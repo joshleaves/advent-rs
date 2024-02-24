@@ -53,11 +53,7 @@ pub fn day_02_v1(input: &str) -> u32 {
   let mut total = 0;
   for line in input.lines() {
     match PresentBox::from_str(line) {
-      Ok(present) => {
-        let add = present.wrapper();
-        println!("_{total}__{add}_");
-        total += present.wrapper();
-      }
+      Ok(present) => total += present.wrapper(),
       Err(_) => {}
     }
   }
@@ -68,9 +64,7 @@ pub fn day_02_v2(input: &str) -> u32 {
   let mut total = 0;
   for line in input.lines() {
     match PresentBox::from_str(line) {
-      Ok(present) => {
-        total += present.ribbon();
-      }
+      Ok(present) => total += present.ribbon(),
       Err(_) => {}
     }
   }

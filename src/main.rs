@@ -27,18 +27,12 @@ struct Args {
 
 fn main() {
   let args = Args::parse();
-
-  let input = match args.input {
-    Some(filename) => match fs::read_to_string(filename.clone()) {
-      Ok(file_data) => file_data,
-      Err(error) => {
-        eprintln!("advent-rs: Could not read {filename:#?} ({error:#})");
-        std::process::exit(1)
-      }
-    },
-    None => io::read_to_string(io::stdin())
-      .expect("Unable to read STDIN")
-      .to_string(),
+  let input: String = match fetch_input(args.input) {
+    Ok(input_data) => input_data,
+    Err(error) => {
+      eprintln!("advent-rs: {}", error);
+      std::process::exit(1);
+    }
   };
 
   match args.year {
@@ -54,4 +48,30 @@ fn main() {
       std::process::exit(1)
     }
   };
+}
+
+fn fetch_input(file_path: Option<PathBuf>) -> Result<String, std::io::Error> {
+  return match file_path {
+    Some(filename) => match fs::read_to_string(filename.clone()) {
+      Ok(file_data) => Ok(file_data),
+      Err(error) => Err(error),
+    },
+    None => match io::read_to_string(io::stdin()) {
+      Ok(io_data) => Ok(io_data),
+      Err(error) => Err(error),
+    },
+  };
+}
+
+#[cfg(test)]
+mod tests {
+  use super::*;
+  use std::io::ErrorKind;
+
+  #[test]
+  fn fetch_input_from_inexisting_file() {
+    let path: Option<PathBuf> = Some("foo.txt".into());
+    let error = fetch_input(path.clone()).unwrap_err();
+    assert_eq!(error.kind(), ErrorKind::NotFound);
+  }
 }
