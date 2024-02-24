@@ -1,0 +1,12 @@
+use advent_rs::year_2015::day_01;
+use std::fs;
+
+#[test]
+fn year_2015_day_01() {
+  let input: &str = &fs::read_to_string("./inputs/year_2015_day_01_input")
+    .expect("Unable to read file")
+    .to_string();
+
+  assert_eq!(day_01::day_01_v1(input), 138);
+  assert_eq!(day_01::day_01_v2(input), 1771);
+}
