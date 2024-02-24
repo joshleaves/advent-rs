@@ -19,6 +19,8 @@ opt-level = 3
 
 [dependencies]
 clap = { version = "4.5.1", features = ["derive"] }
+lazy_static = "1.4.0"
+md-5 = "0.10.6"
 
 [dev-dependencies]
 assert_cmd = "2.0.13"

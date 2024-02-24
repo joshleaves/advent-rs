@@ -1,6 +1,8 @@
 use advent_rs::year_2015::day_01;
 use advent_rs::year_2015::day_02;
 use advent_rs::year_2015::day_03;
+use advent_rs::year_2015::day_04;
+use advent_rs::year_2015::day_05;
 use std::fs;
 
 #[test]
@@ -29,6 +31,26 @@ fn year_2015_day_03() {
     .expect("Unable to read file")
     .to_string();
 
-  assert_eq!(day_03::day_03_v1(input), 2_081);
-  assert_eq!(day_03::day_03_v2(input), 2_341);
+  assert_eq!(day_03::day_03_v1(input), 2081);
+  assert_eq!(day_03::day_03_v2(input), 2341);
+}
+
+#[test]
+fn year_2015_day_04() {
+  let input: &str = &fs::read_to_string("./inputs/year_2015_day_04_input")
+    .expect("Unable to read file")
+    .to_string();
+
+  assert_eq!(day_04::day_04_v1(input), 346_386);
+  assert_eq!(day_04::day_04_v2(input), 9_958_218);
+}
+
+#[test]
+fn year_2015_day_05() {
+  let input: &str = &fs::read_to_string("./inputs/year_2015_day_05_input")
+    .expect("Unable to read file")
+    .to_string();
+
+  assert_eq!(day_05::day_05_v1(input), 238);
+  assert_eq!(day_05::day_05_v2(input), 69);
 }
