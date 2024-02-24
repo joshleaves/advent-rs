@@ -46,6 +46,12 @@ fn main() {
       "Result: {}",
       advent_rs::year_2015::solve(args.day, args.version, input)
     ),
-    _ => println!("Unavailable year: {}", args.year),
+    _ => {
+      eprintln!(
+        "advent-rs: Not implemented (Year {} Day {:02}v{})",
+        args.year, args.day, args.version
+      );
+      std::process::exit(1)
+    }
   };
 }
