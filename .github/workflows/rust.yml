@@ -1,0 +1,23 @@
+name: Rust build and test
+on:
+  push:
+    branches: [ "master" ]
+
+env:
+  CARGO_TERM_COLOR: always
+  CLICOLOR_FORCE: 1
+
+jobs:
+  build:
+    name: Build, test, and check project
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v3
+    - run: rustup toolchain install stable --profile minimal
+    - uses: Swatinem/rust-cache@v2
+    - name: Build
+      run: cargo build
+    - name: Check syntax
+      run: cargo fmt -- --check
+    - name: Run tests
+      run: cargo test
