@@ -13,6 +13,8 @@ Of note:
 ## [2015.5.3]
 ### Added
 - Using [cargo-mutants](https://github.com/sourcefrog/cargo-mutants) to check untested code.
+- Adding a GitHub action.
+
 ### Changed
 - All `.solve` methods return a `None` and only `main()` will be returning errors.
 
