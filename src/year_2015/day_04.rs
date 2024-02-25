@@ -1,5 +1,6 @@
 use md5::{Digest, Md5};
 
+#[mutants::skip] // Don't even try this hahaha
 pub fn loop_until_hash(input: &str, stop_value: u8) -> u32 {
   let mut starter: u32 = 0;
   loop {

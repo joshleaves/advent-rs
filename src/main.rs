@@ -32,13 +32,9 @@ fn main() {
       std::process::exit(1);
     }
   };
-
-  match args.year {
-    2015 => println!(
-      "Result: {}",
-      advent_rs::year_2015::solve(args.day, args.version, input)
-    ),
-    _ => {
+  match advent_rs::solve(args.year, args.day, args.version, input) {
+    Some(result) => println!("Result: {}", result),
+    None => {
       eprintln!(
         "advent-rs: Not implemented (Year {} Day {:02}v{})",
         args.year, args.day, args.version
@@ -47,19 +43,6 @@ fn main() {
     }
   };
 }
-
-// fn fetch_input(file_path: Option<PathBuf>) -> Result<String, std::io::Error> {
-//   return match file_path {
-//     Some(filename) => match fs::read_to_string(filename.clone()) {
-//       Ok(file_data) => Ok(file_data),
-//       Err(error) => Err(error),
-//     },
-//     None => match io::read_to_string(io::stdin()) {
-//       Ok(io_data) => Ok(io_data),
-//       Err(error) => Err(error),
-//     },
-//   };
-// }
 
 #[cfg(test)]
 mod tests {

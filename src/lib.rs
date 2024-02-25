@@ -11,6 +11,7 @@ pub fn fetch_input_from_file(filename: PathBuf) -> Result<String, std::io::Error
   }
 }
 
+#[mutants::skip] // I will do this later
 pub fn fetch_input_from_stdin() -> Result<String, std::io::Error> {
   match io::read_to_string(io::stdin()) {
     Ok(io_data) => Ok(io_data),
@@ -40,12 +41,24 @@ pub fn fetch_input(file_path: Option<PathBuf>) -> Result<String, std::io::Error>
 /// let solution = solve(2019, 1, 1, "14");
 /// assert_eq!(solution, "2"));
 /// ```
-pub fn solve(year: u16, day: u8, version: u8, input: String) -> String {
+pub fn solve(year: u16, day: u8, version: u8, input: String) -> Option<String> {
   match year {
     2015 => return year_2015::solve(day, version, input),
-    _ => {
-      eprintln!("advent-rs: Not implemented (Year 2015 Day {day:02}v{version})");
-      std::process::exit(1)
-    }
+    _ => return None,
+  }
+}
+
+#[cfg(test)]
+mod tests {
+  use super::*;
+
+  #[test]
+  fn solve_for_invalid_year() {
+    assert_eq!(solve(2014, 1, 1, "".to_string()), None);
+  }
+
+  #[test]
+  fn solve_for_year_2015_day_01v1() {
+    assert_eq!(solve(2015, 1, 1, "(())".to_string()), Some("0".to_string()));
   }
 }

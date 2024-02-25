@@ -1,6 +1,6 @@
 [package]
 name = "advent-rs"
-version = "2015.5.1"
+version = "2015.5.3"
 edition = "2021"
 
 # See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
@@ -20,6 +20,7 @@ opt-level = 3
 [dependencies]
 clap = { version = "4.5.1", features = ["derive"] }
 md-5 = "0.10.6"
+mutants = "0.0.3"
 
 [dev-dependencies]
 assert_cmd = "2.0.13"
