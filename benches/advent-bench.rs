@@ -3,6 +3,7 @@ use advent_rs::year_2015::day_02;
 use advent_rs::year_2015::day_03;
 use advent_rs::year_2015::day_04;
 use advent_rs::year_2015::day_05;
+use advent_rs::year_2015::day_06;
 use criterion::{black_box, criterion_group, criterion_main, Criterion};
 use std::time::Duration;
 
@@ -71,6 +72,18 @@ pub fn year_2015_benchmark(c: &mut Criterion) {
     b.iter(|| day_05::day_05_v2(black_box(input_year_2015_day_05)))
   });
   g2015_05.finish();
+
+  let mut g2015_06 = c.benchmark_group("year_2015::day_06");
+  g2015_06.warm_up_time(warm_up_time);
+  g2015_06.measurement_time(measurement_time);
+  let input_year_2015_day_06 = include_str!("../inputs/year_2015_day_06_input");
+  g2015_06.bench_function("year_2015::day_06_v1", |b| {
+    b.iter(|| day_06::day_06_v1(black_box(input_year_2015_day_06)))
+  });
+  g2015_06.bench_function("year_2015::day_06_v2", |b| {
+    b.iter(|| day_06::day_06_v2(black_box(input_year_2015_day_06)))
+  });
+  g2015_06.finish();
 }
 
 criterion_group!(benches, year_2015_benchmark);
