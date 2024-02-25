@@ -1,10 +1,10 @@
 use md5::{Digest, Md5};
 
-pub fn loop_until_hash(input: &str, stopper: &str) -> u32 {
-  let mut starter = 0;
+pub fn loop_until_hash(input: &str, stop_value: u8) -> u32 {
+  let mut starter: u32 = 0;
   loop {
-    let hash = format!("{:X}", Md5::digest(format!("{input}{starter}")));
-    if hash.starts_with(stopper) {
+    let hash = Md5::digest(format!("{input}{starter}"));
+    if hash[..2] == [0, 0] && hash[2] <= stop_value {
       return starter;
     }
 
@@ -14,12 +14,12 @@ pub fn loop_until_hash(input: &str, stopper: &str) -> u32 {
 
 pub fn day_04_v1(input: &str) -> u32 {
   let clean_str = input.lines().next().expect("OK");
-  return loop_until_hash(clean_str, "00000");
+  return loop_until_hash(clean_str, 15);
 }
 
 pub fn day_04_v2(input: &str) -> u32 {
   let clean_str = input.lines().next().expect("OK");
-  return loop_until_hash(clean_str, "000000");
+  return loop_until_hash(clean_str, 0);
 }
 
 #[cfg(test)]
@@ -28,7 +28,10 @@ mod tests {
 
   #[test]
   fn works_with_samples_v1() {
-    let sample_one: [(&str, u32); 2] = [("abcdef", 609043), ("pqrstuv", 1048970)];
+    let sample_one: [(&str, u32); 2] = [
+      ("abcdef", 609043),
+      ("pqrstuv", 1048970),
+    ];
     for (sample, result) in sample_one.iter() {
       assert_eq!(day_04_v1(sample), *result);
     }

@@ -1,27 +1,29 @@
-extern crate lazy_static;
-use lazy_static::lazy_static;
-
 fn string_is_nice_v1(input: &str) -> bool {
-  lazy_static! {
-    static ref VOWELS: Vec<char> = vec!['a', 'e', 'i', 'o', 'u'];
-  }
-
-  if input.contains("ab") || input.contains("cd") || input.contains("pq") || input.contains("xy") {
-    return false;
-  }
   let mut vowels = 0;
   let mut repeated = false;
-  input.chars().fold(' ', |acc, elt| {
+  let no_naughty_sequences = input.chars().try_fold(' ', |acc, elt| {
+    if acc == 'a' && elt == 'b' {
+      return Err('-');
+    }
+    if acc == 'c' && elt == 'd' {
+      return Err('-');
+    }
+    if acc == 'p' && elt == 'q' {
+      return Err('-');
+    }
+    if acc == 'x' && elt == 'y' {
+      return Err('-');
+    }
     if acc == elt {
       repeated = true
     }
-    if VOWELS.contains(&elt) {
+    if elt == 'a' || elt == 'e' || elt == 'i' || elt == 'o' || elt == 'u' {
       vowels += 1
     }
-    elt
+    return Ok(elt);
   });
 
-  return repeated && vowels >= 3;
+  return no_naughty_sequences != Err('-') && repeated && vowels >= 3;
 }
 
 fn string_is_nice_v2(input: &str) -> bool {

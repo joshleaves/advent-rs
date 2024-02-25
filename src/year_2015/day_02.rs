@@ -2,30 +2,30 @@ use std::str::FromStr;
 
 #[derive(Debug, PartialEq)]
 struct PresentBox {
-  height: u32,
-  width: u32,
-  length: u32,
+  height: u8,
+  width: u8,
+  length: u8,
 }
 
 impl PresentBox {
-  fn area_small(&self) -> u32 {
-    self.height * self.width
+  fn area_small(&self) -> u16 {
+    self.height as u16 * self.width as u16
   }
 
-  fn area_med(&self) -> u32 {
-    self.width * self.length
+  fn area_med(&self) -> u16 {
+    self.width as u16 * self.length as u16
   }
 
-  fn area_large(&self) -> u32 {
-    self.length * self.height
+  fn area_large(&self) -> u16 {
+    self.length as u16 * self.height as u16
   }
 
-  fn wrapper(&self) -> u32 {
+  fn wrapper(&self) -> u16 {
     (3 * self.area_small()) + (2 * self.area_med()) + (2 * self.area_large())
   }
 
-  fn ribbon(&self) -> u32 {
-    (self.height * 2) + (self.width * 2) + (self.height * self.width * self.length)
+  fn ribbon(&self) -> u16 {
+    (self.height as u16 * 2) + (self.width as u16 * 2) + (self.area_small() * self.length as u16)
   }
 }
 
@@ -34,10 +34,10 @@ impl FromStr for PresentBox {
 
   fn from_str(input: &str) -> Result<Self, Self::Err> {
     let num_str: Vec<&str> = input.split("x").collect();
-    let mut num_int: [u32; 3] = [
-      num_str[0].parse::<u32>().unwrap(),
-      num_str[1].parse::<u32>().unwrap(),
-      num_str[2].parse::<u32>().unwrap(),
+    let mut num_int: [u8; 3] = [
+      num_str[0].parse::<u8>().unwrap(),
+      num_str[1].parse::<u8>().unwrap(),
+      num_str[2].parse::<u8>().unwrap(),
     ];
     num_int.sort();
 
@@ -50,10 +50,10 @@ impl FromStr for PresentBox {
 }
 
 pub fn day_02_v1(input: &str) -> u32 {
-  let mut total = 0;
+  let mut total: u32 = 0;
   for line in input.lines() {
     match PresentBox::from_str(line) {
-      Ok(present) => total += present.wrapper(),
+      Ok(present) => total += present.wrapper() as u32,
       Err(_) => {}
     }
   }
@@ -61,10 +61,10 @@ pub fn day_02_v1(input: &str) -> u32 {
 }
 
 pub fn day_02_v2(input: &str) -> u32 {
-  let mut total = 0;
+  let mut total: u32 = 0;
   for line in input.lines() {
     match PresentBox::from_str(line) {
-      Ok(present) => total += present.ribbon(),
+      Ok(present) => total += present.ribbon() as u32,
       Err(_) => {}
     }
   }
@@ -77,7 +77,10 @@ mod tests {
 
   #[test]
   fn works_with_samples_v1() {
-    let sample_one: [(&str, u32); 2] = [("2x3x4", 58), ("1x1x10", 43)];
+    let sample_one: [(&str, u32); 2] = [
+      ("2x3x4", 58),
+      ("1x1x10", 43),
+    ];
     for (sample, result) in sample_one.iter() {
       assert_eq!(day_02_v1(sample), *result);
     }
@@ -85,7 +88,10 @@ mod tests {
 
   #[test]
   fn works_with_samples_v2() {
-    let sample_two: [(&str, u32); 2] = [("2x3x4", 34), ("1x1x10", 14)];
+    let sample_two: [(&str, u32); 2] = [
+      ("2x3x4", 34),
+      ("1x1x10", 14),
+    ];
 
     for (sample, result) in sample_two.iter() {
       assert_eq!(day_02_v2(sample), *result);

@@ -1,24 +1,27 @@
-pub fn day_01_v1(input: &str) -> i32 {
-  let right: Vec<&str> = input.matches("(").collect();
-  let left: Vec<&str> = input.matches(")").collect();
-  let rlen = right.len() as i32;
-  let llen = left.len() as i32;
+pub fn day_01_v1(input: &str) -> i16 {
+  let mut lvl: i16 = 0;
 
-  rlen - llen
+  for chr in input.chars() {
+    match chr {
+      '(' => lvl += 1,
+      ')' => lvl -= 1,
+      _ => panic!("Invalid character: {}", chr),
+    }
+  }
+  lvl
 }
 
-pub fn day_01_v2(input: &str) -> i32 {
-  let mut lvl = 0;
+pub fn day_01_v2(input: &str) -> i16 {
+  let mut lvl: i16 = 0;
 
   for (idx, chr) in input.chars().enumerate() {
-    if chr == '(' {
-      lvl += 1;
-    }
-    if chr == ')' {
-      lvl -= 1;
+    match chr {
+      '(' => lvl += 1,
+      ')' => lvl -= 1,
+      _ => panic!("Invalid character: {}", chr),
     }
     if lvl < 0 {
-      return idx as i32 + 1;
+      return idx as i16 + 1;
     }
   }
   0
@@ -30,7 +33,7 @@ mod tests {
 
   #[test]
   fn works_with_samples_v1() {
-    let sample_one: [(&str, i32); 9] = [
+    let sample_one: [(&str, i16); 9] = [
       ("(())", 0),
       ("()()", 0),
       ("(((", 3),
@@ -48,7 +51,10 @@ mod tests {
 
   #[test]
   fn works_with_samples_v2() {
-    let sample_two: [(&str, i32); 2] = [(")", 1), ("()())", 5)];
+    let sample_two: [(&str, i16); 2] = [
+      (")", 1),
+      ("()())", 5),
+    ];
     for (sample, result) in sample_two.iter() {
       assert_eq!(day_01_v2(sample), *result);
     }
