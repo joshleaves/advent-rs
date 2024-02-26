@@ -20,6 +20,8 @@ pub fn solve(day: u8, version: u8, input: String) -> Option<String> {
     (5, 2) => return Some(format!("{}", day_05::day_05_v2(&input))),
     (6, 1) => return Some(format!("{}", day_06::day_06_v2(&input))),
     (6, 2) => return Some(format!("{}", day_06::day_06_v2(&input))),
+    (7, 1) => return Some(format!("{}", day_07::day_07_v2(&input))),
+    (7, 2) => return Some(format!("{}", day_07::day_07_v2(&input))),
     _ => return None,
   }
 }
