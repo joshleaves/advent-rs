@@ -7,7 +7,7 @@ As I said, [Consistency is hard](https://github.com/joshleaves/advent-rb), and I
 I'm also adding notes that may be useful if you're discovering Rust (like I am).
 
 Notes for solving:
-* [2015, up to day 05](year_2015.md)
+* [2015, up to day 07](year_2015.md)
 
 # Regarding style rules
 I'm gonna use a mix of what `cargo fmt` does, with some stuff that feels more natural to me.
