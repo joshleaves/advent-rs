@@ -244,3 +244,36 @@ year_2015::day_08/year_2015::day_08_v2
 </details>
 
 This one was actually very funny. For a while, I thought it would be a pain to not be able to index strings, but extracting slices actually works better.
+
+## Day 09: All in a Single Night
+
+<details>
+<summary>📊Tests and benchmarks</summary>
+
+```
+test year_2015::day_09::tests::works_with_samples_v1 ... ok
+test year_2015::day_09::tests::works_with_samples_v2 ... ok
+test year_2015_day_09 ... o
+
+year_2015::day_09/year_2015::day_09_v1
+                        time:   [4.1046 ms 4.1171 ms 4.1298 ms]
+year_2015::day_09/year_2015::day_09_v2
+                        time:   [4.1209 ms 4.1370 ms 4.1531 ms]
+```
+</details>
+
+<details>
+<summary>Ruby version comments</summary>
+
+> Any programming school worth its salt will one day ask of you the shortest path between many points. Often, the idea is that you'll use graph theory and implement [Dijkstra's algorithm](https://en.wikipedia.org/wiki/Dijkstra%27s_algorithm). Sometimes, the school wants your brain for dinner and you'll be asked to further solve the [Travelling Salesman Problem](https://en.wikipedia.org/wiki/Travelling_salesman_problem). Both are very interested concepts in themselves, and a good first approach to [PathFinding](https://en.wikipedia.org/wiki/Pathfinding).
+> 
+> If you're not fond of graph transversal, the best answer is often to start using the [A* (A-Star)](https://en.wikipedia.org/wiki/A*_search_algorithm) algorithm to iterate through all possible paths.
+> 
+> You can then optimize it, for instance instructing the algorithm to stop searching once it's on a path longer than a previously explored one.
+> 
+> As for finding the "longest path"...just imagine you're not looking for a "shortest" or "longest" path, but a "best" path, and change how that path is selected among others.
+</details>
+
+This one got me a bit closer to understand how lifetimes function.
+
+While my [more experienced counterpart](https://docs.rs/advent-of-code/2022.0.66/src/advent_of_code/year2015/day09.rs.html) used a cleaner perform-all-permutations approach, I wanted to keep the recursivity of my original algorithm, if only to force myself to make lifetimes work across recursion.

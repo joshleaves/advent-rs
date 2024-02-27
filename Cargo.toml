@@ -25,6 +25,7 @@ opt-level = 3
 
 [dependencies]
 clap = { version = "4.5.1", features = ["derive"] }
+itertools = "0.12.1"
 md-5 = "0.10.6"
 mutants = "0.0.3"
 regex = "1.10.3"
