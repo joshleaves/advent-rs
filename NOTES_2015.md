@@ -1,6 +1,9 @@
 # Notes for solving 2015
 ## Day 01: Not Quite Lisp
 
+<details>
+<summary>📊Tests and benchmarks</summary>
+
 ```
 test year_2015::day_01::tests::works_with_samples_v1 ... ok
 test year_2015::day_01::tests::works_with_samples_v2 ... ok
@@ -16,12 +19,24 @@ year_2015::day_01_v1/Slow/7000
 year_2015::day_01_v1/Fast/7000
                         time:   [5.6145 µs 5.9122 µs 6.2267 µs]
 ```
+</details>
+
+<details>
+<summary>Ruby version comments</summary>
+
+> Ruby's `String` class is very well-furnished, even without all of Rail's `ActiveSupport` goodness. In that case, just using [`#count()`](https://apidock.com/ruby/String/count) is enough to get us out of trouble quickly.
+> 
+> I am pretty sure there must be an algorithm that doesn't include iterating through the whole string, but so far, the only idea I got would be to use bisecting until I get to the proper index, which just felt like a hassle.
+</details>
 
 First day wasn't very complicated. I chose to use `i16` out of pragmatic reasons, I don't believe Santa would go this high or this low.
 
 I've added [a benchmark](benches/year_2015_day_01.rs) for this day. The first version had me naively reusing Ruby functionalities, when given Rust's ease of navigating memory, it was faster to just iterate through the data.
 
 ## Day 02: I Was Told There Would Be No Math
+
+<details>
+<summary>📊Tests and benchmarks</summary>
 
 ```
 test year_2015::day_02::tests::works_with_samples_v1 ... ok
@@ -33,6 +48,13 @@ year_2015::day_02/year_2015::day_02_v1
 year_2015::day_02/year_2015::day_02_v2
                         time:   [74.636 µs 74.685 µs 74.727 µs]
 ```
+</details>
+
+<details>
+<summary>Ruby version comments</summary>
+
+> I..am not even sure this one was complicated in any way.
+</details>
 
 I used an object-like approach on this one. Using `(&self)` as he first argument wasn't too much of a stretch since [that's exactly how Ruby handles its Object-Oriented pattern in its C code](https://silverhammermba.github.io/emberb/c/#Methods).
 
@@ -41,6 +63,9 @@ I'm not sure yet whether `impl FromStr for PresentBox` was useful or whether I c
 The most annoying part here is dealing with many integers size. Clearly everything here is `unsigned`, but while I'm sure my box dimensions all fit within `u8(0..255)`, the second I multiply them, I get into `u16(0..65_535)` range, and when I reach the results, I'm clearly overflowing up to `u32(0..4_294_967_295)` size. I would love to have each level work nicely with each other, but no, I have to manually cast.
 
 ## Day 03: Perfectly Spherical Houses in a Vacuum
+
+<details>
+<summary>📊Tests and benchmarks</summary>
 
 ```
 test year_2015::day_03::tests::moves_characters_properly ... ok
@@ -62,12 +87,24 @@ year_2015::day_03_v2/BTreeSet/8192
 year_2015::day_03_v2/HashSet/8192
                         time:   [179.96 µs 180.06 µs 180.15 µs]
 ```
+</details>
+
+<details>
+<summary>Ruby version comments</summary>
+
+> The only thing to be wary of is on line 16: without the call to `#dup`, all of Santa's and Robo-Santa's positions will be overwritten, since Ruby's object model has a tendancy to pass references when you expect to pass values.
+> 
+> Passing by value or reference is a really wonky subject, but this [blog post](https://robertheaton.com/2014/07/22/is-ruby-pass-by-reference-or-pass-by-value/) got nice examples that will get you started.
+</details>
 
 Again, remember to clone your references before modifying, and everything will work out nicely.
 
 This time, [the benchmark](benches/year_2015_day_03.rs) checks which of [`BTreeSet`](https://doc.rust-lang.org/stable/std/collections/struct.BTreeSet.html) or [`HashSet`](https://doc.rust-lang.org/stable/std/collections/hash_set/struct.HashSet.html) is faster. Funnily enough, while `HashSet` is faster at querying elements, it seems `BTreeSet` is [faster at removing them](https://github.com/ssomers/rust_bench_sets_compared). In our case, we only need to insert, so we can safely go with `HashSet`.
 
 ## Day 04:The Ideal Stocking Stuffer
+
+<details>
+<summary>📊Tests and benchmarks</summary>
 
 ```
 test year_2015::day_04::tests::works_with_samples_v1 ... ignored
@@ -80,10 +117,20 @@ Warning: Unable to complete 10 samples in 5.0s. You may wish to increase target 
 year_2015::day_04/year_2015::day_04_v2
                         time:   [1.8911 s 1.8941 s 1.8969 s]
 ```
+</details>
+
+<details>
+<summary>Ruby version comments</summary>
+
+> Not gonna lie, brute-forcing [MD5 hashes](https://en.wikipedia.org/wiki/MD5) is not something interesting.
+</details>
 
 Of course, the bastard child had to be annoying, no matter what language we are in. We can actually win A BIT of time here, but we have to fiddle with bytes.
 
 ## Day 05: Doesn't He Have Intern-Elves For This?
+
+<details>
+<summary>📊Tests and benchmarks</summary>
 
 ```
 test year_2015::day_05::tests::finds_nice_strings_v1 ... ok
@@ -97,10 +144,20 @@ year_2015::day_05/year_2015::day_05_v1
 year_2015::day_05/year_2015::day_05_v2
                         time:   [299.92 µs 300.33 µs 300.68 µs]
 ```
+</details>
+
+<details>
+<summary>Ruby version comments</summary>
+
+> Again, [Regexp](https://ruby-doc.org/core-2.5.1/Regexp.html) really are one of the best tools in your developer arsenal. In this specific exercise, we can look for repetition by using `\1`, which will reference a previously-captured group. Nothing specifically hard beyond that.
+</details>
 
 Another [benchmark](benches/year_2015_day_05.rs), and again it's about the performance of [`.contains()`](https://doc.rust-lang.org/std/primitive.str.html#method.contains). Using [`.try_fold()`](https://doc.rust-lang.org/std/iter/trait.Iterator.html#method.try_fold) to return ASAP when any element doesn't satisfy our needs is also a nice touch.
 
 ## Day 06: Probably a Fire Hazard
+
+<details>
+<summary>📊Tests and benchmarks</summary>
 
 ```
 test year_2015::day_06::tests::works_with_samples_v1 ... ok
@@ -112,10 +169,28 @@ year_2015::day_06/year_2015::day_06_v1
 year_2015::day_06/year_2015::day_06_v2
                         time:   [13.481 ms 13.585 ms 13.720 ms]
 ```
+</details>
+
+<details>
+<summary>Ruby version comments</summary>
+
+> This one actually gave me SOME trouble. My first solution was iterating on each element one by one and was clearly too long. Thanksfully, Ruby is really smart when it comes to replacing slices of an array.
+> 
+> There is an even more beautiful solution for part 2 that consist of only tracking the total numbers of flicks on/off/toggle, but in the off chance that a light already off is turned off again, the results would become false.
+> 
+> Also of note: remember what was discussed earlier about references? Well, the [documentation covers that too](https://ruby-doc.org/core-3.0.1/Array.html#class-Array-label-Creating+Arrays). Quote:
+> 
+> > Note that the second argument populates the array with references to the same object. Therefore, it is only recommended in cases when you need to instantiate arrays with natively immutable objects such as Symbols, numbers, true or false.
+> >
+> > To create an array with separate objects a block can be passed instead. This method is safe to use with mutable objects such as hashes, strings or other arrays:
+</details>
 
 I started doing a copy of my original "naive" algorithm, and as it was too slow, I decided to learn [how to pass closures in Rust](https://doc.rust-lang.org/book/ch13-01-closures.html).
 
 ## Day 07: Some Assembly Required
+
+<details>
+<summary>📊Tests and benchmarks</summary>
 
 ```
 test year_2015::day_07::tests::works_with_samples_v1 ... ok
@@ -127,10 +202,24 @@ year_2015::day_07/year_2015::day_07_v1
 year_2015::day_07/year_2015::day_07_v2
                         time:   [129.92 µs 130.54 µs 131.09 µs]
 ```
+</details>
+
+<details>
+<summary>Ruby version comments</summary>
+
+> We already discovered bitwise operators in the previous exercises, so that shouldn't be too hard. The complication comes from building the wires.
+> 
+> The naive implementation, that works very well with the sample input, consists of interpreting each line one by one, storing the value of each wire every time. Unfortunately, not all inputs are indicated in a linear way.
+> 
+> The answer lies in to store all wires, setting up operations with [lazy evaluation](https://betterprogramming.pub/how-lazy-evaluation-works-in-ruby-a90237e99ac3), and letting intepretation work itself all the way back.
+</details>
 
 This one was already complicated in Ruby, but it gets even worse when you have to deal with [Rust's lifetimes](https://doc.rust-lang.org/rust-by-example/scope/lifetime.html). The concept in itself is kinda okay to understand, but the way it has to be used sometimes makes no sense. I guess I'll get used to it with time. A [nice crate](https://docs.rs/advent-of-code/2022.0.66/src/advent_of_code/year2015/day07.rs.html) helped me see through it a bit more clearly.
 
 ## Day 08: Matchsticks
+
+<details>
+<summary>📊Tests and benchmarks</summary>
 
 ```
 test year_2015::day_08::tests::calculates_length_of_code_strings ... ok
@@ -144,5 +233,14 @@ year_2015::day_08/year_2015::day_08_v1
 year_2015::day_08/year_2015::day_08_v2
                         time:   [8.3510 µs 8.6640 µs 9.1839 µs]
 ```
+</details>
+
+<details>
+<summary>Ruby version comments</summary>
+
+> Understanding how characters escaping works is a massive PAIN, and misunderstand the concept is a reason why [PHP MySQL injections](https://www.php.net/manual/en/security.database.sql-injection.php) were so infamous. Things get even more hairy when you have to work with MULTIPLE type of injections (paths, web, sql,...), or even multiple types of string that don't escape the same way,
+> 
+> In that case, we are lucky, since Ruby already implements [dump](https://ruby-doc.org/3.2.2/String.html#method-i-dump) and [undump](https://ruby-doc.org/3.2.2/String.html#method-i-undump), which happens to work exactly as the exercise require. But since we're here to learn, the methods will alternate at runtime between the Ruby methods and the manual implementation.
+</details>
 
 This one was actually very funny. For a while, I thought it would be a pain to not be able to index strings, but extracting slices actually works better.

@@ -10,6 +10,10 @@ Of note:
 - The changelog 2015.5.2 has been rewritten from each commit content.
 - This file may be amended entirely in the future to adhere to the [GNU Changelog style](https://www.gnu.org/prep/standards/html_node/Style-of-Change-Logs.html#Style-of-Change-Logs)
 
+## [2015.8.2]
+### Changed
+- Rewrote [solving notes for 2015](2015.md).
+
 ## [2015.8.1]
 ### Added
 - Solved [exercice for 2015, day 8](src/year_2015/day_08.rs).
