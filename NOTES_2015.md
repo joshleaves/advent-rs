@@ -253,7 +253,7 @@ This one was actually very funny. For a while, I thought it would be a pain to n
 ```
 test year_2015::day_09::tests::works_with_samples_v1 ... ok
 test year_2015::day_09::tests::works_with_samples_v2 ... ok
-test year_2015_day_09 ... o
+test year_2015_day_09 ... ok
 
 year_2015::day_09/year_2015::day_09_v1
                         time:   [4.1046 ms 4.1171 ms 4.1298 ms]
@@ -277,3 +277,30 @@ year_2015::day_09/year_2015::day_09_v2
 This one got me a bit closer to understand how lifetimes function.
 
 While my [more experienced counterpart](https://docs.rs/advent-of-code/2022.0.66/src/advent_of_code/year2015/day09.rs.html) used a cleaner perform-all-permutations approach, I wanted to keep the recursivity of my original algorithm, if only to force myself to make lifetimes work across recursion.
+
+## Day 10: Elves Look, Elves Say
+
+<details>
+<summary>📊Tests and benchmarks</summary>
+
+```
+test year_2015::day_10::tests::looks_and_says_over_strings ... ok
+test year_2015_day_10 ... ok
+
+year_2015::day_10/year_2015::day_10_v1
+                        time:   [2.7216 ms 2.7336 ms 2.7457 ms]
+Warning: Unable to complete 100 samples in 2.0s. You may wish to increase target time to 3.8s, or reduce sample count to 50.
+year_2015::day_10/year_2015::day_10_v2
+                        time:   [37.291 ms 37.419 ms 37.551 ms]
+```
+</details>
+
+<details>
+<summary>Ruby version comments</summary>
+
+> This exercise is based on John H. Conway's [Look-and-say sequences](https://en.wikipedia.org/wiki/Look-and-say_sequence), you probably know him for the [Game of Life](https://en.wikipedia.org/wiki/Conway%27s_Game_of_Life), but the mathematician provided us with lot of science.
+> 
+> Nothing really hard in this exercise, except complexity quickly running high, it becomes important to use the best algorithm to generate the next sequence.
+</details>
+
+Casting between string, chars, bytes,... is slowly becoming more and more natural!

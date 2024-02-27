@@ -7,6 +7,7 @@ pub mod day_06;
 pub mod day_07;
 pub mod day_08;
 pub mod day_09;
+pub mod day_10;
 
 pub fn solve(day: u8, version: u8, input: String) -> Option<String> {
   match (day, version) {
@@ -24,10 +25,12 @@ pub fn solve(day: u8, version: u8, input: String) -> Option<String> {
     (6, 2) => return Some(format!("{}", day_06::day_06_v2(&input))),
     (7, 1) => return Some(format!("{}", day_07::day_07_v2(&input))),
     (7, 2) => return Some(format!("{}", day_07::day_07_v2(&input))),
-    (8, 1) => return Some(format!("{}", day_08::day_08_v2(&input))),
+    (8, 1) => return Some(format!("{}", day_08::day_08_v1(&input))),
     (8, 2) => return Some(format!("{}", day_08::day_08_v2(&input))),
-    (9, 1) => return Some(format!("{}", day_08::day_08_v2(&input))),
-    (9, 2) => return Some(format!("{}", day_08::day_08_v2(&input))),
+    (9, 1) => return Some(format!("{}", day_09::day_09_v1(&input))),
+    (9, 2) => return Some(format!("{}", day_09::day_09_v2(&input))),
+    (10, 1) => return Some(format!("{}", day_10::day_10_v1(&input))),
+    (10, 2) => return Some(format!("{}", day_10::day_10_v2(&input))),
     _ => return None,
   }
 }
