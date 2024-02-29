@@ -363,3 +363,34 @@ year_2015::day_12/year_2015::day_12_v2
 </details>
 
 You know what's faster than using a Regex matcher on a string, or converting it to JSON before traversing it? Iterating though it only once at byte-level.
+
+
+## Day 13: Knights of the Dinner Table
+
+<details>
+<summary>📊Tests and benchmarks</summary>
+
+```
+test year_2015::day_13::tests::parses_input_lines ... ok
+test year_2015::day_13::tests::works_with_samples_v1 ... ok
+test year_2015_day_13 ... ok
+
+year_2015::day_13/year_2015::day_13_v1
+                        time:   [46.791 ms 47.177 ms 47.561 ms]
+Warning: Unable to complete 100 samples in 5.0s. You may wish to increase target time to 9.9s, or reduce sample count to 50.
+year_2015::day_13/year_2015::day_13_v2
+                        time:   [86.755 ms 87.306 ms 87.891 ms]
+```
+</details>
+
+<details>
+<summary>Ruby version comments</summary>
+
+> Again, refer to [Day 09](##day-09) because we are in a similar configuration, with the exception that we must rejoin our starting point at the end. Nothing too complicated.
+> 
+> Second part is just adding another node with a 0 relationship to all nodes. Surprisingly, it seems our presence lowered the general happiness...
+</details>
+
+Why do these people even bother having a Christmas dinner together if they hate each other (and us) so much? On the Rust front, beginning to understand ownership a little better, I managed to write this one without resorting to lifetimes. Just makes everything more readable.
+
+Something I also gained over my Ruby implementation is saving a loop: since we are looping back to our initial point at the end of each cycle, a permutation like `[0, 1, 2, 3, 4]` will have the same value as `[1, 2, 3, 4, 0]`. Therefore, we only need to generate (brute-force?) sequences starting with our first element. Once we reach our first depth, we can iterate over all available results.
