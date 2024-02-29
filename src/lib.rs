@@ -37,11 +37,11 @@ pub fn fetch_input(file_path: Option<PathBuf>) -> Result<String, std::io::Error>
 /// # Arguments
 /// * `year` - The year of the exercise, from 2015.
 /// * `day` - The day of the exercise, from 1 to 25.
-/// * `version` - The version of the exercise, 1 or 2.
+/// * `part` - The part of the exercise, 1 or 2.
 /// * `input` - The input to the exercise.
 ///
 /// # Examples
-/// Non-existing year/day/version
+/// Missing year/day/part exercise
 /// ```
 /// use advent_rs::solve;
 /// assert_eq!(solve(2014, 1, 1, ""), None);
@@ -49,15 +49,15 @@ pub fn fetch_input(file_path: Option<PathBuf>) -> Result<String, std::io::Error>
 /// assert_eq!(solve(2015, 26, 1, ""), None);
 /// ```
 ///
-/// Existing year/day/version returns a String
+/// Available year/day/part exercise returns a String
 /// ```
 /// use advent_rs::solve;
 /// let solution = solve(2015, 1, 1, "(())");
 /// assert_eq!(solution, Some("0".to_string()));
 /// ```
-pub fn solve(year: u16, day: u8, version: u8, input: impl Into<String>) -> Option<String> {
+pub fn solve(year: u16, day: u8, part: u8, input: impl Into<String>) -> Option<String> {
   match year {
-    2015 => return year_2015::solve(day, version, input),
+    2015 => return year_2015::solve(day, part, input),
     _ => return None,
   }
 }

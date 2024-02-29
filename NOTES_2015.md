@@ -13,7 +13,7 @@ year_2015::day_01/year_2015::day_01_v1
                         time:   [6.2931 µs 6.8094 µs 7.3834 µs]
 year_2015::day_01/year_2015::day_01_v2
                         time:   [1.9841 µs 1.9896 µs 1.9955 µs]
-year_2015::day_01_v1/Slow/7000
+year_2015::day_01_v1/Naive/7000
                         time:   [63.548 µs 64.204 µs 64.821 µs]
 year_2015::day_01_v1/Fast/7000
                         time:   [5.6477 µs 5.8044 µs 6.0121 µs]
@@ -30,7 +30,9 @@ year_2015::day_01_v1/Fast/7000
 
 First day wasn't very complicated. I chose to use `i16` out of pragmatic reasons, I don't believe Santa would go this high or this low.
 
-I've added [a benchmark](benches/year_2015_day_01.rs) for this day. The first version had me naively reusing Ruby functionalities, when given Rust's ease of navigating memory, it was faster to just iterate through the data.
+I've added [a benchmark](benches/year_2015_day_01.rs) for this day. ~~The first version had me naively reusing Ruby functionalities, when given Rust's ease of navigating memory, it was faster to just iterate through the data.~~
+
+There is an EVEN BIGGER optimization that can be done if you treat your string as a bunch of u16 instead of u8.
 
 ## Day 02: I Was Told There Would Be No Math
 

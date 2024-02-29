@@ -1,4 +1,5 @@
 use regex::Regex;
+use std::cmp;
 use std::collections::HashMap;
 
 fn id_for_city<'a>(cities: &mut HashMap<&'a str, u8>, city: &'a str) -> u8 {
@@ -43,13 +44,13 @@ fn try_best_path<'a, STP, CMP>(
   current_city: &u8,
   cities: Vec<u8>,
   stopper_func: &STP,
-  path_is_better: &CMP,
+  better_path: &CMP,
   current_path: &'a u16,
   current_best: &'a u16,
 ) -> u16
 where
   STP: Fn(u16, u16, usize) -> bool,
-  CMP: Fn(u16, u16) -> bool,
+  CMP: Fn(u16, u16) -> u16,
 {
   if stopper_func(*current_best, *current_path, cities.len()) {
     return *current_path;
@@ -66,13 +67,11 @@ where
       city_id,
       next_cities_ids(&cities, city_id),
       stopper_func,
-      path_is_better,
+      better_path,
       &next_path,
       current_best,
     );
-    if path_is_better(best_path, new_best) {
-      best_path = new_best;
-    }
+    best_path = better_path(best_path, new_best);
   }
   best_path
 }
@@ -86,13 +85,11 @@ pub fn day_09_v1<'a>(input: impl Into<String>) -> u16 {
       city_id,
       next_cities_ids(&cities_ids, city_id),
       &|best, cur, cities_len| best < cur || cities_len == 0,
-      &|best, cur| cur < best,
+      &cmp::min,
       &0,
       &best_path,
     );
-    if new_best < best_path {
-      best_path = new_best;
-    }
+    best_path = cmp::min(best_path, new_best);
   }
   best_path
 }
@@ -106,13 +103,11 @@ pub fn day_09_v2<'a>(input: impl Into<String>) -> u16 {
       city_id,
       next_cities_ids(&cities_ids, city_id),
       &|_best, _cur, cities_len| cities_len == 0,
-      &|best, cur| cur > best,
+      &cmp::max,
       &0,
       &best_path,
     );
-    if new_best > best_path {
-      best_path = new_best;
-    }
+    best_path = cmp::max(best_path, new_best);
   }
   best_path
 }

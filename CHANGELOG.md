@@ -10,10 +10,15 @@ Of note:
 - The changelog 2015.5.2 has been rewritten from each commit content.
 - This file may be amended entirely in the future to adhere to the [GNU Changelog style](https://www.gnu.org/prep/standards/html_node/Style-of-Change-Logs.html#Style-of-Change-Logs)
 
+## [2015.12.3]
+### Changed
+- Documentation for 2015 day 1.
+- Small imprivement for 2015 day 9.
+
 ## [2015.12.2]
 ### Changed
 - All tests now take input from any `impl Into<String>` (so `String`, `&str`,...).
-- Some optimisations there and there.
+- Some optimizations there and there.
 ### Removed
 - File samples for 2015, days 6 and 7.
 - Method and tests for `code_line_len` on 2015 day 8.

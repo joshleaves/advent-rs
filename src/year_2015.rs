@@ -15,25 +15,27 @@ pub mod day_12;
 ///
 /// # Arguments
 /// * `day` - The day of the exercise, from 1 to 25.
-/// * `version` - The version of the exercise, 1 or 2.
+/// * `part` - The part of the exercise, 1 or 2.
 /// * `input` - The input to the exercise.
 ///
 /// # Examples
-/// Non-existing day/version
+/// Missing day/part exercise
 /// ```
 /// use advent_rs::year_2015::solve;
+///
 /// assert_eq!(solve(1, 3, ""), None);
 /// assert_eq!(solve(26, 1, ""), None);
 /// ```
 ///
-/// Existing day/version returns a String
+/// Available day/part exercise returns a String
 /// ```
 /// use advent_rs::year_2015::solve;
+///
 /// let solution = solve(1, 1, "(())");
 /// assert_eq!(solution, Some("0".to_string()));
 /// ```
-pub fn solve(day: u8, version: u8, input: impl Into<String>) -> Option<String> {
-  match (day, version) {
+pub fn solve(day: u8, part: u8, input: impl Into<String>) -> Option<String> {
+  match (day, part) {
     (1, 1) => return Some(format!("{}", day_01::day_01_v1(input))),
     (1, 2) => return Some(format!("{}", day_01::day_01_v2(input))),
     (2, 1) => return Some(format!("{}", day_02::day_02_v2(input))),

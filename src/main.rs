@@ -14,9 +14,9 @@ struct Args {
   #[arg(short, long, value_parser = clap::value_parser!(u8))]
   day: u8,
 
-  /// The version of the exercise, 1 or 2
+  /// The part of the exercise, 1 or 2
   #[arg(short, long, default_value_t = 1, value_parser = clap::value_parser!(u8))]
-  version: u8,
+  part: u8,
 
   // File name
   #[arg(value_parser = clap::value_parser!(PathBuf))]
@@ -32,12 +32,12 @@ fn main() {
       std::process::exit(1);
     }
   };
-  match advent_rs::solve(args.year, args.day, args.version, input) {
+  match advent_rs::solve(args.year, args.day, args.part, input) {
     Some(result) => println!("Result: {}", result),
     None => {
       eprintln!(
         "advent-rs: Not implemented (Year {} Day {:02}v{})",
-        args.year, args.day, args.version
+        args.year, args.day, args.part
       );
       std::process::exit(1)
     }
