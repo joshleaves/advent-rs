@@ -289,7 +289,6 @@ test year_2015_day_10 ... ok
 
 year_2015::day_10/year_2015::day_10_v1
                         time:   [2.7216 ms 2.7336 ms 2.7457 ms]
-Warning: Unable to complete 100 samples in 2.0s. You may wish to increase target time to 3.8s, or reduce sample count to 50.
 year_2015::day_10/year_2015::day_10_v2
                         time:   [37.291 ms 37.419 ms 37.551 ms]
 ```
@@ -304,3 +303,57 @@ year_2015::day_10/year_2015::day_10_v2
 </details>
 
 Casting between string, chars, bytes,... is slowly becoming more and more natural!
+
+## Day 11: Corporate Policy
+
+<details>
+<summary>📊Tests and benchmarks</summary>
+
+```
+test year_2015::day_11::tests::passwords_are_valid ... ok
+test year_2015::day_11::tests::works_with_samples_v1 ... ok
+test year_2015_day_11 ... ok
+
+year_2015::day_11/year_2015::day_11_v1
+                        time:   [5.6672 ms 5.6736 ms 5.6797 ms]
+year_2015::day_11/year_2015::day_11_v2
+                        time:   [29.014 ms 29.036 ms 29.057 ms]
+```
+</details>
+
+<details>
+<summary>Ruby version comments</summary>
+
+> Another exercise that is actually quite simple when you don't have to account for PERFORMANCE: the complexity in this exercise can quickly become huge and it's important that each of your iterations is as fast as you can. A good tool for that is [using Ruby's built-in Benchmark class](https://blog.appsignal.com/2018/02/27/benchmarking-ruby-code.html) to compare which of two implementations is the fastest.
+> 
+> Another thing to do is to use heuristics and pre-sanitization: in this exercise, you don't need to iterate and test from `iaaaaaaa` to `izzzzzzz`.
+</details>
+
+Nothing specific to add on this one. I'm just missing the optimization
+
+## Day 12: JSAbacusFramework.io
+
+<details>
+<summary>📊Tests and benchmarks</summary>
+
+```
+test year_2015::day_12::tests::works_with_samples_v1 ... ok
+test year_2015::day_12::tests::works_with_samples_v2 ... ok
+test year_2015_day_12 ... ok
+
+year_2015::day_12/year_2015::day_12_v1
+                        time:   [24.003 µs 24.055 µs 24.112 µs]
+year_2015::day_12/year_2015::day_12_v2
+                        time:   [39.613 µs 39.848 µs 40.091 µs]
+```
+</details>
+
+<details>
+<summary>Ruby version comments</summary>
+
+> That day looked so easy that I could not believe my eyes when I solved it in a simple one-liner: `3.0.0 :001 > pbpaste.scan(/-?\d+/).map(&:to_i).inject(&:+)`.
+> 
+> The second part is a bit more convoluted, but navigating JSON nodes isn't really a pain, you either have a Hash (explore), an Array (explore), or a value (return). Nothing too hard so far.
+</details>
+
+You know what's faster than using a Regex matcher on a string, or converting it to JSON before traversing it? Iterating though it only once at byte-level.

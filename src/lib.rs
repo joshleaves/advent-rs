@@ -19,6 +19,12 @@ pub fn fetch_input_from_stdin() -> Result<String, std::io::Error> {
   }
 }
 
+/// Returns a `String` input to use with a test.
+///
+/// If no argument is provided, the input will be read from STDIN.
+///
+/// # Arguments
+/// * `file_path` - File input to read from.
 pub fn fetch_input(file_path: Option<PathBuf>) -> Result<String, std::io::Error> {
   return match file_path {
     Some(filename) => fetch_input_from_file(filename),

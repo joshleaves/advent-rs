@@ -1,18 +1,21 @@
 [package]
 name = "advent-rs"
-version = "2015.10.1"
+version = "2015.12.1"
 edition = "2021"
+authors = ["Arnaud 'red' Rouyer"]
+readme = "README.md"
 
 # See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
 
 [[bin]]
 name = "advent-rs"
 path = "src/main.rs"
+doc = false
+doctest = false
 
 [lib]
 name = "advent_rs"
 path = "src/lib.rs"
-doctest = false
 
 [profile.dev]
 opt-level = 1
