@@ -67,9 +67,10 @@ fn create_gate<'a>(gates: &mut HashMap<&'a str, LogicalGate<'a>>, line: &'a str)
   gates.insert(wire, gate);
 }
 
-pub fn day_07_v1(input: &str) -> u32 {
+pub fn day_07_v1(input: impl Into<String>) -> u32 {
+  let input_str = input.into();
   let mut gates: HashMap<&str, LogicalGate> = HashMap::new();
-  for line in input.lines() {
+  for line in input_str.lines() {
     create_gate(&mut gates, line);
   }
   let Some(result) = value_of(&mut gates, "a") else {
@@ -78,12 +79,13 @@ pub fn day_07_v1(input: &str) -> u32 {
   return result;
 }
 
-pub fn day_07_v2(input: &str) -> u32 {
+pub fn day_07_v2(input: impl Into<String>) -> u32 {
+  let input_str = input.into();
   let mut gates: HashMap<&str, LogicalGate> = HashMap::new();
-  for line in input.lines() {
+  for line in input_str.lines() {
     create_gate(&mut gates, line);
   }
-  let value_of_a = day_07_v1(input);
+  let value_of_a = day_07_v1(&input_str);
   let value_a = format!("{}", value_of_a);
   let gate = LogicalGate {
     operation: Operation::Assign(value_a.as_str()),
@@ -103,13 +105,27 @@ mod tests {
 
   #[test]
   fn works_with_samples_v1() {
-    let sample_one = include_str!("../../inputs/year_2015_day_07_sample_v1");
+    let sample_one = "123 -> x\n\
+      456 -> b\n\
+      x AND g -> a\n\
+      x OR b -> e\n\
+      x LSHIFT 2 -> f\n\
+      b RSHIFT 2 -> g\n\
+      NOT x -> h\n\
+      NOT b -> i";
     assert_eq!(day_07_v1(sample_one), 114);
   }
 
   #[test]
   fn works_with_samples_v2() {
-    let sample_one = include_str!("../../inputs/year_2015_day_07_sample_v1");
+    let sample_one = "123 -> x\n\
+      456 -> b\n\
+      x AND g -> a\n\
+      x OR b -> e\n\
+      x LSHIFT 2 -> f\n\
+      b RSHIFT 2 -> g\n\
+      NOT x -> h\n\
+      NOT b -> i";
     assert_eq!(day_07_v2(sample_one), 24);
   }
 }

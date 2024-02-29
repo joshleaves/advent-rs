@@ -17,3 +17,5 @@ Strangely, testing feels more natural in Rust than in Ruby. Since I've [already 
 
 # Benchmarking
 I use [criterion.rs](https://github.com/bheisler/criterion.rs) for benchmarking, as it feels like the best option. I try to strive for the most effective solutions, without cutting corners. I could probably gain a lot more time in some spaces, but I'm going at my own speed for now.
+
+The speeds I'm reporting are what my Mac M2 reports, depending on how many Chrome tabs I got opened. It's just to give myself a pat on the back.

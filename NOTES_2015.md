@@ -10,14 +10,13 @@ test year_2015::day_01::tests::works_with_samples_v2 ... ok
 test year_2015_day_01 ... ok
 
 year_2015::day_01/year_2015::day_01_v1
-                        time:   [5.1060 µs 5.1104 µs 5.1152 µs]
+                        time:   [6.2931 µs 6.8094 µs 7.3834 µs]
 year_2015::day_01/year_2015::day_01_v2
-                        time:   [1.4617 µs 1.4620 µs 1.4623 µs]
-
+                        time:   [1.9841 µs 1.9896 µs 1.9955 µs]
 year_2015::day_01_v1/Slow/7000
-                        time:   [59.965 µs 60.418 µs 60.893 µs]
+                        time:   [63.548 µs 64.204 µs 64.821 µs]
 year_2015::day_01_v1/Fast/7000
-                        time:   [5.6145 µs 5.9122 µs 6.2267 µs]
+                        time:   [5.6477 µs 5.8044 µs 6.0121 µs]
 ```
 </details>
 
@@ -44,9 +43,9 @@ test year_2015::day_02::tests::works_with_samples_v2 ... ok
 test year_2015_day_02 ... ok
 
 year_2015::day_02/year_2015::day_02_v1
-                        time:   [74.716 µs 74.839 µs 74.945 µs]
+                        time:   [74.835 µs 74.904 µs 74.977 µs]
 year_2015::day_02/year_2015::day_02_v2
-                        time:   [74.636 µs 74.685 µs 74.727 µs]
+                        time:   [74.878 µs 74.969 µs 75.067 µs]
 ```
 </details>
 
@@ -74,18 +73,17 @@ test year_2015::day_03::tests::works_with_samples_v2 ... ok
 test year_2015_day_03 ... ok
 
 year_2015::day_03/year_2015::day_03_v1
-                        time:   [415.91 µs 416.24 µs 416.60 µs]
+                        time:   [232.27 µs 232.77 µs 233.35 µs]
 year_2015::day_03/year_2015::day_03_v2
-                        time:   [440.35 µs 441.72 µs 442.91 µs]
-
+                        time:   [250.97 µs 251.71 µs 252.48 µs]
 year_2015::day_03_v1/BTreeSet/8192
-                        time:   [410.11 µs 411.30 µs 413.11 µs]
+                        time:   [401.94 µs 402.21 µs 402.50 µs]
 year_2015::day_03_v1/HashSet/8192
-                        time:   [169.64 µs 169.95 µs 170.28 µs]
+                        time:   [234.20 µs 234.41 µs 234.64 µs]
 year_2015::day_03_v2/BTreeSet/8192
-                        time:   [440.56 µs 441.85 µs 443.34 µs]
+                        time:   [432.48 µs 432.72 µs 432.98 µs]
 year_2015::day_03_v2/HashSet/8192
-                        time:   [179.96 µs 180.06 µs 180.15 µs]
+                        time:   [252.37 µs 252.70 µs 253.00 µs]
 ```
 </details>
 
@@ -107,15 +105,15 @@ This time, [the benchmark](benches/year_2015_day_03.rs) checks which of [`BTreeS
 <summary>📊Tests and benchmarks</summary>
 
 ```
-test year_2015::day_04::tests::works_with_samples_v1 ... ignored
-test year_2015::day_04::tests::works_with_samples_v2 ... ignored
+test year_2015::day_04::tests::works_with_samples_v1 ... ok
+test year_2015::day_04::tests::works_with_samples_v2 ... ok
 test year_2015_day_04 ... ok
 
 year_2015::day_04/year_2015::day_04_v1
-                        time:   [65.402 ms 65.534 ms 65.640 ms]
-Warning: Unable to complete 10 samples in 5.0s. You may wish to increase target time to 18.9s.
+                        time:   [36.404 ms 36.439 ms 36.457 ms]
+Warning: Unable to complete 10 samples in 5.0s. You may wish to increase target time to 10.6s.
 year_2015::day_04/year_2015::day_04_v2
-                        time:   [1.8911 s 1.8941 s 1.8969 s]
+                        time:   [1.0535 s 1.0541 s 1.0545 s]
 ```
 </details>
 
@@ -140,9 +138,15 @@ test year_2015::day_05::tests::works_with_samples_v2 ... ok
 test year_2015_day_05 ... ok
 
 year_2015::day_05/year_2015::day_05_v1
-                        time:   [142.32 µs 142.58 µs 142.91 µs]
+                        time:   [51.142 µs 51.447 µs 51.928 µs]
+
 year_2015::day_05/year_2015::day_05_v2
-                        time:   [299.92 µs 300.33 µs 300.68 µs]
+                        time:   [181.19 µs 181.42 µs 181.68 µs]
+
+year_2015::day_05_v1/contains/17000
+                        time:   [95.128 µs 95.245 µs 95.361 µs]
+year_2015::day_05_v1/chars/17000
+                        time:   [50.388 µs 50.474 µs 50.563 µs]
 ```
 </details>
 
@@ -165,9 +169,9 @@ test year_2015::day_06::tests::works_with_samples_v2 ... ok
 test year_2015_day_06 ... ok
 
 year_2015::day_06/year_2015::day_06_v1
-                        time:   [13.269 ms 13.341 ms 13.423 ms]
+                        time:   [13.186 ms 13.320 ms 13.522 ms]
 year_2015::day_06/year_2015::day_06_v2
-                        time:   [13.481 ms 13.585 ms 13.720 ms]
+                        time:   [13.437 ms 13.466 ms 13.499 ms]
 ```
 </details>
 
@@ -198,9 +202,9 @@ test year_2015::day_07::tests::works_with_samples_v2 ... ok
 test year_2015_day_07 ... ok
 
 year_2015::day_07/year_2015::day_07_v1
-                        time:   [63.406 µs 63.509 µs 63.606 µs]
+                        time:   [62.800 µs 62.873 µs 62.940 µs]
 year_2015::day_07/year_2015::day_07_v2
-                        time:   [129.92 µs 130.54 µs 131.09 µs]
+                        time:   [127.35 µs 127.56 µs 127.82 µs]
 ```
 </details>
 
@@ -229,9 +233,9 @@ test year_2015::day_08::tests::works_with_samples_v1 ... ok
 test year_2015::day_08::tests::works_with_samples_v2 ... ok
 
 year_2015::day_08/year_2015::day_08_v1
-                        time:   [11.833 µs 11.907 µs 11.995 µs]
+                        time:   [13.389 µs 13.434 µs 13.486 µs]
 year_2015::day_08/year_2015::day_08_v2
-                        time:   [8.3510 µs 8.6640 µs 9.1839 µs]
+                        time:   [8.7562 µs 8.8298 µs 8.9084 µs]
 ```
 </details>
 
@@ -256,9 +260,9 @@ test year_2015::day_09::tests::works_with_samples_v2 ... ok
 test year_2015_day_09 ... ok
 
 year_2015::day_09/year_2015::day_09_v1
-                        time:   [4.1046 ms 4.1171 ms 4.1298 ms]
+                        time:   [1.2927 ms 1.2995 ms 1.3064 ms]
 year_2015::day_09/year_2015::day_09_v2
-                        time:   [4.1209 ms 4.1370 ms 4.1531 ms]
+                        time:   [4.0988 ms 4.1071 ms 4.1157 ms]
 ```
 </details>
 
@@ -288,9 +292,9 @@ test year_2015::day_10::tests::looks_and_says_over_strings ... ok
 test year_2015_day_10 ... ok
 
 year_2015::day_10/year_2015::day_10_v1
-                        time:   [2.7216 ms 2.7336 ms 2.7457 ms]
+                        time:   [870.36 µs 872.61 µs 875.35 µs]
 year_2015::day_10/year_2015::day_10_v2
-                        time:   [37.291 ms 37.419 ms 37.551 ms]
+                        time:   [12.131 ms 12.153 ms 12.177 ms]
 ```
 </details>
 
@@ -315,9 +319,9 @@ test year_2015::day_11::tests::works_with_samples_v1 ... ok
 test year_2015_day_11 ... ok
 
 year_2015::day_11/year_2015::day_11_v1
-                        time:   [5.6672 ms 5.6736 ms 5.6797 ms]
+                        time:   [4.8713 ms 4.8800 ms 4.8927 ms]
 year_2015::day_11/year_2015::day_11_v2
-                        time:   [29.014 ms 29.036 ms 29.057 ms]
+                        time:   [24.898 ms 24.958 ms 25.035 ms]
 ```
 </details>
 
@@ -342,9 +346,9 @@ test year_2015::day_12::tests::works_with_samples_v2 ... ok
 test year_2015_day_12 ... ok
 
 year_2015::day_12/year_2015::day_12_v1
-                        time:   [24.003 µs 24.055 µs 24.112 µs]
+                        time:   [17.760 µs 17.955 µs 18.183 µs]
 year_2015::day_12/year_2015::day_12_v2
-                        time:   [39.613 µs 39.848 µs 40.091 µs]
+                        time:   [30.888 µs 31.305 µs 31.736 µs]
 ```
 </details>
 

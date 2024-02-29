@@ -1,5 +1,5 @@
 fn string_is_nice_v1(input: &str) -> bool {
-  let mut vowels = 0;
+  let mut vowels: u8 = 0;
   let mut repeated = false;
   let no_naughty_sequences = input.chars().try_fold(' ', |acc, elt| {
     if acc == 'a' && elt == 'b' {
@@ -22,7 +22,6 @@ fn string_is_nice_v1(input: &str) -> bool {
     }
     return Ok(elt);
   });
-
   return no_naughty_sequences != Err('-') && repeated && vowels >= 3;
 }
 
@@ -34,21 +33,32 @@ fn string_is_nice_v2(input: &str) -> bool {
     if letters[i] == letters[i + 2] {
       repeated = true;
     }
-    let pattern = &input[i..(i + 2)];
-    let ending = &input[i + 2..input.len()];
-    if ending.contains(pattern) {
-      twice_pair = true;
+    if twice_pair {
+      continue;
+    }
+    for j in i + 2..input.len() - 1 {
+      if letters[i] == letters[j] && letters[i + 1] == letters[j + 1] {
+        twice_pair = true;
+      }
     }
   }
   return twice_pair && repeated;
 }
 
-pub fn day_05_v1(input: &str) -> u32 {
-  return input.lines().filter(|line| string_is_nice_v1(line)).count() as u32;
+pub fn day_05_v1(input: impl Into<String>) -> u32 {
+  let input_str = input.into();
+  return input_str
+    .lines()
+    .filter(|line| string_is_nice_v1(line))
+    .count() as u32;
 }
 
-pub fn day_05_v2(input: &str) -> u32 {
-  return input.lines().filter(|line| string_is_nice_v2(line)).count() as u32;
+pub fn day_05_v2(input: impl Into<String>) -> u32 {
+  let input_str = input.into();
+  return input_str
+    .lines()
+    .filter(|line| string_is_nice_v2(line))
+    .count() as u32;
 }
 
 #[cfg(test)]
@@ -65,7 +75,7 @@ mod tests {
       ("dvszwmarrgswjxmb", false),
     ];
     for (sample, result) in sample_one.iter() {
-      assert_eq!(string_is_nice_v1(sample), *result);
+      assert_eq!(string_is_nice_v1(*sample), *result);
     }
   }
 
@@ -78,7 +88,7 @@ mod tests {
       ("ieodomkazucvgmuy", false),
     ];
     for (sample, result) in sample_two.iter() {
-      assert_eq!(string_is_nice_v2(sample), *result);
+      assert_eq!(string_is_nice_v2(*sample), *result);
     }
   }
 

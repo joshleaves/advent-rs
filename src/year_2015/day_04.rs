@@ -3,8 +3,12 @@ use md5::{Digest, Md5};
 #[mutants::skip] // Don't even try this hahaha
 pub fn loop_until_hash(input: &str, stop_value: u8) -> u32 {
   let mut starter: u32 = 0;
+  let mut hasher = Md5::new();
+  hasher.update(input);
   loop {
-    let hash = Md5::digest(format!("{input}{starter}"));
+    let mut hasher_num = hasher.clone();
+    hasher_num.update(starter.to_string());
+    let hash = hasher_num.finalize();
     if hash[..2] == [0, 0] && hash[2] <= stop_value {
       return starter;
     }
@@ -13,13 +17,15 @@ pub fn loop_until_hash(input: &str, stop_value: u8) -> u32 {
   }
 }
 
-pub fn day_04_v1(input: &str) -> u32 {
-  let clean_str = input.lines().next().expect("OK");
+pub fn day_04_v1(input: impl Into<String>) -> u32 {
+  let input_str = input.into();
+  let clean_str = input_str.lines().next().expect("OK");
   return loop_until_hash(clean_str, 15);
 }
 
-pub fn day_04_v2(input: &str) -> u32 {
-  let clean_str = input.lines().next().expect("OK");
+pub fn day_04_v2(input: impl Into<String>) -> u32 {
+  let input_str = input.into();
+  let clean_str = input_str.lines().next().expect("OK");
   return loop_until_hash(clean_str, 0);
 }
 
@@ -34,7 +40,7 @@ mod tests {
       ("pqrstuv", 1048970),
     ];
     for (sample, result) in sample_one.iter() {
-      assert_eq!(day_04_v1(sample), *result);
+      assert_eq!(day_04_v1(*sample), *result);
     }
   }
 

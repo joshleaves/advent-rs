@@ -1,7 +1,3 @@
-fn code_line_len(line: &str) -> u16 {
-  line.len() as u16
-}
-
 fn memory_line_len(line: &str) -> u16 {
   let mut line_len = line.len() as u16 - 2;
   let mut idx: usize = 1;
@@ -13,11 +9,11 @@ fn memory_line_len(line: &str) -> u16 {
         idx += 2;
       }
       r#"\x"# => {
-        let num_tokens = &line[idx + 2..=idx + 3];
-        if u32::from_str_radix(num_tokens, 16).ok().is_some() {
-          line_len -= 3;
-          idx += 4;
-        }
+        // let num_tokens =  &line[idx + 2..=idx + 3];
+        // if u32::from_str_radix(num_tokens, 16).ok().is_some() {
+        line_len -= 3;
+        idx += 4;
+        // }
       }
       _ => idx += 1,
     }
@@ -28,28 +24,26 @@ fn memory_line_len(line: &str) -> u16 {
 
 fn dumped_line_len(line: &str) -> u16 {
   let mut line_len = line.len() as u16 + 2 as u16;
-  for char in line.chars() {
-    match char {
-      '"' => line_len += 1,
-      '\\' => line_len += 1,
-      _ => {}
+  for chr in line.chars() {
+    if chr == '"' || chr == '\\' {
+      line_len += 1;
     }
   }
   line_len
 }
 
-pub fn day_08_v1(input: &str) -> u16 {
+pub fn day_08_v1(input: impl Into<String>) -> u16 {
   let mut total: u16 = 0;
-  for line in input.lines() {
-    total += code_line_len(line) - memory_line_len(line);
+  for line in input.into().lines() {
+    total += line.len() as u16 - memory_line_len(line);
   }
   total
 }
 
-pub fn day_08_v2(input: &str) -> u16 {
+pub fn day_08_v2(input: impl Into<String>) -> u16 {
   let mut total: u16 = 0;
-  for line in input.lines() {
-    total += dumped_line_len(line) - code_line_len(line);
+  for line in input.into().lines() {
+    total += dumped_line_len(line) - line.len() as u16;
   }
   total
 }
@@ -57,19 +51,6 @@ pub fn day_08_v2(input: &str) -> u16 {
 #[cfg(test)]
 mod tests {
   use super::*;
-
-  #[test]
-  fn calculates_length_of_code_strings() {
-    let sample_one: [(&str, u16); 4] = [
-      (r#""""#, 2),
-      (r#""abc""#, 5),
-      (r#""aaa\"aaa""#, 10),
-      (r#""\x27""#, 6),
-    ];
-    for (sample, result) in sample_one.iter() {
-      assert_eq!(code_line_len(sample), *result);
-    }
-  }
 
   #[test]
   fn calculates_length_of_memory_strings() {
@@ -93,7 +74,7 @@ mod tests {
       (r#""\x27""#, 11),
     ];
     for (sample, result) in sample_one.iter() {
-      assert_eq!(dumped_line_len(sample), *result);
+      assert_eq!(dumped_line_len(*sample), *result);
     }
   }
 
@@ -106,7 +87,7 @@ mod tests {
       (r#""\x27""#, 5),
     ];
     for (sample, result) in sample_one.iter() {
-      assert_eq!(day_08_v1(sample), *result);
+      assert_eq!(day_08_v1(*sample), *result);
     }
   }
 
@@ -119,7 +100,7 @@ mod tests {
       (r#""\x27""#, 5),
     ];
     for (sample, result) in sample_one.iter() {
-      assert_eq!(day_08_v2(sample), *result);
+      assert_eq!(day_08_v2(*sample), *result);
     }
   }
 

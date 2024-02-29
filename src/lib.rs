@@ -35,19 +35,27 @@ pub fn fetch_input(file_path: Option<PathBuf>) -> Result<String, std::io::Error>
 /// Returns the solution for a specified exercise and input.
 ///
 /// # Arguments
-///
 /// * `year` - The year of the exercise, from 2015.
 /// * `day` - The day of the exercise, from 1 to 25.
 /// * `version` - The version of the exercise, 1 or 2.
-/// * `input` - The input to the problem.
+/// * `input` - The input to the exercise.
 ///
-/// # Example
+/// # Examples
+/// Non-existing year/day/version
 /// ```
-/// use advent_of_code::solve;
-/// let solution = solve(2019, 1, 1, "14");
-/// assert_eq!(solution, "2"));
+/// use advent_rs::solve;
+/// assert_eq!(solve(2014, 1, 1, ""), None);
+/// assert_eq!(solve(2015, 1, 3, ""), None);
+/// assert_eq!(solve(2015, 26, 1, ""), None);
 /// ```
-pub fn solve(year: u16, day: u8, version: u8, input: String) -> Option<String> {
+///
+/// Existing year/day/version returns a String
+/// ```
+/// use advent_rs::solve;
+/// let solution = solve(2015, 1, 1, "(())");
+/// assert_eq!(solution, Some("0".to_string()));
+/// ```
+pub fn solve(year: u16, day: u8, version: u8, input: impl Into<String>) -> Option<String> {
   match year {
     2015 => return year_2015::solve(day, version, input),
     _ => return None,

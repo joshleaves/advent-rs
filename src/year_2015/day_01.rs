@@ -1,7 +1,7 @@
-pub fn day_01_v1(input: &str) -> i16 {
+pub fn day_01_v1(input: impl Into<String>) -> i16 {
   let mut lvl: i16 = 0;
 
-  for chr in input.chars() {
+  for chr in input.into().chars() {
     match chr {
       '(' => lvl += 1,
       ')' => lvl -= 1,
@@ -11,10 +11,10 @@ pub fn day_01_v1(input: &str) -> i16 {
   lvl
 }
 
-pub fn day_01_v2(input: &str) -> i16 {
+pub fn day_01_v2(input: impl Into<String>) -> i16 {
   let mut lvl: i16 = 0;
 
-  for (idx, chr) in input.chars().enumerate() {
+  for (idx, chr) in input.into().chars().enumerate() {
     match chr {
       '(' => lvl += 1,
       ')' => lvl -= 1,
@@ -45,7 +45,7 @@ mod tests {
       (")())())", -3),
     ];
     for (sample, result) in sample_one.iter() {
-      assert_eq!(day_01_v1(sample), *result);
+      assert_eq!(day_01_v1(*sample), *result);
     }
   }
 
@@ -56,7 +56,7 @@ mod tests {
       ("()())", 5),
     ];
     for (sample, result) in sample_two.iter() {
-      assert_eq!(day_01_v2(sample), *result);
+      assert_eq!(day_01_v2(*sample), *result);
     }
   }
 }

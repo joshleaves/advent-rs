@@ -13,6 +13,9 @@ fn traverse_node_value(input: &Vec<u8>, idx: usize) -> (i32, usize) {
         total += input[idx + length] as i32 - 48;
       }
       _ => {
+        if length == 0 {
+          return (0, 1);
+        }
         return (total * min, length - 1);
       }
     };
@@ -24,11 +27,11 @@ fn traverse_node_array(input: &Vec<u8>, idx: usize) -> (i32, usize) {
   let mut total: i32 = 0;
   let mut length: usize = 1;
   loop {
-    if idx + length >= input.len() || input[idx + length] == b']' {
-      return (total, length);
-    }
     match input[idx + length] {
-      b'-' | b'0'..=b'9' => {
+      b']' => {
+        return (total, length);
+      }
+      b'-'..=b'9' => {
         let (add_total, add_length) = traverse_node_value(input, idx + length);
         total += add_total;
         length += add_length;
@@ -54,14 +57,14 @@ fn traverse_node_hash(input: &Vec<u8>, idx: usize) -> (i32, usize) {
   let mut length: usize = 1;
   let mut no_red = true;
   loop {
-    if idx + length >= input.len() || input[idx + length] == b'}' {
-      if no_red == false {
-        total = 0;
-      }
-      return (total, length);
-    }
     match input[idx + length] {
-      b'-' | b'0'..=b'9' => {
+      b'}' => {
+        if no_red == false {
+          total = 0;
+        }
+        return (total, length);
+      }
+      b'-'..=b'9' => {
         let (add_total, add_length) = traverse_node_value(input, idx + length);
         total += add_total;
         length += add_length;
@@ -77,8 +80,8 @@ fn traverse_node_hash(input: &Vec<u8>, idx: usize) -> (i32, usize) {
         length += add_length;
       }
       b'r' => {
-        if input[idx + length - 1..=idx + length + 3] == *r#""red""#.as_bytes() {
-          length += 2;
+        if no_red && input[idx + length - 1..=idx + length + 3] == *r#""red""#.as_bytes() {
+          length += 3;
           no_red = false;
         }
       }
@@ -90,25 +93,19 @@ fn traverse_node_hash(input: &Vec<u8>, idx: usize) -> (i32, usize) {
 
 pub fn day_12_v1(input: impl Into<String>) -> i32 {
   let mut total: i32 = 0;
-  let mut cur: i32 = 0;
-  let mut min: i32 = 1;
-  for chr in input.into().as_bytes().iter() {
-    match chr {
-      b'-' => {
-        min = -1;
+  let mut idx = 0;
+
+  let letters: Vec<u8> = input.into().into_bytes();
+  while idx < letters.len() - 1 {
+    match letters[idx] {
+      b'-'..=b'9' => {
+        let (add_total, add_length) = traverse_node_value(&letters, idx);
+        total += add_total;
+        idx += add_length;
       }
-      b'0'..=b'9' => {
-        cur *= 10;
-        cur += *chr as i32 - 48;
-      }
-      _ => {
-        if cur > 0 {
-          total += cur * min;
-        }
-        cur = 0;
-        min = 1;
-      }
-    }
+      _ => {}
+    };
+    idx += 1;
   }
 
   total

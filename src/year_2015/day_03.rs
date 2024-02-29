@@ -13,22 +13,22 @@ fn move_character(pos: (i8, i8), direction: char) -> (i8, i8) {
   newpos
 }
 
-pub fn day_03_v1(input: &str) -> usize {
+pub fn day_03_v1(input: impl Into<String>) -> usize {
   let mut santa: (i8, i8) = (0, 0);
   let mut houses = HashSet::from([santa]);
 
-  for (_idx, chr) in input.chars().enumerate() {
+  for (_idx, chr) in input.into().chars().enumerate() {
     santa = move_character(santa, chr);
     houses.insert(santa);
   }
   return houses.len() as usize;
 }
 
-pub fn day_03_v2(input: &str) -> usize {
+pub fn day_03_v2(input: impl Into<String>) -> usize {
   let mut santa: (i8, i8) = (0, 0);
   let mut robot: (i8, i8) = (0, 0);
   let mut houses = HashSet::from([santa]);
-  let moves: Vec<char> = input.chars().collect();
+  let moves: Vec<char> = input.into().chars().collect();
 
   for chars in moves.chunks(2) {
     santa = move_character(santa, chars[0]);
@@ -66,7 +66,7 @@ mod tests {
     ];
 
     for (sample, result) in sample_one.iter() {
-      assert_eq!(day_03_v1(sample), *result);
+      assert_eq!(day_03_v1(*sample), *result);
     }
   }
 
@@ -79,7 +79,7 @@ mod tests {
     ];
 
     for (sample, result) in sample_two.iter() {
-      assert_eq!(day_03_v2(sample), *result);
+      assert_eq!(day_03_v2(*sample), *result);
     }
   }
 }

@@ -38,18 +38,20 @@ fn next_cities_ids<'a>(input: &Vec<u8>, needle: &u8) -> Vec<u8> {
   return new_vec;
 }
 
-fn try_best_path<'a, CMP>(
+fn try_best_path<'a, STP, CMP>(
   paths: &HashMap<(u8, u8), u16>,
   current_city: &u8,
   cities: Vec<u8>,
+  stopper_func: &STP,
   path_is_better: &CMP,
   current_path: &'a u16,
   current_best: &'a u16,
 ) -> u16
 where
+  STP: Fn(u16, u16, usize) -> bool,
   CMP: Fn(u16, u16) -> bool,
 {
-  if cities.len() == 0 {
+  if stopper_func(*current_best, *current_path, cities.len()) {
     return *current_path;
   }
   let mut best_path = *current_best;
@@ -63,6 +65,7 @@ where
       &paths,
       city_id,
       next_cities_ids(&cities, city_id),
+      stopper_func,
       path_is_better,
       &next_path,
       current_best,
@@ -74,14 +77,15 @@ where
   best_path
 }
 
-pub fn day_09_v1<'a>(input: &str) -> u16 {
-  let (cities_ids, paths) = parse_input(input);
+pub fn day_09_v1<'a>(input: impl Into<String>) -> u16 {
+  let (cities_ids, paths) = parse_input(&input.into());
   let mut best_path = u16::MAX;
   for city_id in cities_ids.iter() {
     let new_best = try_best_path(
       &paths,
       city_id,
       next_cities_ids(&cities_ids, city_id),
+      &|best, cur, cities_len| best < cur || cities_len == 0,
       &|best, cur| cur < best,
       &0,
       &best_path,
@@ -93,14 +97,15 @@ pub fn day_09_v1<'a>(input: &str) -> u16 {
   best_path
 }
 
-pub fn day_09_v2<'a>(input: &str) -> u16 {
-  let (cities_ids, paths) = parse_input(input);
+pub fn day_09_v2<'a>(input: impl Into<String>) -> u16 {
+  let (cities_ids, paths) = parse_input(&input.into());
   let mut best_path = 0;
   for city_id in cities_ids.iter() {
     let new_best = try_best_path(
       &paths,
       city_id,
       next_cities_ids(&cities_ids, city_id),
+      &|_best, _cur, cities_len| cities_len == 0,
       &|best, cur| cur > best,
       &0,
       &best_path,

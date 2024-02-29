@@ -3,17 +3,17 @@ use itertools::Itertools;
 fn look_and_say(input: Vec<u8>) -> Vec<u8> {
   let mut current_cnt: u8 = 0;
   let mut current_chr: u8 = input[0];
-  let mut new_seq = input.iter().fold(vec![], |mut acc, chr| {
+  let mut new_seq: Vec<u8> = Vec::new();
+  for chr in input.iter() {
     if *chr == current_chr {
       current_cnt += 1;
     } else {
-      acc.push(current_cnt);
-      acc.push(current_chr);
+      new_seq.push(current_cnt);
+      new_seq.push(current_chr);
       current_cnt = 1;
       current_chr = *chr;
     }
-    acc
-  });
+  }
   new_seq.push(current_cnt);
   new_seq.push(current_chr);
 
@@ -31,16 +31,16 @@ fn string_to_chr(input: &str) -> Vec<u8> {
     .collect_vec()
 }
 
-pub fn day_10_v1(input: &str) -> u32 {
-  let mut next_input: Vec<u8> = string_to_chr(input);
+pub fn day_10_v1(input: impl Into<String>) -> u32 {
+  let mut next_input: Vec<u8> = string_to_chr(&input.into());
   for _n in 1..=40 {
     next_input = look_and_say(next_input);
   }
   next_input.len() as u32
 }
 
-pub fn day_10_v2(input: &str) -> u32 {
-  let mut next_input: Vec<u8> = string_to_chr(input);
+pub fn day_10_v2(input: impl Into<String>) -> u32 {
+  let mut next_input: Vec<u8> = string_to_chr(&input.into());
   for _n in 1..=50 {
     next_input = look_and_say(next_input);
   }

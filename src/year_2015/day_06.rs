@@ -31,10 +31,10 @@ where
   }
 }
 
-pub fn day_06_v1(input: &str) -> u32 {
+pub fn day_06_v1(input: impl Into<String>) -> u32 {
   let re = Regex::new(r"(?<inst>on|off|toggle) (?<from>\d+,\d+) through (?<to>\d+,\d+)").unwrap();
   let mut light_grid: Vec<u8> = vec![0_u8; 1_000_000];
-  for line in input.lines() {
+  for line in input.into().lines() {
     let Some(caps) = re.captures(line) else {
       panic!("Invalid instruction: {}", line)
     };
@@ -70,10 +70,10 @@ pub fn day_06_v1(input: &str) -> u32 {
   return light_grid.iter().map(|&i| i as u32).sum();
 }
 
-pub fn day_06_v2(input: &str) -> u32 {
+pub fn day_06_v2(input: impl Into<String>) -> u32 {
   let re = Regex::new(r"(?<inst>on|off|toggle) (?<from>\d+,\d+) through (?<to>\d+,\d+)").unwrap();
   let mut light_grid: Vec<u8> = vec![0_u8; 1_000_000];
-  for line in input.lines() {
+  for line in input.into().lines() {
     let Some(caps) = re.captures(line) else {
       panic!("Invalid instruction: {}", line)
     };
@@ -121,13 +121,16 @@ mod tests {
 
   #[test]
   fn works_with_samples_v1() {
-    let sample_one = include_str!("../../inputs/year_2015_day_06_sample_v1");
+    let sample_one = r#"turn on 0,0 through 999,999
+    toggle 0,0 through 999,0
+    turn off 499,499 through 500,500"#;
     assert_eq!(day_06_v1(sample_one), 998_996);
   }
 
   #[test]
   fn works_with_samples_v2() {
-    let sample_two = include_str!("../../inputs/year_2015_day_06_sample_v2");
+    let sample_two = r#"turn on 0,0 through 0,0
+    toggle 0,0 through 999,999"#;
     assert_eq!(day_06_v2(sample_two), 2_000_001);
   }
 }

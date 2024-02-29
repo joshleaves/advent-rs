@@ -49,9 +49,9 @@ impl FromStr for PresentBox {
   }
 }
 
-pub fn day_02_v1(input: &str) -> u32 {
+pub fn day_02_v1(input: impl Into<String>) -> u32 {
   let mut total: u32 = 0;
-  for line in input.lines() {
+  for line in input.into().lines() {
     match PresentBox::from_str(line) {
       Ok(present) => total += present.wrapper() as u32,
       Err(_) => {}
@@ -60,9 +60,9 @@ pub fn day_02_v1(input: &str) -> u32 {
   total
 }
 
-pub fn day_02_v2(input: &str) -> u32 {
+pub fn day_02_v2(input: impl Into<String>) -> u32 {
   let mut total: u32 = 0;
-  for line in input.lines() {
+  for line in input.into().lines() {
     match PresentBox::from_str(line) {
       Ok(present) => total += present.ribbon() as u32,
       Err(_) => {}
@@ -82,7 +82,7 @@ mod tests {
       ("1x1x10", 43),
     ];
     for (sample, result) in sample_one.iter() {
-      assert_eq!(day_02_v1(sample), *result);
+      assert_eq!(day_02_v1(*sample), *result);
     }
   }
 
@@ -94,7 +94,7 @@ mod tests {
     ];
 
     for (sample, result) in sample_two.iter() {
-      assert_eq!(day_02_v2(sample), *result);
+      assert_eq!(day_02_v2(*sample), *result);
     }
   }
 }
