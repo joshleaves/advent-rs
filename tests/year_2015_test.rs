@@ -11,6 +11,7 @@ use advent_rs::year_2015::day_10;
 use advent_rs::year_2015::day_11;
 use advent_rs::year_2015::day_12;
 use advent_rs::year_2015::day_13;
+use advent_rs::year_2015::day_14;
 
 #[test]
 fn year_2015_day_01() {
@@ -100,4 +101,11 @@ fn year_2015_day_13() {
   let input = include_str!("../inputs/year_2015_day_13_input");
   assert_eq!(day_13::day_13_v1(input), 709);
   assert_eq!(day_13::day_13_v2(input), 668);
+}
+
+#[test]
+fn year_2015_day_14() {
+  let input = include_str!("../inputs/year_2015_day_14_input");
+  assert_eq!(day_14::day_14_v1(input), 2655);
+  assert_eq!(day_14::day_14_v2(input), 1059);
 }

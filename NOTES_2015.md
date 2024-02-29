@@ -394,3 +394,29 @@ year_2015::day_13/year_2015::day_13_v2
 Why do these people even bother having a Christmas dinner together if they hate each other (and us) so much? On the Rust front, beginning to understand ownership a little better, I managed to write this one without resorting to lifetimes. Just makes everything more readable.
 
 Something I also gained over my Ruby implementation is saving a loop: since we are looping back to our initial point at the end of each cycle, a permutation like `[0, 1, 2, 3, 4]` will have the same value as `[1, 2, 3, 4, 0]`. Therefore, we only need to generate (brute-force?) sequences starting with our first element. Once we reach our first depth, we can iterate over all available results.
+
+
+## Day 14: Reindeer Olympics
+
+<details>
+<summary>📊Tests and benchmarks</summary>
+
+```
+test year_2015::day_14::tests::works_with_samples_v1 ... ok
+test year_2015::day_14::tests::works_with_samples_v2 ... ok
+test year_2015_day_14 ... ok
+
+year_2015::day_14/year_2015::day_14_v1
+                        time:   [3.5302 ms 3.5346 ms 3.5403 ms]
+year_2015::day_14/year_2015::day_14_v2
+                        time:   [3.5312 ms 3.5359 ms 3.5412 ms]
+```
+</details>
+
+<details>
+<summary>Ruby version comments</summary>
+
+> This day doesn't have complicated concepts. If you want to dig, you can think of each reindeer as a [finite-state machine](https://en.wikipedia.org/wiki/Finite-state_machine), which is [one of the concepts that are best solved thanks to Object-oriented programming](https://eev.ee/blog/2013/03/03/the-controller-pattern-is-awful-and-other-oo-heresy/).
+</details>
+
+Nothing too different here.
