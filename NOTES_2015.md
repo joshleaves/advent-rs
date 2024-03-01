@@ -420,3 +420,35 @@ year_2015::day_14/year_2015::day_14_v2
 </details>
 
 Nothing too different here.
+
+
+## Day 15: Science for Hungry People
+
+<details>
+<summary>📊Tests and benchmarks</summary>
+
+```
+test year_2015::day_15::tests::works_with_samples_v1 ... ok
+test year_2015::day_15::tests::works_with_samples_v2 ... ok
+test year_2015_day_15 ... ok
+
+year_2015::day_15/year_2015::day_15_v1
+                        time:   [35.365 ms 35.613 ms 35.944 ms]
+year_2015::day_15/year_2015::day_15_v2
+                        time:   [35.463 ms 35.498 ms 35.539 ms]
+```
+</details>
+
+<details>
+<summary>Ruby version comments</summary>
+
+> Is there a day where you don't have to iterate through all possible solutions?
+> 
+> I am (partly) joking. I am pretty sure there must be a way to solve n-sided equations, but quite frankly, there's a reason I've always thought of programming as "languages" and not "mathematics". Again, the best thing we can do to avoid an `O(n*n)` complexity is finding ways to avoid calculations we know will result in a 0 anywhere.
+> 
+> So far, I mainly used loops and other control flow structures, but I decided to go with an [`Enumerator`](https://ruby-doc.org/core-3.0.1/Enumerator.html) for this one. No specific change or speedup, but it's the kind of structure we should think of building more often, as [`Enumerable`](https://ruby-doc.org/core-3.0.1/Enumerable.html) is the class that made me fall in love with Ruby.
+</details>
+
+This one was much harder.
+
+After trying many times to use my previous algorithm to mark ranges where numbers were "forbidden", things got heated, and in the end, I reworked something myself by [following a proper implementation](https://docs.rs/advent-of-code/2022.0.66/src/advent_of_code/year2015/day15.rs.html). However, being in Rust makes the execution of all these loops way faster than it used to be in Ruby.
