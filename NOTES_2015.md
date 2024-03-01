@@ -500,3 +500,36 @@ year_2015::day_17/year_2015::day_17_v2
 </details>
 
 Heh, I'm getting to used to this stuff that it compiled on the second try, and passed the tests on the second. Reworking my Ruby algorithm into Ruby wasn't complicated either.
+
+
+## Day 18: Like a GIF For Your Yard
+
+<details>
+<summary>📊Tests and benchmarks</summary>
+
+```
+test year_2015::day_18::tests::works_with_samples_v1 ... ok
+test year_2015::day_18::tests::works_with_samples_v2 ... ok
+test year_2015_day_18 ... ok
+
+Warning: Unable to complete 100 samples in 5.0s. You may wish to increase target time to 5.4s, or reduce sample count to 90.
+year_2015::day_18/year_2015::day_18_v1
+                        time:   [54.055 ms 54.104 ms 54.155 ms]
+
+Warning: Unable to complete 100 samples in 5.0s. You may wish to increase target time to 6.5s, or reduce sample count to 70.
+year_2015::day_18/year_2015::day_18_v2
+                        time:   [64.643 ms 64.735 ms 64.828 ms]
+```
+</details>
+
+<details>
+<summary>Ruby version comments</summary>
+
+> upon [Conway's Game of Life](https://en.wikipedia.org/wiki/Conway%27s_Game_of_Life) earlier, and this exercise is a good example of it.
+> 
+> I thought I was being smart by only keeping track of positions of only ON lights, which was a good implementation for a six-by-six data set, but proved UTTERLY SLOW on the final data set. Using an array of strings (as is the most naive implementation) is indeed the fastest way to do it. I still kept the old code commented.
+</details>
+
+That was fun.
+
+My [distinguished competitor](https://docs.rs/advent-of-code/2022.0.66/src/advent_of_code/year2015/day18.rs.html) used a single-dimensional vector approach, which may have a better performance, but quite frankly, I prefer having representation closer to "physical" reality. But it's just me, don't listen to me too much.

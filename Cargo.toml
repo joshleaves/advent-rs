@@ -1,6 +1,6 @@
 [package]
 name = "advent-rs"
-version = "2015.17.1"
+version = "2015.18.1"
 edition = "2021"
 authors = ["Arnaud 'red' Rouyer"]
 readme = "README.md"
@@ -36,7 +36,7 @@ regex = "1.10.3"
 [dev-dependencies]
 assert_cmd = "2.0.13"
 predicates = "3.1.0"
-criterion = { version = "0.4", features = ["html_reports"] }
+criterion = { version = "0.5.1", features = ["html_reports"] }
 
 [[bench]]
 name = "advent-bench"
