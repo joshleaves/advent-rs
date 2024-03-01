@@ -475,3 +475,28 @@ year_2015::day_16/year_2015::day_16_v2
 </details>
 
 This one was already easy in Ruby, and it's just as easy in Rust.
+
+## Day 17: No Such Thing as Too Much
+
+<details>
+<summary>📊Tests and benchmarks</summary>
+
+```
+test year_2015::day_17::tests::works_with_samples_v1 ... ok
+test year_2015::day_17::tests::works_with_samples_v2 ... ok
+test year_2015_day_17 ... ok
+
+year_2015::day_17/year_2015::day_17_v1
+                        time:   [9.3768 ms 9.3931 ms 9.4143 ms]
+year_2015::day_17/year_2015::day_17_v2
+                        time:   [9.3911 ms 9.4139 ms 9.4419 ms]
+```
+</details>
+
+<details>
+<summary>Ruby version comments</summary>
+
+> Nothing really complicated here, or that we haven't seen yet.
+</details>
+
+Heh, I'm getting to used to this stuff that it compiled on the second try, and passed the tests on the second. Reworking my Ruby algorithm into Ruby wasn't complicated either.

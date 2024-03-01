@@ -107,22 +107,3 @@ pub fn day_16_v2(input: impl Into<String>) -> usize {
 }
 
 solvable!(day_16, day_16_v1, day_16_v2, usize);
-
-// #[cfg(test)]
-// mod tests {
-//   use super::*;
-
-//   #[test]
-//   fn works_with_samples_v1() {
-//     let sample: &str = r#"Butterscotch: capacity -1, durability -2, flavor 6, texture 3, calories 8\n\
-//       Cinnamon: capacity 2, durability 3, flavor -2, texture -1, calories 3"#;
-//     assert_eq!(day_16_v1(sample), 62_842_880);
-//   }
-
-//   #[test]
-//   fn works_with_samples_v2() {
-//     let sample: &str = r#"Butterscotch: capacity -1, durability -2, flavor 6, texture 3, calories 8\n\
-//       Cinnamon: capacity 2, durability 3, flavor -2, texture -1, calories 3"#;
-//     assert_eq!(day_16_v2(sample), 57_600_000);
-//   }
-// }
