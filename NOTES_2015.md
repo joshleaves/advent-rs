@@ -452,3 +452,26 @@ year_2015::day_15/year_2015::day_15_v2
 This one was much harder.
 
 After trying many times to use my previous algorithm to mark ranges where numbers were "forbidden", things got heated, and in the end, I reworked something myself by [following a proper implementation](https://docs.rs/advent-of-code/2022.0.66/src/advent_of_code/year2015/day15.rs.html). However, being in Rust makes the execution of all these loops way faster than it used to be in Ruby.
+
+## Day 16: Aunt Sue
+
+<details>
+<summary>📊Tests and benchmarks</summary>
+
+```
+test year_2015_day_16 ... ok
+
+year_2015::day_16/year_2015::day_16_v1
+                        time:   [115.32 µs 115.43 µs 115.53 µs]
+year_2015::day_16/year_2015::day_16_v2
+                        time:   [81.179 µs 81.202 µs 81.226 µs]
+```
+</details>
+
+<details>
+<summary>Ruby version comments</summary>
+
+> See, when I say Ruby's `Enumerable` is the perfect, this is the kind of problems I'm talking about.
+</details>
+
+This one was already easy in Ruby, and it's just as easy in Rust.

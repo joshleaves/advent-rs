@@ -13,6 +13,7 @@ pub mod day_12;
 pub mod day_13;
 pub mod day_14;
 pub mod day_15;
+pub mod day_16;
 
 /// Returns the solution for a specified exercise and input.
 ///
@@ -57,6 +58,7 @@ pub fn solve(day: u8, part: u8, input: impl Into<String>) -> Option<String> {
     13 => return Some(format!("{}", day_13::day_13(part, input))),
     14 => return Some(format!("{}", day_14::day_14(part, input))),
     15 => return Some(format!("{}", day_15::day_15(part, input))),
+    16 => return Some(format!("{}", day_16::day_16(part, input))),
     _ => return None,
   }
 }
