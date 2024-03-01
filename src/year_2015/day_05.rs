@@ -45,21 +45,23 @@ fn string_is_nice_v2(input: &str) -> bool {
   return twice_pair && repeated;
 }
 
-pub fn day_05_v1(input: impl Into<String>) -> u32 {
+pub fn day_05_v1(input: impl Into<String>) -> usize {
   let input_str = input.into();
   return input_str
     .lines()
     .filter(|line| string_is_nice_v1(line))
-    .count() as u32;
+    .count() as usize;
 }
 
-pub fn day_05_v2(input: impl Into<String>) -> u32 {
+pub fn day_05_v2(input: impl Into<String>) -> usize {
   let input_str = input.into();
   return input_str
     .lines()
     .filter(|line| string_is_nice_v2(line))
-    .count() as u32;
+    .count() as usize;
 }
+
+solvable!(day_05, day_05_v1, day_05_v2, usize);
 
 #[cfg(test)]
 mod tests {

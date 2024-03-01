@@ -112,6 +112,8 @@ pub fn day_09_v2<'a>(input: impl Into<String>) -> u16 {
   best_path
 }
 
+solvable!(day_09, day_09_v1, day_09_v2, u16);
+
 #[cfg(test)]
 mod tests {
   use super::*;

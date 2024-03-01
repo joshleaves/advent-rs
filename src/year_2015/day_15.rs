@@ -96,6 +96,8 @@ pub fn day_15_v2(input: impl Into<String>) -> i32 {
   try_best_ingredient(&ingredients, &mut quantities, 0, &|c| c != 500)
 }
 
+solvable!(day_15, day_15_v1, day_15_v2, i32);
+
 #[cfg(test)]
 mod tests {
   use super::*;

@@ -160,6 +160,8 @@ pub fn day_01_v2(input: impl Into<String>) -> i16 {
   0
 }
 
+solvable!(day_01, day_01_v1, day_01_v2, i16);
+
 #[cfg(test)]
 mod tests {
   use super::*;

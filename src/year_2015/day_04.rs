@@ -29,6 +29,8 @@ pub fn day_04_v2(input: impl Into<String>) -> u32 {
   return loop_until_hash(clean_str, 0);
 }
 
+solvable!(day_04, day_04_v1, day_04_v2, u32);
+
 #[cfg(test)]
 mod tests {
   use super::*;

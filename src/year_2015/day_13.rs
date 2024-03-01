@@ -111,6 +111,8 @@ pub fn day_13_v2(input: impl Into<String>) -> i16 {
   calculate_happiness(&paths, &0, friends_left, 0)
 }
 
+solvable!(day_13, day_13_v1, day_13_v2, i16);
+
 #[cfg(test)]
 mod tests {
   use super::*;

@@ -83,6 +83,8 @@ pub fn day_11_v2(input: impl Into<String>) -> String {
   return chr_to_string(&password);
 }
 
+solvable!(day_11, day_11_v1, day_11_v2, String);
+
 #[cfg(test)]
 mod tests {
   use super::*;

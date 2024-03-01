@@ -125,6 +125,8 @@ pub fn day_12_v2(input: impl Into<String>) -> i32 {
   0
 }
 
+solvable!(day_12, day_12_v1, day_12_v2, i32);
+
 #[cfg(test)]
 mod tests {
   use super::*;

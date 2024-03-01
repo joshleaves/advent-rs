@@ -39,6 +39,8 @@ pub fn day_03_v2(input: impl Into<String>) -> usize {
   return houses.len() as usize;
 }
 
+solvable!(day_03, day_03_v1, day_03_v2, usize);
+
 #[cfg(test)]
 mod tests {
   use super::*;

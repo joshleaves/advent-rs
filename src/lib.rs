@@ -2,6 +2,20 @@ use std::fs;
 use std::io;
 use std::path::PathBuf;
 
+macro_rules! solvable {
+  ($day_xx:tt, $day_v1:tt, $day_v2:tt, $retype:ty) => {
+    pub fn $day_xx(part: u8, input: impl Into<String>) -> $retype {
+      match part {
+        1 => $day_v1(input),
+        2 => $day_v2(input),
+        _ => {
+          panic!("Invalid part: {}", part)
+        }
+      }
+    }
+  };
+}
+
 pub mod year_2015;
 
 pub fn fetch_input_from_file(filename: PathBuf) -> Result<String, std::io::Error> {

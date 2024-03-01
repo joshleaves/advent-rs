@@ -98,6 +98,8 @@ pub fn day_14_v2(input: impl Into<String>) -> u16 {
   reindeers.iter().map(|deer| deer.points).max().unwrap()
 }
 
+solvable!(day_14, day_14_v1, day_14_v2, u16);
+
 #[cfg(test)]
 mod tests {
   use super::*;

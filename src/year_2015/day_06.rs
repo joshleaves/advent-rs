@@ -115,6 +115,8 @@ pub fn day_06_v2(input: impl Into<String>) -> u32 {
   return light_grid.iter().map(|&i| i as u32).sum();
 }
 
+solvable!(day_06, day_06_v1, day_06_v2, u32);
+
 #[cfg(test)]
 mod tests {
   use super::*;

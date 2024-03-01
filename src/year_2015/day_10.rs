@@ -47,6 +47,8 @@ pub fn day_10_v2(input: impl Into<String>) -> u32 {
   next_input.len() as u32
 }
 
+solvable!(day_10, day_10_v1, day_10_v2, u32);
+
 #[cfg(test)]
 mod tests {
   use super::*;

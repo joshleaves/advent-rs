@@ -48,6 +48,8 @@ pub fn day_08_v2(input: impl Into<String>) -> u16 {
   total
 }
 
+solvable!(day_08, day_08_v1, day_08_v2, u16);
+
 #[cfg(test)]
 mod tests {
   use super::*;
