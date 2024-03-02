@@ -663,3 +663,28 @@ year_2015::day_23/year_2015::day_23_v2
 </details>
 
 Heh, I love this one, whether it's in Ruby or in Rust.
+
+## Day 24: It Hangs in the Balance
+
+<details>
+<summary>📊Tests and benchmarks</summary>
+
+```
+test year_2015::day_24::tests::works_with_samples_v1 ... ok
+test year_2015::day_24::tests::works_with_samples_v2 ... ok
+test year_2015::tests::day_24 ... ok
+
+year_2015::day_24/year_2015::day_24_v1
+                        time:   [15.294 ms 15.326 ms 15.360 ms]
+year_2015::day_24/year_2015::day_24_v2
+                        time:   [3.5474 ms 3.5596 ms 3.5719 ms]
+```
+</details>
+
+<details>
+<summary>Ruby version comments</summary>
+
+>While this looks like YABA (Yet Another Bruteforce Algorithm), Ruby's got a very useful [`#combination`](https://ruby-doc.org/3.2.2/Array.html#method-i-combination) method that will generate permutations around for you. And of course, knowing when to exit the loop at the best time is half the battle.
+</details>
+
+Would you believe it? The `combinations(n)` method also exists in Rust!
