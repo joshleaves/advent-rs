@@ -558,3 +558,31 @@ year_2015::day_19/year_2015::day_19_v2
 </details>
 
 Okay, that was less painful than I remembered it, and my Rust code is actually clearer than my Ruby code.
+
+## Day 20: Infinite Elves and Infinite Houses
+
+<details>
+<summary>📊Tests and benchmarks</summary>
+
+```
+test year_2015::day_20::tests::works_with_samples_v1 ... ok
+test year_2015_day_20 ... ok
+
+Warning: Unable to complete 100 samples in 5.0s. You may wish to increase target time to 45.9s, or reduce sample count to 10.
+year_2015::day_20/year_2015::day_20_v1
+                        time:   [454.92 ms 455.72 ms 456.56 ms]
+Warning: Unable to complete 100 samples in 5.0s. You may wish to increase target time to 50.1s, or reduce sample count to 10.
+year_2015::day_20/year_2015::day_20_v2
+                        time:   [497.94 ms 498.66 ms 499.45 ms]
+```
+</details>
+
+<details>
+<summary>Ruby version comments</summary>
+
+> I've had to calculate list of primes and divisors in the past, and it always sucked. My previous algorithms were correct but always too long (but what is "long" when you're nearing infinity?).
+> 
+> Again, [outside help](https://dmatrix.dev/posts/advent-of-code-year-2015-day-20/) is a great resource to find algorithms better than yours.
+</details>
+
+I remembered this one was A PIECE OF SHIT to run in Ruby, as it lasted around over minute on my machine the last time I ran it. Having it run in only one second here is a real pleasure. Some issues flip-flapping between types, but nothing too brutal.
