@@ -688,3 +688,42 @@ year_2015::day_24/year_2015::day_24_v2
 </details>
 
 Would you believe it? The `combinations(n)` method also exists in Rust!
+
+## Day 25: Let It Snow
+
+<details>
+<summary>📊Tests and benchmarks</summary>
+
+```
+test year_2015::day_25::tests::works_with_samples ... ok
+test year_2015::tests::day_25 ... ok
+
+year_2015::day_25/year_2015::day_25
+                        time:   [148.18 ns 148.33 ns 148.49 ns]
+```
+</details>
+
+<details>
+<summary>Ruby version comments</summary>
+
+> You could solve this one by calculating each number one-by-one, cell-by-cell,... Or you could use [modular exponentiation](https://en.wikipedia.org/wiki/Modular_exponentiation).
+> 
+> If you're careful, you will quickly understand that your operation will at some point look like `STARTER * MULT % MODULO * MULT % MODULO etc...`, and that once you know how many cells you need to iterate through, you can just repeat the `* MULT % MODULO` part.
+> 
+> Not being a math nerd at all (I've learned to talk to machines, not to numbers), the subject was completely lost on me, but here is some help: the modulo operation itself is very funny: once you apply it once, you don't need to repeat it, since it would just end up on the same number. So you can just repeat the multiply operation many times (isn't that a "power" operation?) and apply the modulo only once.
+> 
+> How about this:
+> ```ruby
+> > 9999 * 18 % 7 * 18 % 7 * 18 % 7 * 18 % 7 * 18 % 7 * 18 % 7 * 18 % 7 * 18 % 7
+>  => 6
+> > 9999 * 18 * 18 * 18 * 18 * 18 * 18 * 18 * 18 % 7 % 7 % 7 % 7 % 7 % 7 % 7 % 7
+>  => 6
+> > 9999 * 18 * 18 * 18 * 18 * 18 * 18 * 18 * 18 % 7
+>  => 6
+> > 9999 * 18**8 % 7
+>  => 6
+> ```
+> Now, I got it, and so do you. Merry Xmas!
+</details>
+
+That one was very easy in Rust too, I just had to [pick up an algorithm online](https://rob.co.bb/posts/2019-02-10-modular-exponentiation-in-rust/) to properly perform modular exponentiation since it doesn't seem available in Rust.

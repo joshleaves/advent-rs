@@ -57,6 +57,7 @@ pub mod day_21;
 pub mod day_22;
 pub mod day_23;
 pub mod day_24;
+pub mod day_25;
 
 /// Returns the solution for a specified exercise and input.
 ///
@@ -110,6 +111,7 @@ pub fn solve(day: u8, part: u8, input: impl Into<String>) -> Option<String> {
     22 => Some(format!("{}", day_22::day_22(part, input))),
     23 => Some(format!("{}", day_23::day_23(part, input))),
     24 => Some(format!("{}", day_24::day_24(part, input))),
+    25 => Some(format!("{}", day_25::day_25(input))),
     _ => None,
   }
 }
@@ -283,5 +285,11 @@ mod tests {
     let input = include_str!("../inputs/year_2015_day_24_input");
     assert_eq!(day_24::day_24_v1(input), 10_439_961_859);
     assert_eq!(day_24::day_24_v2(input), 72_050_269);
+  }
+
+  #[test]
+  fn day_25() {
+    let input = include_str!("../inputs/year_2015_day_25_input");
+    assert_eq!(day_25::day_25(input), 19_980_801);
   }
 }
