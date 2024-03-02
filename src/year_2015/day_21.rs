@@ -192,7 +192,7 @@ where
   best_price
 }
 
-pub fn day_21_v1<'a>(input: impl Into<String>) -> usize {
+pub fn day_21_v1(input: impl Into<String>) -> usize {
   let boss = Character::from_string(&input.into());
   let price_updater = |result: bool, best_price, next_price| {
     if result {
@@ -205,7 +205,7 @@ pub fn day_21_v1<'a>(input: impl Into<String>) -> usize {
   try_on_equipment(&boss, 256, price_updater)
 }
 
-pub fn day_21_v2<'a>(input: impl Into<String>) -> usize {
+pub fn day_21_v2(input: impl Into<String>) -> usize {
   let boss = Character::from_string(&input.into());
   let price_updater = |result: bool, best_price, next_price| {
     if !result {

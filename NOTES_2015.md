@@ -593,8 +593,8 @@ I remembered this one was A PIECE OF SHIT to run in Ruby, as it lasted around ov
 <summary>📊Tests and benchmarks</summary>
 
 ```
-test year_2015::day_20::tests::works_with_samples_v1 ... ok
-test year_2015::tests::day_20 ... ok
+test year_2015::day_21::tests::wins_the_fight_with_samples_v1 ... ok
+test year_2015::tests::day_21 ... ok
 
 year_2015::day_21/year_2015::day_21_v1
                         time:   [4.8485 µs 4.8549 µs 4.8618 µs]
@@ -610,3 +610,28 @@ year_2015::day_21/year_2015::day_21_v2
 </details>
 
 Couldn't believe this one is running so fast.
+
+## Day 22: Wizard Simulator 20XX
+
+<details>
+<summary>📊Tests and benchmarks</summary>
+
+```
+test year_2015::tests::day_22 ... ok
+
+year_2015::day_22/year_2015::day_22_v1
+                        time:   [18.188 ms 18.206 ms 18.225 ms]
+year_2015::day_22/year_2015::day_22_v2
+                        time:   [29.689 ms 29.734 ms 29.782 ms]
+```
+</details>
+
+<details>
+<summary>Ruby version comments</summary>
+
+> ["Any sufficiently advanced bruteforce is indistinguishable from Dijkstra's algorithm"](https://en.wikipedia.org/wiki/Clarke%27s_three_laws)
+> 
+> As for this exercise, a key lesson is: make commits BEFORE you rewrite your code. In that occasion, rewriting my code made it unworkable, no matter how many times I tried, and I must have made the same input mistake many times because my second day results were always off by twenty, even when [carefully copying an algorithm that works](https://github.com/rHermes/adventofcode/blob/master/2015/22/y2015_d22_p02.py). In the end, it all boiled down to an off-by-one error.
+</details>
+
+I just hate this one, let's get it over with.
