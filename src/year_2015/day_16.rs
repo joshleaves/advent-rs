@@ -1,3 +1,5 @@
+//! Advent of Code 2015: Day 16: Aunt Sue
+
 use std::collections::HashMap;
 
 const TICKER_TAPE: &str = "children: 3\n\

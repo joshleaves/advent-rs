@@ -4,6 +4,7 @@ use std::path::PathBuf;
 
 macro_rules! solvable {
   ($day_xx:tt, $day_v1:tt, $day_v2:tt, $retype:ty) => {
+    /// Stub function calling the _v1 or _v2 variant
     pub fn $day_xx(part: u8, input: impl Into<String>) -> $retype {
       match part {
         1 => $day_v1(input),
@@ -18,6 +19,7 @@ macro_rules! solvable {
 
 pub mod year_2015;
 
+/// Turns a file into a String input
 pub fn fetch_input_from_file(filename: PathBuf) -> Result<String, std::io::Error> {
   match fs::read_to_string(filename) {
     Ok(file_data) => Ok(file_data),
@@ -25,6 +27,7 @@ pub fn fetch_input_from_file(filename: PathBuf) -> Result<String, std::io::Error
   }
 }
 
+/// Turns STDIN into a String input
 #[mutants::skip] // I will do this later
 pub fn fetch_input_from_stdin() -> Result<String, std::io::Error> {
   match io::read_to_string(io::stdin()) {
@@ -79,6 +82,14 @@ pub fn solve(year: u16, day: u8, part: u8, input: impl Into<String>) -> Option<S
 #[cfg(test)]
 mod tests {
   use super::*;
+  use std::io::ErrorKind;
+
+  #[test]
+  fn fetch_input_from_inexisting_file() {
+    let path: Option<PathBuf> = Some("foo.txt".into());
+    let error = fetch_input(path.clone()).unwrap_err();
+    assert_eq!(error.kind(), ErrorKind::NotFound);
+  }
 
   #[test]
   fn solve_for_invalid_year() {

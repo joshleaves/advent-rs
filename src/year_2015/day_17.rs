@@ -1,3 +1,5 @@
+//! Advent of Code 2015: Day 17: No Such Thing as Too Much
+
 const EGGNOG_LITERS: usize = 150;
 
 fn parse_file(input: String) -> Vec<usize> {
@@ -51,6 +53,7 @@ fn build_solutions(liters: usize, containers: &Vec<usize>) -> Vec<Vec<usize>> {
   }
 }
 
+/// Solve exercise for year 2015, day 17 (part 1).
 pub fn day_17_v1(input: impl Into<String>) -> usize {
   let containers: Vec<usize> = parse_file(input.into());
   let solutions = build_solutions(EGGNOG_LITERS, &containers);
@@ -58,6 +61,7 @@ pub fn day_17_v1(input: impl Into<String>) -> usize {
   solutions.len()
 }
 
+/// Solve exercise for year 2015, day 17 (part 2).
 pub fn day_17_v2(input: impl Into<String>) -> usize {
   let containers: Vec<usize> = parse_file(input.into());
   let mut solutions = build_solutions(EGGNOG_LITERS, &containers);

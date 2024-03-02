@@ -1,3 +1,5 @@
+//! Advent of Code 2015: Day 13: Knights of the Dinner Table
+
 use regex::Regex;
 use std::collections::HashMap;
 

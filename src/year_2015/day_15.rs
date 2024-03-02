@@ -1,3 +1,5 @@
+//! Advent of Code 2015: Day 15: Science for Hungry People
+
 use regex::Regex;
 
 struct Ingredient {

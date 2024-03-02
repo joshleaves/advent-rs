@@ -1,3 +1,5 @@
+//! Advent of Code 2015: Day 12: JSAbacusFramework.io
+
 fn traverse_node_value(input: &Vec<u8>, idx: usize) -> (i32, usize) {
   let mut total: i32 = 0;
   let mut min: i32 = 1;

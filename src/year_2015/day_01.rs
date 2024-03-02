@@ -37,6 +37,7 @@
 //! > What is the position of the character that causes Santa to first enter the basement?
 //! >
 //! > Your puzzle answer was ~~`REDACTED`~~.
+//!
 
 /// Solve exercise for year 2015, day 1 (part 1).
 ///
@@ -72,24 +73,19 @@
 /// Note: Further optimization CAN be done by treating the string as `Vec<u32>`,
 /// but the matcher would become too complicated to maintain.
 ///
-/// # Examples
+/// # Samples
 /// ```
 /// use advent_rs::year_2015::day_01;
 ///
-/// assert_eq!(day_01::day_01_v1("("), 1);
-/// assert_eq!(day_01::day_01_v1(")"), -1);
-/// assert_eq!(day_01::day_01_v1("(("), 2);
-/// assert_eq!(day_01::day_01_v1("))"), -2);
-/// assert_eq!(day_01::day_01_v1("()"), 0);
-/// assert_eq!(day_01::day_01_v1(")("), 0);
-///
-/// let input_a = "))(((((";
-/// let solution_a = day_01::day_01_v1(input_a);
-/// assert_eq!(solution_a, 3);
-///
-/// let input_b = ")())())";
-/// let solution_b = day_01::day_01_v1(input_b);
-/// assert_eq!(solution_b, -3);
+/// assert_eq!(day_01::day_01_v1("(())"), 0);
+/// assert_eq!(day_01::day_01_v1("()()"), 0);
+/// assert_eq!(day_01::day_01_v1("((("), 3);
+/// assert_eq!(day_01::day_01_v1("(()(()("), 3);
+/// assert_eq!(day_01::day_01_v1("))((((("), 3);
+/// assert_eq!(day_01::day_01_v1("())"), -1);
+/// assert_eq!(day_01::day_01_v1("))("), -1);
+/// assert_eq!(day_01::day_01_v1(")))"), -3);
+/// assert_eq!(day_01::day_01_v1(")())())"), -3);
 /// ```
 pub fn day_01_v1(input: impl Into<String>) -> i16 {
   let mut lvl: i16 = 0;
@@ -129,20 +125,13 @@ pub fn day_01_v1(input: impl Into<String>) -> i16 {
 /// Advantage: Impossible to use the "Naive" implementation, and "Normal" is not
 /// a huge time loss either.
 ///
-/// # Examples:
+/// # Samples
 /// ```
 /// use advent_rs::year_2015::day_01;
 ///
-/// assert_eq!(day_01::day_01_v2("("), 0);
+/// assert_eq!(day_01::day_01_v2("(())"), 0);
 /// assert_eq!(day_01::day_01_v2(")"), 1);
-/// assert_eq!(day_01::day_01_v2("(("), 0);
-/// assert_eq!(day_01::day_01_v2("))"), 1);
-/// assert_eq!(day_01::day_01_v2("()"), 0);
-/// assert_eq!(day_01::day_01_v2(")("), 1);
-///
-/// let input = "()())";
-/// let solution = day_01::day_01_v2(input);
-/// assert_eq!(solution, 5);
+/// assert_eq!(day_01::day_01_v2("()())"), 5);
 /// ```
 pub fn day_01_v2(input: impl Into<String>) -> i16 {
   let mut lvl: i16 = 0;

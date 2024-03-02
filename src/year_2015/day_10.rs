@@ -1,3 +1,5 @@
+//! Advent of Code 2015: Day 10: Elves Look, Elves Say
+
 use itertools::Itertools;
 
 fn look_and_say(input: Vec<u8>) -> Vec<u8> {

@@ -1,3 +1,5 @@
+//! Advent of Code 2015: Day 11: Corporate Policy
+
 const PASSWORD_SIZE: usize = 8;
 
 fn string_to_chr(input: &str) -> Vec<u8> {

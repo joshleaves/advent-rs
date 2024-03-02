@@ -1,3 +1,5 @@
+//! Advent of Code 2015: Day 20: Infinite Elves and Infinite Houses
+
 fn parse_input(input: &str) -> usize {
   let Some(first_line) = input.lines().next() else {
     panic!("Invalid input: {}", input)

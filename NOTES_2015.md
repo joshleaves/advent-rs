@@ -7,7 +7,7 @@
 ```
 test year_2015::day_01::tests::works_with_samples_v1 ... ok
 test year_2015::day_01::tests::works_with_samples_v2 ... ok
-test year_2015_day_01 ... ok
+test year_2015::tests::day_01 ... ok
 
 year_2015::day_01/year_2015::day_01_v1
                         time:   [6.2931 µs 6.8094 µs 7.3834 µs]
@@ -42,7 +42,7 @@ There is an EVEN BIGGER optimization that can be done if you treat your string a
 ```
 test year_2015::day_02::tests::works_with_samples_v1 ... ok
 test year_2015::day_02::tests::works_with_samples_v2 ... ok
-test year_2015_day_02 ... ok
+test year_2015::tests::day_02 ... ok
 
 year_2015::day_02/year_2015::day_02_v1
                         time:   [74.835 µs 74.904 µs 74.977 µs]
@@ -72,7 +72,7 @@ The most annoying part here is dealing with many integers size. Clearly everythi
 test year_2015::day_03::tests::moves_characters_properly ... ok
 test year_2015::day_03::tests::works_with_samples_v1 ... ok
 test year_2015::day_03::tests::works_with_samples_v2 ... ok
-test year_2015_day_03 ... ok
+test year_2015::tests::day_03 ... ok
 
 year_2015::day_03/year_2015::day_03_v1
                         time:   [232.27 µs 232.77 µs 233.35 µs]
@@ -109,7 +109,7 @@ This time, [the benchmark](benches/year_2015_day_03.rs) checks which of [`BTreeS
 ```
 test year_2015::day_04::tests::works_with_samples_v1 ... ok
 test year_2015::day_04::tests::works_with_samples_v2 ... ok
-test year_2015_day_04 ... ok
+test year_2015::tests::day_04 ... ok
 
 year_2015::day_04/year_2015::day_04_v1
                         time:   [36.404 ms 36.439 ms 36.457 ms]
@@ -137,7 +137,7 @@ test year_2015::day_05::tests::finds_nice_strings_v1 ... ok
 test year_2015::day_05::tests::finds_nice_strings_v2 ... ok
 test year_2015::day_05::tests::works_with_samples_v1 ... ok
 test year_2015::day_05::tests::works_with_samples_v2 ... ok
-test year_2015_day_05 ... ok
+test year_2015::tests::day_05 ... ok
 
 year_2015::day_05/year_2015::day_05_v1
                         time:   [51.142 µs 51.447 µs 51.928 µs]
@@ -168,7 +168,7 @@ Another [benchmark](benches/year_2015_day_05.rs), and again it's about the perfo
 ```
 test year_2015::day_06::tests::works_with_samples_v1 ... ok
 test year_2015::day_06::tests::works_with_samples_v2 ... ok
-test year_2015_day_06 ... ok
+test year_2015::tests::day_06 ... ok
 
 year_2015::day_06/year_2015::day_06_v1
                         time:   [13.186 ms 13.320 ms 13.522 ms]
@@ -201,7 +201,7 @@ I started doing a copy of my original "naive" algorithm, and as it was too slow,
 ```
 test year_2015::day_07::tests::works_with_samples_v1 ... ok
 test year_2015::day_07::tests::works_with_samples_v2 ... ok
-test year_2015_day_07 ... ok
+test year_2015::tests::day_07 ... ok
 
 year_2015::day_07/year_2015::day_07_v1
                         time:   [62.800 µs 62.873 µs 62.940 µs]
@@ -259,7 +259,7 @@ This one was actually very funny. For a while, I thought it would be a pain to n
 ```
 test year_2015::day_09::tests::works_with_samples_v1 ... ok
 test year_2015::day_09::tests::works_with_samples_v2 ... ok
-test year_2015_day_09 ... ok
+test year_2015::tests::day_09 ... ok
 
 year_2015::day_09/year_2015::day_09_v1
                         time:   [1.2927 ms 1.2995 ms 1.3064 ms]
@@ -291,7 +291,7 @@ While my [more experienced counterpart](https://docs.rs/advent-of-code/2022.0.66
 
 ```
 test year_2015::day_10::tests::looks_and_says_over_strings ... ok
-test year_2015_day_10 ... ok
+test year_2015::tests::day_10 ... ok
 
 year_2015::day_10/year_2015::day_10_v1
                         time:   [870.36 µs 872.61 µs 875.35 µs]
@@ -318,7 +318,7 @@ Casting between string, chars, bytes,... is slowly becoming more and more natura
 ```
 test year_2015::day_11::tests::passwords_are_valid ... ok
 test year_2015::day_11::tests::works_with_samples_v1 ... ok
-test year_2015_day_11 ... ok
+test year_2015::tests::day_11 ... ok
 
 year_2015::day_11/year_2015::day_11_v1
                         time:   [4.8713 ms 4.8800 ms 4.8927 ms]
@@ -345,7 +345,7 @@ Nothing specific to add on this one. I'm just missing the optimization
 ```
 test year_2015::day_12::tests::works_with_samples_v1 ... ok
 test year_2015::day_12::tests::works_with_samples_v2 ... ok
-test year_2015_day_12 ... ok
+test year_2015::tests::day_12 ... ok
 
 year_2015::day_12/year_2015::day_12_v1
                         time:   [17.760 µs 17.955 µs 18.183 µs]
@@ -373,7 +373,7 @@ You know what's faster than using a Regex matcher on a string, or converting it 
 ```
 test year_2015::day_13::tests::parses_input_lines ... ok
 test year_2015::day_13::tests::works_with_samples_v1 ... ok
-test year_2015_day_13 ... ok
+test year_2015::tests::day_13 ... ok
 
 year_2015::day_13/year_2015::day_13_v1
                         time:   [46.791 ms 47.177 ms 47.561 ms]
@@ -404,7 +404,7 @@ Something I also gained over my Ruby implementation is saving a loop: since we a
 ```
 test year_2015::day_14::tests::works_with_samples_v1 ... ok
 test year_2015::day_14::tests::works_with_samples_v2 ... ok
-test year_2015_day_14 ... ok
+test year_2015::tests::day_14 ... ok
 
 year_2015::day_14/year_2015::day_14_v1
                         time:   [3.5302 ms 3.5346 ms 3.5403 ms]
@@ -430,7 +430,7 @@ Nothing too different here.
 ```
 test year_2015::day_15::tests::works_with_samples_v1 ... ok
 test year_2015::day_15::tests::works_with_samples_v2 ... ok
-test year_2015_day_15 ... ok
+test year_2015::tests::day_15 ... ok
 
 year_2015::day_15/year_2015::day_15_v1
                         time:   [35.365 ms 35.613 ms 35.944 ms]
@@ -459,7 +459,7 @@ After trying many times to use my previous algorithm to mark ranges where number
 <summary>📊Tests and benchmarks</summary>
 
 ```
-test year_2015_day_16 ... ok
+test year_2015::tests::day_16 ... ok
 
 year_2015::day_16/year_2015::day_16_v1
                         time:   [115.32 µs 115.43 µs 115.53 µs]
@@ -484,7 +484,7 @@ This one was already easy in Ruby, and it's just as easy in Rust.
 ```
 test year_2015::day_17::tests::works_with_samples_v1 ... ok
 test year_2015::day_17::tests::works_with_samples_v2 ... ok
-test year_2015_day_17 ... ok
+test year_2015::tests::day_17 ... ok
 
 year_2015::day_17/year_2015::day_17_v1
                         time:   [9.3768 ms 9.3931 ms 9.4143 ms]
@@ -510,7 +510,7 @@ Heh, I'm getting to used to this stuff that it compiled on the second try, and p
 ```
 test year_2015::day_18::tests::works_with_samples_v1 ... ok
 test year_2015::day_18::tests::works_with_samples_v2 ... ok
-test year_2015_day_18 ... ok
+test year_2015::tests::day_18 ... ok
 
 Warning: Unable to complete 100 samples in 5.0s. You may wish to increase target time to 5.4s, or reduce sample count to 90.
 year_2015::day_18/year_2015::day_18_v1
@@ -542,7 +542,7 @@ My [distinguished competitor](https://docs.rs/advent-of-code/2022.0.66/src/adven
 ```
 test year_2015::day_19::tests::works_with_samples_v1 ... ok
 test year_2015::day_19::tests::works_with_samples_v2 ... ok
-test year_2015_day_19 ... ok
+test year_2015::tests::day_19 ... ok
 
 year_2015::day_19/year_2015::day_19_v1
                         time:   [565.05 µs 565.71 µs 566.40 µs]
@@ -566,7 +566,7 @@ Okay, that was less painful than I remembered it, and my Rust code is actually c
 
 ```
 test year_2015::day_20::tests::works_with_samples_v1 ... ok
-test year_2015_day_20 ... ok
+test year_2015::tests::day_20 ... ok
 
 Warning: Unable to complete 100 samples in 5.0s. You may wish to increase target time to 45.9s, or reduce sample count to 10.
 year_2015::day_20/year_2015::day_20_v1

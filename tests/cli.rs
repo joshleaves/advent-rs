@@ -13,7 +13,7 @@ fn invalid_year_past() -> Result<(), Box<dyn std::error::Error>> {
 }
 
 #[test]
-fn year_2015_day_01_v1() -> Result<(), Box<dyn std::error::Error>> {
+fn calls_a_proper_test() -> Result<(), Box<dyn std::error::Error>> {
   let mut cmd = Command::cargo_bin("advent-rs")?;
   cmd.arg("--year").arg("2015");
   cmd.arg("--day").arg("01");
@@ -22,21 +22,6 @@ fn year_2015_day_01_v1() -> Result<(), Box<dyn std::error::Error>> {
     .assert()
     .success()
     .stdout(predicates::str::contains("Result: 138"));
-
-  Ok(())
-}
-
-#[test]
-fn year_2015_day_01_v2() -> Result<(), Box<dyn std::error::Error>> {
-  let mut cmd = Command::cargo_bin("advent-rs")?;
-  cmd.arg("--year").arg("2015");
-  cmd.arg("--day").arg("01");
-  cmd.arg("--part").arg("2");
-  cmd.arg("inputs/year_2015_day_01_input");
-  cmd
-    .assert()
-    .success()
-    .stdout(predicates::str::contains("Result: 1771"));
 
   Ok(())
 }

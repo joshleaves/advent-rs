@@ -43,16 +43,3 @@ fn main() {
     }
   };
 }
-
-#[cfg(test)]
-mod tests {
-  use super::*;
-  use std::io::ErrorKind;
-
-  #[test]
-  fn fetch_input_from_inexisting_file() {
-    let path: Option<PathBuf> = Some("foo.txt".into());
-    let error = advent_rs::fetch_input(path.clone()).unwrap_err();
-    assert_eq!(error.kind(), ErrorKind::NotFound);
-  }
-}

@@ -1,3 +1,5 @@
+//! Advent of Code 2015: Day 18: Like a GIF For Your Yard
+
 type LIGHT = bool;
 const LIGHT_ON: LIGHT = true;
 const LIGHT_OFF: LIGHT = false;

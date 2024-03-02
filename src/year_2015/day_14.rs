@@ -1,3 +1,5 @@
+//! Advent of Code 2015: Day 14: Reindeer Olympics
+
 use regex::Regex;
 const RACE_DURATION: u16 = 2503;
 

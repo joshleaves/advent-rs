@@ -1,3 +1,5 @@
+//! Advent of Code 2015: Day 9: All in a Single Night
+
 use regex::Regex;
 use std::cmp;
 use std::collections::HashMap;

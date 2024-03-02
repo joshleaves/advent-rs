@@ -1,3 +1,5 @@
+//! Advent of Code 2015: Day 19: Medicine for Rudolph
+
 use std::collections::{HashMap, HashSet};
 
 fn parse_molecules(input: &str) -> (String, String) {
@@ -26,16 +28,6 @@ fn parse_input(input: &str) -> (HashMap<String, Vec<String>>, String) {
 }
 
 fn do_permutations(starter: &str, input: &str, replacements: &Vec<String>) -> HashSet<String> {
-  // re_input = /(#{input})/
-  // parts = starter.scan(re_input).length
-  // replacements.each do |replacement|
-  //   0.upto(parts - 1) do |idx|
-  //     new_str = starter.gsub(re_input).each_with_index do |_part, i|
-  //       idx == i ? replacement : input
-  //     end
-  //     @permutations.push(new_str)
-  //   end
-  // end
   let mut permutations: HashSet<String> = HashSet::new();
   for (idx, _) in starter.match_indices(input) {
     for replacement in replacements.iter() {
@@ -53,13 +45,6 @@ fn do_permutations(starter: &str, input: &str, replacements: &Vec<String>) -> Ha
 }
 
 fn calculate_permutations(molecules: &HashMap<String, Vec<String>>, starter: &str) -> usize {
-  // @permutations ||= begin
-  //   @permutations = []
-  //   @molecules.each do |input, replacements|
-  //     do_permutations(input, replacements)
-  //   end
-  //   @permutations.sort.uniq
-  // end
   let mut permutations: HashSet<String> = HashSet::new();
   for (molecule, replacements) in molecules {
     let new_permutations = do_permutations(&starter, &molecule, &replacements);
