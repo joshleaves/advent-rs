@@ -53,6 +53,7 @@ pub mod day_17;
 pub mod day_18;
 pub mod day_19;
 pub mod day_20;
+pub mod day_21;
 
 /// Returns the solution for a specified exercise and input.
 ///
@@ -247,5 +248,12 @@ mod tests {
     let input = include_str!("../inputs/year_2015_day_20_input");
     assert_eq!(day_20::day_20_v1(input), 831_600);
     assert_eq!(day_20::day_20_v2(input), 884_520);
+  }
+
+  #[test]
+  fn day_21() {
+    let input = include_str!("../inputs/year_2015_day_21_input");
+    assert_eq!(day_21::day_21_v1(input), 91);
+    assert_eq!(day_21::day_21_v2(input), 158);
   }
 }

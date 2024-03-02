@@ -586,3 +586,27 @@ year_2015::day_20/year_2015::day_20_v2
 </details>
 
 I remembered this one was A PIECE OF SHIT to run in Ruby, as it lasted around over minute on my machine the last time I ran it. Having it run in only one second here is a real pleasure. Some issues flip-flapping between types, but nothing too brutal.
+
+## Day 21: RPG Simulator 20XX
+
+<details>
+<summary>📊Tests and benchmarks</summary>
+
+```
+test year_2015::day_20::tests::works_with_samples_v1 ... ok
+test year_2015::tests::day_20 ... ok
+
+year_2015::day_21/year_2015::day_21_v1
+                        time:   [4.8485 µs 4.8549 µs 4.8618 µs]
+year_2015::day_21/year_2015::day_21_v2
+                        time:   [4.8473 µs 4.8539 µs 4.8609 µs]
+```
+</details>
+
+<details>
+<summary>Ruby version comments</summary>
+
+> ...really nothing to say here.
+</details>
+
+Couldn't believe this one is running so fast.
