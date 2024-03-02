@@ -635,3 +635,31 @@ year_2015::day_22/year_2015::day_22_v2
 </details>
 
 I just hate this one, let's get it over with.
+
+## Day 23: Opening the Turing Lock
+
+<details>
+<summary>📊Tests and benchmarks</summary>
+
+```
+test year_2015::day_23::tests::iterates_over_program ... ok
+test year_2015::tests::day_23 ... ok
+
+ar_2015::day_23/year_2015::day_23_v1
+                        time:   [6.7568 µs 6.7660 µs 6.7749 µs]
+year_2015::day_23/year_2015::day_23_v2
+                        time:   [4.8121 µs 4.8186 µs 4.8261 µs]
+```
+</details>
+
+<details>
+<summary>Ruby version comments</summary>
+
+> We are not [Turing complete](https://en.wikipedia.org/wiki/Turing_completeness) yet, but learning to write a virtual machine is always a fun exercise to understand how computers work.
+> 
+> As a small bonus on this exercise, instead of [re-interpreting each instruction as they come](https://github.com/rHermes/adventofcode/blob/master/2015/23/y2015_d23_p01.py), which can be costly on the long term, I used an approach similar to [Ahead-of-time compilation](https://en.wikipedia.org/wiki/Ahead-of-time_compilation) to have all my instructions in ~~machine code~~ Ruby code and ready to reuse as needed.
+> 
+> That said: make sure you ALWAYS read the exercise WORD. BY. WORD. Because if `jie` means "jump-if-even", it does not mean `jio` will mean "jump-if-odd".
+</details>
+
+Heh, I love this one, whether it's in Ruby or in Rust.
