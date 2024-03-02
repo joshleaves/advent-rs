@@ -533,3 +533,28 @@ year_2015::day_18/year_2015::day_18_v2
 That was fun.
 
 My [distinguished competitor](https://docs.rs/advent-of-code/2022.0.66/src/advent_of_code/year2015/day18.rs.html) used a single-dimensional vector approach, which may have a better performance, but quite frankly, I prefer having representation closer to "physical" reality. But it's just me, don't listen to me too much.
+
+## Day 19: Medicine for Rudolph
+
+<details>
+<summary>📊Tests and benchmarks</summary>
+
+```
+test year_2015::day_19::tests::works_with_samples_v1 ... ok
+test year_2015::day_19::tests::works_with_samples_v2 ... ok
+test year_2015_day_19 ... ok
+
+year_2015::day_19/year_2015::day_19_v1
+                        time:   [565.05 µs 565.71 µs 566.40 µs]
+year_2015::day_19/year_2015::day_19_v2
+                        time:   [6.0105 µs 6.0169 µs 6.0237 µs]
+```
+</details>
+
+<details>
+<summary>Ruby version comments</summary>
+
+> Part one is nothing to write home about. However, part two... First idea was the good ol' bruteforce approach, but when searching if there was an algorithm I didn't know, I stumbled upon a [very interesting Reddit comment](https://www.reddit.com/r/adventofcode/comments/3xflz8/day_19_solutions/cy4h7ji/)...
+</details>
+
+Okay, that was less painful than I remembered it, and my Rust code is actually clearer than my Ruby code.
