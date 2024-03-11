@@ -4,7 +4,7 @@
 <details>
 <summary>📊Tests and benchmarks</summary>
 
-```
+```text
 test year_2015::day_01::tests::works_with_samples_v1 ... ok
 test year_2015::day_01::tests::works_with_samples_v2 ... ok
 test year_2015::tests::day_01 ... ok
@@ -39,7 +39,7 @@ There is an EVEN BIGGER optimization that can be done if you treat your string a
 <details>
 <summary>📊Tests and benchmarks</summary>
 
-```
+```text
 test year_2015::day_02::tests::works_with_samples_v1 ... ok
 test year_2015::day_02::tests::works_with_samples_v2 ... ok
 test year_2015::tests::day_02 ... ok
@@ -68,7 +68,7 @@ The most annoying part here is dealing with many integers size. Clearly everythi
 <details>
 <summary>📊Tests and benchmarks</summary>
 
-```
+```text
 test year_2015::day_03::tests::moves_characters_properly ... ok
 test year_2015::day_03::tests::works_with_samples_v1 ... ok
 test year_2015::day_03::tests::works_with_samples_v2 ... ok
@@ -106,7 +106,7 @@ This time, [the benchmark](benches/year_2015_day_03.rs) checks which of [`BTreeS
 <details>
 <summary>📊Tests and benchmarks</summary>
 
-```
+```text
 test year_2015::day_04::tests::works_with_samples_v1 ... ok
 test year_2015::day_04::tests::works_with_samples_v2 ... ok
 test year_2015::tests::day_04 ... ok
@@ -132,7 +132,7 @@ Of course, the bastard child had to be annoying, no matter what language we are 
 <details>
 <summary>📊Tests and benchmarks</summary>
 
-```
+```text
 test year_2015::day_05::tests::finds_nice_strings_v1 ... ok
 test year_2015::day_05::tests::finds_nice_strings_v2 ... ok
 test year_2015::day_05::tests::works_with_samples_v1 ... ok
@@ -165,7 +165,7 @@ Another [benchmark](benches/year_2015_day_05.rs), and again it's about the perfo
 <details>
 <summary>📊Tests and benchmarks</summary>
 
-```
+```text
 test year_2015::day_06::tests::works_with_samples_v1 ... ok
 test year_2015::day_06::tests::works_with_samples_v2 ... ok
 test year_2015::tests::day_06 ... ok
@@ -198,7 +198,7 @@ I started doing a copy of my original "naive" algorithm, and as it was too slow,
 <details>
 <summary>📊Tests and benchmarks</summary>
 
-```
+```text
 test year_2015::day_07::tests::works_with_samples_v1 ... ok
 test year_2015::day_07::tests::works_with_samples_v2 ... ok
 test year_2015::tests::day_07 ... ok
@@ -227,7 +227,7 @@ This one was already complicated in Ruby, but it gets even worse when you have t
 <details>
 <summary>📊Tests and benchmarks</summary>
 
-```
+```text
 test year_2015::day_08::tests::calculates_length_of_code_strings ... ok
 test year_2015::day_08::tests::calculates_length_of_memory_strings ... ok
 test year_2015::day_08::tests::calculates_length_of_dumped_strings ... ok
@@ -256,7 +256,7 @@ This one was actually very funny. For a while, I thought it would be a pain to n
 <details>
 <summary>📊Tests and benchmarks</summary>
 
-```
+```text
 test year_2015::day_09::tests::works_with_samples_v1 ... ok
 test year_2015::day_09::tests::works_with_samples_v2 ... ok
 test year_2015::tests::day_09 ... ok
@@ -289,7 +289,7 @@ While my [more experienced counterpart](https://docs.rs/advent-of-code/2022.0.66
 <details>
 <summary>📊Tests and benchmarks</summary>
 
-```
+```text
 test year_2015::day_10::tests::looks_and_says_over_strings ... ok
 test year_2015::tests::day_10 ... ok
 
@@ -315,7 +315,7 @@ Casting between string, chars, bytes,... is slowly becoming more and more natura
 <details>
 <summary>📊Tests and benchmarks</summary>
 
-```
+```text
 test year_2015::day_11::tests::passwords_are_valid ... ok
 test year_2015::day_11::tests::works_with_samples_v1 ... ok
 test year_2015::tests::day_11 ... ok
@@ -342,7 +342,7 @@ Nothing specific to add on this one. I'm just missing the optimization
 <details>
 <summary>📊Tests and benchmarks</summary>
 
-```
+```text
 test year_2015::day_12::tests::works_with_samples_v1 ... ok
 test year_2015::day_12::tests::works_with_samples_v2 ... ok
 test year_2015::tests::day_12 ... ok
@@ -370,7 +370,7 @@ You know what's faster than using a Regex matcher on a string, or converting it 
 <details>
 <summary>📊Tests and benchmarks</summary>
 
-```
+```text
 test year_2015::day_13::tests::parses_input_lines ... ok
 test year_2015::day_13::tests::works_with_samples_v1 ... ok
 test year_2015::tests::day_13 ... ok
@@ -401,7 +401,7 @@ Something I also gained over my Ruby implementation is saving a loop: since we a
 <details>
 <summary>📊Tests and benchmarks</summary>
 
-```
+```text
 test year_2015::day_14::tests::works_with_samples_v1 ... ok
 test year_2015::day_14::tests::works_with_samples_v2 ... ok
 test year_2015::tests::day_14 ... ok
@@ -427,7 +427,7 @@ Nothing too different here.
 <details>
 <summary>📊Tests and benchmarks</summary>
 
-```
+```text
 test year_2015::day_15::tests::works_with_samples_v1 ... ok
 test year_2015::day_15::tests::works_with_samples_v2 ... ok
 test year_2015::tests::day_15 ... ok
@@ -458,7 +458,7 @@ After trying many times to use my previous algorithm to mark ranges where number
 <details>
 <summary>📊Tests and benchmarks</summary>
 
-```
+```text
 test year_2015::tests::day_16 ... ok
 
 year_2015::day_16/year_2015::day_16_v1
@@ -481,7 +481,7 @@ This one was already easy in Ruby, and it's just as easy in Rust.
 <details>
 <summary>📊Tests and benchmarks</summary>
 
-```
+```text
 test year_2015::day_17::tests::works_with_samples_v1 ... ok
 test year_2015::day_17::tests::works_with_samples_v2 ... ok
 test year_2015::tests::day_17 ... ok
@@ -507,7 +507,7 @@ Heh, I'm getting to used to this stuff that it compiled on the second try, and p
 <details>
 <summary>📊Tests and benchmarks</summary>
 
-```
+```text
 test year_2015::day_18::tests::works_with_samples_v1 ... ok
 test year_2015::day_18::tests::works_with_samples_v2 ... ok
 test year_2015::tests::day_18 ... ok
@@ -539,7 +539,7 @@ My [distinguished competitor](https://docs.rs/advent-of-code/2022.0.66/src/adven
 <details>
 <summary>📊Tests and benchmarks</summary>
 
-```
+```text
 test year_2015::day_19::tests::works_with_samples_v1 ... ok
 test year_2015::day_19::tests::works_with_samples_v2 ... ok
 test year_2015::tests::day_19 ... ok
@@ -564,7 +564,7 @@ Okay, that was less painful than I remembered it, and my Rust code is actually c
 <details>
 <summary>📊Tests and benchmarks</summary>
 
-```
+```text
 test year_2015::day_20::tests::works_with_samples_v1 ... ok
 test year_2015::tests::day_20 ... ok
 
@@ -592,7 +592,7 @@ I remembered this one was A PIECE OF SHIT to run in Ruby, as it lasted around ov
 <details>
 <summary>📊Tests and benchmarks</summary>
 
-```
+```text
 test year_2015::day_21::tests::wins_the_fight_with_samples_v1 ... ok
 test year_2015::tests::day_21 ... ok
 
@@ -616,7 +616,7 @@ Couldn't believe this one is running so fast.
 <details>
 <summary>📊Tests and benchmarks</summary>
 
-```
+```text
 test year_2015::tests::day_22 ... ok
 
 year_2015::day_22/year_2015::day_22_v1
@@ -641,7 +641,7 @@ I just hate this one, let's get it over with.
 <details>
 <summary>📊Tests and benchmarks</summary>
 
-```
+```text
 test year_2015::day_23::tests::iterates_over_program ... ok
 test year_2015::tests::day_23 ... ok
 
@@ -669,7 +669,7 @@ Heh, I love this one, whether it's in Ruby or in Rust.
 <details>
 <summary>📊Tests and benchmarks</summary>
 
-```
+```text
 test year_2015::day_24::tests::works_with_samples_v1 ... ok
 test year_2015::day_24::tests::works_with_samples_v2 ... ok
 test year_2015::tests::day_24 ... ok
@@ -694,7 +694,7 @@ Would you believe it? The `combinations(n)` method also exists in Rust!
 <details>
 <summary>📊Tests and benchmarks</summary>
 
-```
+```text
 test year_2015::day_25::tests::works_with_samples ... ok
 test year_2015::tests::day_25 ... ok
 

@@ -8,8 +8,6 @@ status-level = "fail"
 final-status-level = "fail"
 failure-output = "final"
 fail-fast = true
-hide-progress-bar = true
-
 
 # Treat a test that takes longer than the configured 'period' as slow, and print a message.
 # See <https://nexte.st/book/slow-tests> for more information.

@@ -1,3 +1,5 @@
+#![doc = include_str!("../NOTES_2015.md")]
+
 //! Year 2015
 //!
 //! ```text
