@@ -10,6 +10,19 @@ Of note:
 - The changelog 2015.5.2 has been rewritten from each commit content.
 - This file may be amended entirely in the future to adhere to the [GNU Changelog style](https://www.gnu.org/prep/standards/html_node/Style-of-Change-Logs.html#Style-of-Change-Logs)
 
+## [2016.1.1]
+### Added
+- Solved [exercice for 2016, day 01](src/year_2015/day_01.rs).
+### Changed
+- Moved old benches (`benches/advent-bench.rs`) into their own file (`benches/year_2015.rs`).
+
+## [2015.25.1]
+### Added
+- Solved [exercice for 2015, day 22](src/year_2015/day_22.rs).
+- Solved [exercice for 2015, day 23](src/year_2015/day_23.rs).
+- Solved [exercice for 2015, day 24](src/year_2015/day_24.rs).
+- Solved [exercice for 2015, day 25](src/year_2015/day_25.rs).
+
 ## [2015.21.1]
 ### Added
 - Solved [exercice for 2015, day 21](src/year_2015/day_21.rs).

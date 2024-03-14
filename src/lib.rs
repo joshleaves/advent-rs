@@ -20,6 +20,7 @@ macro_rules! solvable {
 }
 
 pub mod year_2015;
+pub mod year_2016;
 
 /// Turns a file into a String input
 pub fn fetch_input_from_file(filename: PathBuf) -> Result<String, std::io::Error> {
@@ -77,6 +78,7 @@ pub fn fetch_input(file_path: Option<PathBuf>) -> Result<String, std::io::Error>
 pub fn solve(year: u16, day: u8, part: u8, input: impl Into<String>) -> Option<String> {
   match year {
     2015 => return year_2015::solve(day, part, input),
+    2016 => return year_2016::solve(day, part, input),
     _ => return None,
   }
 }
