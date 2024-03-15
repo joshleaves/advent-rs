@@ -10,6 +10,12 @@ Of note:
 - The changelog 2015.5.2 has been rewritten from each commit content.
 - This file may be amended entirely in the future to adhere to the [GNU Changelog style](https://www.gnu.org/prep/standards/html_node/Style-of-Change-Logs.html#Style-of-Change-Logs)
 
+## [2016.2.1]
+### Added
+- Solved [exercice for 2016, day 02](src/year_2015/day_02.rs).
+### Changed
+- Moved all inputs from 2015 into their own folder (`inputs/year_2015`).
+
 ## [2016.1.1]
 ### Added
 - Solved [exercice for 2016, day 01](src/year_2015/day_01.rs).
