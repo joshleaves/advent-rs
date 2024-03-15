@@ -78,7 +78,7 @@ pub fn day_01_v2_fast(input: impl Into<String>) -> i16 {
 pub fn bench_year_2015_day_01_v1(c: &mut Criterion) {
   let mut group = c.benchmark_group("year_2015::day_01_v1");
   group.warm_up_time(Duration::from_millis(100));
-  let input = include_str!("../inputs/year_2015_day_01_input");
+  let input = include_str!("../inputs/year_2015/day_01_input");
   group.bench_with_input(BenchmarkId::new("Naive", input.len()), input, |b, input| {
     b.iter(|| day_01_v1_naive(input))
   });
@@ -96,7 +96,7 @@ pub fn bench_year_2015_day_01_v1(c: &mut Criterion) {
 pub fn bench_year_2015_day_01_v2(c: &mut Criterion) {
   let mut group = c.benchmark_group("year_2015::day_01_v2");
   group.warm_up_time(Duration::from_millis(100));
-  let input = include_str!("../inputs/year_2015_day_01_input");
+  let input = include_str!("../inputs/year_2015/day_01_input");
   group.bench_with_input(
     BenchmarkId::new("Normal", input.len()),
     input,

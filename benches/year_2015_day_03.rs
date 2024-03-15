@@ -43,7 +43,7 @@ pub fn day_03_v2_bset(input: &str) -> usize {
 }
 
 pub fn bench_year_2015_day_03_sets(c: &mut Criterion) {
-  let input = include_str!("../inputs/year_2015_day_03_input");
+  let input = include_str!("../inputs/year_2015/day_03_input");
   let mut group_v1 = c.benchmark_group("year_2015::day_03_v1");
   group_v1.warm_up_time(Duration::from_millis(100));
   group_v1.bench_with_input(
