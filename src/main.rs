@@ -2,11 +2,9 @@ use advent_rs;
 use clap::Parser;
 use std::path::PathBuf;
 
-mod common;
-
 /// Solver for advent of code exercises
 #[derive(Parser, Debug)]
-#[command(about, long_about = None)]
+#[command(version, about, long_about = None)]
 struct Args {
   /// The year of the exercise, from 2015
   #[arg(short, long, value_parser = clap::value_parser!(u16))]
@@ -21,9 +19,11 @@ struct Args {
   part: u8,
 
   // File name
-  #[arg(value_parser = clap::value_parser!(PathBuf))]
+  #[arg(help = "Input file path (will read from STDIN if empty)", value_parser = clap::value_parser!(PathBuf))]
   input: Option<PathBuf>,
 }
+
+mod common;
 
 fn main() {
   let args = Args::parse();

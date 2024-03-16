@@ -1,7 +1,6 @@
-#![doc = include_str!("../NOTES_2016.md")]
-
 //! Year 2016
 //!
+#![doc = include_str!("../NOTES_2016.md")]
 pub mod day_01;
 pub mod day_02;
 pub mod day_03;
