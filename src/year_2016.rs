@@ -8,6 +8,8 @@ pub mod day_03;
 pub mod day_04;
 pub mod day_05;
 pub mod day_06;
+pub mod day_07;
+pub mod day_08;
 
 pub fn solve(day: u8, part: u8, input: impl Into<String>) -> Option<String> {
   if part != 1 && part != 2 {
@@ -20,6 +22,8 @@ pub fn solve(day: u8, part: u8, input: impl Into<String>) -> Option<String> {
     4 => Some(format!("{}", day_04::day_04(part, input))),
     5 => Some(format!("{}", day_05::day_05(part, input))),
     6 => Some(format!("{}", day_06::day_06(part, input))),
+    7 => Some(format!("{}", day_07::day_07(part, input))),
+    8 => Some(format!("{}", day_08::day_08(part, input))),
     _ => None,
   }
 }
@@ -68,5 +72,25 @@ mod tests {
     let input = include_str!("../inputs/year_2016/day_06_input");
     assert_eq!(day_06::day_06_v1(input), "zcreqgiv");
     assert_eq!(day_06::day_06_v2(input), "pljvorrk");
+  }
+
+  #[test]
+  fn day_07() {
+    let input = include_str!("../inputs/year_2016/day_07_input");
+    assert_eq!(day_07::day_07_v1(input), 118);
+    assert_eq!(day_07::day_07_v2(input), 260);
+  }
+
+  #[test]
+  fn day_08() {
+    let input = include_str!("../inputs/year_2016/day_08_input");
+    assert_eq!(day_08::day_08_v1(input), 106);
+    const CFLELOYFCS: &str = ".##..####.#....####.#.....##..#...#####..##...###.\n\
+      #..#.#....#....#....#....#..#.#...##....#..#.#....\n\
+      #....###..#....###..#....#..#..#.#.###..#....#....\n\
+      #....#....#....#....#....#..#...#..#....#.....##..\n\
+      #..#.#....#....#....#....#..#...#..#....#..#....#.\n\
+      .##..#....####.####.####..##....#..#.....##..###..";
+    assert_eq!(day_08::day_08_v2(input), CFLELOYFCS);
   }
 }

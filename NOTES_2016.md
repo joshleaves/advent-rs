@@ -28,3 +28,13 @@ For efficiency purposes, the [MD5 crate that I am using](https://crates.io/crate
 ## Day 06: Signals and Noise
 
 Playing with specific types for closures can be a pain, but it's often very funny to understand how things work under the hood.
+
+## Day 07: Internet Protocol Version 7
+
+Some iterators are annoying, but sometimes, like when calculating whethere there is an interesection of two sets, it's great to not generate the whole intersection and just peek at the first element.
+
+## Day 08: Two-Factor Authentication
+
+I wouldn't call it an "object model", but I like the way Rust works with `impl X for Y`.
+
+Also, remember the [`splice()` method](https://doc.rust-lang.org/std/vec/struct.Vec.html#method.splice), it's very useful to replace large parts of a vector at once.
