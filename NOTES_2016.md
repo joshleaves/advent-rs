@@ -46,3 +46,7 @@ I knew the Rust version would be faster than my [Ruby implementation](https://gi
 I went back to the workbench to try another implementation, and to my delight, I was the faster. But still not faster than [fornwall's implementation](https://github.com/fornwall/advent-of-code/blob/main/crates/core/src/year2016/day09.rs).
 
 Looking at it carefully proved very smart: both galenelias and me lost too much time **creating a string, then getting its length**, when the exercise only asked to **get the string's length**.
+
+## Day 10: Balance Bots
+
+This exercise got me to face the worst part of Rust: iterating over a hashmap while mutating it.
