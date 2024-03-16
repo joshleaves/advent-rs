@@ -8,3 +8,7 @@ A funny thing to note in `day_01_v2`: I thought that using `match direction {}` 
 ## Day 02: Bathroom Security
 
 I must admit: the biggest pleasure in learning a new language is when it compiles right on your first time.
+
+## Day 03:Squares With Three Sides
+
+Iterators can be a special kind of hell in Rust, especially when combined, and each type specializes itself further, but in the end, they work.
