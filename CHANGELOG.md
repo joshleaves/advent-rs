@@ -10,28 +10,32 @@ Of note:
 - The changelog 2015.5.2 has been rewritten from each commit content.
 - This file may be amended entirely in the future to adhere to the [GNU Changelog style](https://www.gnu.org/prep/standards/html_node/Style-of-Change-Logs.html#Style-of-Change-Logs)
 
+## [2016.6.1]
+### Added
+- Solved [exercice for 2016, day 06](src/year_2016/day_06.rs).
+
 ## [2016.5.1]
 ### Added
-- Solved [exercice for 2016, day 05](src/year_2015/day_05.rs).
+- Solved [exercice for 2016, day 05](src/year_2016/day_05.rs).
 
 ## [2016.4.1]
 ### Added
-- Solved [exercice for 2016, day 04](src/year_2015/day_04.rs).
+- Solved [exercice for 2016, day 04](src/year_2016/day_04.rs).
 
 ## [2016.3.1]
 ### Added
-- Solved [exercice for 2016, day 03](src/year_2015/day_03.rs).
+- Solved [exercice for 2016, day 03](src/year_2016/day_03.rs).
 - Added a [VSCode snipper](.vscode/new_day.code-snippets). May prove useful in setting up a new day file.
 
 ## [2016.2.1]
 ### Added
-- Solved [exercice for 2016, day 02](src/year_2015/day_02.rs).
+- Solved [exercice for 2016, day 02](src/year_2016/day_02.rs).
 ### Changed
 - Moved all inputs from 2015 into their own folder (`inputs/year_2015`).
 
 ## [2016.1.1]
 ### Added
-- Solved [exercice for 2016, day 01](src/year_2015/day_01.rs).
+- Solved [exercice for 2016, day 01](src/year_2016/day_01.rs).
 ### Changed
 - Moved old benches (`benches/advent-bench.rs`) into their own file (`benches/year_2015.rs`).
 

@@ -24,3 +24,7 @@ Interestingly, when calculating the checksum, it is FASTER to reiterate over the
 Hey look, it's those pesky [MD5 hashes](https://en.wikipedia.org/wiki/MD5) again!
 
 For efficiency purposes, the [MD5 crate that I am using](https://crates.io/crates/md-5) is returning hashes in their hexadecimal value, so when humans are expecting to get 32 characters, the digest is returned as 16 `u8` values (reminder, an `u8` goes from `0` to `255` so it can store `2 (* 16 = 256)` hexadecimal values). It's a bit of a mental gymnastic to juggle with afterwards, but it's not impossible either.
+
+## Day 06: Signals and Noise
+
+Playing with specific types for closures can be a pain, but it's often very funny to understand how things work under the hood.

@@ -7,6 +7,7 @@ pub mod day_02;
 pub mod day_03;
 pub mod day_04;
 pub mod day_05;
+pub mod day_06;
 
 pub fn solve(day: u8, part: u8, input: impl Into<String>) -> Option<String> {
   if part != 1 && part != 2 {
@@ -18,6 +19,7 @@ pub fn solve(day: u8, part: u8, input: impl Into<String>) -> Option<String> {
     3 => Some(format!("{}", day_03::day_03(part, input))),
     4 => Some(format!("{}", day_04::day_04(part, input))),
     5 => Some(format!("{}", day_05::day_05(part, input))),
+    6 => Some(format!("{}", day_06::day_06(part, input))),
     _ => None,
   }
 }
@@ -59,5 +61,12 @@ mod tests {
     let input = include_str!("../inputs/year_2016/day_05_input");
     assert_eq!(day_05::day_05_v1(input), "4543c154");
     assert_eq!(day_05::day_05_v2(input), "1050cbbd");
+  }
+
+  #[test]
+  fn day_06() {
+    let input = include_str!("../inputs/year_2016/day_06_input");
+    assert_eq!(day_06::day_06_v1(input), "zcreqgiv");
+    assert_eq!(day_06::day_06_v2(input), "pljvorrk");
   }
 }
