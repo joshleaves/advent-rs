@@ -1,9 +1,5 @@
 #![doc = include_str!("../README.md")]
 
-use std::fs;
-use std::io;
-use std::path::PathBuf;
-
 macro_rules! solvable {
   ($day_xx:tt, $day_v1:tt, $day_v2:tt, $retype:ty) => {
     /// Stub function calling the _v1 or _v2 variant
@@ -11,9 +7,7 @@ macro_rules! solvable {
       match part {
         1 => $day_v1(input),
         2 => $day_v2(input),
-        _ => {
-          panic!("Invalid part: {}", part)
-        }
+        _ => panic!("Invalid part: {}", part),
       }
     }
   };
@@ -21,36 +15,6 @@ macro_rules! solvable {
 
 pub mod year_2015;
 pub mod year_2016;
-
-/// Turns a file into a String input
-pub fn fetch_input_from_file(filename: PathBuf) -> Result<String, std::io::Error> {
-  match fs::read_to_string(filename) {
-    Ok(file_data) => Ok(file_data),
-    Err(error) => Err(error),
-  }
-}
-
-/// Turns STDIN into a String input
-#[mutants::skip] // I will do this later
-pub fn fetch_input_from_stdin() -> Result<String, std::io::Error> {
-  match io::read_to_string(io::stdin()) {
-    Ok(io_data) => Ok(io_data),
-    Err(error) => Err(error),
-  }
-}
-
-/// Returns a `String` input to use with a test.
-///
-/// If no argument is provided, the input will be read from STDIN.
-///
-/// # Arguments
-/// * `file_path` - File input to read from.
-pub fn fetch_input(file_path: Option<PathBuf>) -> Result<String, std::io::Error> {
-  return match file_path {
-    Some(filename) => fetch_input_from_file(filename),
-    None => fetch_input_from_stdin(),
-  };
-}
 
 /// Returns the solution for a specified exercise and input.
 ///
@@ -86,14 +50,6 @@ pub fn solve(year: u16, day: u8, part: u8, input: impl Into<String>) -> Option<S
 #[cfg(test)]
 mod tests {
   use super::*;
-  use std::io::ErrorKind;
-
-  #[test]
-  fn fetch_input_from_inexisting_file() {
-    let path: Option<PathBuf> = Some("foo.txt".into());
-    let error = fetch_input(path.clone()).unwrap_err();
-    assert_eq!(error.kind(), ErrorKind::NotFound);
-  }
 
   #[test]
   fn solve_for_invalid_year() {

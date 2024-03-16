@@ -2,6 +2,8 @@ use advent_rs;
 use clap::Parser;
 use std::path::PathBuf;
 
+mod common;
+
 /// Solver for advent of code exercises
 #[derive(Parser, Debug)]
 #[command(about, long_about = None)]
@@ -25,7 +27,7 @@ struct Args {
 
 fn main() {
   let args = Args::parse();
-  let input: String = match advent_rs::fetch_input(args.input) {
+  let input: String = match common::fetch_input(args.input) {
     Ok(input_data) => input_data,
     Err(error) => {
       eprintln!("advent-rs: {}", error);

@@ -116,6 +116,7 @@ pub fn day_08_v2(input: impl Into<String>) -> String {
   screen.to_string()
 }
 
+/// Stub function only calling the _v1 variant (v2 cannot be tested)
 pub fn day_08(_part: u8, input: impl Into<String>) -> usize {
   day_08_v1(input)
 }
