@@ -38,3 +38,11 @@ Some iterators are annoying, but sometimes, like when calculating whethere there
 I wouldn't call it an "object model", but I like the way Rust works with `impl X for Y`.
 
 Also, remember the [`splice()` method](https://doc.rust-lang.org/std/vec/struct.Vec.html#method.splice), it's very useful to replace large parts of a vector at once.
+
+## Day 09: Explosives in Cyberspace
+
+I knew the Rust version would be faster than my [Ruby implementation](https://github.com/joshleaves/advent-rb/blob/master/year_2016/day_09.rb), but I still felt I wasn't fast enough. I compared myself to [galenelias's implementation](https://github.com/galenelias/AdventOfCode_2016/blob/master/src/Day9/mod.rs) and indeed I wasn't fast enough.
+
+I went back to the workbench to try another implementation, and to my delight, I was the faster. But still not faster than [fornwall's implementation](https://github.com/fornwall/advent-of-code/blob/main/crates/core/src/year2016/day09.rs).
+
+Looking at it carefully proved very smart: both galenelias and me lost too much time **creating a string, then getting its length**, when the exercise only asked to **get the string's length**.
