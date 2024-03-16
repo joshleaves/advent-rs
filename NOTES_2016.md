@@ -12,3 +12,9 @@ I must admit: the biggest pleasure in learning a new language is when it compile
 ## Day 03:Squares With Three Sides
 
 Iterators can be a special kind of hell in Rust, especially when combined, and each type specializes itself further, but in the end, they work.
+
+## Day 04: Security Through Obscurity
+
+Jumping around between `char`, `u8`, and `i32` is a bit of a pain, but it's not too hard once you get it.
+
+Interestingly, when calculating the checksum, it is FASTER to reiterate over the string for each new character we find, rather than query the index straight from a HashMap.
