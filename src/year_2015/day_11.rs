@@ -2,13 +2,6 @@
 
 const PASSWORD_SIZE: usize = 8;
 
-fn string_to_chr(input: &str) -> Vec<u8> {
-  let Some(first_line) = input.lines().next() else {
-    panic!("Invalid input: {}", input);
-  };
-  first_line.as_bytes().to_vec()
-}
-
 fn chr_to_string(input: &Vec<u8>) -> String {
   let Ok(s) = String::from_utf8(input.clone()) else {
     panic!("Invalid byte sequence: {:?}", input);
@@ -60,7 +53,7 @@ fn update_password(password: Vec<u8>) -> Vec<u8> {
 }
 
 pub fn day_11_v1(input: impl Into<String>) -> String {
-  let mut password = string_to_chr(&input.into());
+  let mut password = input.into().trim_end().as_bytes().to_vec();
   loop {
     password = update_password(password);
     if password_is_valid(&password) {
@@ -71,7 +64,7 @@ pub fn day_11_v1(input: impl Into<String>) -> String {
 }
 
 pub fn day_11_v2(input: impl Into<String>) -> String {
-  let mut password = string_to_chr(&input.into());
+  let mut password = input.into().trim_end().as_bytes().to_vec();
   let mut pass_valid = false;
   loop {
     password = update_password(password);
@@ -98,7 +91,7 @@ mod tests {
       "ghjaabcc",
     ];
     for sample in sample_one.iter() {
-      let password = string_to_chr(sample);
+      let password = sample.as_bytes().to_vec();
       assert_eq!(password_is_valid(&password), true);
     }
   }

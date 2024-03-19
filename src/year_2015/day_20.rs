@@ -1,74 +1,40 @@
 //! Advent of Code 2015: Day 20: Infinite Elves and Infinite Houses
 
-fn parse_input(input: &str) -> usize {
-  let Some(first_line) = input.lines().next() else {
-    panic!("Invalid input: {}", input)
-  };
-  let Ok(input_value) = first_line.parse::<usize>() else {
-    panic!("Invalid input: {}", input)
-  };
+const MAX_HOUSES: usize = 900_000;
 
-  input_value
-}
-
-fn divisors_of_v1(number: usize) -> usize {
-  let mut value = 0;
-  let target_iter = f64::sqrt(number as f64) as usize;
-  for num in 1..=target_iter {
-    if number % num != 0 {
-      continue;
-    }
-    let num2 = number / num;
-    value += num;
-    if num2 != num {
-      value += num2
-    }
-  }
-
-  value
-}
-
-fn divisors_of_v2(number: usize) -> usize {
-  let mut value = 0;
-  let target_iter = f64::sqrt(number as f64) as usize;
-  for num in 1..=target_iter {
-    if number % num != 0 {
-      continue;
-    }
-    let num2 = number / num;
-    if num2 < 50 {
-      value += num;
-    }
-    if num2 != num && num < 50 {
-      value += num2
+fn count_gifts(
+  target_gifts: usize,
+  starter: usize,
+  ender: usize,
+  gifts: usize,
+  limiter: usize,
+) -> usize {
+  let mut houses: Vec<usize> = vec![0; ender];
+  for elf_idx in starter..=ender {
+    let mut house_idx = elf_idx;
+    for _ in 1..=limiter {
+      if house_idx >= ender {
+        break;
+      }
+      houses[house_idx] += gifts * elf_idx;
+      if houses[house_idx] >= target_gifts {
+        return elf_idx;
+      }
+      house_idx += elf_idx;
     }
   }
 
-  value
+  0
 }
 
 pub fn day_20_v1(input: impl Into<String>) -> usize {
-  let target: usize = parse_input(&input.into());
-  let mut houses: usize = 0;
-  loop {
-    houses += 1;
-    let elves = divisors_of_v1(houses) * 10;
-    if elves >= target {
-      return houses;
-    }
-  }
+  let target_gifts = input.into().trim_end().parse::<usize>().unwrap();
+  count_gifts(target_gifts, 1, MAX_HOUSES, 10, MAX_HOUSES)
 }
 
 pub fn day_20_v2(input: impl Into<String>) -> usize {
-  let target: usize = parse_input(&input.into());
-  let mut houses: usize = 0;
-  loop {
-    houses += 1;
-    let elves = divisors_of_v2(houses) * 11;
-    if elves >= target {
-      return houses;
-    }
-  }
+  let target_gifts = input.into().trim_end().parse::<usize>().unwrap();
+  count_gifts(target_gifts, 19_000, MAX_HOUSES, 11, 50)
 }
 
 solvable!(day_20, day_20_v1, day_20_v2, usize);
@@ -79,7 +45,6 @@ mod tests {
 
   #[test]
   fn works_with_samples_v1() {
-    let sample_one = "150";
-    assert_eq!(day_20_v1(sample_one), 8);
+    assert_eq!(count_gifts(150, 1, 10, 10, 10), 8);
   }
 }

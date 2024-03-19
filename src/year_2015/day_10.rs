@@ -23,10 +23,8 @@ fn look_and_say(input: Vec<u8>) -> Vec<u8> {
 }
 
 fn string_to_chr(input: &str) -> Vec<u8> {
-  let Some(first_line) = input.lines().next() else {
-    panic!("Invalid input: {}", input);
-  };
-  first_line
+  input
+    .trim_end()
     .as_bytes()
     .iter()
     .map(|chr| chr - 48)

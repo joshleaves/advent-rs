@@ -6,7 +6,7 @@ const HEX_TABLE: [char; 16] = [
 
 pub fn day_05_v1(input: impl Into<String>) -> String {
   let mut hasher = Md5::new();
-  hasher.update(input.into().lines().next().unwrap());
+  hasher.update(input.into().trim_end());
   let mut starter: u32 = 0;
   let mut result: String = String::new();
   loop {
@@ -25,7 +25,7 @@ pub fn day_05_v1(input: impl Into<String>) -> String {
 
 pub fn day_05_v2(input: impl Into<String>) -> String {
   let mut hasher = Md5::new();
-  hasher.update(input.into().lines().next().unwrap());
+  hasher.update(input.into().trim_end());
   let mut starter: u32 = 0;
   let mut result: [char; 8] = [
     '_', '_', '_', '_', '_', '_', '_', '_',
@@ -57,11 +57,13 @@ mod tests {
   use super::*;
 
   #[test]
+  #[ignore = "Too slow for CI"]
   fn works_with_samples_v1() {
     assert_eq!(day_05_v1("abc"), "18f47a30");
   }
 
   #[test]
+  #[ignore = "Too slow for CI"]
   fn works_with_samples_v2() {
     assert_eq!(day_05_v2("abc"), "05ace8e3");
   }

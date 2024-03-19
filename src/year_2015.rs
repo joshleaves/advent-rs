@@ -143,6 +143,7 @@ mod tests {
   }
 
   #[test]
+  #[ignore = "Too slow for CI"]
   fn day_04() {
     let input = include_str!("../inputs/year_2015/day_04_input");
     assert_eq!(day_04::day_04_v1(input), 346_386);

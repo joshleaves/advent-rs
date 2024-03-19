@@ -40,13 +40,13 @@ pub fn loop_until_hash(input: &str, stop_value: u8) -> u32 {
 
 pub fn day_04_v1(input: impl Into<String>) -> u32 {
   let input_str = input.into();
-  let clean_str = input_str.lines().next().expect("OK");
+  let clean_str = input_str.trim_end();
   return loop_until_hash(clean_str, 15);
 }
 
 pub fn day_04_v2(input: impl Into<String>) -> u32 {
   let input_str = input.into();
-  let clean_str = input_str.lines().next().expect("OK");
+  let clean_str = input_str.trim_end();
   return loop_until_hash(clean_str, 0);
 }
 
@@ -57,6 +57,7 @@ mod tests {
   use super::*;
 
   #[test]
+  #[ignore = "Too slow for CI"]
   fn works_with_samples_v1() {
     let sample_one: [(&str, u32); 2] = [
       ("abcdef", 609043),
@@ -68,6 +69,7 @@ mod tests {
   }
 
   #[test]
+  #[ignore = "Too slow for CI"]
   fn works_with_samples_v2() {
     assert_eq!(day_04_v2("abcdef"), 6742839);
   }

@@ -69,7 +69,7 @@ fn traverse_until(favorite: usize, reach_condition: PositionOrCount) -> u8 {
 
 pub fn day_13_v1(input: impl Into<String>) -> u8 {
   let binding = input.into();
-  let input_parts: Vec<_> = binding.lines().next().unwrap().split(",").collect();
+  let input_parts: Vec<_> = binding.trim_end().split(",").collect();
   let favorite = input_parts[0].parse::<usize>().unwrap();
   let reach_x = input_parts[1].parse::<usize>().unwrap();
   let reach_y = input_parts[2].parse::<usize>().unwrap();

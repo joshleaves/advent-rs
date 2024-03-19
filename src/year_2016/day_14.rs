@@ -70,9 +70,7 @@ fn got_quintuplet(input: &str, needle: char) -> bool {
 }
 
 pub fn day_14_v1(input: impl Into<String>) -> usize {
-  let binding = &input.into();
-  let data = binding.lines().next().unwrap();
-  let hasher = build_hasher(data);
+  let hasher = build_hasher(input.into().trim_end());
   let mut starter: usize = 0;
 
   let mut hash_queue: VecDeque<String> = VecDeque::new();
@@ -107,9 +105,7 @@ pub fn day_14_v1(input: impl Into<String>) -> usize {
 }
 
 pub fn day_14_v2(input: impl Into<String>) -> usize {
-  let binding = &input.into();
-  let data = binding.lines().next().unwrap();
-  let hasher = build_hasher(data);
+  let hasher = build_hasher(input.into().trim_end());
   let mut starter: usize = 0;
 
   let mut hash_queue: VecDeque<String> = VecDeque::new();
