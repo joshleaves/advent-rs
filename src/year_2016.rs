@@ -41,7 +41,6 @@ pub fn solve(day: u8, part: u8, input: impl Into<String>) -> Option<String> {
 #[cfg(test)]
 mod tests {
   use super::*;
-  use std::env;
 
   #[test]
   fn day_01() {
@@ -72,12 +71,11 @@ mod tests {
   }
 
   #[test]
+  #[ignore = "Too slow for CI"]
   fn day_05() {
     let input = include_str!("../inputs/year_2016/day_05_input");
     assert_eq!(day_05::day_05_v1(input), "4543c154");
-    if env::var("CI").is_err() {
-      assert_eq!(day_05::day_05_v2(input), "1050cbbd");
-    }
+    assert_eq!(day_05::day_05_v2(input), "1050cbbd");
   }
 
   #[test]
@@ -122,12 +120,11 @@ mod tests {
   }
 
   #[test]
+  #[ignore = "Too slow for CI"]
   fn day_11() {
     let input = include_str!("../inputs/year_2016/day_11_input");
     assert_eq!(day_11::day_11_v1(input), 47);
-    if env::var("CI").is_err() {
-      assert_eq!(day_11::day_11_v2(input), 71);
-    }
+    assert_eq!(day_11::day_11_v2(input), 71);
   }
 
   #[test]

@@ -1,0 +1,5 @@
+{
+  "search.exclude": {
+    "inputs/year_*/day_*_input": true
+  }
+}
