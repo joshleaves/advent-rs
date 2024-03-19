@@ -50,3 +50,23 @@ Looking at it carefully proved very smart: both galenelias and me lost too much 
 ## Day 10: Balance Bots
 
 This exercise got me to face the worst part of Rust: iterating over a hashmap while mutating it.
+
+## Day 11: Radioisotope Thermoelectric Generators
+
+Ugh. I hated this just as much as the first time.
+
+## Day 12: Leonardo's Monorail
+
+Finally, we are back into interesting exercises!
+
+## Day 13: A Maze of Twisty Little Cubicles
+
+...
+
+## Day 14: One-Time Pad
+
+Computing MD5 hashes is never interesting.
+
+## Day 15: Timing is Everything
+
+Finally, something funny to do.
