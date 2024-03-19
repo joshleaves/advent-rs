@@ -10,6 +10,10 @@ Of note:
 - The changelog 2015.5.2 has been rewritten from each commit content.
 - This file may be amended entirely in the future to adhere to the [GNU Changelog style](https://www.gnu.org/prep/standards/html_node/Style-of-Change-Logs.html#Style-of-Change-Logs)
 
+## [2016.14.1]
+### Added
+- Solved [exercice for 2016, day 14](src/year_2016/day_14.rs).
+
 ## [2016.13.1]
 ### Added
 - Solved [exercice for 2016, day 13](src/year_2016/day_13.rs).
