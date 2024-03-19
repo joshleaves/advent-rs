@@ -1,6 +1,8 @@
 //! Year 2016
 //!
 #![doc = include_str!("../NOTES_2016.md")]
+
+mod assembunny;
 pub mod day_01;
 pub mod day_02;
 pub mod day_03;
@@ -12,11 +14,13 @@ pub mod day_08;
 pub mod day_09;
 pub mod day_10;
 pub mod day_11;
+pub mod day_12;
 
 pub fn solve(day: u8, part: u8, input: impl Into<String>) -> Option<String> {
   if part != 1 && part != 2 {
     return None;
   }
+
   match day {
     1 => Some(format!("{}", day_01::day_01(part, input))),
     2 => Some(format!("{}", day_02::day_02(part, input))),
@@ -27,6 +31,9 @@ pub fn solve(day: u8, part: u8, input: impl Into<String>) -> Option<String> {
     7 => Some(format!("{}", day_07::day_07(part, input))),
     8 => Some(format!("{}", day_08::day_08(part, input))),
     9 => Some(format!("{}", day_09::day_09(part, input))),
+    10 => Some(format!("{}", day_10::day_10(part, input))),
+    11 => Some(format!("{}", day_11::day_11(part, input))),
+    12 => Some(format!("{}", day_12::day_12(part, input))),
     _ => None,
   }
 }
@@ -121,5 +128,12 @@ mod tests {
     if env::var("CI").is_err() {
       assert_eq!(day_11::day_11_v2(input), 71);
     }
+  }
+
+  #[test]
+  fn day_12() {
+    let input = include_str!("../inputs/year_2016/day_12_input");
+    assert_eq!(day_12::day_12_v1(input), 318_007);
+    assert_eq!(day_12::day_12_v2(input), 9_227_661);
   }
 }
