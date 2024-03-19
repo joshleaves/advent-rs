@@ -105,7 +105,6 @@ fn next_moves(current_state: Vec<u8>) -> Vec<Vec<u8>> {
 }
 
 fn search(states: Vec<Vec<u8>>, mut moves_tried: HashSet<Vec<u8>>, depth: u16) -> u16 {
-  // println!("NEXT MOVES ({depth}) => {}", states.len());
   if states
     .iter()
     .any(|state| state.iter().all(|floor| *floor == 3))

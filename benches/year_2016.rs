@@ -8,6 +8,9 @@ use advent_rs::year_2016::day_07;
 use advent_rs::year_2016::day_08;
 use advent_rs::year_2016::day_09;
 use advent_rs::year_2016::day_10;
+use advent_rs::year_2016::day_11;
+use advent_rs::year_2016::day_12;
+use advent_rs::year_2016::day_13;
 use criterion::{black_box, criterion_group, criterion_main, Criterion};
 
 pub fn year_2016_day_01(c: &mut Criterion) {
@@ -130,6 +133,42 @@ pub fn year_2016_day_10(c: &mut Criterion) {
   g2016_day_10.finish();
 }
 
+pub fn year_2016_day_11(c: &mut Criterion) {
+  let mut g2016_day_11 = c.benchmark_group("year_2016::day_11");
+  let input_year_2016_day_11 = include_str!("../inputs/year_2016/day_11_input");
+  g2016_day_11.bench_function("year_2016::day_11_v1", |b| {
+    b.iter(|| day_11::day_11_v1(black_box(input_year_2016_day_11)))
+  });
+  g2016_day_11.bench_function("year_2016::day_11_v2", |b| {
+    b.iter(|| day_11::day_11_v2(black_box(input_year_2016_day_11)))
+  });
+  g2016_day_11.finish();
+}
+
+pub fn year_2016_day_12(c: &mut Criterion) {
+  let mut g2016_day_12 = c.benchmark_group("year_2016::day_12");
+  let input_year_2016_day_12 = include_str!("../inputs/year_2016/day_12_input");
+  g2016_day_12.bench_function("year_2016::day_12_v1", |b| {
+    b.iter(|| day_12::day_12_v1(black_box(input_year_2016_day_12)))
+  });
+  g2016_day_12.bench_function("year_2016::day_12_v2", |b| {
+    b.iter(|| day_12::day_12_v2(black_box(input_year_2016_day_12)))
+  });
+  g2016_day_12.finish();
+}
+
+pub fn year_2016_day_13(c: &mut Criterion) {
+  let mut g2016_day_13 = c.benchmark_group("year_2016::day_13");
+  let input_year_2016_day_13 = include_str!("../inputs/year_2016/day_13_input");
+  g2016_day_13.bench_function("year_2016::day_13_v1", |b| {
+    b.iter(|| day_13::day_13_v1(black_box(input_year_2016_day_13)))
+  });
+  g2016_day_13.bench_function("year_2016::day_13_v2", |b| {
+    b.iter(|| day_13::day_13_v2(black_box(input_year_2016_day_13)))
+  });
+  g2016_day_13.finish();
+}
+
 criterion_group!(
   benches,
   year_2016_day_01,
@@ -141,6 +180,9 @@ criterion_group!(
   year_2016_day_07,
   year_2016_day_08,
   year_2016_day_09,
-  year_2016_day_10
+  year_2016_day_10,
+  year_2016_day_11,
+  year_2016_day_12,
+  year_2016_day_13
 );
 criterion_main!(benches);
