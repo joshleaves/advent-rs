@@ -70,3 +70,9 @@ Computing MD5 hashes is never interesting.
 ## Day 15: Timing is Everything
 
 Finally, something funny to do.
+
+## Day 16: Dragon Checksum
+
+For once, I'm faster than my [rustaceans counterparts](https://docs.rs/advent-of-code/2022.0.66/src/advent_of_code/year2016/day16.rs.html). In that case, manipulating `Vec<bool>` instead of `String` worked better.
+
+Another thing of note is that if you know how to optimize your loop-down, you can win a lot of time.
