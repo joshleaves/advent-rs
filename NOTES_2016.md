@@ -76,3 +76,7 @@ Finally, something funny to do.
 For once, I'm faster than my [rustaceans counterparts](https://docs.rs/advent-of-code/2022.0.66/src/advent_of_code/year2016/day16.rs.html). In that case, manipulating `Vec<bool>` instead of `String` worked better.
 
 Another thing of note is that if you know how to optimize your loop-down, you can win a lot of time.
+
+## Day 17: Two Steps Forward
+
+A big part of this day was bout building a [BreadthFirstSearch library](src/bfs.rs) that would be flexible enough to reuse in other exercises, since there are SO MANY in this year.

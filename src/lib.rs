@@ -13,6 +13,7 @@ macro_rules! solvable {
   };
 }
 
+mod bfs;
 pub mod year_2015;
 pub mod year_2016;
 
