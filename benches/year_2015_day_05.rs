@@ -21,14 +21,14 @@ fn string_is_nice_v1_contains(input: &str) -> bool {
   return repeated && vowels >= 3;
 }
 
-pub fn day_05_v1_contains(input: &str) -> u32 {
+fn day_05_v1_contains(input: &str) -> u32 {
   return input
     .lines()
     .filter(|line| string_is_nice_v1_contains(line))
     .count() as u32;
 }
 
-pub fn bench_year_2015_day_05_v1(c: &mut Criterion) {
+fn bench_year_2015_day_05_v1(c: &mut Criterion) {
   let input = include_str!("../inputs/year_2015/day_05_input");
   let mut group = c.benchmark_group("year_2015::day_05_v1");
   group.warm_up_time(Duration::from_millis(100));

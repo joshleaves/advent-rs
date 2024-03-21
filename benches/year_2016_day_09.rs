@@ -82,7 +82,7 @@ fn galenelias_decompress(mut input: &str, recursive: bool) -> String {
   return result;
 }
 
-pub fn bench_year_2016_day_09_v1(c: &mut Criterion) {
+fn bench_year_2016_day_09_v1(c: &mut Criterion) {
   let mut group = c.benchmark_group("year_2016::day_09_v1");
   group.warm_up_time(Duration::from_millis(100));
   let input = include_str!("../inputs/year_2016/day_09_input");
@@ -105,7 +105,7 @@ pub fn bench_year_2016_day_09_v1(c: &mut Criterion) {
   group.finish();
 }
 
-pub fn bench_year_2016_day_09_v2(c: &mut Criterion) {
+fn bench_year_2016_day_09_v2(c: &mut Criterion) {
   let mut group = c.benchmark_group("year_2016::day_09_v2");
   group.warm_up_time(Duration::from_millis(100));
   let input = include_str!("../inputs/year_2016/day_09_input");

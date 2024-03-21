@@ -16,7 +16,7 @@ impl Day17Position {
     }
   }
 
-  pub fn next_moves(&self, mut hasher: CoreWrapper<Md5Core>) -> Vec<Self> {
+  fn next_moves(&self, mut hasher: CoreWrapper<Md5Core>) -> Vec<Self> {
     hasher.update(self.path.clone());
     let positions: &[u8] = &hasher.finalize()[0..=1];
     let mut next_moves = vec![];

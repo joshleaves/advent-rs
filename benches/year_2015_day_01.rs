@@ -10,7 +10,7 @@ fn day_01_v1_naive(input: &str) -> i16 {
   right - left
 }
 
-pub fn day_01_v1_fast(input: impl Into<String>) -> i16 {
+fn day_01_v1_fast(input: impl Into<String>) -> i16 {
   let mut level: i16 = 0;
   let nums: Vec<u16> = unsafe { mem::transmute::<String, Vec<u16>>(input.into()) };
   for num in nums {
@@ -35,7 +35,7 @@ pub fn day_01_v1_fast(input: impl Into<String>) -> i16 {
   level
 }
 
-pub fn day_01_v2_fast(input: impl Into<String>) -> i16 {
+fn day_01_v2_fast(input: impl Into<String>) -> i16 {
   let mut level: i16 = 0;
   let nums: Vec<u16> = unsafe { mem::transmute::<String, Vec<u16>>(input.into()) };
   for (index, num) in nums.iter().enumerate() {
@@ -75,7 +75,7 @@ pub fn day_01_v2_fast(input: impl Into<String>) -> i16 {
   0
 }
 
-pub fn bench_year_2015_day_01_v1(c: &mut Criterion) {
+fn bench_year_2015_day_01_v1(c: &mut Criterion) {
   let mut group = c.benchmark_group("year_2015::day_01_v1");
   group.warm_up_time(Duration::from_millis(100));
   let input = include_str!("../inputs/year_2015/day_01_input");
@@ -93,7 +93,7 @@ pub fn bench_year_2015_day_01_v1(c: &mut Criterion) {
   group.finish();
 }
 
-pub fn bench_year_2015_day_01_v2(c: &mut Criterion) {
+fn bench_year_2015_day_01_v2(c: &mut Criterion) {
   let mut group = c.benchmark_group("year_2015::day_01_v2");
   group.warm_up_time(Duration::from_millis(100));
   let input = include_str!("../inputs/year_2015/day_01_input");

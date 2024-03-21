@@ -53,7 +53,7 @@ fn verify_checksum_fast(checksum: &str, input: &str) -> bool {
   letters == checksum
 }
 
-pub fn day_04_v1_naive(input: impl Into<String>) -> u32 {
+fn day_04_v1_naive(input: impl Into<String>) -> u32 {
   let re = Regex::new(r"(?<letters>[\w-]+)-(?<value>\d+)\[(?<checksum>\w+)\]").unwrap();
   let mut result: u32 = 0;
   for line in input.into().lines() {
@@ -67,7 +67,7 @@ pub fn day_04_v1_naive(input: impl Into<String>) -> u32 {
   result
 }
 
-pub fn day_04_v1_fast(input: impl Into<String>) -> u32 {
+fn day_04_v1_fast(input: impl Into<String>) -> u32 {
   let re = Regex::new(r"(?<letters>[\w-]+)-(?<value>\d+)\[(?<checksum>\w+)\]").unwrap();
   let mut result: u32 = 0;
   for line in input.into().lines() {
@@ -81,7 +81,7 @@ pub fn day_04_v1_fast(input: impl Into<String>) -> u32 {
   result
 }
 
-pub fn bench_year_2016_day_04_checksum(c: &mut Criterion) {
+fn bench_year_2016_day_04_checksum(c: &mut Criterion) {
   let mut group = c.benchmark_group("year_2016::day_04_v1");
   group.warm_up_time(Duration::from_millis(100));
   let input = include_str!("../inputs/year_2016/day_04_input");

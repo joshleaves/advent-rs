@@ -95,7 +95,7 @@ fn checksum(mut input: Vec<bool>) -> Vec<bool> {
   input
 }
 
-pub fn calculate_checksum(input: &str, disk_size: usize) -> String {
+fn calculate_checksum(input: &str, disk_size: usize) -> String {
   let mut values = string2bools(&input);
   values = fill_until(values, disk_size);
   values = checksum(values);

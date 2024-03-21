@@ -32,7 +32,7 @@ impl Bot {
     }
   }
 
-  pub fn add_chip(&mut self, chip: usize) {
+  fn add_chip(&mut self, chip: usize) {
     if self.values.len() == 2 {
       panic!("Cannot add chips here!");
     }
@@ -40,12 +40,12 @@ impl Bot {
     self.values.sort();
   }
 
-  pub fn set_low_high(&mut self, low: BotOutput, high: BotOutput) {
+  fn set_low_high(&mut self, low: BotOutput, high: BotOutput) {
     self.low = low;
     self.high = high;
   }
 
-  pub fn extract_chips(&mut self) -> [(usize, BotOutput); 2] {
+  fn extract_chips(&mut self) -> [(usize, BotOutput); 2] {
     if self.values.len() != 2 {
       panic!("No chips to extract");
     }

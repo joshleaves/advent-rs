@@ -7,7 +7,7 @@ struct DisplayScreen {
 }
 
 impl DisplayScreen {
-  pub fn new(width: usize, height: usize) -> Self {
+  fn new(width: usize, height: usize) -> Self {
     let lights: Vec<bool> = vec![false; (width * height) as usize];
     DisplayScreen {
       width,
@@ -47,13 +47,13 @@ impl DisplayScreen {
     }
   }
 
-  pub fn interpret_lines(&mut self, instructions: impl Into<String>) {
+  fn interpret_lines(&mut self, instructions: impl Into<String>) {
     for line in instructions.into().lines() {
       self.interpret(line);
     }
   }
 
-  pub fn interpret(&mut self, instruction: &str) {
+  fn interpret(&mut self, instruction: &str) {
     let parts: Vec<_> = instruction.split_whitespace().collect();
     match parts[0] {
       "rect" => {
@@ -77,7 +77,7 @@ impl DisplayScreen {
     }
   }
 
-  pub fn to_string(&self) -> String {
+  fn to_string(&self) -> String {
     let mut displaystr: Vec<String> = vec![];
     for row in 0..self.height {
       let idx_from = row * self.width;
@@ -91,7 +91,7 @@ impl DisplayScreen {
     displaystr.join("\n")
   }
 
-  pub fn lights_on(&self) -> usize {
+  fn lights_on(&self) -> usize {
     self.lights.iter().filter(|light| **light == true).count()
   }
 }
