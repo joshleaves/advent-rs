@@ -10,7 +10,7 @@ where
   starting: POS,
   pub ending: Option<POS>,
   queue: VecDeque<(POS, usize)>,
-  visited: HashSet<POS>,
+  pub visited: HashSet<POS>,
   pub depth: usize,
   next_moves: NM,
 }
@@ -59,7 +59,7 @@ where
   }
 
   pub fn traverse_until_depth(&mut self, target_depth: usize) -> &mut Self {
-    self.traverse(|_position, depth| depth == target_depth, true)
+    self.traverse(|_position, depth| depth > target_depth, true)
   }
 
   pub fn traverse_until_position(&mut self, target_position: POS) -> &mut Self {

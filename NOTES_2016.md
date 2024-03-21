@@ -80,3 +80,5 @@ Another thing of note is that if you know how to optimize your loop-down, you ca
 ## Day 17: Two Steps Forward
 
 A big part of this day was bout building a [BreadthFirstSearch library](src/bfs.rs) that would be flexible enough to reuse in other exercises, since there are SO MANY in this year.
+
+There was some confusion between all the generics, abstractions, and types, especially since this day got some strange rules (storing together position+path) but in the end, I think I got it, and implementing it on day 13 (which only got a position) was really fast, and execution time got faster too.

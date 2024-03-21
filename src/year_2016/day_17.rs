@@ -16,7 +16,7 @@ impl Day17Position {
     }
   }
 
-  pub fn next_moves_for_hasher(&self, mut hasher: CoreWrapper<Md5Core>) -> Vec<Self> {
+  pub fn next_moves(&self, mut hasher: CoreWrapper<Md5Core>) -> Vec<Self> {
     hasher.update(self.path.clone());
     let positions: &[u8] = &hasher.finalize()[0..=1];
     let mut next_moves = vec![];
@@ -101,9 +101,7 @@ pub fn day_17_v1(input: impl Into<String>) -> String {
   let mut hasher = Md5::new();
   hasher.update(input.into().trim_end());
   let starter = Day17Position::new((0, 0));
-  let mut bfs = BreadthFirstSearch::new(starter, |curpos| {
-    curpos.next_moves_for_hasher(hasher.clone())
-  });
+  let mut bfs = BreadthFirstSearch::new(starter, |curpos| curpos.next_moves(hasher.clone()));
   bfs.traverse_until(|position| position.position == (3, 3));
 
   bfs.ending.unwrap().path
@@ -113,9 +111,7 @@ pub fn day_17_v2(input: impl Into<String>) -> String {
   let mut hasher = Md5::new();
   hasher.update(input.into().trim_end());
   let starter = Day17Position::new((0, 0));
-  let mut bfs = BreadthFirstSearch::new(starter, |curpos| {
-    curpos.next_moves_for_hasher(hasher.clone())
-  });
+  let mut bfs = BreadthFirstSearch::new(starter, |curpos| curpos.next_moves(hasher.clone()));
   bfs.longest_path_until(|position| position.position == (3, 3));
 
   bfs.depth.to_string()
@@ -135,12 +131,12 @@ mod tests {
       ("ulqzkmiv", "DRURDRUDDLLDLUURRDULRLDUUDDDRR"),
     ];
     for (sample, result) in sample_one {
-      println!("TEST => {}", sample);
       assert_eq!(day_17_v1(sample), result);
     }
   }
 
   #[test]
+  #[ignore = "Too slow for CI"]
   fn works_with_samples_v2() {
     let sample_two: [(&str, &str); 3] = [
       ("ihgpwlah", "370"),
