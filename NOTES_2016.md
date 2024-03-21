@@ -86,3 +86,7 @@ There was some confusion between all the generics, abstractions, and types, espe
 ## Day 18: Like a Rogue
 
 Easy come, easy go.
+
+## Day 19: An Elephant Named Joseph
+
+As easy in Rust as it was in Ruby.
