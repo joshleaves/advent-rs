@@ -94,3 +94,7 @@ As easy in Rust as it was in Ruby.
 ## Day 20: Firewall Rules
 
 One of Rust's biggest pleasure is code that compiles on the first try.
+
+## Day 21: Scrambled Letters and Hash
+
+I love interpreters.
