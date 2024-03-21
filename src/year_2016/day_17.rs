@@ -2,7 +2,7 @@ use crate::bfs::BreadthFirstSearch;
 use md5::{digest::core_api::CoreWrapper, Digest, Md5, Md5Core};
 use std::hash::{Hash, Hasher};
 
-#[derive(Eq, Clone)]
+#[derive(Eq, Clone, Debug)]
 struct Day17Position {
   position: (usize, usize),
   path: String,

@@ -98,3 +98,7 @@ One of Rust's biggest pleasure is code that compiles on the first try.
 ## Day 21: Scrambled Letters and Hash
 
 I love interpreters.
+
+## Day 22: Grid Computing
+
+So far, my [BreadthFirstSearch library](src/bfs.rs) has saved me from rewriting a BFS from scratch twice.

@@ -4,7 +4,7 @@ use std::hash::Hash;
 
 pub struct BreadthFirstSearch<POS, NM>
 where
-  POS: Eq + Hash + Clone,
+  POS: Eq + Hash + Clone + std::fmt::Debug,
   NM: Fn(POS) -> Vec<POS>,
 {
   starting: POS,
@@ -17,7 +17,7 @@ where
 
 impl<POS, NM> BreadthFirstSearch<POS, NM>
 where
-  POS: Eq + Hash + Clone,
+  POS: Eq + Hash + Clone + std::fmt::Debug,
   NM: Fn(POS) -> Vec<POS>,
 {
   pub fn new(starting: POS, next_moves: NM) -> Self {
@@ -37,6 +37,9 @@ where
   {
     self.queue.push_back((self.starting.clone(), 0));
     while let Some((position, depth)) = self.queue.pop_front() {
+      if self.visited.contains(&position) {
+        continue;
+      }
       if traverse_until(&position, depth) {
         self.ending = Some(position);
         self.depth = depth;
