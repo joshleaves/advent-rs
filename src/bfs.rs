@@ -61,6 +61,11 @@ where
     self
   }
 
+  pub fn shortest_path_to(&mut self, target_position: POS) -> usize {
+    self.traverse_until_position(target_position.clone());
+    self.depth
+  }
+
   pub fn traverse_until_depth(&mut self, target_depth: usize) -> &mut Self {
     self.traverse(|_position, depth| depth > target_depth, true)
   }

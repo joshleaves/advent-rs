@@ -106,3 +106,7 @@ So far, my [BreadthFirstSearch library](src/bfs.rs) has saved me from rewriting 
 ## Day 23: Safe Cracking
 
 I had forgotten [the original was taking ten minutes to run](https://github.com/joshleaves/advent-rb/NOTES_2016.md#day-23-safe-cracking). This one takes only seven seconds, and I'll be happy with it.
+
+## Day 24: Air Duct Spelunking
+
+Look, [BreadthFirstSearch library](src/bfs.rs) is coming to our rescue again!
