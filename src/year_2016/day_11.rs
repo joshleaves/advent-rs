@@ -31,7 +31,7 @@ fn parse_world(input: &str) -> Vec<u8> {
   result
 }
 
-fn state_is_safe(state: &Vec<u8>) -> bool {
+fn state_is_safe(state: &[u8]) -> bool {
   let pairs: Vec<Vec<u8>> = state[1..].chunks(2).map(|s| s.into()).collect();
   for (idx_out, pair_out) in pairs.iter().enumerate() {
     if pair_out[0] == pair_out[1] {
@@ -50,7 +50,7 @@ fn state_is_safe(state: &Vec<u8>) -> bool {
   true
 }
 
-fn next_moves_from(current_state: &Vec<u8>, idx: usize, go_up: bool) -> Vec<Vec<u8>> {
+fn next_moves_from(current_state: &[u8], idx: usize, go_up: bool) -> Vec<Vec<u8>> {
   let mut new_moves: Vec<Vec<u8>> = vec![];
   let mut new_state: Vec<u8> = current_state.to_owned();
   if go_up {

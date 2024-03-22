@@ -123,7 +123,7 @@ fn solve(input: impl Into<String>, chipstop: Option<Vec<usize>>) -> usize {
             bot_out.borrow_mut().add_chip(*chip);
           }
           BotOutput::Output(out_id) => {
-            let output = outs.entry(*out_id).or_insert(vec![]);
+            let output = outs.entry(*out_id).or_default();
             output.push(*chip);
           }
         }

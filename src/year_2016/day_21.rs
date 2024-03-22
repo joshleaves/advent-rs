@@ -85,11 +85,11 @@ impl Instruction {
     match self {
       Instruction::SwapPosition(lhs, rhs) => password.swap(lhs, rhs),
       Instruction::SwapLetter(lhs, rhs) => {
-        for idx in 0..password.len() {
-          if password[idx] == lhs {
-            password[idx] = rhs;
-          } else if password[idx] == rhs {
-            password[idx] = lhs;
+        for character in &mut password {
+          if *character == lhs {
+            *character = rhs;
+          } else if *character == rhs {
+            *character = lhs;
           }
         }
       }
@@ -119,11 +119,7 @@ impl Instruction {
 
 pub fn day_21_v1(input: impl Into<String>) -> String {
   let mut password = "abcdefgh".chars().collect::<Vec<_>>();
-  let instructions = input
-    .into()
-    .lines()
-    .map(|line| Instruction::new(line))
-    .collect_vec();
+  let instructions = input.into().lines().map(Instruction::new).collect_vec();
   for instruction in instructions {
     password = instruction.execute(password);
   }
@@ -133,11 +129,7 @@ pub fn day_21_v1(input: impl Into<String>) -> String {
 
 pub fn day_21_v2(input: impl Into<String>) -> String {
   let mut password = "fbgdceah".chars().collect::<Vec<_>>();
-  let mut instructions = input
-    .into()
-    .lines()
-    .map(|line| Instruction::new(line))
-    .collect_vec();
+  let mut instructions = input.into().lines().map(Instruction::new).collect_vec();
   instructions.reverse();
   for instruction in instructions {
     password = instruction.execute_rev(password);
@@ -164,10 +156,7 @@ mod tests {
   #[test]
   fn can_interpret_code() {
     let mut password = "abcde".chars().collect::<Vec<_>>();
-    let instructions = SAMPLE
-      .lines()
-      .map(|line| Instruction::new(line))
-      .collect_vec();
+    let instructions = SAMPLE.lines().map(Instruction::new).collect_vec();
     for instruction in instructions {
       password = instruction.execute(password);
     }

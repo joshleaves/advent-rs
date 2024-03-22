@@ -7,14 +7,14 @@ fn parse_number(number: &str) -> u16 {
   let Ok(parsed) = number.parse::<u16>() else {
     panic!("Invalid number: {}", number);
   };
-  return parsed;
+  parsed
 }
 
 fn parse_coordinates(coordinates: &str) -> (u16, u16) {
   let Some(numbers) = coordinates.split_once(',') else {
     panic!("Invalid coordinates: {}", coordinates);
   };
-  return (parse_number(numbers.0), parse_number(numbers.1));
+  (parse_number(numbers.0), parse_number(numbers.1))
 }
 
 fn modify_grid<F>(light_grid: &mut Vec<u8>, from: &str, to: &str, modifier: F)
@@ -27,7 +27,7 @@ where
     let idx_from = y as usize * 1000 + from_x as usize;
     let idx_to = y as usize * 1000 + to_x as usize;
     let oldval = &light_grid[idx_from..=idx_to];
-    let newval = modifier(&oldval, oldval.len());
+    let newval = modifier(oldval, oldval.len());
 
     light_grid.splice(idx_from..=idx_to, newval.iter().cloned());
   }
@@ -61,7 +61,7 @@ pub fn day_06_v1(input: impl Into<String>) -> u32 {
         |lights: &[u8], _length: usize| {
           lights
             .iter()
-            .map(|c| if *c == 1 as u8 { 0 } else { 1 })
+            .map(|c| if *c == 1_u8 { 0 } else { 1 })
             .collect()
         },
       ),

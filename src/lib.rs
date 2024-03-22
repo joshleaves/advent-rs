@@ -42,9 +42,9 @@ pub mod year_2016;
 /// ```
 pub fn solve(year: u16, day: u8, part: u8, input: impl Into<String>) -> Option<String> {
   match year {
-    2015 => return year_2015::solve(day, part, input),
-    2016 => return year_2016::solve(day, part, input),
-    _ => return None,
+    2015 => year_2015::solve(day, part, input),
+    2016 => year_2016::solve(day, part, input),
+    _ => None,
   }
 }
 

@@ -1,6 +1,6 @@
 //! Advent of Code 2015: Day 12: JSAbacusFramework.io
 
-fn traverse_node_value(input: &Vec<u8>, idx: usize) -> (i32, usize) {
+fn traverse_node_value(input: &[u8], idx: usize) -> (i32, usize) {
   let mut total: i32 = 0;
   let mut min: i32 = 1;
   let mut length: usize = 0;
@@ -61,7 +61,7 @@ fn traverse_node_hash(input: &Vec<u8>, idx: usize) -> (i32, usize) {
   loop {
     match input[idx + length] {
       b'}' => {
-        if no_red == false {
+        if !no_red {
           total = 0;
         }
         return (total, length);
@@ -99,14 +99,11 @@ pub fn day_12_v1(input: impl Into<String>) -> i32 {
 
   let letters: Vec<u8> = input.into().into_bytes();
   while idx < letters.len() - 1 {
-    match letters[idx] {
-      b'-'..=b'9' => {
-        let (add_total, add_length) = traverse_node_value(&letters, idx);
-        total += add_total;
-        idx += add_length;
-      }
-      _ => {}
-    };
+    if let b'-'..=b'9' = letters[idx] {
+      let (add_total, add_length) = traverse_node_value(&letters, idx);
+      total += add_total;
+      idx += add_length;
+    }
     idx += 1;
   }
 

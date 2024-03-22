@@ -57,7 +57,7 @@ impl Program {
   fn from_input(input: &str) -> Self {
     let mut instructions: Vec<Instruction> = vec![];
     for line in input.lines() {
-      let parts: Vec<&str> = line.split(" ").collect();
+      let parts: Vec<&str> = line.split(' ').collect();
       match parts[0] {
         "hlf" => {
           let register = if parts[1] == "a" { 0 } else { 1 };
@@ -100,7 +100,7 @@ impl Program {
     Program {
       pc: 0,
       registers: [0i32; 2],
-      instructions: instructions,
+      instructions,
     }
   }
 }

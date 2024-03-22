@@ -79,7 +79,7 @@ fn galenelias_decompress(mut input: &str, recursive: bool) -> String {
     }
   }
 
-  return result;
+  result
 }
 
 fn bench_year_2016_day_09_v1(c: &mut Criterion) {
@@ -95,7 +95,7 @@ fn bench_year_2016_day_09_v1(c: &mut Criterion) {
   group.bench_with_input(
     BenchmarkId::new("galenelias", input.len()),
     input,
-    |b, input| b.iter(|| galenelias_decompress(&input, false)),
+    |b, input| b.iter(|| galenelias_decompress(input, false)),
   );
   group.bench_with_input(
     BenchmarkId::new("joshleaves", input.len()),
@@ -118,7 +118,7 @@ fn bench_year_2016_day_09_v2(c: &mut Criterion) {
   group.bench_with_input(
     BenchmarkId::new("galenelias", input.len()),
     input,
-    |b, input| b.iter(|| galenelias_decompress(&input, true)),
+    |b, input| b.iter(|| galenelias_decompress(input, true)),
   );
   group.bench_with_input(
     BenchmarkId::new("joshleaves", input.len()),

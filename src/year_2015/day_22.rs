@@ -3,51 +3,39 @@
 const WORST_MANA: usize = 100_000;
 
 fn combat(
-  mut user_hp: i16,
-  mut user_mp: i16,
-  mut boss_hp: i8,
-  boss_dmg: i8,
+  mut user: (i16, i16),
+  mut boss: (i8, i8),
   mut effects: Vec<i8>,
   player_turn: bool,
-  mut best_mana: usize,
-  version: u8,
+  mut best: usize,
+  ver: u8,
   mana: usize,
 ) -> usize {
-  if mana >= best_mana || user_mp < 0 {
+  if mana >= best || user.1 < 0 {
     return WORST_MANA;
   }
-  if version == 2 && player_turn {
-    user_hp -= 1;
+  if ver == 2 && player_turn {
+    user.0 -= 1;
   }
-  if user_hp <= 0 {
+  if user.0 <= 0 {
     return WORST_MANA;
   }
   let user_df = if effects[0] > 0 { 7 } else { 0 };
   if effects[1] > 0 {
-    boss_hp -= 3;
+    boss.0 -= 3;
   }
   if effects[2] > 0 {
-    user_mp += 101;
+    user.1 += 101;
   }
   effects = effects.iter().map(|e| std::cmp::max(0, e - 1)).collect();
-  if boss_hp <= 0 {
-    return std::cmp::min(best_mana, mana);
+  if boss.0 <= 0 {
+    return std::cmp::min(best, mana);
   }
 
   if !player_turn {
-    user_hp -= std::cmp::max(1, boss_dmg - user_df) as i16;
-    if user_hp > 0 {
-      return combat(
-        user_hp,
-        user_mp,
-        boss_hp,
-        boss_dmg,
-        effects,
-        true,
-        best_mana,
-        version,
-        mana,
-      );
+    user.0 -= std::cmp::max(1, boss.1 - user_df) as i16;
+    if user.0 > 0 {
+      return combat(user, boss, effects, true, best, ver, mana);
     } else {
       return WORST_MANA;
     }
@@ -55,90 +43,80 @@ fn combat(
 
   // Magic Missile
   let mut next_mana = combat(
-    user_hp,
-    user_mp - 53,
-    boss_hp - 4,
-    boss_dmg,
+    (user.0, user.1 - 53),
+    (boss.0 - 4, boss.1),
     effects.clone(),
     false,
-    best_mana,
-    version,
+    best,
+    ver,
     mana + 53,
   );
-  best_mana = std::cmp::min(best_mana, next_mana);
+  best = std::cmp::min(best, next_mana);
   // Drain
   next_mana = combat(
-    user_hp + 2,
-    user_mp - 73,
-    boss_hp - 2,
-    boss_dmg,
+    (user.0 + 2, user.1 - 73),
+    (boss.0 - 2, boss.1),
     effects.clone(),
     false,
-    best_mana,
-    version,
+    best,
+    ver,
     mana + 73,
   );
-  best_mana = std::cmp::min(best_mana, next_mana);
+  best = std::cmp::min(best, next_mana);
   // Shield
   if effects[0] == 0 {
     next_mana = combat(
-      user_hp,
-      user_mp - 113,
-      boss_hp,
-      boss_dmg,
+      (user.0, user.1 - 113),
+      boss,
       vec![
         6,
         effects[1],
         effects[2],
       ],
       false,
-      best_mana,
-      version,
+      best,
+      ver,
       mana + 113,
     );
-    best_mana = std::cmp::min(best_mana, next_mana);
+    best = std::cmp::min(best, next_mana);
   }
   // Poison
   if effects[1] == 0 {
     next_mana = combat(
-      user_hp,
-      user_mp - 173,
-      boss_hp,
-      boss_dmg,
+      (user.0, user.1 - 173),
+      boss,
       vec![
         effects[0],
         6,
         effects[2],
       ],
       false,
-      best_mana,
-      version,
+      best,
+      ver,
       mana + 173,
     );
-    best_mana = std::cmp::min(best_mana, next_mana);
+    best = std::cmp::min(best, next_mana);
   }
 
   // Recharge
   if effects[2] == 0 {
     next_mana = combat(
-      user_hp,
-      user_mp - 229,
-      boss_hp,
-      boss_dmg,
+      (user.0, user.1 - 229),
+      boss,
       vec![
         effects[0],
         effects[1],
         5,
       ],
       false,
-      best_mana,
-      version,
+      best,
+      ver,
       mana + 229,
     );
-    best_mana = std::cmp::min(best_mana, next_mana);
+    best = std::cmp::min(best, next_mana);
   }
 
-  best_mana
+  best
 }
 
 fn parse_input(boss_input: &str) -> (i8, i8) {
@@ -160,33 +138,13 @@ fn parse_input(boss_input: &str) -> (i8, i8) {
 }
 
 pub fn day_22_v1(input: impl Into<String>) -> usize {
-  let (boss_hp, boss_dmg) = parse_input(&input.into());
-  combat(
-    50,
-    500,
-    boss_hp,
-    boss_dmg,
-    vec![0, 0, 0],
-    true,
-    WORST_MANA,
-    1,
-    0,
-  )
+  let boss = parse_input(&input.into());
+  combat((50, 500), boss, vec![0, 0, 0], true, WORST_MANA, 1, 0)
 }
 
 pub fn day_22_v2(input: impl Into<String>) -> usize {
-  let (boss_hp, boss_dmg) = parse_input(&input.into());
-  combat(
-    50,
-    500,
-    boss_hp,
-    boss_dmg,
-    vec![0, 0, 0],
-    true,
-    WORST_MANA,
-    2,
-    0,
-  )
+  let boss = parse_input(&input.into());
+  combat((50, 500), boss, vec![0, 0, 0], true, WORST_MANA, 2, 0)
 }
 
 solvable!(day_22, day_22_v1, day_22_v2, usize);

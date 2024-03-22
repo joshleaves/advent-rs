@@ -11,12 +11,12 @@ fn mod_exp(mut base: u64, mut exp: u64, modulus: u64) -> u64 {
     return 0;
   }
   let mut result: u64 = 1;
-  base = base % modulus;
+  base %= modulus;
   while exp > 0 {
     if exp % 2 == 1 {
       result = result * base % modulus;
     }
-    exp = exp >> 1;
+    exp >>= 1;
     base = base * base % modulus
   }
   result
@@ -31,7 +31,7 @@ fn parse_input(input: &str) -> (u64, u64) {
     .lines()
     .next()
     .unwrap()
-    .split(",")
+    .split(',')
     .map(|p| p.parse::<u64>().unwrap())
     .collect_tuple()
     .expect("Wrong input")

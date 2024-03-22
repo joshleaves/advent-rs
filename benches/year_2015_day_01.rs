@@ -4,8 +4,8 @@ use std::mem;
 use std::time::Duration;
 
 fn day_01_v1_naive(input: &str) -> i16 {
-  let right: i16 = input.matches("(").count() as i16;
-  let left: i16 = input.matches(")").count() as i16;
+  let right: i16 = input.matches('(').count() as i16;
+  let left: i16 = input.matches(')').count() as i16;
 
   right - left
 }

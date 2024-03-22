@@ -1,9 +1,9 @@
 fn decompressed_size(mut input: &str, deep_decompress: bool) -> usize {
   let mut result: usize = 0;
   while !input.is_empty() {
-    if let Some(next_paren_l) = input.find("(") {
-      let next_paren_r = input.find(")").unwrap();
-      let nums: Vec<_> = input[next_paren_l + 1..next_paren_r].split("x").collect();
+    if let Some(next_paren_l) = input.find('(') {
+      let next_paren_r = input.find(')').unwrap();
+      let nums: Vec<_> = input[next_paren_l + 1..next_paren_r].split('x').collect();
       let (duration, repeat) = (
         nums[0].parse::<usize>().unwrap(),
         nums[1].parse::<usize>().unwrap(),
@@ -27,11 +27,11 @@ fn decompressed_size(mut input: &str, deep_decompress: bool) -> usize {
 }
 
 pub fn day_09_v1(input: impl Into<String>) -> usize {
-  decompressed_size(&mut input.into(), false)
+  decompressed_size(&input.into(), false)
 }
 
 pub fn day_09_v2(input: impl Into<String>) -> usize {
-  decompressed_size(&mut input.into(), true)
+  decompressed_size(&input.into(), true)
 }
 
 solvable!(day_09, day_09_v1, day_09_v2, usize);

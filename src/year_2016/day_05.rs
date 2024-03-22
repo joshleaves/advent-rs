@@ -38,8 +38,8 @@ pub fn day_05_v2(input: impl Into<String>) -> String {
     if hash[..2] == [0, 0] && hash[2] <= 15 {
       let pos = hash[2] as usize;
       let value = (hash[3] / 16) as usize;
-      if pos < 8 && result[pos as usize] == '_' {
-        result[pos as usize] = HEX_TABLE[value as usize];
+      if pos < 8 && result[pos] == '_' {
+        result[pos] = HEX_TABLE[value];
         added += 1;
         if added == 8 {
           return result.iter().collect::<String>();

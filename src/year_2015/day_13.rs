@@ -7,7 +7,7 @@ fn sort_tuple(lhp: u8, rhp: u8) -> (u8, u8) {
   if lhp < rhp {
     return (lhp, rhp);
   }
-  return (rhp, lhp);
+  (rhp, lhp)
 }
 
 fn parse_line(input: &str) -> ((String, String), i16) {
@@ -28,7 +28,7 @@ fn parse_input(input: &str) -> (Vec<u8>, HashMap<(u8, u8), i16>) {
   let mut users: HashMap<String, u8> = HashMap::new();
   let mut paths: HashMap<(u8, u8), i16> = HashMap::new();
 
-  fn get_id_for_user<'a>(users: &mut HashMap<String, u8>, user: String) -> u8 {
+  fn get_id_for_user(users: &mut HashMap<String, u8>, user: String) -> u8 {
     match users.get(&user) {
       Some(user_id) => *user_id,
       None => {
@@ -63,7 +63,7 @@ fn parse_input(input: &str) -> (Vec<u8>, HashMap<(u8, u8), i16>) {
 fn remove_user_id_from_vec(users: Vec<u8>, needle: &u8) -> Vec<u8> {
   let mut new_vec = users.clone();
   new_vec.retain(|elt| elt != needle);
-  return new_vec;
+  new_vec
 }
 
 fn calculate_happiness(
@@ -89,7 +89,7 @@ fn calculate_happiness(
   for user_id in friends_left.iter() {
     let friends_left = remove_user_id_from_vec(friends_left.clone(), user_id);
     let add_hap = cur_hap + get_happiness(paths, current_friend, user_id);
-    let nex_hap = calculate_happiness(&paths, user_id, friends_left, add_hap);
+    let nex_hap = calculate_happiness(paths, user_id, friends_left, add_hap);
     best_happiness = std::cmp::max(best_happiness, nex_hap);
   }
   best_happiness

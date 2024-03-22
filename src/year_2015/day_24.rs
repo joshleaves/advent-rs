@@ -2,7 +2,7 @@
 
 use itertools::Itertools;
 
-fn solve(numbers: &Vec<u64>, magic: u64) -> u64 {
+fn solve(numbers: &[u64], magic: u64) -> u64 {
   let mut combos: Vec<Vec<&u64>> = vec![];
   for i in 1..=numbers.len() {
     let mut results: Vec<Vec<&u64>> = numbers.iter().combinations(i).collect_vec();
@@ -10,7 +10,7 @@ fn solve(numbers: &Vec<u64>, magic: u64) -> u64 {
     if results.is_empty() {
       continue;
     }
-    if results.len() > 0 {
+    if !results.is_empty() {
       combos = results;
       break;
     }

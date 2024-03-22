@@ -4,7 +4,7 @@ fn cell_is_wall(favorite: usize, position: (usize, usize)) -> bool {
   let x = position.0;
   let y = position.1;
   let value = x * x + 3 * x + 2 * x * y + y + y * y + favorite;
-  return value.count_ones() % 2 == 1;
+  value.count_ones() % 2 == 1
 }
 
 fn next_moves(favorite: usize, position: (usize, usize)) -> Vec<(usize, usize)> {
@@ -27,7 +27,7 @@ fn next_moves(favorite: usize, position: (usize, usize)) -> Vec<(usize, usize)> 
 
 pub fn day_13_v1(input: impl Into<String>) -> u8 {
   let binding = input.into();
-  let input_parts: Vec<_> = binding.trim_end().split(",").collect();
+  let input_parts: Vec<_> = binding.trim_end().split(',').collect();
   let favorite = input_parts[0].parse::<usize>().unwrap();
   let reach_x = input_parts[1].parse::<usize>().unwrap();
   let reach_y = input_parts[2].parse::<usize>().unwrap();
@@ -39,7 +39,7 @@ pub fn day_13_v1(input: impl Into<String>) -> u8 {
 
 pub fn day_13_v2(input: impl Into<String>) -> u8 {
   let binding = input.into();
-  let input_parts: Vec<_> = binding.split(",").collect();
+  let input_parts: Vec<_> = binding.split(',').collect();
   let favorite = input_parts[0].parse::<usize>().unwrap();
   let mut bfs = BreadthFirstSearch::new((1, 1), |position| next_moves(favorite, position));
   bfs.traverse_until_depth(50);

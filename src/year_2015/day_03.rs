@@ -34,27 +34,27 @@
 
 use std::collections::HashSet;
 
-fn move_character(pos: (i8, i8), direction: char) -> (i8, i8) {
-  let mut newpos = pos.clone();
+#[inline]
+fn move_character(mut pos: (i8, i8), direction: char) -> (i8, i8) {
   match direction {
-    '>' => newpos.0 += 1,
-    '<' => newpos.0 -= 1,
-    'v' => newpos.1 += 1,
-    '^' => newpos.1 -= 1,
+    '>' => pos.0 += 1,
+    '<' => pos.0 -= 1,
+    'v' => pos.1 += 1,
+    '^' => pos.1 -= 1,
     _ => panic!("Invalid direction character: {direction}"),
   }
-  newpos
+  pos
 }
 
 pub fn day_03_v1(input: impl Into<String>) -> usize {
   let mut santa: (i8, i8) = (0, 0);
   let mut houses = HashSet::from([santa]);
 
-  for (_idx, chr) in input.into().chars().enumerate() {
+  for chr in input.into().chars() {
     santa = move_character(santa, chr);
     houses.insert(santa);
   }
-  return houses.len() as usize;
+  houses.len()
 }
 
 pub fn day_03_v2(input: impl Into<String>) -> usize {
@@ -69,7 +69,7 @@ pub fn day_03_v2(input: impl Into<String>) -> usize {
     houses.insert(santa);
     houses.insert(robot);
   }
-  return houses.len() as usize;
+  houses.len()
 }
 
 solvable!(day_03, day_03_v1, day_03_v2, usize);

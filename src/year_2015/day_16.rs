@@ -81,7 +81,7 @@ pub fn day_16_v1(input: impl Into<String>) -> usize {
     index += 1;
     if compare_aunts(
       &ticker_tape,
-      &aunt,
+      aunt,
       &|ticker_value, aunt_value| ticker_value == aunt_value,
       &|ticker_value, aunt_value| ticker_value == aunt_value,
     ) {

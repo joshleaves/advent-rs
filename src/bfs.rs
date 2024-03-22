@@ -22,12 +22,12 @@ where
 {
   pub fn new(starting: POS, next_moves: NM) -> Self {
     BreadthFirstSearch {
-      starting: starting,
+      starting,
       ending: None,
       queue: VecDeque::new(),
       visited: HashSet::new(),
       depth: 0,
-      next_moves: next_moves,
+      next_moves,
     }
   }
 

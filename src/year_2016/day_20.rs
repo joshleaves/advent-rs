@@ -5,7 +5,7 @@ fn parse_ranges(input: &str) -> Vec<(u32, u32)> {
     .lines()
     .map(|line| {
       line
-        .split("-")
+        .split('-')
         .map(|part| part.parse::<u32>().unwrap())
         .collect_tuple()
         .unwrap()

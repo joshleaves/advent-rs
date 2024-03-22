@@ -53,7 +53,7 @@ impl Assembunny {
   }
 
   fn execute(&mut self) -> Option<Value> {
-    match &self.instructions[self.pc as usize] {
+    match &self.instructions[self.pc] {
       Instruction::Copy(vor, register) => {
         self.registers[*register as usize] = self.value_of(*vor);
         self.pc += 1;
@@ -91,7 +91,7 @@ impl Assembunny {
             ValueOrRegister::Register(register) => Instruction::Copy(vor, register),
             _ => Instruction::Nop(),
           },
-          Instruction::Toggle(offset) => Instruction::Increment(offset as u8),
+          Instruction::Toggle(offset) => Instruction::Increment(offset),
           Instruction::Out(vor) => match vor {
             ValueOrRegister::Register(register) => Instruction::Increment(register),
             _ => Instruction::Nop(),
@@ -111,14 +111,14 @@ impl Assembunny {
   }
 
   pub fn run(&mut self) {
-    while (self.pc as usize) < self.instructions.len() {
+    while self.pc < self.instructions.len() {
       self.execute();
     }
   }
 
   pub fn output(&mut self) -> bool {
     let mut output: Vec<bool> = Vec::from([true]);
-    while (self.pc as usize) < self.instructions.len() {
+    while self.pc < self.instructions.len() {
       if output.len() >= 10 {
         return true;
       }
@@ -147,7 +147,7 @@ impl Assembunny {
   pub fn from_input(input: &str) -> Self {
     let mut instructions: Vec<Instruction> = vec![];
     for line in input.lines() {
-      let parts: Vec<&str> = line.split(" ").collect();
+      let parts: Vec<&str> = line.split(' ').collect();
       match parts[0] {
         // cpy x y copies x (either an integer or the value of a register) into register y.
         "cpy" => {
@@ -187,7 +187,7 @@ impl Assembunny {
     Assembunny {
       pc: 0,
       registers: [0; 4],
-      instructions: instructions,
+      instructions,
     }
   }
 

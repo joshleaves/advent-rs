@@ -16,17 +16,17 @@ impl Node {
     let x = id_parts[0][1..].parse::<u8>().unwrap();
     let y = id_parts[1][1..].parse::<u8>().unwrap();
     let size = parts[1]
-      .strip_suffix("T")
+      .strip_suffix('T')
       .unwrap()
       .parse::<usize>()
       .unwrap();
     let used = parts[2]
-      .strip_suffix("T")
+      .strip_suffix('T')
       .unwrap()
       .parse::<usize>()
       .unwrap();
     let available = parts[3]
-      .strip_suffix("T")
+      .strip_suffix('T')
       .unwrap()
       .parse::<usize>()
       .unwrap();
@@ -45,7 +45,7 @@ fn parse_nodes(input: &str) -> Vec<Node> {
   input
     .lines()
     .filter(|line| line.starts_with('/'))
-    .map(|line| (Node::new(line)))
+    .map(Node::new)
     .collect_vec()
 }
 

@@ -21,11 +21,11 @@ fn memory_line_len(line: &str) -> u16 {
     }
   }
 
-  line_len as u16
+  line_len
 }
 
 fn dumped_line_len(line: &str) -> u16 {
-  let mut line_len = line.len() as u16 + 2 as u16;
+  let mut line_len = line.len() as u16 + 2_u16;
   for chr in line.chars() {
     if chr == '"' || chr == '\\' {
       line_len += 1;
@@ -78,7 +78,7 @@ mod tests {
       (r#""\x27""#, 11),
     ];
     for (sample, result) in sample_one.iter() {
-      assert_eq!(dumped_line_len(*sample), *result);
+      assert_eq!(dumped_line_len(sample), *result);
     }
   }
 

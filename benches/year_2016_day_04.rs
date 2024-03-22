@@ -22,7 +22,7 @@ fn verify_checksum_naive(checksum: &str, input: &str) -> bool {
         *letters_cnt.get(chr).unwrap()
       };
       [
-        cnt_chr as i8 * -1,
+        -(cnt_chr as i8),
         *chr as i8,
       ]
     })
@@ -43,7 +43,7 @@ fn verify_checksum_fast(checksum: &str, input: &str) -> bool {
         input.chars().filter(|in_chr| in_chr == chr).count()
       };
       [
-        cnt_chr as i8 * -1,
+        -(cnt_chr as i8),
         *chr as i8,
       ]
     })

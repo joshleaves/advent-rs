@@ -27,7 +27,7 @@ fn parse_line(input: &str) -> Ingredient {
   }
 }
 
-fn score_recipe<STP>(ingredients: &Vec<Ingredient>, quantities: &[i32], cal: &STP) -> i32
+fn score_recipe<STP>(ingredients: &[Ingredient], quantities: &[i32], cal: &STP) -> i32
 where
   STP: Fn(i32) -> bool,
 {

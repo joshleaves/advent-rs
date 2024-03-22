@@ -20,11 +20,7 @@ const DIVIDERS: [usize; 15] = [
 
 #[inline]
 fn string2bools(input: &str) -> Vec<bool> {
-  input
-    .trim_end()
-    .chars()
-    .map(|c| if c == '1' { true } else { false })
-    .collect_vec()
+  input.trim_end().chars().map(|c| c == '1').collect_vec()
 }
 
 #[inline]
@@ -64,13 +60,13 @@ fn fold4(input: &[bool]) -> bool {
 #[inline]
 fn fold(mut input: Vec<bool>) -> bool {
   while input.len() % 16 == 0 {
-    input = input.chunks(16).map(|chunk| fold16(chunk)).collect_vec();
+    input = input.chunks(16).map(fold16).collect_vec();
   }
   while input.len() % 8 == 0 {
-    input = input.chunks(8).map(|chunk| fold8(chunk)).collect_vec();
+    input = input.chunks(8).map(fold8).collect_vec();
   }
   while input.len() % 4 == 0 {
-    input = input.chunks(4).map(|chunk| fold4(chunk)).collect_vec();
+    input = input.chunks(4).map(fold4).collect_vec();
   }
   if input.len() == 2 {
     return input[0] == input[1];
@@ -96,7 +92,7 @@ fn checksum(mut input: Vec<bool>) -> Vec<bool> {
 }
 
 fn calculate_checksum(input: &str, disk_size: usize) -> String {
-  let mut values = string2bools(&input);
+  let mut values = string2bools(input);
   values = fill_until(values, disk_size);
   values = checksum(values);
 

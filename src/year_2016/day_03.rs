@@ -53,7 +53,7 @@ mod tests {
   #[test]
   fn checks_if_triangle_is_possible() {
     let sample: [u16; 3] = [5, 10, 25];
-    assert_eq!(is_triangle_possible(sample), false);
+    assert!(!is_triangle_possible(sample));
   }
 
   #[test]

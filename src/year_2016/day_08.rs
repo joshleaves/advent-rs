@@ -8,7 +8,7 @@ struct DisplayScreen {
 
 impl DisplayScreen {
   fn new(width: usize, height: usize) -> Self {
-    let lights: Vec<bool> = vec![false; (width * height) as usize];
+    let lights: Vec<bool> = vec![false; width * height];
     DisplayScreen {
       width,
       height,
@@ -38,12 +38,12 @@ impl DisplayScreen {
 
   fn rotate_column(&mut self, column: usize, shift: usize) {
     let mut extract: Vec<bool> = vec![false; self.height];
-    for row in 0..self.height {
-      extract[row] = self.lights[(row * self.width) + column];
+    for (row, extracted) in extract.iter_mut().enumerate() {
+      *extracted = self.lights[(row * self.width) + column];
     }
     extract.rotate_right(shift);
-    for row in 0..self.height {
-      self.lights[(row * self.width) + column] = extract[row];
+    for (row, extracted) in extract.iter().enumerate() {
+      self.lights[(row * self.width) + column] = *extracted;
     }
   }
 
@@ -57,13 +57,13 @@ impl DisplayScreen {
     let parts: Vec<_> = instruction.split_whitespace().collect();
     match parts[0] {
       "rect" => {
-        let pos: Vec<_> = parts[1].split("x").collect();
+        let pos: Vec<_> = parts[1].split('x').collect();
         let width = pos[0].parse::<usize>().unwrap();
         let height = pos[1].parse::<usize>().unwrap();
         self.rect(width, height);
       }
       "rotate" => {
-        let pos: Vec<_> = parts[2].split("=").collect();
+        let pos: Vec<_> = parts[2].split('=').collect();
         let shift = parts[4].parse::<usize>().unwrap();
         if parts[1] == "row" && pos[0] == "y" {
           let row = pos[1].parse::<usize>().unwrap();
@@ -77,7 +77,13 @@ impl DisplayScreen {
     }
   }
 
-  fn to_string(&self) -> String {
+  fn lights_on(&self) -> usize {
+    self.lights.iter().filter(|light| **light).count()
+  }
+}
+
+impl fmt::Display for DisplayScreen {
+  fn fmt(&self, f: &mut fmt::Formatter) -> fmt::Result {
     let mut displaystr: Vec<String> = vec![];
     for row in 0..self.height {
       let idx_from = row * self.width;
@@ -88,17 +94,8 @@ impl DisplayScreen {
         .collect::<String>();
       displaystr.push(rowstr);
     }
-    displaystr.join("\n")
-  }
 
-  fn lights_on(&self) -> usize {
-    self.lights.iter().filter(|light| **light == true).count()
-  }
-}
-
-impl fmt::Display for DisplayScreen {
-  fn fmt(&self, f: &mut fmt::Formatter) -> fmt::Result {
-    write!(f, "{}", self.to_string())
+    write!(f, "{}", displaystr.join("\n"))
   }
 }
 

@@ -91,8 +91,8 @@ pub fn day_14_v1(input: impl Into<String>) -> usize {
       let from = starter + 1 + hash_queue.len();
       let to = from + (starter + 1000) - hash_queue.len();
       hash_queue.append(&mut generate_hashes(hasher.clone(), from, to));
-      for idx in 0..1000 {
-        if got_quintuplet(&hash_queue[idx], triplet) {
+      for hash in hash_queue.iter().take(1000) {
+        if got_quintuplet(hash, triplet) {
           if keys_count == 63 {
             return starter;
           }
@@ -126,8 +126,8 @@ pub fn day_14_v2(input: impl Into<String>) -> usize {
       let from = starter + 1 + hash_queue.len();
       let to = from + (starter + 1000) - hash_queue.len();
       hash_queue.append(&mut generate_hashes_v2(hasher.clone(), from, to));
-      for idx in 0..1000 {
-        if got_quintuplet(&hash_queue[idx], triplet) {
+      for hash in hash_queue.iter().take(1000) {
+        if got_quintuplet(hash, triplet) {
           if keys_count == 63 {
             return starter;
           }

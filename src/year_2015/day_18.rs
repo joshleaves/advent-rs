@@ -1,11 +1,11 @@
 //! Advent of Code 2015: Day 18: Like a GIF For Your Yard
 
-type LIGHT = bool;
-const LIGHT_ON: LIGHT = true;
-const LIGHT_OFF: LIGHT = false;
+type Light = bool;
+const LIGHT_ON: Light = true;
+const LIGHT_OFF: Light = false;
 
 struct GameOfLifeGrid {
-  data: Vec<Vec<LIGHT>>,
+  data: Vec<Vec<Light>>,
   size: usize,
   alive_corner: bool,
 }
@@ -21,7 +21,7 @@ impl GameOfLifeGrid {
   }
 
   fn cell_is_alive(&self, row: usize, line: usize) -> bool {
-    if self.alive_corner == true
+    if self.alive_corner
       && ((row, line) == (0, 0)
         || (row, line) == (self.size - 1, 0)
         || (row, line) == (0, self.size - 1)
@@ -29,14 +29,11 @@ impl GameOfLifeGrid {
     {
       return true;
     }
-    match self.data[row][line] {
-      LIGHT_ON => true,
-      _ => false,
-    }
+    self.data[row][line]
   }
 
   fn cell_will_be_alive(&self, row: usize, line: usize) -> bool {
-    if self.alive_corner == true
+    if self.alive_corner
       && ((row, line) == (0, 0)
         || (row, line) == (self.size - 1, 0)
         || (row, line) == (0, self.size - 1)
@@ -75,17 +72,13 @@ impl GameOfLifeGrid {
       .iter()
       .filter(|(row, line)| self.cell_is_alive(*row, *line))
       .count();
-    match (cell_status, neighbors) {
-      (LIGHT_ON, 2) | (LIGHT_ON, 3) => true,
-      (LIGHT_OFF, 3) => true,
-      _ => false,
-    }
+    matches!((cell_status, neighbors), (LIGHT_ON, 2) | (_, 3))
   }
 
   fn from_grid(old_grid: GameOfLifeGrid) -> Self {
-    let mut data: Vec<Vec<LIGHT>> = vec![];
+    let mut data: Vec<Vec<Light>> = vec![];
     for (x, row) in old_grid.data.iter().enumerate() {
-      let mut data_line: Vec<LIGHT> = vec![];
+      let mut data_line: Vec<Light> = vec![];
       for (y, _cell) in row.iter().enumerate() {
         match old_grid.cell_will_be_alive(x, y) {
           true => data_line.push(LIGHT_ON),
@@ -104,10 +97,10 @@ impl GameOfLifeGrid {
   }
 
   fn from_str(input: &str, alive_corner: bool) -> Self {
-    let mut data: Vec<Vec<LIGHT>> = vec![];
+    let mut data: Vec<Vec<Light>> = vec![];
     let mut size: usize = 0;
     for line in input.lines() {
-      let mut data_line: Vec<LIGHT> = vec![];
+      let mut data_line: Vec<Light> = vec![];
       for chr in line.chars() {
         match chr {
           '#' => data_line.push(LIGHT_ON),
@@ -142,7 +135,7 @@ impl ToString for GameOfLifeGrid {
         .collect::<Vec<&str>>()
         .join("");
       data.push_str(&row_str);
-      data.push_str("\n");
+      data.push('\n');
     }
 
     data

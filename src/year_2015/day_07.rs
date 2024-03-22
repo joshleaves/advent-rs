@@ -18,9 +18,9 @@ struct LogicalGate<'a> {
 
 fn value_of<'a>(gates: &mut HashMap<&'a str, LogicalGate<'a>>, wire: &'a str) -> Option<u32> {
   if let Ok(value) = wire.parse::<u32>() {
-    return Some(value);
+    Some(value)
   } else {
-    return find_value_of_wire(gates, wire);
+    find_value_of_wire(gates, wire)
   }
 }
 
@@ -78,7 +78,7 @@ pub fn day_07_v1(input: impl Into<String>) -> u32 {
   let Some(result) = value_of(&mut gates, "a") else {
     panic!("Invalid result");
   };
-  return result;
+  result
 }
 
 pub fn day_07_v2(input: impl Into<String>) -> u32 {
@@ -98,7 +98,7 @@ pub fn day_07_v2(input: impl Into<String>) -> u32 {
   let Some(result) = value_of(&mut gates, "a") else {
     panic!("Invalid result");
   };
-  return result;
+  result
 }
 
 solvable!(day_07, day_07_v1, day_07_v2, u32);

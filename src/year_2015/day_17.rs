@@ -38,7 +38,7 @@ fn build_combinations(
   solutions
 }
 
-fn build_solutions(liters: usize, containers: &Vec<usize>) -> Vec<Vec<usize>> {
+fn build_solutions(liters: usize, containers: &[usize]) -> Vec<Vec<usize>> {
   let mut solutions: Vec<Vec<usize>> = vec![];
   let mut start: usize = 0;
   loop {

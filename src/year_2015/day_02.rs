@@ -65,7 +65,7 @@ impl FromStr for PresentBox {
   type Err = std::num::ParseIntError;
 
   fn from_str(input: &str) -> Result<Self, Self::Err> {
-    let num_str: Vec<&str> = input.split("x").collect();
+    let num_str: Vec<&str> = input.split('x').collect();
     let mut num_int: [u8; 3] = [
       num_str[0].parse::<u8>().unwrap(),
       num_str[1].parse::<u8>().unwrap(),
@@ -84,9 +84,8 @@ impl FromStr for PresentBox {
 pub fn day_02_v1(input: impl Into<String>) -> u32 {
   let mut total: u32 = 0;
   for line in input.into().lines() {
-    match PresentBox::from_str(line) {
-      Ok(present) => total += present.wrapper() as u32,
-      Err(_) => {}
+    if let Ok(present) = PresentBox::from_str(line) {
+      total += present.wrapper() as u32
     }
   }
   total
@@ -95,9 +94,8 @@ pub fn day_02_v1(input: impl Into<String>) -> u32 {
 pub fn day_02_v2(input: impl Into<String>) -> u32 {
   let mut total: u32 = 0;
   for line in input.into().lines() {
-    match PresentBox::from_str(line) {
-      Ok(present) => total += present.ribbon() as u32,
-      Err(_) => {}
+    if let Ok(present) = PresentBox::from_str(line) {
+      total += present.ribbon() as u32
     }
   }
   total

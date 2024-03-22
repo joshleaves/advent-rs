@@ -15,7 +15,7 @@ fn id_for_city<'a>(cities: &mut HashMap<&'a str, u8>, city: &'a str) -> u8 {
   };
 }
 
-fn parse_input<'a>(input: &str) -> (Vec<u8>, HashMap<(u8, u8), u16>) {
+fn parse_input(input: &str) -> (Vec<u8>, HashMap<(u8, u8), u16>) {
   let mut cities: HashMap<&str, u8> = HashMap::new();
   let mut paths: HashMap<(u8, u8), u16> = HashMap::new();
 
@@ -35,10 +35,10 @@ fn parse_input<'a>(input: &str) -> (Vec<u8>, HashMap<(u8, u8), u16>) {
   (cities_ids, paths)
 }
 
-fn next_cities_ids<'a>(input: &Vec<u8>, needle: &u8) -> Vec<u8> {
-  let mut new_vec = input.clone();
+fn next_cities_ids(input: &[u8], needle: &u8) -> Vec<u8> {
+  let mut new_vec = input.to_owned();
   new_vec.retain(|&elt| elt != *needle);
-  return new_vec;
+  new_vec
 }
 
 fn try_best_path<'a, STP, CMP>(
@@ -65,7 +65,7 @@ where
     };
     let next_path = current_path + new_path;
     let new_best = try_best_path(
-      &paths,
+      paths,
       city_id,
       next_cities_ids(&cities, city_id),
       stopper_func,
@@ -78,7 +78,7 @@ where
   best_path
 }
 
-pub fn day_09_v1<'a>(input: impl Into<String>) -> u16 {
+pub fn day_09_v1(input: impl Into<String>) -> u16 {
   let (cities_ids, paths) = parse_input(&input.into());
   let mut best_path = u16::MAX;
   for city_id in cities_ids.iter() {
@@ -96,7 +96,7 @@ pub fn day_09_v1<'a>(input: impl Into<String>) -> u16 {
   best_path
 }
 
-pub fn day_09_v2<'a>(input: impl Into<String>) -> u16 {
+pub fn day_09_v2(input: impl Into<String>) -> u16 {
   let (cities_ids, paths) = parse_input(&input.into());
   let mut best_path = 0;
   for city_id in cities_ids.iter() {

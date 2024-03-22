@@ -18,7 +18,7 @@ fn string_is_nice_v1_contains(input: &str) -> bool {
     elt
   });
 
-  return repeated && vowels >= 3;
+  repeated && vowels >= 3
 }
 
 fn day_05_v1_contains(input: &str) -> u32 {

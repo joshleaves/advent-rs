@@ -21,13 +21,13 @@ fn parse_input(input: &str) -> (HashMap<String, Vec<String>>, String) {
       continue;
     }
     let (from, to) = parse_molecules(line);
-    molecules.entry(from).or_insert_with(Vec::new).push(to);
+    molecules.entry(from).or_default().push(to);
   }
 
   (molecules, starter)
 }
 
-fn do_permutations(starter: &str, input: &str, replacements: &Vec<String>) -> HashSet<String> {
+fn do_permutations(starter: &str, input: &str, replacements: &[String]) -> HashSet<String> {
   let mut permutations: HashSet<String> = HashSet::new();
   for (idx, _) in starter.match_indices(input) {
     for replacement in replacements.iter() {
@@ -47,7 +47,7 @@ fn do_permutations(starter: &str, input: &str, replacements: &Vec<String>) -> Ha
 fn calculate_permutations(molecules: &HashMap<String, Vec<String>>, starter: &str) -> usize {
   let mut permutations: HashSet<String> = HashSet::new();
   for (molecule, replacements) in molecules {
-    let new_permutations = do_permutations(&starter, &molecule, &replacements);
+    let new_permutations = do_permutations(starter, molecule, replacements);
     permutations.extend(new_permutations);
   }
   permutations.len()

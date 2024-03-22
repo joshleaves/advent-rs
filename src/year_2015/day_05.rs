@@ -63,9 +63,9 @@ fn string_is_nice_v1(input: &str) -> bool {
     if elt == 'a' || elt == 'e' || elt == 'i' || elt == 'o' || elt == 'u' {
       vowels += 1
     }
-    return Ok(elt);
+    Ok(elt)
   });
-  return no_naughty_sequences != Err('-') && repeated && vowels >= 3;
+  no_naughty_sequences != Err('-') && repeated && vowels >= 3
 }
 
 fn string_is_nice_v2(input: &str) -> bool {
@@ -85,7 +85,7 @@ fn string_is_nice_v2(input: &str) -> bool {
       }
     }
   }
-  return twice_pair && repeated;
+  twice_pair && repeated
 }
 
 pub fn day_05_v1(input: impl Into<String>) -> usize {
@@ -93,7 +93,7 @@ pub fn day_05_v1(input: impl Into<String>) -> usize {
   return input_str
     .lines()
     .filter(|line| string_is_nice_v1(line))
-    .count() as usize;
+    .count();
 }
 
 pub fn day_05_v2(input: impl Into<String>) -> usize {
@@ -101,7 +101,7 @@ pub fn day_05_v2(input: impl Into<String>) -> usize {
   return input_str
     .lines()
     .filter(|line| string_is_nice_v2(line))
-    .count() as usize;
+    .count();
 }
 
 solvable!(day_05, day_05_v1, day_05_v2, usize);
@@ -120,7 +120,7 @@ mod tests {
       ("dvszwmarrgswjxmb", false),
     ];
     for (sample, result) in sample_one.iter() {
-      assert_eq!(string_is_nice_v1(*sample), *result);
+      assert_eq!(string_is_nice_v1(sample), *result);
     }
   }
 
@@ -133,7 +133,7 @@ mod tests {
       ("ieodomkazucvgmuy", false),
     ];
     for (sample, result) in sample_two.iter() {
-      assert_eq!(string_is_nice_v2(*sample), *result);
+      assert_eq!(string_is_nice_v2(sample), *result);
     }
   }
 

@@ -124,7 +124,7 @@ impl Character {
     let armor: u8 = equipment.iter().map(|s| s.armor).sum();
 
     (
-      cost as usize,
+      cost,
       Character {
         hit_points,
         damage,
@@ -228,6 +228,6 @@ mod tests {
   fn wins_the_fight_with_samples_v1() {
     let sample_boss = Character::from_string("Hit Points: 12\nDamage: 7\nArmor: 2");
     let sample_player = Character::from_string("Hit Points: 8\nDamage: 5\nArmor: 5");
-    assert_eq!(simulate_battle(&sample_player, &sample_boss), true);
+    assert!(simulate_battle(&sample_player, &sample_boss));
   }
 }

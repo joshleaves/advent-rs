@@ -41,13 +41,13 @@ fn loop_until_hash(input: &str, stop_value: u8) -> u32 {
 pub fn day_04_v1(input: impl Into<String>) -> u32 {
   let input_str = input.into();
   let clean_str = input_str.trim_end();
-  return loop_until_hash(clean_str, 15);
+  loop_until_hash(clean_str, 15)
 }
 
 pub fn day_04_v2(input: impl Into<String>) -> u32 {
   let input_str = input.into();
   let clean_str = input_str.trim_end();
-  return loop_until_hash(clean_str, 0);
+  loop_until_hash(clean_str, 0)
 }
 
 solvable!(day_04, day_04_v1, day_04_v2, u32);

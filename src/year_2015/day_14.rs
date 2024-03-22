@@ -56,9 +56,9 @@ fn parse_line(input: &str) -> Reindeer {
   let rest: u16 = captures[3].parse::<u16>().unwrap();
 
   Reindeer {
-    speed: speed,
-    length: length,
-    rest: rest,
+    speed,
+    length,
+    rest,
     curpos: 0,
     state: ReindeerState::Running,
     progress: 0,
@@ -66,7 +66,7 @@ fn parse_line(input: &str) -> Reindeer {
   }
 }
 
-fn race(reindeers: &mut Vec<Reindeer>, duration: u16) {
+fn race(reindeers: &mut [Reindeer], duration: u16) {
   for _i in 0..=duration {
     let mut pole_position = 0;
     for deer in reindeers.iter_mut() {

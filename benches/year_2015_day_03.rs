@@ -4,16 +4,15 @@ use std::collections::BTreeSet;
 use std::time::Duration;
 
 #[inline]
-fn move_character(pos: (i8, i8), direction: char) -> (i8, i8) {
-  let mut newpos = pos.clone();
+fn move_character(mut pos: (i8, i8), direction: char) -> (i8, i8) {
   match direction {
-    '>' => newpos.0 += 1,
-    '<' => newpos.0 -= 1,
-    'v' => newpos.1 += 1,
-    '^' => newpos.1 -= 1,
+    '>' => pos.0 += 1,
+    '<' => pos.0 -= 1,
+    'v' => pos.1 += 1,
+    '^' => pos.1 -= 1,
     _ => panic!("Invalid direction character: {direction}"),
   }
-  newpos
+  pos
 }
 
 fn day_03_v1_bset(input: &str) -> usize {
@@ -24,7 +23,7 @@ fn day_03_v1_bset(input: &str) -> usize {
     santa = move_character(santa, chr);
     houses.insert(santa);
   }
-  return houses.len() as usize;
+  houses.len()
 }
 
 fn day_03_v2_bset(input: &str) -> usize {
@@ -39,7 +38,7 @@ fn day_03_v2_bset(input: &str) -> usize {
     houses.insert(santa);
     houses.insert(robot);
   }
-  return houses.len() as usize;
+  houses.len()
 }
 
 fn bench_year_2015_day_03_sets(c: &mut Criterion) {
