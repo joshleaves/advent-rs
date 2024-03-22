@@ -16,7 +16,7 @@ impl ValueOrRegister {
   }
 }
 
-#[derive(Debug)]
+#[derive(Debug, Clone)]
 enum Instruction {
   // cpy x y copies x (either an integer or the value of a register) into register y.
   Copy(ValueOrRegister, Register),
@@ -28,6 +28,8 @@ enum Instruction {
   JumpNotZero(ValueOrRegister, ValueOrRegister),
   // tgl x toggles the instruction x away (pointing at instructions like jnz does: positive means forward; negative means backward):
   Toggle(Register),
+  // out x transmits x (either an integer or the value of a register) as the next value for the clock signal.
+  Out(ValueOrRegister),
   Nop(),
 }
 
@@ -50,54 +52,86 @@ impl Assembunny {
     self.registers[reg_id as usize] = value;
   }
 
+  fn execute(&mut self) -> Option<Value> {
+    match &self.instructions[self.pc as usize] {
+      Instruction::Copy(vor, register) => {
+        self.registers[*register as usize] = self.value_of(*vor);
+        self.pc += 1;
+      }
+      Instruction::Increment(register) => {
+        self.registers[*register as usize] += 1;
+        self.pc += 1;
+      }
+      Instruction::Decrement(register) => {
+        self.registers[*register as usize] -= 1;
+        self.pc += 1;
+      }
+      Instruction::JumpNotZero(vor, offset) => {
+        let value = self.value_of(*vor);
+        let offset = self.value_of(*offset);
+        if value != 0 {
+          self.pc = ((self.pc as i64) + offset) as usize;
+        } else {
+          self.pc += 1;
+        }
+      }
+      Instruction::Toggle(register) => {
+        let target = (self.pc as Value + self.registers[*register as usize]) as usize;
+        if target >= self.instructions.len() {
+          self.pc += 1;
+          return None;
+        }
+        self.instructions[target] = match self.instructions[target] {
+          Instruction::Copy(vor, register) => {
+            Instruction::JumpNotZero(vor, ValueOrRegister::Register(register))
+          }
+          Instruction::Increment(register) => Instruction::Decrement(register),
+          Instruction::Decrement(register) => Instruction::Increment(register),
+          Instruction::JumpNotZero(vor, offset) => match offset {
+            ValueOrRegister::Register(register) => Instruction::Copy(vor, register),
+            _ => Instruction::Nop(),
+          },
+          Instruction::Toggle(offset) => Instruction::Increment(offset as u8),
+          Instruction::Out(vor) => match vor {
+            ValueOrRegister::Register(register) => Instruction::Increment(register),
+            _ => Instruction::Nop(),
+          },
+          Instruction::Nop() => Instruction::Nop(),
+        };
+        self.pc += 1;
+      }
+      Instruction::Out(vor) => {
+        let value = self.value_of(*vor);
+        self.pc += 1;
+        return Some(value);
+      }
+      Instruction::Nop() => {}
+    }
+    None
+  }
+
   pub fn run(&mut self) {
     while (self.pc as usize) < self.instructions.len() {
-      match &self.instructions[self.pc as usize] {
-        Instruction::Copy(vor, register) => {
-          self.registers[*register as usize] = self.value_of(*vor);
-          self.pc += 1;
+      self.execute();
+    }
+  }
+
+  pub fn output(&mut self) -> bool {
+    let mut output: Vec<bool> = Vec::from([true]);
+    while (self.pc as usize) < self.instructions.len() {
+      if output.len() >= 10 {
+        return true;
+      }
+      if let Some(signal) = self.execute() {
+        let last_signal = output.last().unwrap();
+        match (signal, last_signal) {
+          (0, true) => output.push(false),
+          (1, false) => output.push(true),
+          _ => return false,
         }
-        Instruction::Increment(register) => {
-          self.registers[*register as usize] += 1;
-          self.pc += 1;
-        }
-        Instruction::Decrement(register) => {
-          self.registers[*register as usize] -= 1;
-          self.pc += 1;
-        }
-        Instruction::JumpNotZero(vor, offset) => {
-          let value = self.value_of(*vor);
-          let offset = self.value_of(*offset);
-          if value != 0 {
-            self.pc = ((self.pc as i64) + offset) as usize;
-          } else {
-            self.pc += 1;
-          }
-        }
-        Instruction::Toggle(register) => {
-          let target = (self.pc as Value + self.registers[*register as usize]) as usize;
-          if target >= self.instructions.len() {
-            self.pc += 1;
-            continue;
-          }
-          self.instructions[target] = match self.instructions[target] {
-            Instruction::Copy(vor, register) => {
-              Instruction::JumpNotZero(vor, ValueOrRegister::Register(register))
-            }
-            Instruction::Increment(register) => Instruction::Decrement(register),
-            Instruction::Decrement(register) => Instruction::Increment(register),
-            Instruction::JumpNotZero(vor, offset) => match offset {
-              ValueOrRegister::Register(register) => Instruction::Copy(vor, register),
-              _ => Instruction::Nop(),
-            },
-            Instruction::Toggle(offset) => Instruction::Increment(offset as u8),
-            Instruction::Nop() => Instruction::Nop(),
-          };
-          self.pc += 1;
-        }
-        Instruction::Nop() => {}
       }
     }
+    false
   }
 
   fn register(register: &str) -> u8 {
@@ -142,6 +176,11 @@ impl Assembunny {
           let register = Self::register(parts[1]);
           instructions.push(Instruction::Toggle(register));
         }
+        // out x transmits x (either an integer or the value of a register) as the next value for the clock signal.
+        "out" => {
+          let vor = ValueOrRegister::parse(parts[1]);
+          instructions.push(Instruction::Out(vor));
+        }
         _ => panic!("Invalid instruction: {}", line),
       }
     }
@@ -150,5 +189,11 @@ impl Assembunny {
       registers: [0; 4],
       instructions: instructions,
     }
+  }
+
+  pub fn reset(&mut self) -> &mut Self {
+    self.pc = 0;
+    self.registers = [0; 4];
+    self
   }
 }

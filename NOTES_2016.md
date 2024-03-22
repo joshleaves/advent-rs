@@ -110,3 +110,7 @@ I had forgotten [the original was taking ten minutes to run](https://github.com/
 ## Day 24: Air Duct Spelunking
 
 Look, [BreadthFirstSearch library](src/bfs.rs) is coming to our rescue again!
+
+## Day 25: Clock Signal
+
+The [Assembunny](src/year_2016/assembunny.rs) library proved very useful too \o/
