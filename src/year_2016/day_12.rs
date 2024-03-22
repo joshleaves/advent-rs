@@ -1,12 +1,12 @@
 use super::assembunny::Assembunny;
 
-pub fn day_12_v1(input: impl Into<String>) -> u64 {
+pub fn day_12_v1(input: impl Into<String>) -> i64 {
   let mut bunny: Assembunny = Assembunny::from_input(&input.into());
   bunny.run();
 
   bunny.registers[0]
 }
-pub fn day_12_v2(input: impl Into<String>) -> u64 {
+pub fn day_12_v2(input: impl Into<String>) -> i64 {
   let mut bunny: Assembunny = Assembunny::from_input(&input.into());
   bunny.set_register("c", 1);
   bunny.run();
@@ -14,7 +14,7 @@ pub fn day_12_v2(input: impl Into<String>) -> u64 {
   bunny.registers[0]
 }
 
-solvable!(day_12, day_12_v1, day_12_v2, u64);
+solvable!(day_12, day_12_v1, day_12_v2, i64);
 
 #[cfg(test)]
 mod tests {

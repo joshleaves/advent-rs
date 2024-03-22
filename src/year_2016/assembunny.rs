@@ -1,4 +1,4 @@
-type Value = u64;
+type Value = i64;
 type Register = u8;
 
 #[derive(Debug, Copy, Clone)]
@@ -25,24 +25,27 @@ enum Instruction {
   // dec x decreases the value of register x by one.
   Decrement(Register),
   // jnz x y jumps to an instruction y away (positive means forward; negative means backward), but only if x is not zero.
-  JumpNotZero(ValueOrRegister, i8),
+  JumpNotZero(ValueOrRegister, ValueOrRegister),
+  // tgl x toggles the instruction x away (pointing at instructions like jnz does: positive means forward; negative means backward):
+  Toggle(Register),
+  Nop(),
 }
 
 pub struct Assembunny {
   pc: usize,
-  pub registers: [u64; 4],
+  pub registers: [Value; 4],
   instructions: Vec<Instruction>,
 }
 
 impl Assembunny {
-  const fn value_of(&self, item: ValueOrRegister) -> u64 {
+  const fn value_of(&self, item: ValueOrRegister) -> Value {
     match item {
       ValueOrRegister::Value(value) => value,
       ValueOrRegister::Register(register_id) => self.registers[register_id as usize],
     }
   }
 
-  pub fn set_register(&mut self, register: &str, value: u64) {
+  pub fn set_register(&mut self, register: &str, value: Value) {
     let reg_id = Self::register(register);
     self.registers[reg_id as usize] = value;
   }
@@ -64,12 +67,35 @@ impl Assembunny {
         }
         Instruction::JumpNotZero(vor, offset) => {
           let value = self.value_of(*vor);
+          let offset = self.value_of(*offset);
           if value != 0 {
-            self.pc = ((self.pc as i8) + offset) as usize;
+            self.pc = ((self.pc as i64) + offset) as usize;
           } else {
             self.pc += 1;
           }
         }
+        Instruction::Toggle(register) => {
+          let target = (self.pc as Value + self.registers[*register as usize]) as usize;
+          if target >= self.instructions.len() {
+            self.pc += 1;
+            continue;
+          }
+          self.instructions[target] = match self.instructions[target] {
+            Instruction::Copy(vor, register) => {
+              Instruction::JumpNotZero(vor, ValueOrRegister::Register(register))
+            }
+            Instruction::Increment(register) => Instruction::Decrement(register),
+            Instruction::Decrement(register) => Instruction::Increment(register),
+            Instruction::JumpNotZero(vor, offset) => match offset {
+              ValueOrRegister::Register(register) => Instruction::Copy(vor, register),
+              _ => Instruction::Nop(),
+            },
+            Instruction::Toggle(offset) => Instruction::Increment(offset as u8),
+            Instruction::Nop() => Instruction::Nop(),
+          };
+          self.pc += 1;
+        }
+        Instruction::Nop() => {}
       }
     }
   }
@@ -108,15 +134,20 @@ impl Assembunny {
         // jnz x y jumps to an instruction y away (positive means forward; negative means backward), but only if x is not zero.
         "jnz" => {
           let vor = ValueOrRegister::parse(parts[1]);
-          let offset = parts[2].parse::<i8>().unwrap();
+          let offset = ValueOrRegister::parse(parts[2]);
           instructions.push(Instruction::JumpNotZero(vor, offset));
+        }
+        // tgl x toggles the instruction x away (pointing at instructions like jnz does: positive means forward; negative means backward):
+        "tgl" => {
+          let register = Self::register(parts[1]);
+          instructions.push(Instruction::Toggle(register));
         }
         _ => panic!("Invalid instruction: {}", line),
       }
     }
     Assembunny {
       pc: 0,
-      registers: [0u64; 4],
+      registers: [0; 4],
       instructions: instructions,
     }
   }
