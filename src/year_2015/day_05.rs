@@ -71,7 +71,7 @@ fn string_is_nice_v1(input: &str) -> bool {
 fn string_is_nice_v2(input: &str) -> bool {
   let mut twice_pair = false;
   let mut repeated = false;
-  let letters: Vec<_> = input.chars().collect();
+  let letters: Vec<_> = input.as_bytes().to_vec();
   for i in 0..(input.len() - 2) {
     if letters[i] == letters[i + 2] {
       repeated = true;
@@ -89,19 +89,19 @@ fn string_is_nice_v2(input: &str) -> bool {
 }
 
 pub fn day_05_v1(input: impl Into<String>) -> usize {
-  let input_str = input.into();
-  return input_str
+  input
+    .into()
     .lines()
     .filter(|line| string_is_nice_v1(line))
-    .count();
+    .count()
 }
 
 pub fn day_05_v2(input: impl Into<String>) -> usize {
-  let input_str = input.into();
-  return input_str
+  input
+    .into()
     .lines()
     .filter(|line| string_is_nice_v2(line))
-    .count();
+    .count()
 }
 
 solvable!(day_05, day_05_v1, day_05_v2, usize);

@@ -89,10 +89,10 @@
 /// ```
 pub fn day_01_v1(input: impl Into<String>) -> i16 {
   let mut lvl: i16 = 0;
-  for chr in input.into().chars() {
+  for chr in input.into().bytes() {
     match chr {
-      '(' => lvl += 1,
-      ')' => lvl -= 1,
+      b'(' => lvl += 1,
+      b')' => lvl -= 1,
       _ => panic!("Invalid character: {}", chr),
     }
   }
@@ -135,10 +135,10 @@ pub fn day_01_v1(input: impl Into<String>) -> i16 {
 /// ```
 pub fn day_01_v2(input: impl Into<String>) -> i16 {
   let mut lvl: i16 = 0;
-  for (idx, chr) in input.into().chars().enumerate() {
+  for (idx, chr) in input.into().bytes().enumerate() {
     match chr {
-      '(' => lvl += 1,
-      ')' => lvl -= 1,
+      b'(' => lvl += 1,
+      b')' => lvl -= 1,
       _ => panic!("Invalid character: {}", chr),
     }
     if lvl < 0 {

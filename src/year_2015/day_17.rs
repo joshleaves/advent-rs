@@ -2,18 +2,6 @@
 
 const EGGNOG_LITERS: usize = 150;
 
-fn parse_file(input: String) -> Vec<usize> {
-  let mut inputs: Vec<usize> = vec![];
-  for line in input.lines() {
-    let Ok(value) = line.parse::<usize>() else {
-      panic!("Invalid number: {}", line)
-    };
-    inputs.push(value);
-  }
-
-  inputs
-}
-
 fn build_combinations(
   liters: usize,
   containers_left: Vec<usize>,
@@ -55,7 +43,11 @@ fn build_solutions(liters: usize, containers: &[usize]) -> Vec<Vec<usize>> {
 
 /// Solve exercise for year 2015, day 17 (part 1).
 pub fn day_17_v1(input: impl Into<String>) -> usize {
-  let containers: Vec<usize> = parse_file(input.into());
+  let containers: Vec<usize> = input
+    .into()
+    .lines()
+    .map(|line| line.parse::<usize>().unwrap())
+    .collect();
   let solutions = build_solutions(EGGNOG_LITERS, &containers);
 
   solutions.len()
@@ -63,7 +55,12 @@ pub fn day_17_v1(input: impl Into<String>) -> usize {
 
 /// Solve exercise for year 2015, day 17 (part 2).
 pub fn day_17_v2(input: impl Into<String>) -> usize {
-  let containers: Vec<usize> = parse_file(input.into());
+  let containers: Vec<usize> = input
+    .into()
+    .lines()
+    .map(|line| line.parse::<usize>().unwrap())
+    .collect();
+  // let containers: Vec<usize> = parse_file(input.into());
   let mut solutions = build_solutions(EGGNOG_LITERS, &containers);
   let Some(min_solution) = solutions.iter().map(|s| s.len()).min() else {
     panic!("No minimum size: {:?}", solutions)

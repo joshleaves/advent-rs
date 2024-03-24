@@ -1,11 +1,7 @@
 //! Advent of Code 2015: Day 19: Medicine for Rudolph
 
+use itertools::Itertools;
 use std::collections::{HashMap, HashSet};
-
-fn parse_molecules(input: &str) -> (String, String) {
-  let parts: Vec<_> = input.split(" => ").collect();
-  (parts[0].to_string(), parts[1].to_string())
-}
 
 fn parse_input(input: &str) -> (HashMap<String, Vec<String>>, String) {
   let mut molecules: HashMap<String, Vec<String>> = HashMap::new();
@@ -20,8 +16,11 @@ fn parse_input(input: &str) -> (HashMap<String, Vec<String>>, String) {
       starter.push_str(line);
       continue;
     }
-    let (from, to) = parse_molecules(line);
-    molecules.entry(from).or_default().push(to);
+    let (from, to) = line.split(" => ").collect_tuple().unwrap();
+    molecules
+      .entry(from.to_string())
+      .or_default()
+      .push(to.to_string());
   }
 
   (molecules, starter)

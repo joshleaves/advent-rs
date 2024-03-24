@@ -54,7 +54,7 @@ impl Program {
     }
   }
 
-  fn from_input(input: &str) -> Self {
+  fn new(input: &str) -> Self {
     let mut instructions: Vec<Instruction> = vec![];
     for line in input.lines() {
       let parts: Vec<&str> = line.split(' ').collect();
@@ -106,14 +106,14 @@ impl Program {
 }
 
 pub fn day_23_v1(input: impl Into<String>) -> i32 {
-  let mut program = Program::from_input(&input.into());
+  let mut program = Program::new(&input.into());
   program.run();
 
   program.registers[1]
 }
 
 pub fn day_23_v2(input: impl Into<String>) -> i32 {
-  let mut program = Program::from_input(&input.into());
+  let mut program = Program::new(&input.into());
   program.registers[0] = 1;
   program.run();
 
@@ -129,7 +129,7 @@ mod tests {
   #[test]
   fn iterates_over_program() {
     let sample_one = "inc a\njio a, +2\ntpl a\ninc a";
-    let mut program = Program::from_input(sample_one);
+    let mut program = Program::new(sample_one);
     program.run();
     assert_eq!(program.registers[0], 2);
   }

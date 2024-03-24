@@ -18,9 +18,7 @@ fn build_ticker_tape() -> HashMap<String, i8> {
   for line in TICKER_TAPE.lines() {
     let parts: Vec<_> = line.split(": ").collect();
     let key = parts[0].to_string();
-    let Ok(value) = parts[1].parse::<i8>() else {
-      panic!("Invalid ticker: {}", line)
-    };
+    let value = parts[1].parse::<i8>().unwrap();
     data.insert(key, value);
   }
   data
@@ -76,9 +74,8 @@ where
 
 pub fn day_16_v1(input: impl Into<String>) -> usize {
   let ticker_tape = build_ticker_tape();
-  let mut index = 0;
+  let mut index = 1;
   for aunt in input.into().lines() {
-    index += 1;
     if compare_aunts(
       &ticker_tape,
       aunt,
@@ -87,15 +84,15 @@ pub fn day_16_v1(input: impl Into<String>) -> usize {
     ) {
       return index;
     }
+    index += 1;
   }
   index
 }
 
 pub fn day_16_v2(input: impl Into<String>) -> usize {
   let ticker_tape = build_ticker_tape();
-  let mut index = 0;
+  let mut index = 1;
   for aunt in input.into().lines() {
-    index += 1;
     if compare_aunts(
       &ticker_tape,
       aunt,
@@ -104,6 +101,7 @@ pub fn day_16_v2(input: impl Into<String>) -> usize {
     ) {
       return index;
     }
+    index += 1;
   }
   index
 }

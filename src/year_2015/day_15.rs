@@ -1,7 +1,5 @@
 //! Advent of Code 2015: Day 15: Science for Hungry People
 
-use regex::Regex;
-
 struct Ingredient {
   capacity: i32,
   durability: i32,
@@ -10,20 +8,17 @@ struct Ingredient {
   calories: i32,
 }
 
-fn parse_line(input: &str) -> Ingredient {
-  let parser: Regex = Regex::new(
-    r#"\w+: capacity (-?\d+), durability (-?\d+), flavor (-?\d+), texture (-?\d+), calories (-?\d+)"#
-  ).unwrap();
-  let Some(captures) = parser.captures(input) else {
-    panic!("Invalid input: {}", input);
-  };
+impl Ingredient {
+  fn new(input: &str) -> Self {
+    let parts: Vec<_> = input.split_whitespace().collect();
 
-  Ingredient {
-    capacity: captures[1].parse::<i32>().unwrap(),
-    durability: captures[2].parse::<i32>().unwrap(),
-    flavor: captures[3].parse::<i32>().unwrap(),
-    texture: captures[4].parse::<i32>().unwrap(),
-    calories: captures[5].parse::<i32>().unwrap(),
+    Self {
+      capacity: parts[2].strip_suffix(',').unwrap().parse::<i32>().unwrap(),
+      durability: parts[4].strip_suffix(',').unwrap().parse::<i32>().unwrap(),
+      flavor: parts[6].strip_suffix(',').unwrap().parse::<i32>().unwrap(),
+      texture: parts[8].strip_suffix(',').unwrap().parse::<i32>().unwrap(),
+      calories: parts[10].trim_end().parse::<i32>().unwrap(),
+    }
   }
 }
 
@@ -81,7 +76,7 @@ where
 pub fn day_15_v1(input: impl Into<String>) -> i32 {
   let mut ingredients: Vec<Ingredient> = vec![];
   for line in input.into().lines() {
-    ingredients.push(parse_line(line));
+    ingredients.push(Ingredient::new(line));
   }
   let mut quantities = vec![1; ingredients.len()];
 
@@ -91,7 +86,7 @@ pub fn day_15_v1(input: impl Into<String>) -> i32 {
 pub fn day_15_v2(input: impl Into<String>) -> i32 {
   let mut ingredients: Vec<Ingredient> = vec![];
   for line in input.into().lines() {
-    ingredients.push(parse_line(line));
+    ingredients.push(Ingredient::new(line));
   }
   let mut quantities = vec![0; ingredients.len()];
 
@@ -106,15 +101,17 @@ mod tests {
 
   #[test]
   fn works_with_samples_v1() {
-    let sample: &str = r#"Butterscotch: capacity -1, durability -2, flavor 6, texture 3, calories 8\n\
-      Cinnamon: capacity 2, durability 3, flavor -2, texture -1, calories 3"#;
+    let sample: &str =
+      "Butterscotch: capacity -1, durability -2, flavor 6, texture 3, calories 8\n\
+      Cinnamon: capacity 2, durability 3, flavor -2, texture -1, calories 3";
     assert_eq!(day_15_v1(sample), 62_842_880);
   }
 
   #[test]
   fn works_with_samples_v2() {
-    let sample: &str = r#"Butterscotch: capacity -1, durability -2, flavor 6, texture 3, calories 8\n\
-      Cinnamon: capacity 2, durability 3, flavor -2, texture -1, calories 3"#;
+    let sample: &str =
+      "Butterscotch: capacity -1, durability -2, flavor 6, texture 3, calories 8\n\
+      Cinnamon: capacity 2, durability 3, flavor -2, texture -1, calories 3";
     assert_eq!(day_15_v2(sample), 57_600_000);
   }
 }

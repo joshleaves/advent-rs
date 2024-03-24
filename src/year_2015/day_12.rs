@@ -25,7 +25,7 @@ fn traverse_node_value(input: &[u8], idx: usize) -> (i32, usize) {
   }
 }
 
-fn traverse_node_array(input: &Vec<u8>, idx: usize) -> (i32, usize) {
+fn traverse_node_array(input: &[u8], idx: usize) -> (i32, usize) {
   let mut total: i32 = 0;
   let mut length: usize = 1;
   loop {
@@ -54,7 +54,7 @@ fn traverse_node_array(input: &Vec<u8>, idx: usize) -> (i32, usize) {
   }
 }
 
-fn traverse_node_hash(input: &Vec<u8>, idx: usize) -> (i32, usize) {
+fn traverse_node_hash(input: &[u8], idx: usize) -> (i32, usize) {
   let mut total: i32 = 0;
   let mut length: usize = 1;
   let mut no_red = true;
@@ -112,16 +112,11 @@ pub fn day_12_v1(input: impl Into<String>) -> i32 {
 
 pub fn day_12_v2(input: impl Into<String>) -> i32 {
   let bytes = input.into().as_bytes().to_vec();
-  if bytes[0] == b'{' {
-    let (total, _length) = traverse_node_hash(&bytes, 0);
-    return total;
+  match bytes[0] {
+    b'{' => traverse_node_hash(&bytes, 0).0,
+    b'[' => traverse_node_array(&bytes, 0).0,
+    _ => traverse_node_value(&bytes, 0).0,
   }
-  if bytes[0] == b'[' {
-    let (total, _length) = traverse_node_array(&bytes, 0);
-    return total;
-  }
-
-  0
 }
 
 solvable!(day_12, day_12_v1, day_12_v2, i32);

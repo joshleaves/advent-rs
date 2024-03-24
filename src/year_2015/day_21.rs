@@ -117,23 +117,7 @@ struct Character {
 }
 
 impl Character {
-  fn from_equipment(equipment: [&Equipment; 4]) -> (usize, Self) {
-    let hit_points = PLAYER_HP;
-    let cost: usize = equipment.iter().map(|s| s.cost as usize).sum();
-    let damage: u8 = equipment.iter().map(|s| s.damage).sum();
-    let armor: u8 = equipment.iter().map(|s| s.armor).sum();
-
-    (
-      cost,
-      Character {
-        hit_points,
-        damage,
-        armor,
-      },
-    )
-  }
-
-  fn from_string(boss_input: &str) -> Character {
+  fn new(boss_input: &str) -> Character {
     let mut hit_points: u8 = 0;
     let mut damage: u8 = 0;
     let mut armor: u8 = 0;
@@ -155,6 +139,22 @@ impl Character {
       damage,
       armor,
     }
+  }
+
+  fn from_equipment(equipment: [&Equipment; 4]) -> (usize, Self) {
+    let hit_points = PLAYER_HP;
+    let cost: usize = equipment.iter().map(|s| s.cost as usize).sum();
+    let damage: u8 = equipment.iter().map(|s| s.damage).sum();
+    let armor: u8 = equipment.iter().map(|s| s.armor).sum();
+
+    (
+      cost,
+      Character {
+        hit_points,
+        damage,
+        armor,
+      },
+    )
   }
 }
 
@@ -193,7 +193,7 @@ where
 }
 
 pub fn day_21_v1(input: impl Into<String>) -> usize {
-  let boss = Character::from_string(&input.into());
+  let boss = Character::new(&input.into());
   let price_updater = |result: bool, best_price, next_price| {
     if result {
       std::cmp::min(best_price, next_price)
@@ -206,7 +206,7 @@ pub fn day_21_v1(input: impl Into<String>) -> usize {
 }
 
 pub fn day_21_v2(input: impl Into<String>) -> usize {
-  let boss = Character::from_string(&input.into());
+  let boss = Character::new(&input.into());
   let price_updater = |result: bool, best_price, next_price| {
     if !result {
       std::cmp::max(best_price, next_price)
@@ -226,8 +226,8 @@ mod tests {
 
   #[test]
   fn wins_the_fight_with_samples_v1() {
-    let sample_boss = Character::from_string("Hit Points: 12\nDamage: 7\nArmor: 2");
-    let sample_player = Character::from_string("Hit Points: 8\nDamage: 5\nArmor: 5");
+    let sample_boss = Character::new("Hit Points: 12\nDamage: 7\nArmor: 2");
+    let sample_player = Character::new("Hit Points: 8\nDamage: 5\nArmor: 5");
     assert!(simulate_battle(&sample_player, &sample_boss));
   }
 }

@@ -1,6 +1,5 @@
 //! Advent of Code 2015: Day 14: Reindeer Olympics
 
-use regex::Regex;
 const RACE_DURATION: u16 = 2503;
 
 #[derive(PartialEq)]
@@ -20,6 +19,23 @@ struct Reindeer {
 }
 
 impl Reindeer {
+  fn new(input: &str) -> Self {
+    let parts: Vec<_> = input.split_whitespace().collect();
+    let speed: u16 = parts[3].parse::<u16>().unwrap();
+    let length: u16 = parts[6].parse::<u16>().unwrap();
+    let rest: u16 = parts[13].parse::<u16>().unwrap();
+
+    Reindeer {
+      speed,
+      length,
+      rest,
+      curpos: 0,
+      state: ReindeerState::Running,
+      progress: 0,
+      points: 0,
+    }
+  }
+
   fn switch_state(&mut self, new_state: ReindeerState) {
     self.state = new_state;
     self.progress = 0;
@@ -43,29 +59,6 @@ impl Reindeer {
   }
 }
 
-fn parse_line(input: &str) -> Reindeer {
-  let parser: Regex = Regex::new(
-    r#"\w+ can fly (\d+) km\/s for (\d+) seconds, but then must rest for (\d+) seconds\."#,
-  )
-  .unwrap();
-  let Some(captures) = parser.captures(input) else {
-    panic!("Invalid input: {}", input);
-  };
-  let speed: u16 = captures[1].parse::<u16>().unwrap();
-  let length: u16 = captures[2].parse::<u16>().unwrap();
-  let rest: u16 = captures[3].parse::<u16>().unwrap();
-
-  Reindeer {
-    speed,
-    length,
-    rest,
-    curpos: 0,
-    state: ReindeerState::Running,
-    progress: 0,
-    points: 0,
-  }
-}
-
 fn race(reindeers: &mut [Reindeer], duration: u16) {
   for _i in 0..=duration {
     let mut pole_position = 0;
@@ -84,7 +77,7 @@ fn race(reindeers: &mut [Reindeer], duration: u16) {
 pub fn day_14_v1(input: impl Into<String>) -> u16 {
   let mut reindeers: Vec<Reindeer> = vec![];
   for line in input.into().lines() {
-    reindeers.push(parse_line(line));
+    reindeers.push(Reindeer::new(line));
   }
   race(&mut reindeers, RACE_DURATION);
 
@@ -94,7 +87,7 @@ pub fn day_14_v1(input: impl Into<String>) -> u16 {
 pub fn day_14_v2(input: impl Into<String>) -> u16 {
   let mut reindeers: Vec<Reindeer> = vec![];
   for line in input.into().lines() {
-    reindeers.push(parse_line(line));
+    reindeers.push(Reindeer::new(line));
   }
   race(&mut reindeers, RACE_DURATION);
   reindeers.iter().map(|deer| deer.points).max().unwrap()
@@ -109,8 +102,8 @@ mod tests {
   #[test]
   fn works_with_samples_v1() {
     let mut reindeers: Vec<Reindeer> = vec![
-      parse_line("Comet can fly 14 km/s for 10 seconds, but then must rest for 127 seconds."),
-      parse_line("Dancer can fly 16 km/s for 11 seconds, but then must rest for 162 seconds."),
+      Reindeer::new("Comet can fly 14 km/s for 10 seconds, but then must rest for 127 seconds."),
+      Reindeer::new("Dancer can fly 16 km/s for 11 seconds, but then must rest for 162 seconds."),
     ];
     race(&mut reindeers, 1000);
     assert_eq!(
@@ -122,8 +115,8 @@ mod tests {
   #[test]
   fn works_with_samples_v2() {
     let mut reindeers: Vec<Reindeer> = vec![
-      parse_line("Comet can fly 14 km/s for 10 seconds, but then must rest for 127 seconds."),
-      parse_line("Dancer can fly 16 km/s for 11 seconds, but then must rest for 162 seconds."),
+      Reindeer::new("Comet can fly 14 km/s for 10 seconds, but then must rest for 127 seconds."),
+      Reindeer::new("Dancer can fly 16 km/s for 11 seconds, but then must rest for 162 seconds."),
     ];
     race(&mut reindeers, 1000);
     assert_eq!(reindeers.iter().map(|deer| deer.points).max().unwrap(), 689);

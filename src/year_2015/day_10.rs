@@ -2,7 +2,7 @@
 
 use itertools::Itertools;
 
-fn look_and_say(input: Vec<u8>) -> Vec<u8> {
+fn look_and_say(input: &[u8]) -> Vec<u8> {
   let mut current_cnt: u8 = 0;
   let mut current_chr: u8 = input[0];
   let mut new_seq: Vec<u8> = Vec::new();
@@ -22,6 +22,7 @@ fn look_and_say(input: Vec<u8>) -> Vec<u8> {
   new_seq
 }
 
+#[inline]
 fn string_to_chr(input: &str) -> Vec<u8> {
   input
     .trim_end()
@@ -34,7 +35,7 @@ fn string_to_chr(input: &str) -> Vec<u8> {
 pub fn day_10_v1(input: impl Into<String>) -> u32 {
   let mut next_input: Vec<u8> = string_to_chr(&input.into());
   for _n in 1..=40 {
-    next_input = look_and_say(next_input);
+    next_input = look_and_say(&next_input);
   }
   next_input.len() as u32
 }
@@ -42,7 +43,7 @@ pub fn day_10_v1(input: impl Into<String>) -> u32 {
 pub fn day_10_v2(input: impl Into<String>) -> u32 {
   let mut next_input: Vec<u8> = string_to_chr(&input.into());
   for _n in 1..=50 {
-    next_input = look_and_say(next_input);
+    next_input = look_and_say(&next_input);
   }
   next_input.len() as u32
 }
@@ -63,15 +64,7 @@ mod tests {
       (vec![1, 1, 1, 2, 2, 1], vec![3, 1, 2, 2, 1, 1]),
     ];
     for (sample, result) in sample_one {
-      assert_eq!(look_and_say(sample), result);
+      assert_eq!(look_and_say(&sample), result);
     }
   }
-
-  // #[test]
-  // fn works_with_samples_v2() {
-  //   let sample_two = "London to Dublin = 464
-  //   London to Belfast = 518
-  //   Dublin to Belfast = 141";
-  //   assert_eq!(day_10_v2(sample_two), 982);
-  // }
 }

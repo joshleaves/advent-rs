@@ -2,13 +2,6 @@
 
 const PASSWORD_SIZE: usize = 8;
 
-fn chr_to_string(input: &Vec<u8>) -> String {
-  let Ok(s) = String::from_utf8(input.clone()) else {
-    panic!("Invalid byte sequence: {:?}", input);
-  };
-  s.to_string()
-}
-
 fn password_is_valid(password: &[u8]) -> bool {
   let mut criteria_1 = false;
   let mut criteria_3 = false;
@@ -34,35 +27,32 @@ fn password_is_valid(password: &[u8]) -> bool {
   criteria_1 && criteria_3
 }
 
-fn update_password(password: Vec<u8>) -> Vec<u8> {
-  let mut next_password = password.clone();
-  next_password[7] += 1;
+fn update_password(mut password: Vec<u8>) -> Vec<u8> {
+  password[7] += 1;
   let mut idx = 7;
-  while next_password[idx] > b'z' {
-    next_password[idx] = b'a';
+  while password[idx] > b'z' {
+    password[idx] = b'a';
     idx -= 1;
-    next_password[idx] += 1;
+    password[idx] += 1;
   }
   for idx in (0..=6).rev() {
-    if next_password[idx] == b'i' || next_password[idx] == b'l' || next_password[idx] == b'o' {
-      for character in next_password[idx + 1..=7].iter_mut() {
+    if password[idx] == b'i' || password[idx] == b'l' || password[idx] == b'o' {
+      for character in password[idx + 1..=7].iter_mut() {
         *character = b'z';
       }
-      return update_password(next_password);
+      return update_password(password);
     }
   }
-  next_password
+  password
 }
 
 pub fn day_11_v1(input: impl Into<String>) -> String {
   let mut password = input.into().trim_end().as_bytes().to_vec();
-  loop {
+  while !password_is_valid(&password) {
     password = update_password(password);
-    if password_is_valid(&password) {
-      break;
-    }
   }
-  chr_to_string(&password)
+
+  String::from_utf8(password).unwrap().to_string()
 }
 
 pub fn day_11_v2(input: impl Into<String>) -> String {
@@ -77,7 +67,8 @@ pub fn day_11_v2(input: impl Into<String>) -> String {
       pass_valid = true;
     }
   }
-  chr_to_string(&password)
+
+  String::from_utf8(password).unwrap().to_string()
 }
 
 solvable!(day_11, day_11_v1, day_11_v2, String);

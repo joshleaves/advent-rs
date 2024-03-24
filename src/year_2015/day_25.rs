@@ -22,10 +22,12 @@ fn mod_exp(mut base: u64, mut exp: u64, modulus: u64) -> u64 {
   result
 }
 
+#[inline]
 fn find_iterations_count(col: u64, row: u64) -> u64 {
   ((((col + row - 1) * (col + row)) / 2) - row) + 1
 }
 
+#[inline]
 fn parse_input(input: &str) -> (u64, u64) {
   input
     .lines()

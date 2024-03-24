@@ -12,66 +12,44 @@ struct GameOfLifeGrid {
 
 impl GameOfLifeGrid {
   fn alive_count(&self) -> usize {
-    let mut alive_count: usize = 0;
-    for row in 0..self.size {
-      alive_count += self.data[row].iter().filter(|c| **c == LIGHT_ON).count();
-    }
-
-    alive_count
+    self
+      .data
+      .iter()
+      .map(|row| row.iter().filter(|c| **c == LIGHT_ON).count())
+      .sum()
   }
 
+  #[inline]
   fn cell_is_alive(&self, row: usize, line: usize) -> bool {
-    if self.alive_corner
-      && ((row, line) == (0, 0)
-        || (row, line) == (self.size - 1, 0)
-        || (row, line) == (0, self.size - 1)
-        || (row, line) == (self.size - 1, self.size - 1))
-    {
-      return true;
-    }
     self.data[row][line]
   }
 
-  fn cell_will_be_alive(&self, row: usize, line: usize) -> bool {
-    if self.alive_corner
-      && ((row, line) == (0, 0)
-        || (row, line) == (self.size - 1, 0)
-        || (row, line) == (0, self.size - 1)
-        || (row, line) == (self.size - 1, self.size - 1))
-    {
-      return true;
-    }
-    let mut around_positions: Vec<(usize, usize)> = vec![];
-    if row > 0 {
-      if line > 0 {
-        around_positions.push((row - 1, line - 1));
-      }
-      around_positions.push((row - 1, line));
-      if line < self.size - 1 {
-        around_positions.push((row - 1, line + 1));
-      }
-    }
-    if line > 0 {
-      around_positions.push((row, line - 1));
-    }
-    if line < self.size - 1 {
-      around_positions.push((row, line + 1));
-    }
-    if row < self.size - 1 {
-      if line > 0 {
-        around_positions.push((row + 1, line - 1));
-      }
-      around_positions.push((row + 1, line));
-      if line < self.size - 1 {
-        around_positions.push((row + 1, line + 1));
+  fn count_cells(&self, row: usize, line: usize) -> u8 {
+    let row_from = if row == 0 { 0 } else { row - 1 };
+    let row_to = if row + 1 == self.size { row } else { row + 1 };
+    let line_from = if line == 0 { 0 } else { line - 1 };
+    let line_to = if line + 1 == self.size {
+      line
+    } else {
+      line + 1
+    };
+    let mut alive = 0_u8;
+    for line_id in line_from..=line_to {
+      for row_id in row_from..=row_to {
+        if line == line_id && row == row_id {
+          continue;
+        }
+        if self.cell_is_alive(row_id, line_id) {
+          alive += 1;
+        }
       }
     }
+    alive
+  }
 
+  fn cell_will_be_alive(&self, row: usize, line: usize) -> bool {
     let cell_status = self.data[row][line];
-    let neighbors = around_positions
-      .iter()
-      .filter(|(row, line)| self.cell_is_alive(*row, *line))
-      .count();
+    let neighbors = self.count_cells(row, line);
     matches!((cell_status, neighbors), (LIGHT_ON, 2) | (_, 3))
   }
 
@@ -89,6 +67,12 @@ impl GameOfLifeGrid {
     }
     let size: usize = old_grid.size;
     let alive_corner: bool = old_grid.alive_corner;
+    if alive_corner {
+      data[0][0] = LIGHT_ON;
+      data[0][size - 1] = LIGHT_ON;
+      data[size - 1][0] = LIGHT_ON;
+      data[size - 1][size - 1] = LIGHT_ON;
+    }
     GameOfLifeGrid {
       data,
       size,
@@ -96,7 +80,11 @@ impl GameOfLifeGrid {
     }
   }
 
-  fn from_str(input: &str, alive_corner: bool) -> Self {
+  fn mutate(self) -> Self {
+    GameOfLifeGrid::from_grid(self)
+  }
+
+  fn new(input: &str, alive_corner: bool) -> Self {
     let mut data: Vec<Vec<Light>> = vec![];
     let mut size: usize = 0;
     for line in input.lines() {
@@ -143,19 +131,19 @@ impl ToString for GameOfLifeGrid {
 }
 
 pub fn day_18_v1(input: impl Into<String>) -> usize {
-  let mut grid = GameOfLifeGrid::from_str(&input.into(), false);
+  let mut grid = GameOfLifeGrid::new(&input.into(), false);
   for _i in 0..100 {
-    grid = GameOfLifeGrid::from_grid(grid);
+    grid = grid.mutate();
   }
 
   grid.alive_count()
 }
 
 pub fn day_18_v2(input: impl Into<String>) -> usize {
-  let mut grid = GameOfLifeGrid::from_str(&input.into(), true);
+  let mut grid = GameOfLifeGrid::new(&input.into(), true);
 
   for _i in 0..100 {
-    grid = GameOfLifeGrid::from_grid(grid);
+    grid = grid.mutate();
   }
 
   grid.alive_count()
@@ -170,41 +158,41 @@ mod tests {
   #[test]
   fn works_with_samples_v1() {
     let sample = ".#.#.#\n...##.\n#....#\n..#...\n#.#..#\n####..";
-    let mut grid = GameOfLifeGrid::from_str(sample, false);
-    grid = GameOfLifeGrid::from_grid(grid);
+    let mut grid = GameOfLifeGrid::new(sample, false);
+    grid = grid.mutate();
     assert_eq!(grid.alive_count(), 11);
   }
 
   #[test]
   fn works_with_samples_v2() {
     let sample = "##.#.#\n...##.\n#....#\n..#...\n#.#..#\n####.#";
-    let mut grid = GameOfLifeGrid::from_str(sample, true);
+    let mut grid = GameOfLifeGrid::new(sample, true);
 
-    grid = GameOfLifeGrid::from_grid(grid);
+    grid = grid.mutate();
     assert_eq!(
       grid.to_string(),
       "#.##.#\n####.#\n...##.\n......\n#...#.\n#.####\n"
     );
 
-    grid = GameOfLifeGrid::from_grid(grid);
+    grid = grid.mutate();
     assert_eq!(
       grid.to_string(),
       "#..#.#\n#....#\n.#.##.\n...##.\n.#..##\n##.###\n"
     );
 
-    grid = GameOfLifeGrid::from_grid(grid);
+    grid = grid.mutate();
     assert_eq!(
       grid.to_string(),
       "#...##\n####.#\n..##.#\n......\n##....\n####.#\n"
     );
 
-    grid = GameOfLifeGrid::from_grid(grid);
+    grid = grid.mutate();
     assert_eq!(
       grid.to_string(),
       "#.####\n#....#\n...#..\n.##...\n#.....\n#.#..#\n"
     );
 
-    grid = GameOfLifeGrid::from_grid(grid);
+    grid = grid.mutate();
     assert_eq!(
       grid.to_string(),
       "##.###\n.##..#\n.##...\n.##...\n#.#...\n##...#\n"

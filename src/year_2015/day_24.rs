@@ -7,9 +7,6 @@ fn solve(numbers: &[u64], magic: u64) -> u64 {
   for i in 1..=numbers.len() {
     let mut results: Vec<Vec<&u64>> = numbers.iter().combinations(i).collect_vec();
     results.retain(|arr| arr.iter().copied().sum::<u64>() == magic);
-    if results.is_empty() {
-      continue;
-    }
     if !results.is_empty() {
       combos = results;
       break;
@@ -20,11 +17,7 @@ fn solve(numbers: &[u64], magic: u64) -> u64 {
     .map(|combo| combo.iter().fold(1, |acc, elt| acc * *elt))
     .collect_vec();
 
-  if let Some(min_value) = combos_values.iter().min() {
-    *min_value
-  } else {
-    0
-  }
+  *combos_values.iter().min().unwrap()
 }
 
 fn parse_input(input: &str) -> Vec<u64> {

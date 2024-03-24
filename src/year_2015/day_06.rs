@@ -1,28 +1,98 @@
 //! Advent of Code 2015: Day 6: Probably a Fire Hazard
 
-use regex::Regex;
+use itertools::Itertools;
+
+type Position = (u16, u16);
 
 #[inline]
-fn parse_number(number: &str) -> u16 {
-  let Ok(parsed) = number.parse::<u16>() else {
-    panic!("Invalid number: {}", number);
-  };
-  parsed
+fn parse_coordinates(coordinates: &str) -> Position {
+  coordinates
+    .split(',')
+    .map(|coord| coord.parse::<u16>().unwrap())
+    .collect_tuple()
+    .unwrap()
 }
 
-fn parse_coordinates(coordinates: &str) -> (u16, u16) {
-  let Some(numbers) = coordinates.split_once(',') else {
-    panic!("Invalid coordinates: {}", coordinates);
-  };
-  (parse_number(numbers.0), parse_number(numbers.1))
+enum Instruction {
+  TurnOn(Position, Position),
+  TurnOff(Position, Position),
+  Toggle(Position, Position),
 }
 
-fn modify_grid<F>(light_grid: &mut Vec<u8>, from: &str, to: &str, modifier: F)
+impl Instruction {
+  fn new(mut input: &str) -> Self {
+    input = input.trim();
+    if let Some(stripped_input) = input.strip_prefix("turn") {
+      input = stripped_input;
+    }
+    let parts: Vec<_> = input.split_whitespace().collect();
+    let from = parse_coordinates(parts[1]);
+    let to = parse_coordinates(parts[3]);
+    match parts[0] {
+      "on" => Instruction::TurnOn(from, to),
+      "off" => Instruction::TurnOff(from, to),
+      "toggle" => Instruction::Toggle(from, to),
+      _ => panic!("Invalid instruction: {}", input),
+    }
+  }
+
+  fn execute_v1(&self, light_grid: &mut Vec<bool>) {
+    match self {
+      Instruction::TurnOn(from, to) => {
+        modify_grid(light_grid, *from, *to, |_lights: &[bool], length: usize| {
+          vec![true; length]
+        })
+      }
+      Instruction::TurnOff(from, to) => {
+        modify_grid(light_grid, *from, *to, |_lights: &[bool], length: usize| {
+          vec![false; length]
+        })
+      }
+      Instruction::Toggle(from, to) => {
+        modify_grid(light_grid, *from, *to, |lights: &[bool], _length: usize| {
+          lights.iter().map(|c| !*c).collect()
+        })
+      }
+    }
+  }
+
+  fn execute_v2(&self, light_grid: &mut Vec<u8>) {
+    match self {
+      Instruction::TurnOn(from, to) => {
+        modify_grid(light_grid, *from, *to, |lights: &[u8], _length: usize| {
+          lights.iter().map(|c| *c + 1).collect()
+        })
+      }
+      Instruction::TurnOff(from, to) => {
+        modify_grid(light_grid, *from, *to, |lights: &[u8], _length: usize| {
+          lights
+            .iter()
+            .map(|c| {
+              if let Some(res) = c.checked_sub(1) {
+                res
+              } else {
+                0
+              }
+            })
+            .collect()
+        })
+      }
+      Instruction::Toggle(from, to) => {
+        modify_grid(light_grid, *from, *to, |lights: &[u8], _length: usize| {
+          lights.iter().map(|c| *c + 2).collect()
+        })
+      }
+    }
+  }
+}
+
+fn modify_grid<F, T>(light_grid: &mut Vec<T>, from: Position, to: Position, modifier: F)
 where
-  F: Fn(&[u8], usize) -> Vec<u8>,
+  F: Fn(&[T], usize) -> Vec<T>,
+  T: Clone,
 {
-  let (from_y, from_x) = parse_coordinates(from);
-  let (to_y, to_x) = parse_coordinates(to);
+  let (from_y, from_x) = from;
+  let (to_y, to_x) = to;
   for y in from_y..=to_y {
     let idx_from = y as usize * 1000 + from_x as usize;
     let idx_to = y as usize * 1000 + to_x as usize;
@@ -34,87 +104,23 @@ where
 }
 
 pub fn day_06_v1(input: impl Into<String>) -> u32 {
-  let re = Regex::new(r"(?<inst>on|off|toggle) (?<from>\d+,\d+) through (?<to>\d+,\d+)").unwrap();
-  let mut light_grid: Vec<u8> = vec![0_u8; 1_000_000];
+  let mut light_grid: Vec<bool> = vec![false; 1_000_000];
   for line in input.into().lines() {
-    let Some(caps) = re.captures(line) else {
-      panic!("Invalid instruction: {}", line)
-    };
-
-    match &caps["inst"] {
-      "on" => modify_grid(
-        &mut light_grid,
-        &caps["from"],
-        &caps["to"],
-        |_lights: &[u8], length: usize| vec![1u8; length],
-      ),
-      "off" => modify_grid(
-        &mut light_grid,
-        &caps["from"],
-        &caps["to"],
-        |_lights: &[u8], length: usize| vec![0u8; length],
-      ),
-      "toggle" => modify_grid(
-        &mut light_grid,
-        &caps["from"],
-        &caps["to"],
-        |lights: &[u8], _length: usize| {
-          lights
-            .iter()
-            .map(|c| if *c == 1_u8 { 0 } else { 1 })
-            .collect()
-        },
-      ),
-      _ => panic!("Invalid instruction: {}", line),
-    }
+    let instruction = Instruction::new(line);
+    instruction.execute_v1(&mut light_grid);
   }
 
-  return light_grid.iter().map(|&i| i as u32).sum();
+  light_grid.iter().filter(|&light| *light).count() as u32
 }
 
 pub fn day_06_v2(input: impl Into<String>) -> u32 {
-  let re = Regex::new(r"(?<inst>on|off|toggle) (?<from>\d+,\d+) through (?<to>\d+,\d+)").unwrap();
   let mut light_grid: Vec<u8> = vec![0_u8; 1_000_000];
   for line in input.into().lines() {
-    let Some(caps) = re.captures(line) else {
-      panic!("Invalid instruction: {}", line)
-    };
-
-    match &caps["inst"] {
-      "on" => modify_grid(
-        &mut light_grid,
-        &caps["from"],
-        &caps["to"],
-        |lights: &[u8], _length: usize| lights.iter().map(|c| *c + 1).collect(),
-      ),
-      "off" => modify_grid(
-        &mut light_grid,
-        &caps["from"],
-        &caps["to"],
-        |lights: &[u8], _length: usize| {
-          lights
-            .iter()
-            .map(|c| {
-              if let Some(res) = c.checked_sub(1) {
-                res
-              } else {
-                0
-              }
-            })
-            .collect()
-        },
-      ),
-      "toggle" => modify_grid(
-        &mut light_grid,
-        &caps["from"],
-        &caps["to"],
-        |lights: &[u8], _length: usize| lights.iter().map(|c| *c + 2).collect(),
-      ),
-      _ => panic!("Invalid instruction: {}", line),
-    }
+    let instruction = Instruction::new(line);
+    instruction.execute_v2(&mut light_grid)
   }
 
-  return light_grid.iter().map(|&i| i as u32).sum();
+  light_grid.iter().map(|&i| i as u32).sum()
 }
 
 solvable!(day_06, day_06_v1, day_06_v2, u32);
@@ -125,16 +131,16 @@ mod tests {
 
   #[test]
   fn works_with_samples_v1() {
-    let sample_one = r#"turn on 0,0 through 999,999
-    toggle 0,0 through 999,0
-    turn off 499,499 through 500,500"#;
+    let sample_one = "turn on 0,0 through 999,999\n\
+      toggle 0,0 through 999,0\n\
+      turn off 499,499 through 500,500";
     assert_eq!(day_06_v1(sample_one), 998_996);
   }
 
   #[test]
   fn works_with_samples_v2() {
-    let sample_two = r#"turn on 0,0 through 0,0
-    toggle 0,0 through 999,999"#;
+    let sample_two = "turn on 0,0 through 0,0\n\
+      toggle 0,0 through 999,999";
     assert_eq!(day_06_v2(sample_two), 2_000_001);
   }
 }

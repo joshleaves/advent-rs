@@ -32,28 +32,30 @@
 //! > Your puzzle answer was ~~`REDACTED`~~.
 //!
 
+use itertools::Itertools;
 use std::collections::HashSet;
 
 #[inline]
-fn move_character(mut pos: (i8, i8), direction: char) -> (i8, i8) {
+fn move_character(pos: &mut (i8, i8), direction: u8) {
   match direction {
-    '>' => pos.0 += 1,
-    '<' => pos.0 -= 1,
-    'v' => pos.1 += 1,
-    '^' => pos.1 -= 1,
+    b'>' => pos.0 += 1,
+    b'<' => pos.0 -= 1,
+    b'v' => pos.1 += 1,
+    b'^' => pos.1 -= 1,
     _ => panic!("Invalid direction character: {direction}"),
   }
-  pos
+  // pos
 }
 
 pub fn day_03_v1(input: impl Into<String>) -> usize {
   let mut santa: (i8, i8) = (0, 0);
   let mut houses = HashSet::from([santa]);
 
-  for chr in input.into().chars() {
-    santa = move_character(santa, chr);
+  for direction in input.into().bytes() {
+    move_character(&mut santa, direction);
     houses.insert(santa);
   }
+
   houses.len()
 }
 
@@ -61,14 +63,14 @@ pub fn day_03_v2(input: impl Into<String>) -> usize {
   let mut santa: (i8, i8) = (0, 0);
   let mut robot: (i8, i8) = (0, 0);
   let mut houses = HashSet::from([santa]);
-  let moves: Vec<char> = input.into().chars().collect();
 
-  for chars in moves.chunks(2) {
-    santa = move_character(santa, chars[0]);
-    robot = move_character(robot, chars[1]);
+  for mut chars in &input.into().bytes().chunks(2) {
+    move_character(&mut santa, chars.next().unwrap());
+    move_character(&mut robot, chars.next().unwrap());
     houses.insert(santa);
     houses.insert(robot);
   }
+
   houses.len()
 }
 
@@ -77,20 +79,6 @@ solvable!(day_03, day_03_v1, day_03_v2, usize);
 #[cfg(test)]
 mod tests {
   use super::*;
-
-  #[test]
-  fn moves_characters_properly() {
-    let sample_moves: [((i8, i8), char, (i8, i8)); 4] = [
-      ((0, 0), '>', (1, 0)),
-      ((0, 0), '<', (-1, 0)),
-      ((0, 0), '^', (0, -1)),
-      ((0, 0), 'v', (0, 1)),
-    ];
-
-    for (sample, direction, result) in sample_moves.iter() {
-      assert_eq!(move_character(*sample, *direction), *result);
-    }
-  }
 
   #[test]
   fn works_with_samples_v1() {

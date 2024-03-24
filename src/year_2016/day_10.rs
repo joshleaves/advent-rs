@@ -23,15 +23,17 @@ struct Bot {
   high: BotOutput,
 }
 
-impl Bot {
-  fn new() -> Self {
+impl Default for Bot {
+  fn default() -> Self {
     Bot {
       values: vec![],
       low: BotOutput::Output(0),
       high: BotOutput::Output(0),
     }
   }
+}
 
+impl Bot {
   fn add_chip(&mut self, chip: usize) {
     if self.values.len() == 2 {
       panic!("Cannot add chips here!");
@@ -67,14 +69,14 @@ fn parse_input(input: impl Into<String>) -> BotHM {
     match parts[0] {
       "value" => {
         let bot_id = parts[5].parse::<usize>().unwrap();
-        let bot = bots.entry(bot_id).or_insert_with(|| Bot::new().into());
+        let bot = bots.entry(bot_id).or_default();
 
         let value = parts[1].parse::<usize>().unwrap();
         bot.borrow_mut().add_chip(value);
       }
       "bot" => {
         let bot_id = parts[1].parse::<usize>().unwrap();
-        let bot = bots.entry(bot_id).or_insert_with(|| Bot::new().into());
+        let bot = bots.entry(bot_id).or_default();
 
         let low_id = parts[6].parse::<usize>().unwrap();
         let low_bo = match parts[5] {

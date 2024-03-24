@@ -30,26 +30,38 @@
 //! > Your puzzle answer was ~~`REDACTED`~~.
 //!
 
-use std::str::FromStr;
-
 #[derive(Debug, PartialEq)]
 struct PresentBox {
-  height: u8,
-  width: u8,
-  length: u8,
+  height: u16,
+  width: u16,
+  length: u16,
 }
 
 impl PresentBox {
+  fn new(input: &str) -> Self {
+    let mut nums: Vec<u16> = input
+      .split('x')
+      .map(|num| num.parse::<u16>().unwrap())
+      .collect();
+    nums.sort();
+
+    PresentBox {
+      height: nums[0],
+      width: nums[1],
+      length: nums[2],
+    }
+  }
+
   fn area_small(&self) -> u16 {
-    self.height as u16 * self.width as u16
+    self.height * self.width
   }
 
   fn area_med(&self) -> u16 {
-    self.width as u16 * self.length as u16
+    self.width * self.length
   }
 
   fn area_large(&self) -> u16 {
-    self.length as u16 * self.height as u16
+    self.length * self.height
   }
 
   fn wrapper(&self) -> u16 {
@@ -57,48 +69,24 @@ impl PresentBox {
   }
 
   fn ribbon(&self) -> u16 {
-    (self.height as u16 * 2) + (self.width as u16 * 2) + (self.area_small() * self.length as u16)
-  }
-}
-
-impl FromStr for PresentBox {
-  type Err = std::num::ParseIntError;
-
-  fn from_str(input: &str) -> Result<Self, Self::Err> {
-    let num_str: Vec<&str> = input.split('x').collect();
-    let mut num_int: [u8; 3] = [
-      num_str[0].parse::<u8>().unwrap(),
-      num_str[1].parse::<u8>().unwrap(),
-      num_str[2].parse::<u8>().unwrap(),
-    ];
-    num_int.sort();
-
-    Ok(PresentBox {
-      height: num_int[0],
-      width: num_int[1],
-      length: num_int[2],
-    })
+    (self.height * 2) + (self.width * 2) + (self.area_small() * self.length)
   }
 }
 
 pub fn day_02_v1(input: impl Into<String>) -> u32 {
-  let mut total: u32 = 0;
-  for line in input.into().lines() {
-    if let Ok(present) = PresentBox::from_str(line) {
-      total += present.wrapper() as u32
-    }
-  }
-  total
+  input
+    .into()
+    .lines()
+    .map(|line| PresentBox::new(line).wrapper() as u32)
+    .sum()
 }
 
 pub fn day_02_v2(input: impl Into<String>) -> u32 {
-  let mut total: u32 = 0;
-  for line in input.into().lines() {
-    if let Ok(present) = PresentBox::from_str(line) {
-      total += present.ribbon() as u32
-    }
-  }
-  total
+  input
+    .into()
+    .lines()
+    .map(|line| PresentBox::new(line).ribbon() as u32)
+    .sum()
 }
 
 solvable!(day_02, day_02_v1, day_02_v2, u32);
