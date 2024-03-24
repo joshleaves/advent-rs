@@ -5,7 +5,7 @@ use std::path::PathBuf;
 #[derive(Parser, Debug)]
 #[command(version, about, long_about = None)]
 struct Args {
-  /// The year of the exercise, from 2015
+  /// The year of the exercise, from 2015 to today
   #[arg(short, long, value_parser = clap::value_parser!(u16))]
   year: u16,
 

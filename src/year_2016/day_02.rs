@@ -1,7 +1,7 @@
-fn matcher_v1(curbut: char, line: &str) -> char {
-  let mut nextbut: char = curbut;
+#[inline]
+fn matcher_v1(mut current_button: char, line: &str) -> char {
   for direction in line.chars() {
-    nextbut = match (nextbut, direction) {
+    current_button = match (current_button, direction) {
       ('1', 'R') => '2',
       ('1', 'D') => '4',
       ('2', 'L') => '1',
@@ -26,16 +26,16 @@ fn matcher_v1(curbut: char, line: &str) -> char {
       ('8', 'U') => '5',
       ('9', 'L') => '8',
       ('9', 'U') => '6',
-      _ => nextbut,
+      _ => current_button,
     }
   }
-  nextbut
+  current_button
 }
 
-fn matcher_v2(curbut: char, line: &str) -> char {
-  let mut nextbut: char = curbut;
+#[inline]
+fn matcher_v2(mut current_button: char, line: &str) -> char {
   for direction in line.chars() {
-    nextbut = match (nextbut, direction) {
+    current_button = match (current_button, direction) {
       ('1', 'D') => '3',
       ('2', 'R') => '3',
       ('2', 'D') => '6',
@@ -68,18 +68,18 @@ fn matcher_v2(curbut: char, line: &str) -> char {
       ('C', 'L') => 'B',
       ('C', 'U') => '8',
       ('D', 'U') => 'B',
-      _ => nextbut,
+      _ => current_button,
     }
   }
-  nextbut
+  current_button
 }
 
 pub fn day_02_v1(input: impl Into<String>) -> String {
   let mut result: Vec<char> = vec![];
-  let mut curbut = '5';
+  let mut current_button = '5';
   for line in input.into().lines() {
-    curbut = matcher_v1(curbut, line);
-    result.push(curbut);
+    current_button = matcher_v1(current_button, line);
+    result.push(current_button);
   }
 
   result.iter().collect::<String>()
@@ -87,10 +87,10 @@ pub fn day_02_v1(input: impl Into<String>) -> String {
 
 pub fn day_02_v2(input: impl Into<String>) -> String {
   let mut result: Vec<char> = vec![];
-  let mut curbut = '5';
+  let mut current_button = '5';
   for line in input.into().lines() {
-    curbut = matcher_v2(curbut, line);
-    result.push(curbut);
+    current_button = matcher_v2(current_button, line);
+    result.push(current_button);
   }
 
   result.iter().collect::<String>()

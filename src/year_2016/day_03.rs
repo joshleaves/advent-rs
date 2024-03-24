@@ -1,5 +1,6 @@
 use itertools::Itertools;
 
+#[inline]
 fn is_triangle_possible(triangle: [u16; 3]) -> bool {
   let sides: Vec<_> = triangle.iter().sorted().collect();
 

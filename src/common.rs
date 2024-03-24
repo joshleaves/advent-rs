@@ -1,17 +1,6 @@
 use std::fs;
 use std::io;
-use std::path::PathBuf;
-
-/// Turns a file into a String input
-fn fetch_input_from_file(filename: PathBuf) -> Result<String, std::io::Error> {
-  fs::read_to_string(filename)
-}
-
-/// Turns STDIN into a String input
-#[mutants::skip] // I will do this later
-fn fetch_input_from_stdin() -> Result<String, std::io::Error> {
-  io::read_to_string(io::stdin())
-}
+use std::path::Path;
 
 /// Returns a `String` input to use with a test.
 ///
@@ -19,10 +8,10 @@ fn fetch_input_from_stdin() -> Result<String, std::io::Error> {
 ///
 /// # Arguments
 /// * `file_path` - File input to read from.
-pub fn fetch_input(file_path: Option<PathBuf>) -> Result<String, std::io::Error> {
+pub fn fetch_input(file_path: Option<impl AsRef<Path>>) -> Result<String, std::io::Error> {
   match file_path {
-    Some(filename) => fetch_input_from_file(filename),
-    None => fetch_input_from_stdin(),
+    Some(filename) => fs::read_to_string(filename),
+    None => io::read_to_string(io::stdin()),
   }
 }
 
@@ -30,6 +19,7 @@ pub fn fetch_input(file_path: Option<PathBuf>) -> Result<String, std::io::Error>
 mod tests {
   use super::*;
   use std::io::ErrorKind;
+  use std::path::PathBuf;
 
   #[test]
   fn fetch_input_from_inexisting_file() {

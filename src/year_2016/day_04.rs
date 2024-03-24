@@ -1,10 +1,9 @@
 use itertools::Itertools;
-use regex::Regex;
 
-const NOS: &str = "northpole object storage";
+const NOS: &[u8] = b"northpole object storage";
 
 fn verify_checksum(checksum: &str, input: &str) -> bool {
-  let letters = input
+  input
     .chars()
     .unique()
     .sorted_by_key(|chr| {
@@ -18,34 +17,40 @@ fn verify_checksum(checksum: &str, input: &str) -> bool {
         *chr as i8,
       ]
     })
-    .take(5)
-    .collect::<String>();
-
-  letters == checksum
+    .collect::<String>()
+    .starts_with(checksum)
 }
 
-fn translate_line(input: &str, value: u32) -> String {
-  input
-    .chars()
-    .map(|chr| {
-      if chr == '-' {
-        ' '
-      } else {
-        (((((chr as u8) as i16 - 97 + value as i16) % 26) + 97) as u8) as char
-      }
-    })
-    .collect::<String>()
+fn verify_translation(input: &str, value: u32, reference: &[u8]) -> bool {
+  for (idx, chr) in input.chars().enumerate() {
+    let translated = if chr == '-' {
+      ' '
+    } else {
+      (((((chr as u8) as i16 - 97 + value as i16) % 26) + 97) as u8) as char
+    };
+    if translated != reference[idx] as char {
+      return false;
+    }
+  }
+  true
+}
+
+#[inline]
+fn parse_line(input: &str) -> (&str, u32, &str) {
+  let input = input.strip_suffix(']').unwrap();
+  let (input, checksum) = input.rsplit_once('[').unwrap();
+  let (input, value_str) = input.rsplit_once('-').unwrap();
+  let value = value_str.parse::<u32>().unwrap();
+
+  (input, value, checksum)
 }
 
 pub fn day_04_v1(input: impl Into<String>) -> u32 {
-  let re = Regex::new(r"(?<letters>[\w-]+)-(?<value>\d+)\[(?<checksum>\w+)\]").unwrap();
   let mut result: u32 = 0;
   for line in input.into().lines() {
-    let Some(caps) = re.captures(line) else {
-      panic!("Incorrect input: {}", line);
-    };
-    if verify_checksum(&caps["checksum"], &caps["letters"]) {
-      result += caps["value"].parse::<u32>().unwrap();
+    let (letters, value, checksum) = parse_line(line);
+    if verify_checksum(checksum, letters) {
+      result += value
     }
   }
 
@@ -53,16 +58,13 @@ pub fn day_04_v1(input: impl Into<String>) -> u32 {
 }
 
 pub fn day_04_v2(input: impl Into<String>) -> u32 {
-  let re = Regex::new(r"(?<letters>[\w-]+)-(?<value>\d+)\[(?<checksum>\w+)\]").unwrap();
   for line in input.into().lines() {
-    let Some(caps) = re.captures(line) else {
-      panic!("Incorrect input: {}", line);
-    };
-    if !verify_checksum(&caps["checksum"], &caps["letters"]) {
+    let (letters, value, checksum) = parse_line(line);
+    if !verify_checksum(checksum, letters) {
       continue;
     }
-    let value = caps["value"].parse::<u32>().unwrap();
-    if translate_line(&caps["letters"], value) == NOS {
+    // if translate_line(&letters, value) == NOS {
+    if verify_translation(letters, value, NOS) {
       return value;
     }
   }
@@ -90,9 +92,11 @@ mod tests {
   }
 
   #[test]
-  fn can_translate_string() {
-    let sample = ("qzmt-zixmtkozy-ivhz", 343, "very encrypted name");
-
-    assert_eq!(translate_line(sample.0, sample.1), sample.2);
+  fn works_with_samples_v2() {
+    assert!(verify_translation(
+      "qzmt-zixmtkozy-ivhz",
+      343,
+      b"very encrypted name"
+    ));
   }
 }

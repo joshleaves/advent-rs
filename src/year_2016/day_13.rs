@@ -1,8 +1,7 @@
 use crate::bfs::BreadthFirstSearch;
 
 fn cell_is_wall(favorite: usize, position: (usize, usize)) -> bool {
-  let x = position.0;
-  let y = position.1;
+  let (x, y) = position;
   let value = x * x + 3 * x + 2 * x * y + y + y * y + favorite;
   value.count_ones() % 2 == 1
 }
