@@ -63,9 +63,10 @@ fn get_distance(distances: &HashMap<(&usize, &usize), usize>, from: usize, to: u
 }
 
 #[inline]
-fn remove_position_from_vec(mut positions: Vec<usize>, needle: &usize) -> Vec<usize> {
-  positions.retain(|elt| elt != needle);
-  positions
+fn remove_position_from_vec(positions: &[usize], needle: &usize) -> Vec<usize> {
+  let mut new_positions = positions.to_owned();
+  new_positions.retain(|elt| elt != needle);
+  new_positions
 }
 
 fn best_path_v1(
@@ -82,7 +83,7 @@ fn best_path_v1(
     return path;
   }
   for next_position in positions_left.iter() {
-    let next_positions_left = remove_position_from_vec(positions_left.clone(), next_position);
+    let next_positions_left = remove_position_from_vec(&positions_left, next_position);
     let next_path = path + get_distance(distances, position, *next_position);
     let next_distance = best_path_v1(
       distances,
@@ -134,7 +135,7 @@ fn best_path_v2(
     return path + get_distance(distances, position, 0);
   }
   for next_position in positions_left.iter() {
-    let next_positions_left = remove_position_from_vec(positions_left.clone(), next_position);
+    let next_positions_left = remove_position_from_vec(&positions_left, next_position);
     let next_path = path + get_distance(distances, position, *next_position);
     let next_distance = best_path_v2(
       distances,

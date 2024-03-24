@@ -24,7 +24,7 @@ mod tests {
   #[test]
   fn fetch_input_from_inexisting_file() {
     let path: Option<PathBuf> = Some("foo.txt".into());
-    let error = fetch_input(path.clone()).unwrap_err();
+    let error = fetch_input(path).unwrap_err();
     assert_eq!(error.kind(), ErrorKind::NotFound);
   }
 }

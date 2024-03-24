@@ -60,8 +60,8 @@ fn parse_input(input: &str) -> (Vec<u8>, HashMap<(u8, u8), i16>) {
   (users_ids, paths)
 }
 
-fn remove_user_id_from_vec(users: Vec<u8>, needle: &u8) -> Vec<u8> {
-  let mut new_vec = users.clone();
+fn remove_user_id_from_vec(users: &[u8], needle: &u8) -> Vec<u8> {
+  let mut new_vec = users.to_owned();
   new_vec.retain(|elt| elt != needle);
   new_vec
 }
@@ -87,7 +87,7 @@ fn calculate_happiness(
   }
   let mut best_happiness = 0;
   for user_id in friends_left.iter() {
-    let friends_left = remove_user_id_from_vec(friends_left.clone(), user_id);
+    let friends_left = remove_user_id_from_vec(&friends_left, user_id);
     let add_hap = cur_hap + get_happiness(paths, current_friend, user_id);
     let nex_hap = calculate_happiness(paths, user_id, friends_left, add_hap);
     best_happiness = std::cmp::max(best_happiness, nex_hap);
@@ -97,7 +97,7 @@ fn calculate_happiness(
 
 pub fn day_13_v1(input: impl Into<String>) -> i16 {
   let (users_ids, paths) = parse_input(&input.into());
-  let friends_left = remove_user_id_from_vec(users_ids.clone(), &0);
+  let friends_left = remove_user_id_from_vec(&users_ids, &0);
   calculate_happiness(&paths, &0, friends_left, 0)
 }
 
@@ -108,7 +108,7 @@ pub fn day_13_v2(input: impl Into<String>) -> i16 {
     paths.insert((lhp, my_user_id), 0);
   }
   users_ids.push(my_user_id);
-  let friends_left = remove_user_id_from_vec(users_ids.clone(), &0);
+  let friends_left = remove_user_id_from_vec(&users_ids, &0);
 
   calculate_happiness(&paths, &0, friends_left, 0)
 }

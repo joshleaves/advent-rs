@@ -62,7 +62,7 @@ where
   }
 
   pub fn shortest_path_to(&mut self, target_position: POS) -> usize {
-    self.traverse_until_position(target_position.clone());
+    self.traverse_until_position(target_position);
     self.depth
   }
 
