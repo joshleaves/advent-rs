@@ -15,6 +15,28 @@
 	// 	],
 	// 	"description": "Log output to console"
 	// }
+	"New year": {
+		"scope": "rust",
+		"prefix": "create_year_",
+		"body": [
+			"//! Year ${1:year_number}",
+			"//!",
+			"#![doc = include_str!(\"../NOTES_${1:year_number}.md\")]",
+			"",
+			"pub mod day_01;",
+			"",
+			"pub fn solve(day: u8, part: u8, input: impl Into<String>) -> Option<String> {",
+			"  if part != 1 && part != 2 {",
+			"    return None;",
+			"  }",
+			"",
+			"  match day {",
+			"    1 => Some(day_01::day_01(part, input).to_string()),",
+			"    _ => None,",
+      "  }",
+			"}",
+		]
+	},
 	"New day": {
 		"scope": "rust",
 		"prefix": "create_day_",

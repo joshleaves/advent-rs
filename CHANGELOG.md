@@ -10,6 +10,17 @@ Of note:
 - The changelog 2015.5.2 has been rewritten from each commit content.
 - This file may be amended entirely in the future to adhere to the [GNU Changelog style](https://www.gnu.org/prep/standards/html_node/Style-of-Change-Logs.html#Style-of-Change-Logs)
 
+## [2017.5.1]
+### Added
+- Solved [exercice for 2017, day 01](src/year_2017/01.rs).
+- Solved [exercice for 2017, day 02](src/year_2017/02.rs).
+- Solved [exercice for 2017, day 03](src/year_2017/03.rs).
+- Solved [exercice for 2017, day 04](src/year_2017/04.rs).
+- Solved [exercice for 2017, day 05](src/year_2017/05.rs).
+### Changes
+- Benchmarks (at least for 2017) now use `assert_eq!` to ensure that changes I do to optimize runtime don't end up breaking tests.
+- More tests, more optimisations,...
+
 ## [2016.25.2]
 ### Changed
 - Used [rust-clippy](https://github.com/rust-lang/rust-clippy) to lint more.

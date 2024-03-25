@@ -16,6 +16,7 @@ macro_rules! solvable {
 mod bfs;
 pub mod year_2015;
 pub mod year_2016;
+pub mod year_2017;
 
 /// Returns the solution for a specified exercise and input.
 ///
@@ -44,6 +45,7 @@ pub fn solve(year: u16, day: u8, part: u8, input: impl Into<String>) -> Option<S
   match year {
     2015 => year_2015::solve(day, part, input),
     2016 => year_2016::solve(day, part, input),
+    2017 => year_2017::solve(day, part, input),
     _ => None,
   }
 }
