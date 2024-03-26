@@ -21,3 +21,13 @@ Knowing how to use iterators properly is often the key to winning.
 ## Day 05: A Maze of Twisty Trampolines, All Alike
 
 I was expecting more difficulty here.
+
+## Day 06: Memory Reallocation
+
+No idea why, but I cannot get this one to go faster at all.
+
+## Day 07: Recursive Circus
+
+Little-known fact about me: I hate traversing trees.
+
+That said, you can always find ways to avoid doing it :D
