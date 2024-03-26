@@ -54,33 +54,6 @@ impl TowerNode {
 }
 
 impl Tower {
-  // pub fn to_s(&self) {
-  //   let starter_node = self.bottom_node();
-  //   self.print_node(0, starter_node);
-  // }
-
-  // fn print_node(&self, depth: usize, node: &TowerNode) {
-  //   let prefix = "  ".repeat(depth);
-  //   println!("{} -> {:5}: {}", prefix, self.get_value(&node.name), node.name);
-  //   for child_name in node.children.iter() {
-  //     let child_node = self.get(&child_name);
-  //     self.print_node(depth + 1, child_node);
-  //   }
-  // }
-
-  // fn bottom_node(&self) -> &TowerNode {
-  //   let mut name = "";
-  //   let mut size = 0;
-  //   for (node_name, node_size) in self.values.iter() {
-  //     if size < *node_size {
-  //       name = node_name;
-  //       size = *node_size;
-  //     }
-  //   }
-
-  //   self.nodes.get(name).unwrap()
-  // }
-
   fn get(&self, name: &str) -> &TowerNode {
     self.nodes.get(name).unwrap()
   }
@@ -167,7 +140,6 @@ pub fn day_07_v2(input: impl Into<String>) -> String {
   let weight_difference = bad_weights.0.abs_diff(bad_weights.1);
   (bad_node.size - weight_difference).to_string()
 
-  // println!("WEIGHTS: {:?}_", bad_weights);
   //   // let bad_weight_node = bottom.children.iter()
   //   //   .find(|&name| tower.size_of(&name) == bad_weight_size)
   //   //   .unwrap();
