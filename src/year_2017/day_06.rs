@@ -23,7 +23,7 @@ fn max_idx(input: &[u8]) -> (usize, usize) {
   (idx, max)
 }
 
-pub fn day_06_v1(input: impl Into<String>) -> usize {
+pub fn day_06_v1(input: impl Into<String>) -> u32 {
   let mut towers = parse_input(&input.into());
   let towers_len = towers.len();
   let mut positions: HashSet<Vec<u8>> = HashSet::new();
@@ -41,10 +41,10 @@ pub fn day_06_v1(input: impl Into<String>) -> usize {
   moves
 }
 
-pub fn day_06_v2(input: impl Into<String>) -> usize {
+pub fn day_06_v2(input: impl Into<String>) -> u32 {
   let mut towers = parse_input(&input.into());
   let towers_len = towers.len();
-  let mut positions: HashMap<Vec<u8>, usize> = HashMap::new();
+  let mut positions: HashMap<Vec<u8>, u32> = HashMap::new();
   let mut moves = 0;
 
   loop {
@@ -60,7 +60,7 @@ pub fn day_06_v2(input: impl Into<String>) -> usize {
   }
 }
 
-solvable!(day_06, day_06_v1, day_06_v2, usize);
+solvable!(day_06, day_06_v1, day_06_v2, u32);
 
 #[cfg(test)]
 mod tests {

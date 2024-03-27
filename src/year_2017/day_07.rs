@@ -139,15 +139,8 @@ pub fn day_07_v2(input: impl Into<String>) -> String {
     .unwrap();
   let weight_difference = bad_weights.0.abs_diff(bad_weights.1);
   (bad_node.size - weight_difference).to_string()
-
-  //   // let bad_weight_node = bottom.children.iter()
-  //   //   .find(|&name| tower.size_of(&name) == bad_weight_size)
-  //   //   .unwrap();
-  //   return "foo".to_string();
-  // }
-
-  // "foo".to_string()
 }
+
 solvable!(day_07, day_07_v1, day_07_v2, String);
 
 #[cfg(test)]

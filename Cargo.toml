@@ -42,12 +42,6 @@ criterion = { version = "0.5.1", features = ["html_reports"] }
 [[bench]]
 name = "year_2015"
 harness = false
-[[bench]]
-name = "year_2016"
-harness = false
-[[bench]]
-name = "year_2017"
-harness = false
 # [[bench]]
 # name = "year_2015_day_01"
 # harness = false
@@ -57,9 +51,24 @@ harness = false
 # [[bench]]
 # name = "year_2015_day_05"
 # harness = false
+[[bench]]
+name = "year_2016"
+harness = false
 # [[bench]]
 # name = "year_2016_day_04"
 # harness = false
 # [[bench]]
 # name = "year_2016_day_09"
+# harness = false
+[[bench]]
+name = "year_2017"
+harness = false
+# [[bench]]
+# name = "year_2017_day_01"
+# harness = false
+# [[bench]]
+# name = "year_2017_day_02"
+# harness = false
+# [[bench]]
+# name = "year_2017_day_04"
 # harness = false

@@ -1,4 +1,4 @@
-fn traverse_input(input: &str) -> (usize, usize) {
+fn traverse_input(input: &str) -> (u32, u32) {
   let mut result = 0;
   let mut garbage = 0;
   let mut depth = 0;
@@ -27,15 +27,15 @@ fn traverse_input(input: &str) -> (usize, usize) {
   (result, garbage)
 }
 
-pub fn day_09_v1(input: impl Into<String>) -> usize {
+pub fn day_09_v1(input: impl Into<String>) -> u32 {
   traverse_input(&input.into()).0
 }
 
-pub fn day_09_v2(input: impl Into<String>) -> usize {
+pub fn day_09_v2(input: impl Into<String>) -> u32 {
   traverse_input(&input.into()).1
 }
 
-solvable!(day_09, day_09_v1, day_09_v2, usize);
+solvable!(day_09, day_09_v1, day_09_v2, u32);
 
 #[cfg(test)]
 mod tests {
@@ -43,7 +43,7 @@ mod tests {
 
   #[test]
   fn works_with_samples_v1() {
-    let sample_one: [(&str, usize); 8] = [
+    let sample_one: [(&str, u32); 8] = [
       (r#"{}"#, 1),
       (r#"{{{}}}"#, 6),
       (r#"{{},{}}"#, 5),
@@ -53,7 +53,6 @@ mod tests {
       (r#"{{<!!>},{<!!>},{<!!>},{<!!>}}"#, 9),
       (r#"{{<a!>},{<a!>},{<a!>},{<ab>}}"#, 3),
     ];
-
     for (sample, result) in sample_one {
       assert_eq!(day_09_v1(sample), result);
     }
@@ -61,7 +60,7 @@ mod tests {
 
   #[test]
   fn works_with_samples_v2() {
-    let sample_two: [(&str, usize); 7] = [
+    let sample_two: [(&str, u32); 7] = [
       (r#"<>"#, 0),
       (r#"<random characters>"#, 17),
       (r#"<<<<>"#, 3),

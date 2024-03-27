@@ -84,7 +84,7 @@ pub mod day_25;
 /// assert_eq!(solution, Some("0".to_string()));
 /// ```
 pub fn solve(day: u8, part: u8, input: impl Into<String>) -> Option<String> {
-  if part != 1 && part != 2 {
+  if part > 2 {
     return None;
   }
   match day {

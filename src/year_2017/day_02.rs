@@ -1,14 +1,14 @@
 use itertools::Itertools;
 
-pub fn day_02_v1(input: impl Into<String>) -> usize {
+pub fn day_02_v1(input: impl Into<String>) -> u16 {
   input
     .into()
     .lines()
     .map(|line| {
       let mut max = 0;
-      let mut min = usize::MAX;
+      let mut min = u16::MAX;
       line.split_whitespace().for_each(|number| {
-        let number = number.parse::<usize>().unwrap();
+        let number = number.parse::<u16>().unwrap();
         max = std::cmp::max(max, number);
         min = std::cmp::min(min, number);
       });
@@ -17,19 +17,18 @@ pub fn day_02_v1(input: impl Into<String>) -> usize {
     .sum()
 }
 
-pub fn day_02_v2(input: impl Into<String>) -> usize {
+pub fn day_02_v2(input: impl Into<String>) -> u16 {
   input
     .into()
     .lines()
     .map(|line| {
       line
         .split_whitespace()
-        .map(|number| number.parse::<usize>().unwrap())
+        .map(|number| number.parse::<u16>().unwrap())
+        .sorted()
         .combinations(2)
         .filter_map(|pair| {
-          if pair[0] % pair[1] == 0 {
-            Some(pair[0] / pair[1])
-          } else if pair[1] % pair[0] == 0 {
+          if pair[1] % pair[0] == 0 {
             Some(pair[1] / pair[0])
           } else {
             None
@@ -41,7 +40,7 @@ pub fn day_02_v2(input: impl Into<String>) -> usize {
     .sum()
 }
 
-solvable!(day_02, day_02_v1, day_02_v2, usize);
+solvable!(day_02, day_02_v1, day_02_v2, u16);
 
 #[cfg(test)]
 mod tests {

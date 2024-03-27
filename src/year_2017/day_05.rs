@@ -1,11 +1,11 @@
-pub fn day_05_v1(input: impl Into<String>) -> usize {
+pub fn day_05_v1(input: impl Into<String>) -> u32 {
   let mut instructions: Vec<i16> = input
     .into()
     .lines()
     .map(|line| line.parse::<i16>().unwrap())
     .collect();
   let mut pc: i16 = 0;
-  let mut moves: usize = 0;
+  let mut moves: u32 = 0;
 
   while let Some(instruction) = instructions.get_mut(pc as usize) {
     pc += *instruction;
@@ -15,24 +15,24 @@ pub fn day_05_v1(input: impl Into<String>) -> usize {
   moves
 }
 
-pub fn day_05_v2(input: impl Into<String>) -> usize {
+pub fn day_05_v2(input: impl Into<String>) -> u32 {
   let mut instructions: Vec<i16> = input
     .into()
     .lines()
     .map(|line| line.parse::<i16>().unwrap())
     .collect();
   let mut pc: i16 = 0;
-  let mut moves: usize = 0;
+  let mut moves: u32 = 0;
 
   while let Some(instruction) = instructions.get_mut(pc as usize) {
     pc += *instruction;
-    *instruction += if *instruction >= 3 { -1 } else { 1 };
+    *instruction += if *instruction < 3 { 1 } else { -1 };
     moves += 1;
   }
   moves
 }
 
-solvable!(day_05, day_05_v1, day_05_v2, usize);
+solvable!(day_05, day_05_v1, day_05_v2, u32);
 
 #[cfg(test)]
 mod tests {

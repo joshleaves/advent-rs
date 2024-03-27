@@ -72,7 +72,7 @@ where
   true
 }
 
-pub fn day_16_v1(input: impl Into<String>) -> usize {
+pub fn day_16_v1(input: impl Into<String>) -> u16 {
   let ticker_tape = build_ticker_tape();
   let mut index = 1;
   for aunt in input.into().lines() {
@@ -89,7 +89,7 @@ pub fn day_16_v1(input: impl Into<String>) -> usize {
   index
 }
 
-pub fn day_16_v2(input: impl Into<String>) -> usize {
+pub fn day_16_v2(input: impl Into<String>) -> u16 {
   let ticker_tape = build_ticker_tape();
   let mut index = 1;
   for aunt in input.into().lines() {
@@ -106,4 +106,4 @@ pub fn day_16_v2(input: impl Into<String>) -> usize {
   index
 }
 
-solvable!(day_16, day_16_v1, day_16_v2, usize);
+solvable!(day_16, day_16_v1, day_16_v2, u16);

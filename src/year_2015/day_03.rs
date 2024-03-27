@@ -47,7 +47,7 @@ fn move_character(pos: &mut (i8, i8), direction: u8) {
   // pos
 }
 
-pub fn day_03_v1(input: impl Into<String>) -> usize {
+pub fn day_03_v1(input: impl Into<String>) -> u16 {
   let mut santa: (i8, i8) = (0, 0);
   let mut houses = HashSet::from([santa]);
 
@@ -56,10 +56,10 @@ pub fn day_03_v1(input: impl Into<String>) -> usize {
     houses.insert(santa);
   }
 
-  houses.len()
+  houses.len() as u16
 }
 
-pub fn day_03_v2(input: impl Into<String>) -> usize {
+pub fn day_03_v2(input: impl Into<String>) -> u16 {
   let mut santa: (i8, i8) = (0, 0);
   let mut robot: (i8, i8) = (0, 0);
   let mut houses = HashSet::from([santa]);
@@ -71,10 +71,10 @@ pub fn day_03_v2(input: impl Into<String>) -> usize {
     houses.insert(robot);
   }
 
-  houses.len()
+  houses.len() as u16
 }
 
-solvable!(day_03, day_03_v1, day_03_v2, usize);
+solvable!(day_03, day_03_v1, day_03_v2, u16);
 
 #[cfg(test)]
 mod tests {
@@ -82,7 +82,7 @@ mod tests {
 
   #[test]
   fn works_with_samples_v1() {
-    let sample_one: [(&str, usize); 3] = [
+    let sample_one: [(&str, u16); 3] = [
       (">", 2),
       ("^>v<", 4),
       ("^v^v^v^v^v", 2),
@@ -95,7 +95,7 @@ mod tests {
 
   #[test]
   fn works_with_samples_v2() {
-    let sample_two: [(&str, usize); 3] = [
+    let sample_two: [(&str, u16); 3] = [
       ("^v", 3),
       ("^>v<", 3),
       ("^v^v^v^v^v", 11),

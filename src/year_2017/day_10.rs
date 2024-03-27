@@ -1,24 +1,24 @@
 use itertools::Itertools;
 
 #[inline]
-fn parse_jumps_v1(input: &str) -> Vec<usize> {
+fn parse_jumps_v1(input: &str) -> Vec<u32> {
   input
     .trim_end()
     .split(',')
-    .map(|number| number.trim().parse::<usize>().unwrap())
+    .map(|number| number.trim().parse::<u32>().unwrap())
     .collect()
 }
 
 #[inline]
-fn parse_jumps_v2(input: &str) -> Vec<usize> {
+fn parse_jumps_v2(input: &str) -> Vec<u32> {
   input
     .trim_end()
     .bytes()
-    .map(|number| number as usize)
+    .map(|number| number as u32)
     .collect()
 }
 
-fn knot_hash(size: usize, jumps: &[usize], rounds: usize) -> Vec<usize> {
+fn knot_hash(size: u32, jumps: &[u32], rounds: u32) -> Vec<u32> {
   let mut numbers: Vec<_> = (0..size).collect_vec();
   let num_lens = numbers.len();
   let mut jumps_done = 0;
@@ -26,14 +26,18 @@ fn knot_hash(size: usize, jumps: &[usize], rounds: usize) -> Vec<usize> {
 
   for _ in 0..rounds {
     for jump in jumps.iter() {
-      let extract = numbers[0..*jump].iter().cloned().rev().collect_vec();
-      numbers.splice(0..*jump, extract);
-      numbers.rotate_left((jump + skip_size) % num_lens);
-      jumps_done += (jump + skip_size) % num_lens;
+      let extract = numbers[0..*jump as usize]
+        .iter()
+        .cloned()
+        .rev()
+        .collect_vec();
+      numbers.splice(0..*jump as usize, extract);
+      numbers.rotate_left(((jump + skip_size) % num_lens as u32) as usize);
+      jumps_done += (jump + skip_size) % num_lens as u32;
       skip_size += 1;
     }
   }
-  numbers.rotate_right(jumps_done % num_lens);
+  numbers.rotate_right(jumps_done as usize % num_lens);
 
   numbers
 }
@@ -46,14 +50,13 @@ pub fn day_10_v1(input: impl Into<String>) -> String {
 pub fn day_10_v2(input: impl Into<String>) -> String {
   let mut jumps = parse_jumps_v2(&input.into());
   jumps.append(&mut vec![17, 31, 73, 47, 23]);
-  let numbers = knot_hash(256, &jumps, 64);
-  numbers
-    .chunks(16)
-    .map(|chunk| chunk.iter().fold(0, |acc, &val| acc ^ val))
-    .map(|xor| format!("{:02x}", xor))
-    .join("")
 
-  // "foo".to_string()
+  knot_hash(256, &jumps, 64)
+    .chunks(16)
+    .map(|chunk| chunk.iter().fold(0, |acc, &val| acc ^ val) as u8)
+    .map(|xor| format!("{:02x}", xor))
+    .collect::<Vec<_>>()
+    .join("")
 }
 
 solvable!(day_10, day_10_v1, day_10_v2, String);

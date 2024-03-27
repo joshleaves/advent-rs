@@ -1,16 +1,16 @@
 use std::collections::HashMap;
 
-#[inline]
-fn check_conditional(register: i16, conditions: &[&str]) -> bool {
-  let value = conditions[1].parse::<i16>().unwrap();
-  match conditions[0] {
+// #[inline]
+fn check_conditional(register: i16, condition: &str, value: &str) -> bool {
+  let value = value.parse::<i16>().unwrap();
+  match condition {
     ">" => register > value,
     "<" => register < value,
     ">=" => register >= value,
     "<=" => register <= value,
     "==" => register == value,
     "!=" => register != value,
-    _ => panic!("Invalid condition: {}", conditions[0]),
+    _ => panic!("Invalid condition: {}", condition),
   }
 }
 
@@ -19,8 +19,9 @@ fn follow_instructions(input: &str) -> (i16, i16) {
   let mut best_max = 0;
   for line in input.lines() {
     let parts: Vec<&str> = line.split_whitespace().collect();
+    assert_eq!(parts.len(), 7);
     let reg_cond = registers.get(parts[4]).unwrap_or(&0);
-    if check_conditional(*reg_cond, &parts[5..]) {
+    if check_conditional(*reg_cond, parts[5], parts[6]) {
       let reg_target = registers.entry(parts[0]).or_default();
       let value = parts[2].parse::<i16>().unwrap();
       match parts[1] {

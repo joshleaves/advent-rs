@@ -15,7 +15,7 @@ fn move_character(mut pos: (i8, i8), direction: char) -> (i8, i8) {
   pos
 }
 
-fn day_03_v1_bset(input: &str) -> usize {
+fn day_03_v1_bset(input: &str) -> u16 {
   let mut santa: (i8, i8) = (0, 0);
   let mut houses = BTreeSet::from([santa]);
 
@@ -23,10 +23,10 @@ fn day_03_v1_bset(input: &str) -> usize {
     santa = move_character(santa, chr);
     houses.insert(santa);
   }
-  houses.len()
+  houses.len() as u16
 }
 
-fn day_03_v2_bset(input: &str) -> usize {
+fn day_03_v2_bset(input: &str) -> u16 {
   let mut santa: (i8, i8) = (0, 0);
   let mut robot: (i8, i8) = (0, 0);
   let mut houses = BTreeSet::from([santa]);
@@ -38,7 +38,7 @@ fn day_03_v2_bset(input: &str) -> usize {
     houses.insert(santa);
     houses.insert(robot);
   }
-  houses.len()
+  houses.len() as u16
 }
 
 fn bench_year_2015_day_03_sets(c: &mut Criterion) {

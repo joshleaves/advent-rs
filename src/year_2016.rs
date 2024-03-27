@@ -30,7 +30,7 @@ pub mod day_24;
 pub mod day_25;
 
 pub fn solve(day: u8, part: u8, input: impl Into<String>) -> Option<String> {
-  if part != 1 && part != 2 {
+  if part > 2 {
     return None;
   }
 

@@ -3,19 +3,19 @@ use std::collections::HashSet;
 
 #[derive(Default)]
 struct Village {
-  groups: Vec<HashSet<usize>>,
+  groups: Vec<HashSet<u16>>,
 }
 
 impl Village {
-  fn group_with(&self, needle: usize) -> Option<usize> {
+  fn group_with(&self, needle: u16) -> Option<usize> {
     self.groups.iter().position(|group| group.contains(&needle))
   }
 
-  fn parse_node(input: &str) -> Vec<usize> {
+  fn parse_node(input: &str) -> Vec<u16> {
     let (root, links) = input.split_once(" <-> ").unwrap();
-    let mut new_node = Vec::from([root.parse::<usize>().unwrap()]);
+    let mut new_node = Vec::from([root.parse::<u16>().unwrap()]);
     for link in links.split(", ") {
-      new_node.push(link.parse::<usize>().unwrap());
+      new_node.push(link.parse::<u16>().unwrap());
     }
     new_node.sort();
     new_node
@@ -39,29 +39,29 @@ impl Village {
     self.groups.push(final_node);
   }
 
-  pub fn group_zero(&mut self) -> &HashSet<usize> {
+  pub fn group_zero(&mut self) -> &HashSet<u16> {
     let idx = self.group_with(0).unwrap();
     &self.groups[idx]
   }
 }
 
-pub fn day_12_v1(input: impl Into<String>) -> usize {
+pub fn day_12_v1(input: impl Into<String>) -> u16 {
   let mut village = Village::default();
   for line in input.into().lines() {
     village.add_node(line);
   }
-  village.group_zero().len()
+  village.group_zero().len() as u16
 }
 
-pub fn day_12_v2(input: impl Into<String>) -> usize {
+pub fn day_12_v2(input: impl Into<String>) -> u16 {
   let mut village = Village::default();
   for line in input.into().lines() {
     village.add_node(line);
   }
-  village.groups.len()
+  village.groups.len() as u16
 }
 
-solvable!(day_12, day_12_v1, day_12_v2, usize);
+solvable!(day_12, day_12_v1, day_12_v2, u16);
 
 #[cfg(test)]
 mod tests {
