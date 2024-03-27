@@ -48,18 +48,18 @@ harness = false
 [[bench]]
 name = "year_2017"
 harness = false
-[[bench]]
-name = "year_2015_day_01"
-harness = false
-[[bench]]
-name = "year_2015_day_03"
-harness = false
-[[bench]]
-name = "year_2015_day_05"
-harness = false
-[[bench]]
-name = "year_2016_day_04"
-harness = false
+# [[bench]]
+# name = "year_2015_day_01"
+# harness = false
+# [[bench]]
+# name = "year_2015_day_03"
+# harness = false
+# [[bench]]
+# name = "year_2015_day_05"
+# harness = false
+# [[bench]]
+# name = "year_2016_day_04"
+# harness = false
 # [[bench]]
 # name = "year_2016_day_09"
 # harness = false

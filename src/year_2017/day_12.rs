@@ -1,3 +1,4 @@
+use itertools::Itertools;
 use std::collections::HashSet;
 
 #[derive(Default)]
@@ -10,7 +11,7 @@ impl Village {
     self.groups.iter().position(|group| group.contains(&needle))
   }
 
-  fn parse_node(&self, input: &str) -> Vec<usize> {
+  fn parse_node(input: &str) -> Vec<usize> {
     let (root, links) = input.split_once(" <-> ").unwrap();
     let mut new_node = Vec::from([root.parse::<usize>().unwrap()]);
     for link in links.split(", ") {
@@ -21,14 +22,20 @@ impl Village {
   }
 
   pub fn add_node(&mut self, input: &str) {
-    let new_node = self.parse_node(input);
+    let new_node = Village::parse_node(input);
     let mut final_node = HashSet::from_iter(new_node.iter().cloned());
-    for add_node in new_node {
-      if let Some(idx) = self.group_with(add_node) {
-        let extract = self.groups.remove(idx);
-        final_node.extend(&mut extract.iter());
-      }
-    }
+    let groups: Vec<_> = new_node
+      .iter()
+      .filter_map(|add_node| self.group_with(*add_node))
+      .sorted()
+      .unique()
+      .rev()
+      .collect();
+
+    groups.iter().for_each(|node_idx| {
+      let extract = &self.groups.remove(*node_idx);
+      final_node.extend(&mut extract.iter());
+    });
     self.groups.push(final_node);
   }
 
