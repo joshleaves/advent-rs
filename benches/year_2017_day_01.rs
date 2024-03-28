@@ -44,43 +44,23 @@ fn day_01_v2_zip(input: impl Into<String>) -> u16 {
     .sum()
 }
 
-// fn bench_year_2017_day_01_v1(c: &mut Criterion) {
-//   let mut group = c.benchmark_group("year_2017::day_01_v1");
-//   group.warm_up_time(Duration::from_millis(100));
-//   let input = include_str!("../inputs/year_2017/day_01_input");
-//   group.bench_with_input(BenchmarkId::new("Naive", input.len()), input, |b, input| {
-//     b.iter(|| day_01_v1_naive(input))
-//   });
-// assert_eq!(day_01::day_01_v1(input), 1_069);
-//   group.bench_with_input(
-//     BenchmarkId::new("Normal", input.len()),
-//     input,
-//     |b, input| b.iter(|| day_01::day_01_v1(input)),
-//   );
-//   group.bench_with_input(BenchmarkId::new("Fast", input.len()), input, |b, input| {
-//     b.iter(|| day_01_v1_fast(input))
-//   });
-//   group.finish();
-// }
-
 fn bench_year_2017_day_01_v2(c: &mut Criterion) {
-  let mut group = c.benchmark_group("year_2017::day_01_v2");
-  group.warm_up_time(Duration::from_millis(100));
   let input = include_str!("../inputs/year_2017/day_01_input");
   assert_eq!(day_01_v2_naive(input), 1_268);
   assert_eq!(day_01_v2_zip(input), 1_268);
   assert_eq!(day_01::day_01_v2(input), 1_268);
+
+  let mut group = c.benchmark_group("year_2017::day_01_v2");
+  group.warm_up_time(Duration::from_millis(100));
   group.bench_with_input(BenchmarkId::new("Naive", input.len()), input, |b, input| {
     b.iter(|| day_01_v2_naive(input))
   });
   group.bench_with_input(BenchmarkId::new("Zip", input.len()), input, |b, input| {
     b.iter(|| day_01_v2_zip(input))
   });
-  group.bench_with_input(
-    BenchmarkId::new("Normal", input.len()),
-    input,
-    |b, input| b.iter(|| day_01::day_01_v2(input)),
-  );
+  group.bench_with_input(BenchmarkId::new("Base", input.len()), input, |b, input| {
+    b.iter(|| day_01::day_01_v2(input))
+  });
 
   group.finish();
 }

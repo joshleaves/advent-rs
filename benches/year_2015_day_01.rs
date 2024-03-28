@@ -75,18 +75,48 @@ fn day_01_v2_fast(input: impl Into<String>) -> i16 {
   0
 }
 
+fn day_01_v2_flash(input: impl Into<String>) -> i16 {
+  unsafe { mem::transmute::<String, Vec<u16>>(input.into()) }
+    .iter()
+    .try_fold((0, 0), |mut acc, pair| {
+      match (acc.0, pair) {
+        // Case for ")" or "))" or "()"
+        (0, 41) | (0, 10537) | (0, 10281) => return Err((acc.1) + 1),
+
+        // Case for "("
+        (_, 40) => acc.0 += 1,
+        // Case for ")"
+        (_, 41) => acc.0 -= 1,
+        // Case for "(("
+        (_, 10280) => acc.0 += 2,
+        // Case for "))"
+        (_, 10537) => acc.0 -= 2,
+        // Case for ")(" or "()"
+        (_, 10536) | (_, 10281) => (),
+        _ => (),
+      }
+      acc.1 += 2;
+      Ok(acc)
+    })
+    .and::<i16>(Err(0))
+    .unwrap_err()
+}
+
 fn bench_year_2015_day_01_v1(c: &mut Criterion) {
+  let input = include_str!("../inputs/year_2015/day_01_input");
+  assert_eq!(day_01::day_01_v1(input), 138);
+  assert_eq!(day_01_v1_naive(input), 138);
+  assert_eq!(day_01_v1_fast(input), 138);
+
   let mut group = c.benchmark_group("year_2015::day_01_v1");
   group.warm_up_time(Duration::from_millis(100));
-  let input = include_str!("../inputs/year_2015/day_01_input");
+  group.bench_with_input(BenchmarkId::new("Base", input.len()), input, |b, input| {
+    b.iter(|| day_01::day_01_v1(input))
+  });
+
   group.bench_with_input(BenchmarkId::new("Naive", input.len()), input, |b, input| {
     b.iter(|| day_01_v1_naive(input))
   });
-  group.bench_with_input(
-    BenchmarkId::new("Normal", input.len()),
-    input,
-    |b, input| b.iter(|| day_01::day_01_v1(input)),
-  );
   group.bench_with_input(BenchmarkId::new("Fast", input.len()), input, |b, input| {
     b.iter(|| day_01_v1_fast(input))
   });
@@ -94,16 +124,22 @@ fn bench_year_2015_day_01_v1(c: &mut Criterion) {
 }
 
 fn bench_year_2015_day_01_v2(c: &mut Criterion) {
+  let input = include_str!("../inputs/year_2015/day_01_input");
+  assert_eq!(day_01::day_01_v2(input), 1_771);
+  assert_eq!(day_01_v2_fast(input), 1_771);
+  assert_eq!(day_01_v2_flash(input), 1_771);
+
   let mut group = c.benchmark_group("year_2015::day_01_v2");
   group.warm_up_time(Duration::from_millis(100));
-  let input = include_str!("../inputs/year_2015/day_01_input");
-  group.bench_with_input(
-    BenchmarkId::new("Normal", input.len()),
-    input,
-    |b, input| b.iter(|| day_01::day_01_v2(input)),
-  );
+
+  group.bench_with_input(BenchmarkId::new("Base", input.len()), input, |b, input| {
+    b.iter(|| day_01::day_01_v2(input))
+  });
   group.bench_with_input(BenchmarkId::new("Fast", input.len()), input, |b, input| {
     b.iter(|| day_01_v2_fast(input))
+  });
+  group.bench_with_input(BenchmarkId::new("Flash", input.len()), input, |b, input| {
+    b.iter(|| day_01_v2_flash(input))
   });
   group.finish();
 }

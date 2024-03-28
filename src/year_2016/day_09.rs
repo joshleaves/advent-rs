@@ -1,24 +1,24 @@
-fn decompressed_size(mut input: &str, deep_decompress: bool) -> usize {
-  let mut result: usize = 0;
+fn decompressed_size(mut input: &str, deep_decompress: bool) -> u64 {
+  let mut result: u64 = 0;
   while !input.is_empty() {
     if let Some(next_paren_l) = input.find('(') {
       let next_paren_r = input.find(')').unwrap();
       let nums: Vec<_> = input[next_paren_l + 1..next_paren_r].split('x').collect();
       let (duration, repeat) = (
-        nums[0].parse::<usize>().unwrap(),
-        nums[1].parse::<usize>().unwrap(),
+        nums[0].parse::<u64>().unwrap(),
+        nums[1].parse::<u64>().unwrap(),
       );
-      result += next_paren_l;
+      result += next_paren_l as u64;
       input = &input[next_paren_r + 1..];
       if deep_decompress {
-        let dup_elt = &input[..duration];
+        let dup_elt = &input[..duration as usize];
         result += decompressed_size(dup_elt, true) * repeat;
       } else {
         result += duration * repeat;
       }
-      input = &input[duration..];
+      input = &input[duration as usize..];
     } else {
-      result += input.len();
+      result += input.len() as u64;
       input = "";
     }
   }
@@ -26,15 +26,15 @@ fn decompressed_size(mut input: &str, deep_decompress: bool) -> usize {
   result
 }
 
-pub fn day_09_v1(input: impl Into<String>) -> usize {
+pub fn day_09_v1(input: impl Into<String>) -> u64 {
   decompressed_size(&input.into(), false)
 }
 
-pub fn day_09_v2(input: impl Into<String>) -> usize {
+pub fn day_09_v2(input: impl Into<String>) -> u64 {
   decompressed_size(&input.into(), true)
 }
 
-solvable!(day_09, day_09_v1, day_09_v2, usize);
+solvable!(day_09, day_09_v1, day_09_v2, u64);
 
 #[cfg(test)]
 mod tests {
@@ -42,7 +42,7 @@ mod tests {
 
   #[test]
   fn works_with_samples_v1() {
-    let sample_one: [(&str, usize); 6] = [
+    let sample_one: [(&str, u64); 6] = [
       ("ADVENT", 6),
       ("A(1x5)BC", 7),
       ("(3x3)XYZ", 9),
@@ -57,7 +57,7 @@ mod tests {
 
   #[test]
   fn works_with_samples_v2() {
-    let sample_two: [(&str, usize); 4] = [
+    let sample_two: [(&str, u64); 4] = [
       ("(3x3)XYZ", 9),
       ("X(8x2)(3x3)ABCY", 20),
       ("(27x12)(20x12)(13x14)(7x10)(1x12)A", 241_920),

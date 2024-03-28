@@ -47,11 +47,9 @@ fn bench_year_2017_day_13_v2(c: &mut Criterion) {
   group.bench_with_input(BenchmarkId::new("Sieve", input.len()), input, |b, input| {
     b.iter(|| day_13_v2_sieve(input))
   });
-  group.bench_with_input(
-    BenchmarkId::new("Normal", input.len()),
-    input,
-    |b, input| b.iter(|| day_13::day_13_v2(input)),
-  );
+  group.bench_with_input(BenchmarkId::new("Base", input.len()), input, |b, input| {
+    b.iter(|| day_13::day_13_v2(input))
+  });
 
   group.finish();
 }

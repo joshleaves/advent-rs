@@ -58,6 +58,10 @@ fn bench_year_2017_day_04_v1(c: &mut Criterion) {
   assert_eq!(day_04_v1_naive(input), 466);
   assert_eq!(day_04_v1_sorted(input), 466);
   assert_eq!(day_04_v1_with_set(input), 466);
+
+  group.bench_with_input(BenchmarkId::new("Base", input.len()), input, |b, input| {
+    b.iter(|| day_04::day_04_v1(input))
+  });
   group.bench_with_input(BenchmarkId::new("Naive", input.len()), input, |b, input| {
     b.iter(|| day_04_v1_naive(input))
   });
@@ -70,11 +74,6 @@ fn bench_year_2017_day_04_v1(c: &mut Criterion) {
     BenchmarkId::new("WithSet", input.len()),
     input,
     |b, input| b.iter(|| day_04_v1_with_set(input)),
-  );
-  group.bench_with_input(
-    BenchmarkId::new("Normal", input.len()),
-    input,
-    |b, input| b.iter(|| day_04::day_04_v1(input)),
   );
 
   group.finish();

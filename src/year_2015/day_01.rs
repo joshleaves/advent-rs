@@ -38,6 +38,9 @@
 //! >
 //! > Your puzzle answer was ~~`REDACTED`~~.
 //!
+//! # Implementation tricks
+//!
+//!
 
 /// Solve exercise for year 2015, day 1 (part 1).
 ///
@@ -87,17 +90,17 @@
 /// assert_eq!(day_01::day_01_v1(")))"), -3);
 /// assert_eq!(day_01::day_01_v1(")())())"), -3);
 /// ```
-pub fn day_01_v1(input: impl Into<String>) -> i16 {
-  let mut lvl: i16 = 0;
-  for chr in input.into().bytes() {
-    match chr {
-      b'(' => lvl += 1,
-      b')' => lvl -= 1,
-      _ => panic!("Invalid character: {}", chr),
-    }
-  }
 
-  lvl
+pub fn day_01_v1(input: impl Into<String>) -> i16 {
+  input
+    .into()
+    .bytes()
+    .map(|chr| match chr {
+      b'(' => 1,
+      b')' => -1,
+      _ => 0,
+    })
+    .sum()
 }
 
 /// Solve exercise for year 2015, day 1 (part 2).
@@ -122,8 +125,8 @@ pub fn day_01_v1(input: impl Into<String>) -> i16 {
 /// - If `level` reaches `-1`, return current `index` multipled by `2` (compound
 ///   size) and add `1` (because `index` started at `0`).
 ///
-/// Advantage: Impossible to use the "Naive" implementation, and "Normal" is not
-/// a huge time loss either.
+/// Advantage: Impossible to use the "Naive" implementation, and "Base" is not a
+/// huge time loss either.
 ///
 /// # Samples
 /// ```
@@ -133,20 +136,23 @@ pub fn day_01_v1(input: impl Into<String>) -> i16 {
 /// assert_eq!(day_01::day_01_v2(")"), 1);
 /// assert_eq!(day_01::day_01_v2("()())"), 5);
 /// ```
-pub fn day_01_v2(input: impl Into<String>) -> i16 {
-  let mut lvl: i16 = 0;
-  for (idx, chr) in input.into().bytes().enumerate() {
-    match chr {
-      b'(' => lvl += 1,
-      b')' => lvl -= 1,
-      _ => panic!("Invalid character: {}", chr),
-    }
-    if lvl < 0 {
-      return idx as i16 + 1;
-    }
-  }
 
-  0
+pub fn day_01_v2(input: impl Into<String>) -> i16 {
+  input
+    .into()
+    .bytes()
+    .try_fold((0, 0), |mut acc, chr| {
+      acc.1 += 1;
+      match (acc.0, chr) {
+        (0, b')') => return Err(acc.1),
+        (_, b'(') => acc.0 += 1,
+        (_, b')') => acc.0 -= 1,
+        _ => (),
+      }
+      Ok(acc)
+    })
+    .and::<i16>(Err(0))
+    .unwrap_err()
 }
 
 solvable!(day_01, day_01_v1, day_01_v2, i16);
@@ -175,11 +181,13 @@ mod tests {
 
   #[test]
   fn works_with_samples_v2() {
-    let sample_two: [(&str, i16); 2] = [
+    let sample_two: [(&str, i16); 3] = [
+      ("(())", 0),
       (")", 1),
       ("()())", 5),
     ];
     for (sample, result) in sample_two.iter() {
+      println!("Test: {}", sample);
       assert_eq!(day_01_v2(*sample), *result);
     }
   }
