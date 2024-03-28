@@ -1,6 +1,6 @@
 [package]
 name = "advent-rs"
-version = "2017.12.1"
+version = "2017.13.1"
 edition = "2021"
 authors = ["Arnaud 'red' Rouyer"]
 readme = "README.md"
@@ -71,4 +71,7 @@ harness = false
 # harness = false
 # [[bench]]
 # name = "year_2017_day_04"
+# harness = false
+# [[bench]]
+# name = "year_2017_day_13"
 # harness = false

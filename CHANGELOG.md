@@ -10,6 +10,12 @@ Of note:
 - The changelog 2015.5.2 has been rewritten from each commit content.
 - This file may be amended entirely in the future to adhere to the [GNU Changelog style](https://www.gnu.org/prep/standards/html_node/Style-of-Change-Logs.html#Style-of-Change-Logs)
 
+## [2017.13.1]
+### Added
+- Solved [exercice for 2017, day 13](src/year_2017/13.rs).
+### Changed
+- Added a lot of benchmarks and optimizations.
+
 ## [2017.12.1]
 ### Added
 - Solved [exercice for 2017, day 08](src/year_2017/08.rs).
@@ -30,9 +36,9 @@ Of note:
 - Solved [exercice for 2017, day 03](src/year_2017/03.rs).
 - Solved [exercice for 2017, day 04](src/year_2017/04.rs).
 - Solved [exercice for 2017, day 05](src/year_2017/05.rs).
-### Changes
+### Changed
 - Benchmarks (at least for 2017) now use `assert_eq!` to ensure that changes I do to optimize runtime don't end up breaking tests.
-- More tests, more optimisations,...
+- More tests, more optimizations,...
 
 ## [2016.25.2]
 ### Changed
