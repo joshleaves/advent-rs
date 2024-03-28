@@ -55,3 +55,7 @@ I hate traversing trees. But you don't always have to.
 ## Day 13: Packet Scanners
 
 The maths were a bit annoying on this one, and I was hoping for a specific mathematical formula that would prevent me from looping over all scenarios. I found something that felt promising and ported the code from Python, but to no avail, my original code was already faster...
+
+## Day 14: Disk Defragmentation
+
+I kinda liked this one.

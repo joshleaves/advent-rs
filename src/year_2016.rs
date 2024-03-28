@@ -3,6 +3,7 @@
 #![doc = include_str!("../NOTES_2016.md")]
 
 mod assembunny;
+
 pub mod day_01;
 pub mod day_02;
 pub mod day_03;

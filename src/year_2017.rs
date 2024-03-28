@@ -2,6 +2,8 @@
 //!
 #![doc = include_str!("../NOTES_2017.md")]
 
+mod knot_hash;
+
 pub mod day_01;
 pub mod day_02;
 pub mod day_03;
@@ -15,6 +17,7 @@ pub mod day_10;
 pub mod day_11;
 pub mod day_12;
 pub mod day_13;
+pub mod day_14;
 
 pub fn solve(day: u8, part: u8, input: impl Into<String>) -> Option<String> {
   if part > 2 {
@@ -35,6 +38,7 @@ pub fn solve(day: u8, part: u8, input: impl Into<String>) -> Option<String> {
     11 => Some(day_11::day_11(part, input).to_string()),
     12 => Some(day_12::day_12(part, input).to_string()),
     13 => Some(day_13::day_13(part, input).to_string()),
+    14 => Some(day_14::day_14(part, input).to_string()),
     _ => None,
   }
 }
@@ -132,5 +136,12 @@ mod tests {
     let input = include_str!("../inputs/year_2017/day_13_input");
     assert_eq!(day_13::day_13_v1(input), 2_264);
     assert_eq!(day_13::day_13_v2(input), 3_875_838);
+  }
+
+  #[test]
+  fn day_14() {
+    let input = include_str!("../inputs/year_2017/day_14_input");
+    assert_eq!(day_14::day_14_v1(input), 8_230);
+    assert_eq!(day_14::day_14_v2(input), 1_103);
   }
 }
