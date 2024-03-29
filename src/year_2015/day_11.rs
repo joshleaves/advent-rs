@@ -7,17 +7,14 @@ fn password_is_valid(password: &[u8]) -> bool {
   let mut criteria_3 = false;
   let mut criteria_3_chr = 0;
   for (idx, chr) in password.iter().enumerate() {
-    if *chr == b'i' || *chr == b'l' || *chr == b'o' {
-      return false;
-    }
-    if idx < PASSWORD_SIZE - 2
-      && *chr <= b'x'
+    if !criteria_1
+      && idx < PASSWORD_SIZE - 2
       && password[idx + 1] == *chr + 1
       && password[idx + 2] == *chr + 2
     {
       criteria_1 = true;
     }
-    if idx < PASSWORD_SIZE - 1 && *chr == password[idx + 1] {
+    if !criteria_3 && idx < PASSWORD_SIZE - 1 && *chr == password[idx + 1] {
       match criteria_3_chr {
         0 => criteria_3_chr = *chr,
         _ => criteria_3 = !criteria_3 && criteria_3_chr != *chr,
@@ -27,6 +24,7 @@ fn password_is_valid(password: &[u8]) -> bool {
   criteria_1 && criteria_3
 }
 
+#[inline]
 fn update_password(mut password: Vec<u8>) -> Vec<u8> {
   password[7] += 1;
   let mut idx = 7;

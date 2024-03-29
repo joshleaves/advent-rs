@@ -4,6 +4,23 @@ type Light = bool;
 const LIGHT_ON: Light = true;
 const LIGHT_OFF: Light = false;
 
+/// Structure to old Game Of Life state.
+///
+/// DO. NOT. EVER. TURN. IT. TO. A. SINGLE. DIMENSION. ARRAY.
+///
+/// The performance loss is kinda as follows:
+///
+/// ```text
+/// year_2015::day_18/year_2015::day_18_v1
+///         time:   [10.337 ms 10.350 ms 10.364 ms]
+///         change: [+32.681% +32.909% +33.125%] (p = 0.00 < 0.05)
+///         Performance has regressed.
+/// year_2015::day_18/year_2015::day_18_v2
+///         time:   [10.357 ms 10.385 ms 10.414 ms]
+///         change: [+33.193% +33.534% +33.954%] (p = 0.00 < 0.05)
+///         Performance has regressed.
+/// ```
+///
 struct GameOfLifeGrid {
   data: Vec<Vec<Light>>,
   size: usize,
@@ -17,6 +34,15 @@ impl GameOfLifeGrid {
       .iter()
       .map(|row| row.iter().filter(|c| **c == LIGHT_ON).count() as u16)
       .sum::<u16>()
+  }
+
+  #[inline]
+  fn get(&self, row: usize, line: usize) -> Light {
+    self.data[row][line]
+  }
+  #[inline]
+  fn set(&mut self, row: usize, line: usize, value: Light) {
+    self.data[row][line] = value
   }
 
   /// Optimization trick here: we loop on range of (-1..+1) on both axis, except
@@ -33,11 +59,11 @@ impl GameOfLifeGrid {
     let neighbors = (line_from..=line_to)
       .map(|line_id| {
         (row_from..=row_to)
-          .filter(|&row_id| self.data[row_id][line_id])
+          .filter(|&row_id| self.get(row_id, line_id))
           .count() as u8
       })
       .sum::<u8>();
-    let cell_status = self.data[row][line];
+    let cell_status = self.get(row, line);
     match (cell_status, neighbors) {
       (LIGHT_ON, 3) => LIGHT_ON,
       (LIGHT_ON, 4) => LIGHT_ON,
@@ -47,11 +73,17 @@ impl GameOfLifeGrid {
   }
 
   fn revive_corners(&mut self) {
-    if self.alive_corners {
-      self.data[0][0] = LIGHT_ON;
-      self.data[0][self.size - 1] = LIGHT_ON;
-      self.data[self.size - 1][0] = LIGHT_ON;
-      self.data[self.size - 1][self.size - 1] = LIGHT_ON;
+    if !self.alive_corners {
+      return;
+    }
+    let max = self.size - 1;
+    for (row, line) in [
+      (0, 0),
+      (0, max),
+      (max, 0),
+      (max, max),
+    ] {
+      self.set(row, line, LIGHT_ON)
     }
   }
 

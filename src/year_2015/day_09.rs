@@ -1,6 +1,5 @@
 //! Advent of Code 2015: Day 9: All in a Single Night
 
-use regex::Regex;
 use std::cmp;
 use std::collections::HashMap;
 
@@ -19,16 +18,15 @@ fn parse_input(input: &str) -> (Vec<u8>, HashMap<(u8, u8), u16>) {
   let mut cities: HashMap<&str, u8> = HashMap::new();
   let mut paths: HashMap<(u8, u8), u16> = HashMap::new();
 
-  let re = Regex::new(r#"(\w+) to (\w+) = (\d+)"#).unwrap();
-  for (_, [from, to, path]) in re.captures_iter(input).map(|c| c.extract()) {
-    let from_id = id_for_city(&mut cities, from);
-    let to_id = id_for_city(&mut cities, to);
-    let Ok(path_size) = path.parse::<u16>() else {
-      panic!("Invalid number: {}", path);
-    };
+  input.lines().for_each(|line| {
+    let parts: Vec<_> = line.split_whitespace().collect();
+    assert_eq!(parts.len(), 5);
+    let from_id = id_for_city(&mut cities, parts[0]);
+    let to_id = id_for_city(&mut cities, parts[2]);
+    let path_size = parts[4].parse::<u16>().unwrap();
     paths.insert((from_id, to_id), path_size);
     paths.insert((to_id, from_id), path_size);
-  }
+  });
 
   let mut cities_ids = cities.values().cloned().collect::<Vec<u8>>();
   cities_ids.sort();

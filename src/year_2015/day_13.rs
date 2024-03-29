@@ -1,24 +1,14 @@
 //! Advent of Code 2015: Day 13: Knights of the Dinner Table
 
-use regex::Regex;
 use std::collections::HashMap;
 
-fn sort_tuple(lhp: u8, rhp: u8) -> (u8, u8) {
-  if lhp < rhp {
-    return (lhp, rhp);
-  }
-  (rhp, lhp)
-}
-
 fn parse_line(input: &str) -> ((String, String), i16) {
-  let parser: Regex =
-    Regex::new(r#"(\w+) would (\w+) (\d+) happiness units by sitting next to (\w+)\."#).unwrap();
-  let Some(captures) = parser.captures(input) else {
-    panic!("Invalid input: {}", input);
-  };
-  let duet = (captures[1].to_string(), captures[4].to_string());
-  let mut value: i16 = captures[3].parse::<i16>().unwrap();
-  if captures[2] == *"lose" {
+  let input = input.strip_suffix('.').unwrap();
+  let parts: Vec<_> = input.split_whitespace().collect();
+  assert_eq!(parts.len(), 11);
+  let duet = (parts[0].to_string(), parts[10].to_string());
+  let mut value: i16 = parts[3].parse::<i16>().unwrap();
+  if parts[2] == "lose" {
     value *= -1;
   }
   (duet, value)
@@ -51,8 +41,8 @@ fn parse_input(input: &str) -> (Vec<u8>, HashMap<(u8, u8), i16>) {
     let ((lhp, rhp), happiness) = parse_line(line);
     let lhp_id = get_id_for_user(&mut users, lhp);
     let rhp_id = get_id_for_user(&mut users, rhp);
-    let people = sort_tuple(lhp_id, rhp_id);
-    insert_happiness(&mut paths, people, happiness);
+    insert_happiness(&mut paths, (lhp_id, rhp_id), happiness);
+    insert_happiness(&mut paths, (rhp_id, lhp_id), happiness);
   }
   let mut users_ids = users.values().cloned().collect::<Vec<u8>>();
   users_ids.sort();
@@ -73,12 +63,9 @@ fn calculate_happiness(
   cur_hap: i16,
 ) -> i16 {
   fn get_happiness(paths: &HashMap<(u8, u8), i16>, lhp: &u8, rhp: &u8) -> i16 {
-    let users = sort_tuple(*lhp, *rhp);
-    match paths.get(&users) {
+    match paths.get(&(*lhp, *rhp)) {
       Some(happiness) => *happiness,
-      None => {
-        panic!("No friendship for {}-{}", lhp, rhp);
-      }
+      None => panic!("No friendship for {}-{}", lhp, rhp),
     }
   }
 
@@ -106,6 +93,7 @@ pub fn day_13_v2(input: impl Into<String>) -> i16 {
   let my_user_id = users_ids.len() as u8;
   for lhp in 0..my_user_id {
     paths.insert((lhp, my_user_id), 0);
+    paths.insert((my_user_id, lhp), 0);
   }
   users_ids.push(my_user_id);
   let friends_left = remove_user_id_from_vec(&users_ids, &0);
@@ -181,7 +169,7 @@ mod tests {
 
   #[test]
   fn works_with_samples_v1() {
-    let sample = r#"Alice would gain 54 happiness units by sitting next to Bob.\n\
+    let sample = "Alice would gain 54 happiness units by sitting next to Bob.\n\
       Alice would lose 79 happiness units by sitting next to Carol.\n\
       Alice would lose 2 happiness units by sitting next to David.\n\
       Bob would gain 83 happiness units by sitting next to Alice.\n\
@@ -192,7 +180,7 @@ mod tests {
       Carol would gain 55 happiness units by sitting next to David.\n\
       David would gain 46 happiness units by sitting next to Alice.\n\
       David would lose 7 happiness units by sitting next to Bob.\n\
-      David would gain 41 happiness units by sitting next to Carol.\n\"#;
+      David would gain 41 happiness units by sitting next to Carol.\n";
     assert_eq!(day_13_v1(sample), 330);
   }
 }

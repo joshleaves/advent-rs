@@ -44,44 +44,50 @@
 fn string_is_nice_v1(input: &str) -> bool {
   let mut vowels: u8 = 0;
   let mut repeated = false;
-  let no_naughty_sequences = input.chars().try_fold(' ', |acc, elt| {
-    if acc == 'a' && elt == 'b' {
+  let no_naughty_sequences = input.bytes().try_fold(0, |acc, elt| {
+    if elt == acc + 1 && matches!(acc, b'a' | b'c' | b'p' | b'x') {
       return Err('-');
     }
-    if acc == 'c' && elt == 'd' {
-      return Err('-');
-    }
-    if acc == 'p' && elt == 'q' {
-      return Err('-');
-    }
-    if acc == 'x' && elt == 'y' {
-      return Err('-');
-    }
+
     if acc == elt {
       repeated = true
     }
-    if elt == 'a' || elt == 'e' || elt == 'i' || elt == 'o' || elt == 'u' {
+    if ((2130466 >> (elt & 31)) & 1) == 1 {
       vowels += 1
     }
     Ok(elt)
   });
-  no_naughty_sequences != Err('-') && repeated && vowels >= 3
+  no_naughty_sequences.is_ok() && repeated && vowels >= 3
 }
 
 fn string_is_nice_v2(input: &str) -> bool {
   let mut twice_pair = false;
   let mut repeated = false;
-  let letters: Vec<_> = input.as_bytes().to_vec();
-  for i in 0..(input.len() - 2) {
-    if letters[i] == letters[i + 2] {
+  let mut letters = input.bytes();
+  while let Some(chr) = letters.next() {
+    let mut letters_cp = letters.clone().peekable();
+    let Some(second) = letters_cp.next() else {
+      break;
+    };
+    let Some(third) = letters_cp.peek() else {
+      break;
+    };
+    if chr == *third {
       repeated = true;
+      if twice_pair {
+        return true;
+      }
     }
-    if twice_pair {
-      continue;
-    }
-    for j in i + 2..input.len() - 1 {
-      if letters[i] == letters[j] && letters[i + 1] == letters[j + 1] {
+    while let Some(right_chr) = letters_cp.next() {
+      let Some(right_second) = letters_cp.peek() else {
+        break;
+      };
+      if chr == right_chr && second == *right_second {
+        if repeated {
+          return true;
+        }
         twice_pair = true;
+        break;
       }
     }
   }

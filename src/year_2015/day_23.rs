@@ -18,7 +18,6 @@ struct Program {
 
 impl Program {
   fn run(&mut self) {
-    // while self.pc < (self.instructions.len() as i8) {
     while (self.pc as usize) < self.instructions.len() {
       match self.instructions[self.pc as usize] {
         Instruction::Half(register) => {

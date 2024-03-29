@@ -42,7 +42,7 @@ fn move_character(pos: &mut (i8, i8), direction: u8) {
     b'<' => pos.0 -= 1,
     b'v' => pos.1 += 1,
     b'^' => pos.1 -= 1,
-    _ => panic!("Invalid direction character: {direction}"),
+    _ => (),
   }
   // pos
 }

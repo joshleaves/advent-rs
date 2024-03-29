@@ -15,22 +15,27 @@ fn solve(numbers: &[u64], magic: u64) -> u64 {
     .unwrap()
 }
 
-fn parse_input(input: &str) -> Vec<u64> {
-  input
-    .lines()
-    .map(|line| line.parse::<u64>().unwrap())
-    .collect()
-}
+// fn parse_input(input: &str) -> Vec<u64> {
+//   input.lines().map(|l| l.parse::<u64>().unwrap()).collect()
+// }
 
 pub fn day_24_v1(input: impl Into<String>) -> u64 {
-  let numbers = parse_input(&input.into());
+  let numbers: Vec<u64> = input
+    .into()
+    .lines()
+    .map(|line| line.parse::<u64>().unwrap())
+    .collect();
   let magic = numbers.iter().sum::<u64>() / 3;
 
   solve(&numbers, magic)
 }
 
 pub fn day_24_v2(input: impl Into<String>) -> u64 {
-  let numbers = parse_input(&input.into());
+  let numbers: Vec<u64> = input
+    .into()
+    .lines()
+    .map(|line| line.parse::<u64>().unwrap())
+    .collect();
   let magic = numbers.iter().sum::<u64>() / 4;
 
   solve(&numbers, magic)

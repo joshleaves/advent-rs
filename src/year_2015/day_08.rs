@@ -1,5 +1,7 @@
 //! Advent of Code 2015: Day 8: Matchsticks
 
+/// Tip: you can cheat here:
+/// `line.len() as u16`
 fn memory_line_len(line: &str) -> u16 {
   let mut line_len = line.len() as u16 - 2;
   let mut idx: usize = 1;

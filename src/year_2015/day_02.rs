@@ -28,7 +28,8 @@
 //! > How many total feet of ribbon should they order?
 //! >
 //! > Your puzzle answer was ~~`REDACTED`~~.
-//!
+
+use itertools::Itertools;
 
 #[derive(Debug, PartialEq)]
 struct PresentBox {
@@ -39,16 +40,17 @@ struct PresentBox {
 
 impl PresentBox {
   fn new(input: &str) -> Self {
-    let mut nums: Vec<u16> = input
+    let numbers: Vec<u16> = input
       .split('x')
       .map(|num| num.parse::<u16>().unwrap())
+      .sorted()
       .collect();
-    nums.sort();
+    assert_eq!(numbers.len(), 3);
 
     PresentBox {
-      height: nums[0],
-      width: nums[1],
-      length: nums[2],
+      height: numbers[0],
+      width: numbers[1],
+      length: numbers[2],
     }
   }
 
@@ -64,7 +66,7 @@ impl PresentBox {
     self.length * self.height
   }
 
-  fn wrapper(&self) -> u16 {
+  fn wrapping_paper(&self) -> u16 {
     (3 * self.area_small()) + (2 * self.area_med()) + (2 * self.area_large())
   }
 
@@ -77,7 +79,7 @@ pub fn day_02_v1(input: impl Into<String>) -> u32 {
   input
     .into()
     .lines()
-    .map(|line| PresentBox::new(line).wrapper() as u32)
+    .map(|line| PresentBox::new(line).wrapping_paper() as u32)
     .sum()
 }
 

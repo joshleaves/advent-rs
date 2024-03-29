@@ -67,13 +67,7 @@ impl Instruction {
         modify_grid(light_grid, *from, *to, |lights: &[u8], _length: usize| {
           lights
             .iter()
-            .map(|c| {
-              if let Some(res) = c.checked_sub(1) {
-                res
-              } else {
-                0
-              }
-            })
+            .map(|c| std::cmp::max(0, *c as i8 - 1) as u8)
             .collect()
         })
       }

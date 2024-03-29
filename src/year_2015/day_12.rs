@@ -111,7 +111,7 @@ pub fn day_12_v1(input: impl Into<String>) -> i32 {
 }
 
 pub fn day_12_v2(input: impl Into<String>) -> i32 {
-  let bytes = input.into().as_bytes().to_vec();
+  let bytes = input.into().into_bytes();
   match bytes[0] {
     b'{' => traverse_node_hash(&bytes, 0).0,
     b'[' => traverse_node_array(&bytes, 0).0,

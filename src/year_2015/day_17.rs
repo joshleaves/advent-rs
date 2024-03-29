@@ -16,17 +16,20 @@ fn build_solutions_v1(liters: u16, containers: &[u16]) -> u16 {
 }
 
 fn build_solutions_v2(liters: u16, containers: &[u16]) -> u16 {
-  let mut answers = 0;
-  let mut sol_len = 2;
-  while answers == 0 && sol_len < containers.len() {
-    answers = containers
-      .iter()
-      .combinations(sol_len)
-      .filter(|combo| combo.iter().map(|c| **c).sum::<u16>() == liters)
-      .count() as u16;
-    sol_len += 1;
-  }
-  answers
+  (2..containers.len())
+    .find_map(|sol_len| {
+      let answers = containers
+        .iter()
+        .combinations(sol_len)
+        .filter(|combo| combo.iter().map(|c| **c).sum::<u16>() == liters)
+        .count() as u16;
+      if answers == 0 {
+        None
+      } else {
+        Some(answers)
+      }
+    })
+    .unwrap()
 }
 
 /// Solve exercise for year 2015, day 17 (part 1).
@@ -35,7 +38,6 @@ pub fn day_17_v1(input: impl Into<String>) -> u16 {
     .into()
     .lines()
     .map(|line| line.parse::<u16>().unwrap())
-    // .sorted()
     .collect();
   build_solutions_v1(EGGNOG_LITERS, &containers)
 }

@@ -1,5 +1,4 @@
 use itertools::Itertools;
-use regex::Regex;
 use std::collections::BTreeSet;
 use std::collections::HashMap;
 use std::collections::HashSet;
@@ -9,20 +8,35 @@ fn parse_world(input: &str) -> Vec<u8> {
   let mut chips: HashMap<&str, u8> = HashMap::new();
   let mut gens: HashMap<&str, u8> = HashMap::new();
   let mut alltypes: BTreeSet<&str> = BTreeSet::new();
-  let re_chips: Regex = Regex::new(r"(\w+)-compatible").unwrap();
-  let re_gens: Regex = Regex::new(r"(\w+) generator").unwrap();
 
-  for (floor, line) in input.lines().enumerate() {
-    for (_, [capture]) in re_chips.captures_iter(line).map(|c| c.extract()) {
-      alltypes.insert(capture);
-      chips.insert(capture, floor as u8);
+  // for (floor, line) in
+  input.lines().enumerate().for_each(|(floor, line)| {
+    let mut parts: Vec<_> = line.split_whitespace().collect();
+    if parts.len() == 6 {
+      return;
     }
-    for (_, [capture]) in re_gens.captures_iter(line).map(|c| c.extract()) {
-      alltypes.insert(capture);
-      gens.insert(capture, floor as u8);
+    for _ in 0..=3 {
+      parts.remove(0);
     }
-  }
-  // alltypes.sort()
+    while !parts.is_empty() {
+      let word = parts.remove(0);
+      match word {
+        "a" | "and" => (),
+        "generator" | "generator," | "generator." => (),
+        "microchip" | "microchip," | "microchip." => (),
+        _ => {
+          if let Some(chip) = word.strip_suffix("-compatible") {
+            alltypes.insert(chip);
+            chips.insert(chip, floor as u8);
+          } else {
+            alltypes.insert(word);
+            gens.insert(word, floor as u8);
+          }
+        }
+      }
+    }
+  });
+
   for element in alltypes {
     result.push(*chips.get(element).unwrap());
     result.push(*gens.get(element).unwrap());
@@ -31,6 +45,7 @@ fn parse_world(input: &str) -> Vec<u8> {
   result
 }
 
+#[inline]
 fn state_is_safe(state: &[u8]) -> bool {
   let pairs: Vec<Vec<u8>> = state[1..].chunks(2).map(|s| s.into()).collect();
   for (idx_out, pair_out) in pairs.iter().enumerate() {
@@ -50,6 +65,7 @@ fn state_is_safe(state: &[u8]) -> bool {
   true
 }
 
+#[inline]
 fn next_moves_from(current_state: &[u8], idx: usize, go_up: bool) -> Vec<Vec<u8>> {
   let mut new_moves: Vec<Vec<u8>> = vec![];
   let mut new_state: Vec<u8> = current_state.to_owned();
