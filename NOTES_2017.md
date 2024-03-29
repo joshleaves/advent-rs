@@ -59,3 +59,7 @@ The maths were a bit annoying on this one, and I was hoping for a specific mathe
 ## Day 14: Disk Defragmentation
 
 I kinda liked this one.
+
+## Day 15: Dueling Generators
+
+The most interesting part of these exercises is often [all the obscure maths you can leanr about](https://www.reddit.com/r/adventofcode/comments/7jyz5x/2017_day_15_opportunities_for_optimization/drasfzr/?context=3), in that case [Mersenne prime](https://en.wikipedia.org/wiki/Mersenne_prime). But the peculiarities of the number used for the remainder [should have been obvious to people who wrote a lot of C](https://doc.rust-lang.org/std/i32/constant.MAX.html).

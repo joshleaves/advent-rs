@@ -1,6 +1,6 @@
 [package]
 name = "advent-rs"
-version = "2017.14.1"
+version = "2017.15.1"
 edition = "2021"
 authors = ["Arnaud 'red' Rouyer"]
 readme = "README.md"
@@ -32,10 +32,10 @@ clap = { version = "4.5.1", features = ["derive"] }
 itertools = "0.12.1"
 md-5 = "0.10.6"
 mutants = "0.0.3"
-regex = "1.10.3"
 
 [dev-dependencies]
 assert_cmd = "2.0.13"
+regex = "1.10.3"
 predicates = "3.1.0"
 criterion = { version = "0.5.1", features = ["html_reports"] }
 
