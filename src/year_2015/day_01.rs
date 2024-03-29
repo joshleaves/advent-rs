@@ -187,7 +187,6 @@ mod tests {
       ("()())", 5),
     ];
     for (sample, result) in sample_two.iter() {
-      println!("Test: {}", sample);
       assert_eq!(day_01_v2(*sample), *result);
     }
   }

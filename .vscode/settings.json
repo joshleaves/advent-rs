@@ -3,10 +3,6 @@
     "inputs/year_*/day_*_input": true
   },
   "rust-analyzer.linkedProjects": [
-    "./Cargo.toml",
-    "./Cargo.toml",
-    "./Cargo.toml",
-    "./Cargo.toml",
     "./Cargo.toml"
   ]
 }

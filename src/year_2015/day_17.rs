@@ -1,76 +1,56 @@
 //! Advent of Code 2015: Day 17: No Such Thing as Too Much
 
-const EGGNOG_LITERS: usize = 150;
+use itertools::Itertools;
 
-fn build_combinations(
-  liters: usize,
-  containers_left: Vec<usize>,
-  containers_build: Vec<usize>,
-) -> Vec<Vec<usize>> {
-  let mut solutions: Vec<Vec<usize>> = vec![];
-  let container_size: usize = containers_build.iter().sum::<usize>();
-  if container_size >= liters || containers_left.is_empty() {
-    if container_size == liters {
-      solutions.push(containers_build);
+const EGGNOG_LITERS: u16 = 150;
+
+fn build_solutions_v1(liters: u16, containers: &[u16]) -> u16 {
+  let mut answers = vec![0; (liters + 1) as usize];
+  answers[0] = 1;
+  for container_size in containers {
+    for next_size in (*container_size..=liters).rev() {
+      answers[next_size as usize] += answers[(next_size - container_size) as usize];
     }
-    return solutions;
   }
-  for idx in 0..containers_left.len() {
-    let next_containers_left: Vec<usize> = containers_left[idx + 1..].to_owned();
-    let mut next_containers_build: Vec<usize> = containers_build.clone();
-    next_containers_build.push(containers_left[idx]);
-    let mut new_solutions = build_combinations(liters, next_containers_left, next_containers_build);
-    solutions.append(&mut new_solutions);
-  }
-
-  solutions
+  answers[liters as usize]
 }
 
-fn build_solutions(liters: usize, containers: &[usize]) -> Vec<Vec<usize>> {
-  let mut solutions: Vec<Vec<usize>> = vec![];
-  let mut start: usize = 0;
-  loop {
-    if containers[start..].iter().sum::<usize>() < liters {
-      return solutions;
-    }
-    let containers_left: Vec<usize> = containers[start + 1..].to_owned();
-    let containers_build: Vec<usize> = vec![containers[start]];
-    let mut new_solutions = build_combinations(liters, containers_left, containers_build);
-    solutions.append(&mut new_solutions);
-    start += 1;
+fn build_solutions_v2(liters: u16, containers: &[u16]) -> u16 {
+  let mut answers = 0;
+  let mut sol_len = 2;
+  while answers == 0 && sol_len < containers.len() {
+    answers = containers
+      .iter()
+      .combinations(sol_len)
+      .filter(|combo| combo.iter().map(|c| **c).sum::<u16>() == liters)
+      .count() as u16;
+    sol_len += 1;
   }
+  answers
 }
 
 /// Solve exercise for year 2015, day 17 (part 1).
-pub fn day_17_v1(input: impl Into<String>) -> usize {
-  let containers: Vec<usize> = input
+pub fn day_17_v1(input: impl Into<String>) -> u16 {
+  let containers: Vec<u16> = input
     .into()
     .lines()
-    .map(|line| line.parse::<usize>().unwrap())
+    .map(|line| line.parse::<u16>().unwrap())
+    // .sorted()
     .collect();
-  let solutions = build_solutions(EGGNOG_LITERS, &containers);
-
-  solutions.len()
+  build_solutions_v1(EGGNOG_LITERS, &containers)
 }
 
 /// Solve exercise for year 2015, day 17 (part 2).
-pub fn day_17_v2(input: impl Into<String>) -> usize {
-  let containers: Vec<usize> = input
+pub fn day_17_v2(input: impl Into<String>) -> u16 {
+  let containers: Vec<u16> = input
     .into()
     .lines()
-    .map(|line| line.parse::<usize>().unwrap())
+    .map(|line| line.parse::<u16>().unwrap())
     .collect();
-  // let containers: Vec<usize> = parse_file(input.into());
-  let mut solutions = build_solutions(EGGNOG_LITERS, &containers);
-  let Some(min_solution) = solutions.iter().map(|s| s.len()).min() else {
-    panic!("No minimum size: {:?}", solutions)
-  };
-  solutions.retain(|s| s.len() == min_solution);
-
-  solutions.len()
+  build_solutions_v2(EGGNOG_LITERS, &containers)
 }
 
-solvable!(day_17, day_17_v1, day_17_v2, usize);
+solvable!(day_17, day_17_v1, day_17_v2, u16);
 
 #[cfg(test)]
 mod tests {
@@ -78,19 +58,13 @@ mod tests {
 
   #[test]
   fn works_with_samples_v1() {
-    let sample: Vec<usize> = vec![20, 15, 10, 5, 5];
-    let solutions = build_solutions(25, &sample);
-    assert_eq!(solutions.len(), 4);
+    let sample: Vec<u16> = vec![5, 5, 10, 15, 20];
+    assert_eq!(build_solutions_v1(25, &sample), 4);
   }
 
   #[test]
   fn works_with_samples_v2() {
-    let sample: Vec<usize> = vec![20, 15, 10, 5, 5];
-    let mut solutions = build_solutions(25, &sample);
-    let Some(min_solution) = solutions.iter().map(|s| s.len()).min() else {
-      panic!("No minimum size: {:?}", solutions)
-    };
-    solutions.retain(|s| s.len() == min_solution);
-    assert_eq!(solutions.len(), 3);
+    let sample: Vec<u16> = vec![20, 15, 10, 5, 5];
+    assert_eq!(build_solutions_v2(25, &sample), 3);
   }
 }

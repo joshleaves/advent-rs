@@ -3,33 +3,23 @@
 use itertools::Itertools;
 
 fn solve(numbers: &[u64], magic: u64) -> u64 {
-  let mut combos: Vec<Vec<&u64>> = vec![];
-  for i in 1..=numbers.len() {
-    let mut results: Vec<Vec<&u64>> = numbers.iter().combinations(i).collect_vec();
-    results.retain(|arr| arr.iter().copied().sum::<u64>() == magic);
-    if !results.is_empty() {
-      combos = results;
-      break;
-    }
-  }
-  let combos_values: Vec<u64> = combos
-    .iter()
-    .map(|combo| combo.iter().fold(1, |acc, elt| acc * *elt))
-    .collect_vec();
-
-  *combos_values.iter().min().unwrap()
+  (2..=numbers.len())
+    .find_map(|i| {
+      numbers
+        .iter()
+        .combinations(i)
+        .filter(|arr| arr.iter().copied().sum::<u64>() == magic)
+        .map(|combo| combo.iter().copied().product::<u64>())
+        .min()
+    })
+    .unwrap()
 }
 
 fn parse_input(input: &str) -> Vec<u64> {
-  let mut numbers: Vec<u64> = vec![];
-  for line in input.lines() {
-    let Ok(number) = line.parse::<u64>() else {
-      panic!("Invalid input: {}", line)
-    };
-    numbers.push(number);
-  }
-
-  numbers
+  input
+    .lines()
+    .map(|line| line.parse::<u64>().unwrap())
+    .collect()
 }
 
 pub fn day_24_v1(input: impl Into<String>) -> u64 {
