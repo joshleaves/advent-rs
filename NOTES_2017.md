@@ -67,3 +67,7 @@ The most interesting part of these exercises is often [all the obscure maths you
 ## Day 16: Permutation Promenade
 
 Nothing hard, until you see how much ONE BILLION ITERATIONS actually is. Good news though: "All loops are about knowing when to stop". In that case, we can just...look for a repetition of the pattern.
+
+## Day 17: Spinlock
+
+As always, there's a trick to avoid looping too much: since `0` is ALWAYS at the 0th position, we just have to store the last number we are inserting  (allegedly, no need to allocate a real Vec) after it.
