@@ -15,6 +15,7 @@ use advent_rs::year_2017::day_14;
 use advent_rs::year_2017::day_15;
 use advent_rs::year_2017::day_16;
 use advent_rs::year_2017::day_17;
+use advent_rs::year_2017::day_18;
 use criterion::{black_box, criterion_group, criterion_main, Criterion};
 
 fn year_2017_day_01(c: &mut Criterion) {
@@ -275,6 +276,21 @@ fn year_2017_day_17(c: &mut Criterion) {
   g2017_day_17.finish();
 }
 
+fn year_2017_day_18(c: &mut Criterion) {
+  let input_day_18 = include_str!("../inputs/year_2017/day_18_input");
+  assert_eq!(day_18::day_18_v1(input_day_18), 1_187);
+  assert_eq!(day_18::day_18_v2(input_day_18), 5_969);
+
+  let mut g2017_day_18 = c.benchmark_group("year_2017::day_18");
+  g2017_day_18.bench_function("year_2017::day_18_v1", |b| {
+    b.iter(|| day_18::day_18_v1(black_box(input_day_18)))
+  });
+  g2017_day_18.bench_function("year_2017::day_18_v2", |b| {
+    b.iter(|| day_18::day_18_v2(black_box(input_day_18)))
+  });
+  g2017_day_18.finish();
+}
+
 criterion_group!(
   benches,
   year_2017_day_01,
@@ -293,6 +309,7 @@ criterion_group!(
   year_2017_day_14,
   year_2017_day_15,
   year_2017_day_16,
-  year_2017_day_17
+  year_2017_day_17,
+  year_2017_day_18
 );
 criterion_main!(benches);
