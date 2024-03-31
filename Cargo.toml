@@ -55,9 +55,6 @@ harness = false
 name = "year_2016"
 harness = false
 # [[bench]]
-# name = "year_2016_day_04"
-# harness = false
-# [[bench]]
 # name = "year_2016_day_09"
 # harness = false
 [[bench]]

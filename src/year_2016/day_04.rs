@@ -2,6 +2,16 @@ use itertools::Itertools;
 
 const NOS: &[u8] = b"northpole object storage";
 
+#[inline]
+pub fn parse_line(input: &str) -> (&str, u32, &str) {
+  let input = input.strip_suffix(']').unwrap();
+  let (input, checksum) = input.rsplit_once('[').unwrap();
+  let (input, value_str) = input.rsplit_once('-').unwrap();
+  let value = value_str.parse::<u32>().unwrap();
+
+  (input, value, checksum)
+}
+
 fn verify_checksum(checksum: &str, input: &str) -> bool {
   input
     .chars()
@@ -35,26 +45,19 @@ fn verify_translation(input: &str, value: u32, reference: &[u8]) -> bool {
   true
 }
 
-#[inline]
-fn parse_line(input: &str) -> (&str, u32, &str) {
-  let input = input.strip_suffix(']').unwrap();
-  let (input, checksum) = input.rsplit_once('[').unwrap();
-  let (input, value_str) = input.rsplit_once('-').unwrap();
-  let value = value_str.parse::<u32>().unwrap();
-
-  (input, value, checksum)
-}
-
 pub fn day_04_v1(input: impl Into<String>) -> u32 {
-  let mut result: u32 = 0;
-  for line in input.into().lines() {
-    let (letters, value, checksum) = parse_line(line);
-    if verify_checksum(checksum, letters) {
-      result += value
-    }
-  }
-
-  result
+  input
+    .into()
+    .lines()
+    .filter_map(|line| {
+      let (letters, value, checksum) = parse_line(line);
+      if verify_checksum(checksum, letters) {
+        Some(value)
+      } else {
+        None
+      }
+    })
+    .sum()
 }
 
 pub fn day_04_v2(input: impl Into<String>) -> u32 {
