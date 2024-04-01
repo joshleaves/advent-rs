@@ -71,3 +71,11 @@ Nothing hard, until you see how much ONE BILLION ITERATIONS actually is. Good ne
 ## Day 17: Spinlock
 
 As always, there's a trick to avoid looping too much: since `0` is ALWAYS at the 0th position, we just have to store the last number we are inserting  (allegedly, no need to allocate a real Vec) after it.
+
+## Day 18: Duet
+
+Threading is a bitch.
+
+## Day 19: A Series of Tubes
+
+Worse than maps? Maps that aren't reliably readable by machines.

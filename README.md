@@ -7,7 +7,7 @@ As I said, [Consistency is hard](https://github.com/joshleaves/advent-rb), and I
 I'm also adding notes that may be useful if you're (like me) discovering Rust:
 - [2015, complete!](NOTES_2015.md)
 - [2016, complete!](NOTES_2016.md)
-- [2017, up to day 18](NOTES_2017.md)
+- [2017, up to day 19](NOTES_2017.md)
 
 # Regarding style rules
 I'm gonna use a mix of what `cargo fmt` does, with some stuff that feels more natural to me.

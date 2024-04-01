@@ -16,279 +16,292 @@ use advent_rs::year_2017::day_15;
 use advent_rs::year_2017::day_16;
 use advent_rs::year_2017::day_17;
 use advent_rs::year_2017::day_18;
+use advent_rs::year_2017::day_19;
 use criterion::{black_box, criterion_group, criterion_main, Criterion};
 
 fn year_2017_day_01(c: &mut Criterion) {
-  let input_day_01 = include_str!("../inputs/year_2017/day_01_input");
-  assert_eq!(day_01::day_01_v1(input_day_01), 1_069);
-  assert_eq!(day_01::day_01_v2(input_day_01), 1_268);
+  let input = include_str!("../inputs/year_2017/day_01_input");
+  assert_eq!(day_01::day_01_v1(input), 1_069);
+  assert_eq!(day_01::day_01_v2(input), 1_268);
 
   let mut g2017_day_01 = c.benchmark_group("year_2017::day_01");
   g2017_day_01.bench_function("year_2017::day_01_v1", |b| {
-    b.iter(|| day_01::day_01_v1(black_box(input_day_01)))
+    b.iter(|| day_01::day_01_v1(black_box(input)))
   });
   g2017_day_01.bench_function("year_2017::day_01_v2", |b| {
-    b.iter(|| day_01::day_01_v2(black_box(input_day_01)))
+    b.iter(|| day_01::day_01_v2(black_box(input)))
   });
   g2017_day_01.finish();
 }
 
 fn year_2017_day_02(c: &mut Criterion) {
-  let input_day_02 = include_str!("../inputs/year_2017/day_02_input");
-  assert_eq!(day_02::day_02_v1(input_day_02), 53_978);
-  assert_eq!(day_02::day_02_v2(input_day_02), 314);
+  let input = include_str!("../inputs/year_2017/day_02_input");
+  assert_eq!(day_02::day_02_v1(input), 53_978);
+  assert_eq!(day_02::day_02_v2(input), 314);
 
   let mut g2017_day_02 = c.benchmark_group("year_2017::day_02");
   g2017_day_02.bench_function("year_2017::day_02_v1", |b| {
-    b.iter(|| day_02::day_02_v1(black_box(input_day_02)))
+    b.iter(|| day_02::day_02_v1(black_box(input)))
   });
   g2017_day_02.bench_function("year_2017::day_02_v2", |b| {
-    b.iter(|| day_02::day_02_v2(black_box(input_day_02)))
+    b.iter(|| day_02::day_02_v2(black_box(input)))
   });
   g2017_day_02.finish();
 }
 
 fn year_2017_day_03(c: &mut Criterion) {
-  let input_day_03 = include_str!("../inputs/year_2017/day_03_input");
-  assert_eq!(day_03::day_03_v1(input_day_03), 552);
-  assert_eq!(day_03::day_03_v2(input_day_03), 330_785);
+  let input = include_str!("../inputs/year_2017/day_03_input");
+  assert_eq!(day_03::day_03_v1(input), 552);
+  assert_eq!(day_03::day_03_v2(input), 330_785);
 
   let mut g2017_day_03 = c.benchmark_group("year_2017::day_03");
   g2017_day_03.bench_function("year_2017::day_03_v1", |b| {
-    b.iter(|| day_03::day_03_v1(black_box(input_day_03)))
+    b.iter(|| day_03::day_03_v1(black_box(input)))
   });
   g2017_day_03.bench_function("year_2017::day_03_v2", |b| {
-    b.iter(|| day_03::day_03_v2(black_box(input_day_03)))
+    b.iter(|| day_03::day_03_v2(black_box(input)))
   });
   g2017_day_03.finish();
 }
 
 fn year_2017_day_04(c: &mut Criterion) {
-  let input_day_04 = include_str!("../inputs/year_2017/day_04_input");
-  assert_eq!(day_04::day_04_v1(input_day_04), 466);
-  assert_eq!(day_04::day_04_v2(input_day_04), 251);
+  let input = include_str!("../inputs/year_2017/day_04_input");
+  assert_eq!(day_04::day_04_v1(input), 466);
+  assert_eq!(day_04::day_04_v2(input), 251);
 
   let mut g2017_day_04 = c.benchmark_group("year_2017::day_04");
   g2017_day_04.bench_function("year_2017::day_04_v1", |b| {
-    b.iter(|| day_04::day_04_v1(black_box(input_day_04)))
+    b.iter(|| day_04::day_04_v1(black_box(input)))
   });
   g2017_day_04.bench_function("year_2017::day_04_v2", |b| {
-    b.iter(|| day_04::day_04_v2(black_box(input_day_04)))
+    b.iter(|| day_04::day_04_v2(black_box(input)))
   });
   g2017_day_04.finish();
 }
 
 fn year_2017_day_05(c: &mut Criterion) {
-  let input_day_05 = include_str!("../inputs/year_2017/day_05_input");
-  assert_eq!(day_05::day_05_v1(input_day_05), 373_160);
-  assert_eq!(day_05::day_05_v2(input_day_05), 26_395_586);
+  let input = include_str!("../inputs/year_2017/day_05_input");
+  assert_eq!(day_05::day_05_v1(input), 373_160);
+  assert_eq!(day_05::day_05_v2(input), 26_395_586);
 
   let mut g2017_day_05 = c.benchmark_group("year_2017::day_05");
   g2017_day_05.bench_function("year_2017::day_05_v1", |b| {
-    b.iter(|| day_05::day_05_v1(black_box(input_day_05)))
+    b.iter(|| day_05::day_05_v1(black_box(input)))
   });
   g2017_day_05.bench_function("year_2017::day_05_v2", |b| {
-    b.iter(|| day_05::day_05_v2(black_box(input_day_05)))
+    b.iter(|| day_05::day_05_v2(black_box(input)))
   });
   g2017_day_05.finish();
 }
 
 fn year_2017_day_06(c: &mut Criterion) {
-  let input_day_06 = include_str!("../inputs/year_2017/day_06_input");
-  assert_eq!(day_06::day_06_v1(input_day_06), 11_137);
-  assert_eq!(day_06::day_06_v2(input_day_06), 1_037);
+  let input = include_str!("../inputs/year_2017/day_06_input");
+  assert_eq!(day_06::day_06_v1(input), 11_137);
+  assert_eq!(day_06::day_06_v2(input), 1_037);
 
   let mut g2017_day_06 = c.benchmark_group("year_2017::day_06");
   g2017_day_06.bench_function("year_2017::day_06_v1", |b| {
-    b.iter(|| day_06::day_06_v1(black_box(input_day_06)))
+    b.iter(|| day_06::day_06_v1(black_box(input)))
   });
   g2017_day_06.bench_function("year_2017::day_06_v2", |b| {
-    b.iter(|| day_06::day_06_v2(black_box(input_day_06)))
+    b.iter(|| day_06::day_06_v2(black_box(input)))
   });
   g2017_day_06.finish();
 }
 
 fn year_2017_day_07(c: &mut Criterion) {
-  let input_day_07 = include_str!("../inputs/year_2017/day_07_input");
-  assert_eq!(day_07::day_07_v1(input_day_07), "ykpsek");
-  assert_eq!(day_07::day_07_v2(input_day_07), "1060");
+  let input = include_str!("../inputs/year_2017/day_07_input");
+  assert_eq!(day_07::day_07_v1(input), "ykpsek");
+  assert_eq!(day_07::day_07_v2(input), "1060");
 
   let mut g2017_day_07 = c.benchmark_group("year_2017::day_07");
   g2017_day_07.bench_function("year_2017::day_07_v1", |b| {
-    b.iter(|| day_07::day_07_v1(black_box(input_day_07)))
+    b.iter(|| day_07::day_07_v1(black_box(input)))
   });
   g2017_day_07.bench_function("year_2017::day_07_v2", |b| {
-    b.iter(|| day_07::day_07_v2(black_box(input_day_07)))
+    b.iter(|| day_07::day_07_v2(black_box(input)))
   });
   g2017_day_07.finish();
 }
 
 fn year_2017_day_08(c: &mut Criterion) {
-  let input_day_08 = include_str!("../inputs/year_2017/day_08_input");
-  assert_eq!(day_08::day_08_v1(input_day_08), 4_163);
-  assert_eq!(day_08::day_08_v2(input_day_08), 5_347);
+  let input = include_str!("../inputs/year_2017/day_08_input");
+  assert_eq!(day_08::day_08_v1(input), 4_163);
+  assert_eq!(day_08::day_08_v2(input), 5_347);
 
   let mut g2017_day_08 = c.benchmark_group("year_2017::day_08");
   g2017_day_08.bench_function("year_2017::day_08_v1", |b| {
-    b.iter(|| day_08::day_08_v1(black_box(input_day_08)))
+    b.iter(|| day_08::day_08_v1(black_box(input)))
   });
   g2017_day_08.bench_function("year_2017::day_08_v2", |b| {
-    b.iter(|| day_08::day_08_v2(black_box(input_day_08)))
+    b.iter(|| day_08::day_08_v2(black_box(input)))
   });
   g2017_day_08.finish();
 }
 
 fn year_2017_day_09(c: &mut Criterion) {
-  let input_day_09 = include_str!("../inputs/year_2017/day_09_input");
-  assert_eq!(day_09::day_09_v1(input_day_09), 17_537);
-  assert_eq!(day_09::day_09_v2(input_day_09), 7_539);
+  let input = include_str!("../inputs/year_2017/day_09_input");
+  assert_eq!(day_09::day_09_v1(input), 17_537);
+  assert_eq!(day_09::day_09_v2(input), 7_539);
 
   let mut g2017_day_09 = c.benchmark_group("year_2017::day_09");
   g2017_day_09.bench_function("year_2017::day_09_v1", |b| {
-    b.iter(|| day_09::day_09_v1(black_box(input_day_09)))
+    b.iter(|| day_09::day_09_v1(black_box(input)))
   });
   g2017_day_09.bench_function("year_2017::day_09_v2", |b| {
-    b.iter(|| day_09::day_09_v2(black_box(input_day_09)))
+    b.iter(|| day_09::day_09_v2(black_box(input)))
   });
   g2017_day_09.finish();
 }
 
 fn year_2017_day_10(c: &mut Criterion) {
-  let input_day_10 = include_str!("../inputs/year_2017/day_10_input");
-  assert_eq!(day_10::day_10_v1(input_day_10), "6909");
-  assert_eq!(
-    day_10::day_10_v2(input_day_10),
-    "9d5f4561367d379cfbf04f8c471c0095"
-  );
+  let input = include_str!("../inputs/year_2017/day_10_input");
+  assert_eq!(day_10::day_10_v1(input), "6909");
+  assert_eq!(day_10::day_10_v2(input), "9d5f4561367d379cfbf04f8c471c0095");
 
   let mut g2017_day_10 = c.benchmark_group("year_2017::day_10");
   g2017_day_10.bench_function("year_2017::day_10_v1", |b| {
-    b.iter(|| day_10::day_10_v1(black_box(input_day_10)))
+    b.iter(|| day_10::day_10_v1(black_box(input)))
   });
   g2017_day_10.bench_function("year_2017::day_10_v2", |b| {
-    b.iter(|| day_10::day_10_v2(black_box(input_day_10)))
+    b.iter(|| day_10::day_10_v2(black_box(input)))
   });
   g2017_day_10.finish();
 }
 
 fn year_2017_day_11(c: &mut Criterion) {
-  let input_day_11 = include_str!("../inputs/year_2017/day_11_input");
-  assert_eq!(day_11::day_11_v1(input_day_11), 682);
-  assert_eq!(day_11::day_11_v2(input_day_11), 1_406);
+  let input = include_str!("../inputs/year_2017/day_11_input");
+  assert_eq!(day_11::day_11_v1(input), 682);
+  assert_eq!(day_11::day_11_v2(input), 1_406);
 
   let mut g2017_day_11 = c.benchmark_group("year_2017::day_11");
   g2017_day_11.bench_function("year_2017::day_11_v1", |b| {
-    b.iter(|| day_11::day_11_v1(black_box(input_day_11)))
+    b.iter(|| day_11::day_11_v1(black_box(input)))
   });
   g2017_day_11.bench_function("year_2017::day_11_v2", |b| {
-    b.iter(|| day_11::day_11_v2(black_box(input_day_11)))
+    b.iter(|| day_11::day_11_v2(black_box(input)))
   });
   g2017_day_11.finish();
 }
 
 fn year_2017_day_12(c: &mut Criterion) {
-  let input_day_12 = include_str!("../inputs/year_2017/day_12_input");
-  assert_eq!(day_12::day_12_v1(input_day_12), 130);
-  assert_eq!(day_12::day_12_v2(input_day_12), 189);
+  let input = include_str!("../inputs/year_2017/day_12_input");
+  assert_eq!(day_12::day_12_v1(input), 130);
+  assert_eq!(day_12::day_12_v2(input), 189);
 
   let mut g2017_day_12 = c.benchmark_group("year_2017::day_12");
   g2017_day_12.bench_function("year_2017::day_12_v1", |b| {
-    b.iter(|| day_12::day_12_v1(black_box(input_day_12)))
+    b.iter(|| day_12::day_12_v1(black_box(input)))
   });
   g2017_day_12.bench_function("year_2017::day_12_v2", |b| {
-    b.iter(|| day_12::day_12_v2(black_box(input_day_12)))
+    b.iter(|| day_12::day_12_v2(black_box(input)))
   });
   g2017_day_12.finish();
 }
 
 fn year_2017_day_13(c: &mut Criterion) {
-  let input_day_13 = include_str!("../inputs/year_2017/day_13_input");
-  assert_eq!(day_13::day_13_v1(input_day_13), 2_264);
-  assert_eq!(day_13::day_13_v2(input_day_13), 3_875_838);
+  let input = include_str!("../inputs/year_2017/day_13_input");
+  assert_eq!(day_13::day_13_v1(input), 2_264);
+  assert_eq!(day_13::day_13_v2(input), 3_875_838);
 
   let mut g2017_day_13 = c.benchmark_group("year_2017::day_13");
   g2017_day_13.bench_function("year_2017::day_13_v1", |b| {
-    b.iter(|| day_13::day_13_v1(black_box(input_day_13)))
+    b.iter(|| day_13::day_13_v1(black_box(input)))
   });
   g2017_day_13.bench_function("year_2017::day_13_v2", |b| {
-    b.iter(|| day_13::day_13_v2(black_box(input_day_13)))
+    b.iter(|| day_13::day_13_v2(black_box(input)))
   });
   g2017_day_13.finish();
 }
 
 fn year_2017_day_14(c: &mut Criterion) {
-  let input_day_14 = include_str!("../inputs/year_2017/day_14_input");
-  assert_eq!(day_14::day_14_v1(input_day_14), 8_230);
-  assert_eq!(day_14::day_14_v2(input_day_14), 1_103);
+  let input = include_str!("../inputs/year_2017/day_14_input");
+  assert_eq!(day_14::day_14_v1(input), 8_230);
+  assert_eq!(day_14::day_14_v2(input), 1_103);
 
   let mut g2017_day_14 = c.benchmark_group("year_2017::day_14");
   g2017_day_14.bench_function("year_2017::day_14_v1", |b| {
-    b.iter(|| day_14::day_14_v1(black_box(input_day_14)))
+    b.iter(|| day_14::day_14_v1(black_box(input)))
   });
   g2017_day_14.bench_function("year_2017::day_14_v2", |b| {
-    b.iter(|| day_14::day_14_v2(black_box(input_day_14)))
+    b.iter(|| day_14::day_14_v2(black_box(input)))
   });
   g2017_day_14.finish();
 }
 
 fn year_2017_day_15(c: &mut Criterion) {
-  let input_day_15 = include_str!("../inputs/year_2017/day_15_input");
-  assert_eq!(day_15::day_15_v1(input_day_15), 567);
-  assert_eq!(day_15::day_15_v2(input_day_15), 323);
+  let input = include_str!("../inputs/year_2017/day_15_input");
+  assert_eq!(day_15::day_15_v1(input), 567);
+  assert_eq!(day_15::day_15_v2(input), 323);
 
   let mut g2017_day_15 = c.benchmark_group("year_2017::day_15");
   g2017_day_15.bench_function("year_2017::day_15_v1", |b| {
-    b.iter(|| day_15::day_15_v1(black_box(input_day_15)))
+    b.iter(|| day_15::day_15_v1(black_box(input)))
   });
   g2017_day_15.bench_function("year_2017::day_15_v2", |b| {
-    b.iter(|| day_15::day_15_v2(black_box(input_day_15)))
+    b.iter(|| day_15::day_15_v2(black_box(input)))
   });
   g2017_day_15.finish();
 }
 
 fn year_2017_day_16(c: &mut Criterion) {
-  let input_day_16 = include_str!("../inputs/year_2017/day_16_input");
-  assert_eq!(day_16::day_16_v1(input_day_16), "lgpkniodmjacfbeh");
-  assert_eq!(day_16::day_16_v2(input_day_16), "hklecbpnjigoafmd");
+  let input = include_str!("../inputs/year_2017/day_16_input");
+  assert_eq!(day_16::day_16_v1(input), "lgpkniodmjacfbeh");
+  assert_eq!(day_16::day_16_v2(input), "hklecbpnjigoafmd");
 
   let mut g2017_day_16 = c.benchmark_group("year_2017::day_16");
   g2017_day_16.bench_function("year_2017::day_16_v1", |b| {
-    b.iter(|| day_16::day_16_v1(black_box(input_day_16)))
+    b.iter(|| day_16::day_16_v1(black_box(input)))
   });
   g2017_day_16.bench_function("year_2017::day_16_v2", |b| {
-    b.iter(|| day_16::day_16_v2(black_box(input_day_16)))
+    b.iter(|| day_16::day_16_v2(black_box(input)))
   });
   g2017_day_16.finish();
 }
 
 fn year_2017_day_17(c: &mut Criterion) {
-  let input_day_17 = include_str!("../inputs/year_2017/day_17_input");
-  assert_eq!(day_17::day_17_v1(input_day_17), 1_173);
-  assert_eq!(day_17::day_17_v2(input_day_17), 1_930_815);
+  let input = include_str!("../inputs/year_2017/day_17_input");
+  assert_eq!(day_17::day_17_v1(input), 1_173);
+  assert_eq!(day_17::day_17_v2(input), 1_930_815);
 
   let mut g2017_day_17 = c.benchmark_group("year_2017::day_17");
   g2017_day_17.bench_function("year_2017::day_17_v1", |b| {
-    b.iter(|| day_17::day_17_v1(black_box(input_day_17)))
+    b.iter(|| day_17::day_17_v1(black_box(input)))
   });
   g2017_day_17.bench_function("year_2017::day_17_v2", |b| {
-    b.iter(|| day_17::day_17_v2(black_box(input_day_17)))
+    b.iter(|| day_17::day_17_v2(black_box(input)))
   });
   g2017_day_17.finish();
 }
 
 fn year_2017_day_18(c: &mut Criterion) {
-  let input_day_18 = include_str!("../inputs/year_2017/day_18_input");
-  assert_eq!(day_18::day_18_v1(input_day_18), 1_187);
-  assert_eq!(day_18::day_18_v2(input_day_18), 5_969);
+  let input = include_str!("../inputs/year_2017/day_18_input");
+  assert_eq!(day_18::day_18_v1(input), 1_187);
+  assert_eq!(day_18::day_18_v2(input), 5_969);
 
   let mut g2017_day_18 = c.benchmark_group("year_2017::day_18");
   g2017_day_18.bench_function("year_2017::day_18_v1", |b| {
-    b.iter(|| day_18::day_18_v1(black_box(input_day_18)))
+    b.iter(|| day_18::day_18_v1(black_box(input)))
   });
   g2017_day_18.bench_function("year_2017::day_18_v2", |b| {
-    b.iter(|| day_18::day_18_v2(black_box(input_day_18)))
+    b.iter(|| day_18::day_18_v2(black_box(input)))
   });
   g2017_day_18.finish();
+}
+
+fn year_2017_day_19(c: &mut Criterion) {
+  let input = include_str!("../inputs/year_2017/day_19_input");
+  assert_eq!(day_19::day_19_v1(input), "RYLONKEWB");
+  assert_eq!(day_19::day_19_v2(input), "16016");
+
+  let mut g2017_day_19 = c.benchmark_group("year_2017::day_19");
+  g2017_day_19.bench_function("year_2017::day_19_v1", |b| {
+    b.iter(|| day_19::day_19_v1(black_box(input)))
+  });
+  g2017_day_19.bench_function("year_2017::day_19_v2", |b| {
+    b.iter(|| day_19::day_19_v2(black_box(input)))
+  });
+  g2017_day_19.finish();
 }
 
 criterion_group!(
@@ -310,6 +323,7 @@ criterion_group!(
   year_2017_day_15,
   year_2017_day_16,
   year_2017_day_17,
-  year_2017_day_18
+  year_2017_day_18,
+  year_2017_day_19
 );
 criterion_main!(benches);
