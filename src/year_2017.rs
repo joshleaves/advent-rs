@@ -24,6 +24,7 @@ pub mod day_17;
 pub mod day_18;
 pub mod day_19;
 pub mod day_20;
+pub mod day_21;
 
 pub fn solve(day: u8, part: u8, input: impl Into<String>) -> Option<String> {
   if part > 2 {
@@ -51,6 +52,7 @@ pub fn solve(day: u8, part: u8, input: impl Into<String>) -> Option<String> {
     18 => Some(day_18::day_18(part, input).to_string()),
     19 => Some(day_19::day_19(part, input).to_string()),
     20 => Some(day_20::day_20(part, input).to_string()),
+    21 => Some(day_21::day_21(part, input).to_string()),
     _ => None,
   }
 }
@@ -197,5 +199,12 @@ mod tests {
     let input = include_str!("../inputs/year_2017/day_20_input");
     assert_eq!(day_20::day_20_v1(input), 157);
     assert_eq!(day_20::day_20_v2(input), 499);
+  }
+
+  #[test]
+  fn day_21() {
+    let input = include_str!("../inputs/year_2017/day_21_input");
+    assert_eq!(day_21::day_21_v1(input), 179);
+    assert_eq!(day_21::day_21_v2(input), 2_766_750);
   }
 }
