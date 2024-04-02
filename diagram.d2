@@ -1,0 +1,64 @@
+vars: {
+  d2-config: {
+    layout-engine: elk
+    # Terminal theme code
+    theme-id: 300
+  }
+}
+
+user: {
+  shape: person
+  width: 130
+}
+
+developer: {
+  shape: person
+  width: 130
+}
+
+project: {
+  test: {
+    sample test
+    input test
+    cli test
+  }
+  benches: {
+    year
+    day
+  }
+
+  binary: {
+    advent-rs: {shape: hexagon}
+  }
+
+  library: {
+    solve(): {
+      shape: stored_data
+      style.multiple: true
+    }
+
+    individual year
+
+    solve() -> individual year: 2015
+    solve() -> individual year: 2016
+    solve() -> individual year: 2016
+
+    individual day
+
+    individual year -> individual day
+  }
+}
+
+user -> project.library: use crate {
+  style.stroke-dash: 3
+}
+user -> project.binary.advent-rs: command line
+developer -> project.test: test exercises
+developer -> project.benches: run benchmark
+
+project.binary.advent-rs -> project.library.solve()
+project.test.cli test -> project.binary.advent-rs
+project.test.input test -> project.library.individual year
+project.test.sample test -> project.library.individual day
+project.benches.year -> project.library.individual year
+project.benches.day -> project.library.individual day

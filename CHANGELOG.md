@@ -13,6 +13,7 @@ Of note:
 ## [2017.21.1]
 ### Added
 - Solved [exercice for 2017, day 21](src/year_2017/21.rs).
+- Trying my hand at [D2](https://d2lang.com/) to describe how the code parts interact together.
 
 ## [2017.20.1]
 ### Added
