@@ -10,6 +10,17 @@ fn day_01_v1_naive(input: &str) -> i16 {
   right - left
 }
 
+fn day_01_v1_normal(input: &str) -> i16 {
+  input
+    .chars()
+    .filter_map(|chr| match chr {
+      '(' => Some(1),
+      ')' => Some(-1),
+      _ => None,
+    })
+    .sum::<i16>()
+}
+
 fn day_01_v1_fast(input: impl Into<String>) -> i16 {
   let mut level: i16 = 0;
   let nums: Vec<u16> = unsafe { mem::transmute::<String, Vec<u16>>(input.into()) };
@@ -106,6 +117,7 @@ fn bench_year_2015_day_01_v1(c: &mut Criterion) {
   let input = include_str!("../inputs/year_2015/day_01_input");
   assert_eq!(day_01::day_01_v1(input), 138);
   assert_eq!(day_01_v1_naive(input), 138);
+  assert_eq!(day_01_v1_normal(input), 138);
   assert_eq!(day_01_v1_fast(input), 138);
 
   let mut group = c.benchmark_group("year_2015::day_01_v1");
@@ -117,6 +129,11 @@ fn bench_year_2015_day_01_v1(c: &mut Criterion) {
   group.bench_with_input(BenchmarkId::new("Naive", input.len()), input, |b, input| {
     b.iter(|| day_01_v1_naive(input))
   });
+  group.bench_with_input(
+    BenchmarkId::new("Normal", input.len()),
+    input,
+    |b, input| b.iter(|| day_01_v1_normal(input)),
+  );
   group.bench_with_input(BenchmarkId::new("Fast", input.len()), input, |b, input| {
     b.iter(|| day_01_v1_fast(input))
   });
