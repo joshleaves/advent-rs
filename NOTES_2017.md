@@ -79,3 +79,15 @@ Threading is a bitch.
 ## Day 19: A Series of Tubes
 
 Worse than maps? Maps that aren't reliably readable by machines.
+
+## Day 20: Particle Swarm
+
+Nothing too hard here.
+
+## Day 21: Fractal Art
+
+That one was both funny and very annoying. Playing with patterns and turning them into fractals wasn't easy.
+
+## Day 22: Sporifica Virus
+
+Very funny exercise, but I'll spend a long time trying to optimize it.
