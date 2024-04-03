@@ -91,3 +91,15 @@ That one was both funny and very annoying. Playing with patterns and turning the
 ## Day 22: Sporifica Virus
 
 Very funny exercise, but I'll spend a long time trying to optimize it.
+
+## Day 23: Coprocessor Conflagration
+
+This exercise [is actually a trap](https://www.youtube.com/watch?v=4F4qzPbcFiA): running it as expected would last you around ten minutes. Were you to [rewrite it as pseudo-code](https://docs.rs/advent-of-code/2022.0.66/src/advent_of_code/year2017/day23.rs.html#15), you would see another algorithm, that is [way easier to implement](https://github.com/galenelias/AdventOfCode_2017/blob/master/src/Day23/mod.rs#L70).
+
+##  Day 24: Electromagnetic Moat
+
+Your usual shortest-path algorithm.
+
+## Day 25: The Halting Problem
+
+Implementing a [Turing machine](https://en.wikipedia.org/wiki/Turing_machine) isn't that hard once you get to the principle. Hardest part was actually parsing the input.
