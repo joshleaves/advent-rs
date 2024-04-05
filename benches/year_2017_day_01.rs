@@ -3,12 +3,7 @@ use criterion::{criterion_group, criterion_main, BenchmarkId, Criterion};
 use std::time::Duration;
 
 fn day_01_v2_naive(input: impl Into<String>) -> u16 {
-  let characters = input
-    .into()
-    .trim_end()
-    .chars()
-    .map(|c| c as u8)
-    .collect::<Vec<_>>();
+  let characters = input.into().trim_end().as_bytes().to_vec();
   let length = characters.len();
   let dem_length = length / 2;
   characters
@@ -25,12 +20,7 @@ fn day_01_v2_naive(input: impl Into<String>) -> u16 {
 }
 
 fn day_01_v2_zip(input: impl Into<String>) -> u16 {
-  let characters = input
-    .into()
-    .trim_end()
-    .chars()
-    .map(|c| c as u8)
-    .collect::<Vec<_>>();
+  let characters = input.into().trim_end().as_bytes().to_vec();
   characters
     .iter()
     .zip(characters.iter().cycle().skip(characters.len() / 2))

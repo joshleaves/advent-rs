@@ -15,10 +15,6 @@ fn solve(numbers: &[u64], magic: u64) -> u64 {
     .unwrap()
 }
 
-// fn parse_input(input: &str) -> Vec<u64> {
-//   input.lines().map(|l| l.parse::<u64>().unwrap()).collect()
-// }
-
 pub fn day_24_v1(input: impl Into<String>) -> u64 {
   let numbers: Vec<u64> = input
     .into()

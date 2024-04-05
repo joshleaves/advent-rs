@@ -63,6 +63,7 @@ pub fn day_15_v2(input: impl Into<String>) -> u64 {
     .filter(|&(a, b)| (a & 0xFFFF) == (b & 0xFFFF))
     .count() as u64
 }
+
 solvable!(day_15, day_15_v1, day_15_v2, u64);
 
 #[cfg(test)]

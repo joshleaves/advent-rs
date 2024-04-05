@@ -161,7 +161,6 @@ pub fn day_18_v2(input: impl Into<String>) -> i64 {
     sc1.inputs.append(&mut sc0.outputs.drain(..).collect_vec());
   }
   sound_count
-  // sc1.sent_count
 }
 solvable!(day_18, day_18_v1, day_18_v2, i64);
 

@@ -44,7 +44,6 @@ fn move_character(pos: &mut (i8, i8), direction: u8) {
     b'^' => pos.1 -= 1,
     _ => (),
   }
-  // pos
 }
 
 pub fn day_03_v1(input: impl Into<String>) -> u16 {

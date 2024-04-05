@@ -34,13 +34,13 @@ where
 {
   aunt
     .split(',')
-    .map(|pair| pair.split(':').map(&str::trim).collect::<Vec<_>>())
-    .all(|chunk| {
-      assert_eq!(chunk.len(), 2);
-      let ticker_value = ticker.get(chunk[0]).unwrap();
-      let aunt_value = chunk[1].parse::<i8>().unwrap();
+    .map(|pair| pair.split(':').map(&str::trim))
+    .all(|mut chunk| {
+      let key = chunk.next().unwrap();
+      let ticker_value = ticker.get(key).unwrap();
+      let aunt_value = chunk.next().unwrap().parse::<i8>().unwrap();
 
-      match chunk[0] {
+      match key {
         "cats" | "trees" => cmp_gt(*ticker_value, aunt_value),
         "pomeranians" | "goldfish" => cmp_lt(*ticker_value, aunt_value),
         // "samoyeds" | "akitas" | "vizslas" | "cars" | "perfumes" | "children" => {

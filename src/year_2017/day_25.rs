@@ -11,19 +11,16 @@ struct Execution {
 
 impl Execution {
   fn new(input: Vec<&str>) -> Self {
-    println!("EXEC: {:?}", input);
-
     assert_eq!(input.len(), 3);
     let mut write_value = input[0].split_whitespace();
     assert_eq!(write_value.nth(1).unwrap(), "Write");
-    let write_value = matches!(write_value.nth(2).unwrap(), "1.");
-
     let mut direction = input[1].split_whitespace();
     assert_eq!(direction.nth(1).unwrap(), "Move");
-    let direction = matches!(direction.nth(4).unwrap(), "right.");
-
     let mut next_state = input[2].split_whitespace();
     assert_eq!(next_state.nth(1).unwrap(), "Continue");
+
+    let write_value = matches!(write_value.nth(2).unwrap(), "1.");
+    let direction = matches!(direction.nth(4).unwrap(), "right.");
     let next_state = next_state.nth(2).unwrap().as_bytes()[0] - b'A';
 
     Execution {
@@ -44,13 +41,12 @@ impl State {
     assert!(input.len() >= 9);
     let in_state = input[0];
     assert_eq!(in_state.split_whitespace().count(), 3);
-
     let false_state = input[1];
     assert_eq!(false_state.split_whitespace().count(), 6);
-    let false_exec = Execution::new(input[2..=4].to_vec());
-
     let true_state = input[5];
     assert_eq!(true_state.split_whitespace().count(), 6);
+
+    let false_exec = Execution::new(input[2..=4].to_vec());
     let true_exec = Execution::new(input[6..=8].to_vec());
 
     State {
@@ -68,12 +64,11 @@ impl State {
 }
 
 struct StateMachine {
-  counter: u32,
   stopper: u32,
   current_state: u8,
   states: Vec<State>,
-  tape: HashMap<i32, bool>,
-  index: i32,
+  tape: HashMap<i16, bool>,
+  index: i16,
 }
 
 impl StateMachine {
@@ -99,30 +94,28 @@ impl StateMachine {
       .collect();
 
     StateMachine {
-      counter: 0,
       stopper,
       states,
       current_state,
       tape: HashMap::new(),
-      index: 0i32,
+      index: 0i16,
     }
   }
 
   fn _execute(&mut self) {
-    let state = &self.states[self.current_state as usize];
     let entry = self.tape.entry(self.index).or_insert(false);
-    let exec = state.exec(*entry);
+    let exec = self.states[self.current_state as usize].exec(*entry);
     *entry = exec.write_value;
     self.index = match exec.direction {
       true => self.index + 1,
       false => self.index - 1,
     };
     self.current_state = exec.next_state;
-    self.counter += 1;
+    self.stopper -= 1;
   }
 
   fn run(&mut self) {
-    while self.counter < self.stopper {
+    while self.stopper > 0 {
       self._execute();
     }
   }
