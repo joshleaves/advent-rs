@@ -1,5 +1,5 @@
 # Notes for solving 2016
-## Day 1: No Time for a Taxicab
+## Day 01: No Time for a Taxicab
 
 Nice to get back into it!
 
