@@ -1,8 +1,9 @@
-//! Year 2017
+//! Year 2018
 //!
-#![doc = include_str!("../NOTES_2017.md")]
+#![doc = include_str!("../NOTES_2018.md")]
 
 pub mod day_01;
+pub mod day_02;
 
 pub fn solve(day: u8, part: u8, input: impl Into<String>) -> Option<String> {
   if part > 2 {
@@ -11,6 +12,7 @@ pub fn solve(day: u8, part: u8, input: impl Into<String>) -> Option<String> {
 
   match day {
     1 => Some(day_01::day_01(part, input).to_string()),
+    2 => Some(day_02::day_02(part, input).to_string()),
     _ => None,
   }
 }
@@ -24,5 +26,12 @@ mod tests {
     let input = include_str!("../inputs/year_2018/day_01_input");
     assert_eq!(day_01::day_01_v1(input), 484);
     assert_eq!(day_01::day_01_v2(input), 367);
+  }
+
+  #[test]
+  fn day_02() {
+    let input = include_str!("../inputs/year_2018/day_02_input");
+    assert_eq!(day_02::day_02_v1(input), "7872");
+    assert_eq!(day_02::day_02_v2(input), "tjxmoewpdkyaihvrndfluwbzc");
   }
 }

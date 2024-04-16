@@ -2,3 +2,7 @@
 ## Day 01: Chronal Calibration
 
 Again, first day is nothing to write home about: just iterate and sum, nothing too complicated.
+
+## Day 02: Inventory Management System
+
+Oh look, another of those "loop over EVERY-FUCKING-COMBINATION" exercises...
