@@ -6,3 +6,7 @@ Again, first day is nothing to write home about: just iterate and sum, nothing t
 ## Day 02: Inventory Management System
 
 Oh look, another of those "loop over EVERY-FUCKING-COMBINATION" exercises...
+
+## Day 03: No Matter How You Slice It
+
+Not much we haven't seen last year.
