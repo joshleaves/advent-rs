@@ -1,6 +1,7 @@
 use advent_rs::year_2018::day_01;
 use advent_rs::year_2018::day_02;
 use advent_rs::year_2018::day_03;
+use advent_rs::year_2018::day_04;
 use criterion::{black_box, criterion_group, criterion_main, Criterion};
 
 fn year_2018_day_01(c: &mut Criterion) {
@@ -48,10 +49,26 @@ fn year_2018_day_03(c: &mut Criterion) {
   g2018_day_03.finish();
 }
 
+fn year_2018_day_04(c: &mut Criterion) {
+  let input = include_str!("../inputs/year_2018/day_04_input");
+  assert_eq!(day_04::day_04_v1(input), 35_623);
+  assert_eq!(day_04::day_04_v2(input), 23_037);
+
+  let mut g2018_day_04 = c.benchmark_group("year_2018::day_04");
+  g2018_day_04.bench_function("year_2018::day_04_v1", |b| {
+    b.iter(|| day_04::day_04_v1(black_box(input)))
+  });
+  g2018_day_04.bench_function("year_2018::day_04_v2", |b| {
+    b.iter(|| day_04::day_04_v2(black_box(input)))
+  });
+  g2018_day_04.finish();
+}
+
 criterion_group!(
   benches,
   year_2018_day_01,
   year_2018_day_02,
-  year_2018_day_03
+  year_2018_day_03,
+  year_2018_day_04
 );
 criterion_main!(benches);
