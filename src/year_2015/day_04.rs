@@ -53,7 +53,7 @@ fn find_hash(input: &str, stop_value: u8) -> u32 {
   (0..=u32::MAX)
     .find(|counter| {
       let mut hasher = md5.clone();
-      hasher.update(&counter.to_string());
+      hasher.update(counter.to_string());
       let hash = hasher.finalize();
       hash[0] == 0 && hash[1] == 0 && hash[2] < stop_value
     })

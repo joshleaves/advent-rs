@@ -18,7 +18,7 @@ fn fill_hashes_v2(md5: &CoreWrapper<Md5Core>, start: usize, end: usize) -> VecDe
   let mut hashes: VecDeque<String> = VecDeque::new();
   for idx in start..=end {
     let mut md5_num = md5.clone();
-    md5_num.update(&idx.to_string());
+    md5_num.update(idx.to_string());
     let md5_str = Md5::new();
     hashes.push_back(multi_hash(&md5_str, &format!("{:x}", md5_num.finalize())));
   }
@@ -86,7 +86,7 @@ fn fill_hashes(md5: &CoreWrapper<Md5Core>, counter: usize, hashes: usize) -> Vec
   let mut hashes: VecDeque<Vec<u8>> = VecDeque::new();
   for idx in start..=end {
     let mut md5_num = md5.clone();
-    md5_num.update(&idx.to_string());
+    md5_num.update(idx.to_string());
     hashes.push_back(md5_num.finalize().to_vec());
   }
 

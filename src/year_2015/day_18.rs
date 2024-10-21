@@ -1,4 +1,5 @@
 //! Advent of Code 2015: Day 18: Like a GIF For Your Yard
+use std::fmt;
 
 type Light = bool;
 const LIGHT_ON: Light = true;
@@ -127,20 +128,18 @@ impl GameOfLifeGrid {
   }
 }
 
-impl ToString for GameOfLifeGrid {
-  fn to_string(&self) -> String {
-    let mut data: String = String::new();
+impl fmt::Display for GameOfLifeGrid {
+  fn fmt(&self, f: &mut fmt::Formatter) -> fmt::Result {
     for row in 0..self.size {
-      let row_str = self.data[row]
-        .iter()
-        .map(|c| if *c == LIGHT_ON { "#" } else { "." })
-        .collect::<Vec<&str>>()
-        .join("");
-      data.push_str(&row_str);
-      data.push('\n');
+      for col in 0..self.size {
+        match self.data[row][col] {
+          LIGHT_ON => write!(f, "#")?,
+          LIGHT_OFF => write!(f, ".")?,
+        }
+      }
+      writeln!(f)?;
     }
-
-    data
+    Ok(())
   }
 }
 

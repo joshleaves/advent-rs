@@ -118,7 +118,7 @@ pub fn day_07_v2(input: impl Into<String>) -> String {
     .iter()
     .map(|n| tower.size_of(n))
     .sorted()
-    .group_by(|v| *v)
+    .chunk_by(|v| *v)
     .into_iter()
     .map(|(key, group)| (key, group.count()))
     .sorted_by_key(|elt| elt.1)

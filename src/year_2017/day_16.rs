@@ -59,9 +59,10 @@ impl DanceFloor {
   }
 }
 
-impl ToString for DanceFloor {
-  fn to_string(&self) -> String {
-    self.input.iter().collect::<String>()
+impl std::fmt::Display for DanceFloor {
+  fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+    let string = self.input.iter().collect::<String>();
+    write!(f, "{}", string)
   }
 }
 

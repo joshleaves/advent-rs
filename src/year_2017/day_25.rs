@@ -1,3 +1,4 @@
+use core::fmt;
 use std::collections::HashMap;
 
 use itertools::Itertools;
@@ -121,14 +122,15 @@ impl StateMachine {
   }
 }
 
-impl ToString for StateMachine {
-  fn to_string(&self) -> String {
-    self
-      .tape
-      .iter()
-      .sorted()
-      .map(|(_idx, value)| if *value { "1" } else { "0" })
-      .join(" ")
+impl fmt::Display for StateMachine {
+  fn fmt(&self, f: &mut fmt::Formatter) -> fmt::Result {
+    for (_idx, value) in self.tape.iter().sorted() {
+      match value {
+        true => write!(f, "1 ")?,
+        false => write!(f, "0 ")?,
+      }
+    }
+    Ok(())
   }
 }
 

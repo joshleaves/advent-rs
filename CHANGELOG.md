@@ -10,6 +10,10 @@ Of note:
 - The changelog 2015.5.2 has been rewritten from each commit content.
 - This file may be amended entirely in the future to adhere to the [GNU Changelog style](https://www.gnu.org/prep/standards/html_node/Style-of-Change-Logs.html#Style-of-Change-Logs)
 
+## [2018.6.2]
+### Changed
+- Updated dependencies, changed all `ToString` implementations to `fmt::Display`, and other clippy improvements
+
 ## [2018.6.1]
 ### Added
 - Solved [exercice for 2018, day 06](src/year_2018/06.rs).

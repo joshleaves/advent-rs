@@ -16,10 +16,10 @@ struct ChronalCoordinates {
 
 impl ChronalCoordinates {
   fn new(input: &str) -> Self {
-    let mut left = std::i32::MAX;
-    let mut top = std::i32::MAX;
-    let mut right = std::i32::MIN;
-    let mut bottom = std::i32::MIN;
+    let mut left = i32::MAX;
+    let mut top = i32::MAX;
+    let mut right = i32::MIN;
+    let mut bottom = i32::MIN;
 
     let points = input
       .lines()
@@ -54,7 +54,7 @@ impl ChronalCoordinates {
 
     for x in self.left..=self.right {
       for y in self.top..=self.bottom {
-        let mut closest_distance = std::i32::MAX;
+        let mut closest_distance = i32::MAX;
         let mut closest_id = 0;
 
         for (id, point) in self.points.iter() {

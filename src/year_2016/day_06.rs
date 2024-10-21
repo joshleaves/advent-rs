@@ -21,7 +21,7 @@ where
       let (next_char, _) = row
         .iter()
         .sorted()
-        .group_by(|&x| x)
+        .chunk_by(|&x| x)
         .into_iter()
         .map(|(key, group)| (key, group.count()))
         .max_by(&sort_closure)

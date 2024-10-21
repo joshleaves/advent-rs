@@ -7,7 +7,7 @@ pub fn day_02_v1(input: impl Into<String>) -> String {
     .map(|input| {
       let mut two = false;
       let mut tre = false;
-      for (_chr, cnt) in &input.bytes().sorted().group_by(|chr| *chr) {
+      for (_chr, cnt) in &input.bytes().sorted().chunk_by(|chr| *chr) {
         match cnt.count() {
           2 => two = true,
           3 => tre = true,

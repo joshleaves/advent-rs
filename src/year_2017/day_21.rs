@@ -1,5 +1,6 @@
 use itertools::Itertools;
 use std::collections::HashMap;
+use std::fmt;
 use std::hash::Hash;
 
 #[derive(Clone, Eq, Hash, PartialEq)]
@@ -114,14 +115,18 @@ impl Default for Pattern {
   }
 }
 
-impl ToString for Pattern {
-  fn to_string(&self) -> String {
-    self
-      .data
-      .iter()
-      .map(|row| row.iter().map(|chr| if *chr { "#" } else { "." }).join(""))
-      .join("\n")
-      .to_string()
+impl fmt::Display for Pattern {
+  fn fmt(&self, f: &mut fmt::Formatter) -> fmt::Result {
+    for row in self.data.iter() {
+      for chr in row.iter() {
+        match chr {
+          true => write!(f, "#")?,
+          false => write!(f, ".")?,
+        }
+      }
+      writeln!(f)?
+    }
+    Ok(())
   }
 }
 

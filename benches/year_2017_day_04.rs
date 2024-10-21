@@ -11,7 +11,7 @@ pub fn day_04_v1_naive(input: impl Into<String>) -> u16 {
       line
         .split_whitespace()
         .sorted()
-        .group_by(|word| *word)
+        .chunk_by(|word| *word)
         .into_iter()
         .all(|(_word, group)| group.count() == 1)
     })
