@@ -2,7 +2,7 @@
 
 [package]
 name = "advent-rs"
-version = "2018.6.2"
+version = "2018.6.3"
 edition = "2021"
 authors = ["Arnaud 'red' Rouyer"]
 readme = "README.md"
@@ -32,7 +32,7 @@ panic = "abort"   # Abort on panic
 # codegen-units = 1 # Reduce number of codegen units to increase optimizations.
 
 [dependencies]
-clap = { version = "4.5.20", features = ["derive"] }
+argh = "0.1.10"
 itertools = "0.13.0"
 md-5 = "0.10.6"
 

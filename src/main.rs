@@ -1,27 +1,26 @@
-use clap::Parser;
+use argh::FromArgs;
 use std::fs;
 use std::io;
 use std::path::Path;
 use std::path::PathBuf;
 
+#[derive(FromArgs)]
 /// Solver for advent of code exercises
-#[derive(Parser, Debug)]
-#[command(version, about, long_about = None)]
 struct Args {
-  /// The year of the exercise, from 2015 to today
-  #[arg(short, long, value_parser = clap::value_parser!(u16))]
+  /// year of the exercise, from 2015 to today
+  #[argh(option, short = 'y')]
   year: u16,
 
-  /// The day of the exercise, from 1 to 25
-  #[arg(short, long, value_parser = clap::value_parser!(u8))]
+  /// day of the exercise, from 1 to 25
+  #[argh(option, short = 'd')]
   day: u8,
 
-  /// The part of the exercise, 1 or 2
-  #[arg(short, long, default_value_t = 1, value_parser = clap::value_parser!(u8))]
+  /// part of the exercise, 1 or 2
+  #[argh(option, short = 'p', default = "1")]
   part: u8,
 
-  // File name
-  #[arg(help = "Input file path (will read from STDIN if empty)", value_parser = clap::value_parser!(PathBuf))]
+  /// file name
+  #[argh(positional, greedy)]
   input: Option<PathBuf>,
 }
 
@@ -48,7 +47,7 @@ pub fn fetch_input(file_path: Option<impl AsRef<Path>>) -> Result<String, std::i
 /// * `part` -  The part of the exercise, 1 or 2.
 /// * `input` - Input file path (will read from STDIN if empty).
 fn main() {
-  let args = Args::parse();
+  let args: Args = argh::from_env();
   let input: String = match fetch_input(args.input) {
     Ok(input_data) => input_data,
     Err(error) => {

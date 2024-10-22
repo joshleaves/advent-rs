@@ -10,6 +10,10 @@ Of note:
 - The changelog 2015.5.2 has been rewritten from each commit content.
 - This file may be amended entirely in the future to adhere to the [GNU Changelog style](https://www.gnu.org/prep/standards/html_node/Style-of-Change-Logs.html#Style-of-Change-Logs)
 
+## [2018.6.3]
+### Changed
+- Replaced [Clap](https://github.com/clap-rs/clap) with [Argh](https://github.com/google/argh) for CLI input parsing, binaries are now 300k lighter.
+
 ## [2018.6.2]
 ### Changed
 - Updated dependencies, changed all `ToString` implementations to `fmt::Display`, and other clippy improvements
