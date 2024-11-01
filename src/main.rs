@@ -51,7 +51,11 @@ fn main() {
   let input: String = match fetch_input(args.input) {
     Ok(input_data) => input_data,
     Err(error) => {
-      eprintln!("advent-rs: {}", error);
+      let error_str = error.to_string();
+      eprintln!(
+        "advent-rs: {}",
+        error_str.split(" (os error").next().unwrap()
+      );
       std::process::exit(1);
     }
   };

@@ -13,6 +13,19 @@ fn invalid_year_past() -> Result<(), Box<dyn std::error::Error>> {
 }
 
 #[test]
+fn non_existing_file() -> Result<(), Box<dyn std::error::Error>> {
+  let mut cmd = Command::cargo_bin("advent-rs")?;
+  cmd.arg("--year").arg("2015");
+  cmd.arg("--day").arg("01");
+  cmd.arg("non_existing_file");
+  cmd.assert().failure().stderr(predicates::str::contains(
+    "advent-rs: No such file or directory",
+  ));
+
+  Ok(())
+}
+
+#[test]
 fn calls_a_proper_test() -> Result<(), Box<dyn std::error::Error>> {
   let mut cmd = Command::cargo_bin("advent-rs")?;
   cmd.arg("--year").arg("2015");
