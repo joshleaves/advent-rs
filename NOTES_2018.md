@@ -22,3 +22,7 @@ As a programmer, your MUST have used, at least once, the command [`man ascii`](h
 ## Day 06: Chronal Coordinates
 
 At first, I felt like expanding each area one by one, until I realised that just calculating distances was just easier.
+
+# Day 07: The Sum of Its Parts
+
+I hate everything about time-advancing series calculations...

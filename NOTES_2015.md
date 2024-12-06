@@ -92,7 +92,7 @@ year_2015::day_03_v2/HashSet/8192
 <details>
 <summary>Ruby version comments</summary>
 
-> The only thing to be wary of is on line 16: without the call to `#dup`, all of Santa's and Robo-Santa's positions will be overwritten, since Ruby's object model has a tendancy to pass references when you expect to pass values.
+> The only thing to be wary of is on line 16: without the call to `#dup`, all of Santa's and Robo-Santa's positions will be overwritten, since Ruby's object model has a tendency to pass references when you expect to pass values.
 > 
 > Passing by value or reference is a really wonky subject, but this [blog post](https://robertheaton.com/2014/07/22/is-ruby-pass-by-reference-or-pass-by-value/) got nice examples that will get you started.
 </details>
@@ -180,7 +180,7 @@ year_2015::day_06/year_2015::day_06_v2
 <details>
 <summary>Ruby version comments</summary>
 
-> This one actually gave me SOME trouble. My first solution was iterating on each element one by one and was clearly too long. Thanksfully, Ruby is really smart when it comes to replacing slices of an array.
+> This one actually gave me SOME trouble. My first solution was iterating on each element one by one and was clearly too long. Thankfully, Ruby is really smart when it comes to replacing slices of an array.
 > 
 > There is an even more beautiful solution for part 2 that consist of only tracking the total numbers of flicks on/off/toggle, but in the off chance that a light already off is turned off again, the results would become false.
 > 
@@ -217,7 +217,7 @@ year_2015::day_07/year_2015::day_07_v2
 > 
 > The naive implementation, that works very well with the sample input, consists of interpreting each line one by one, storing the value of each wire every time. Unfortunately, not all inputs are indicated in a linear way.
 > 
-> The answer lies in to store all wires, setting up operations with [lazy evaluation](https://betterprogramming.pub/how-lazy-evaluation-works-in-ruby-a90237e99ac3), and letting intepretation work itself all the way back.
+> The answer lies in to store all wires, setting up operations with [lazy evaluation](https://betterprogramming.pub/how-lazy-evaluation-works-in-ruby-a90237e99ac3), and letting interpretation work itself all the way back.
 </details>
 
 This one was already complicated in Ruby, but it gets even worse when you have to deal with [Rust's lifetimes](https://doc.rust-lang.org/rust-by-example/scope/lifetime.html). The concept in itself is kinda okay to understand, but the way it has to be used sometimes makes no sense. I guess I'll get used to it with time. A [nice crate](https://docs.rs/advent-of-code/2022.0.66/src/advent_of_code/year2015/day07.rs.html) helped me see through it a bit more clearly.
@@ -246,7 +246,7 @@ year_2015::day_08/year_2015::day_08_v2
 
 > Understanding how characters escaping works is a massive PAIN, and misunderstand the concept is a reason why [PHP MySQL injections](https://www.php.net/manual/en/security.database.sql-injection.php) were so infamous. Things get even more hairy when you have to work with MULTIPLE type of injections (paths, web, sql,...), or even multiple types of string that don't escape the same way,
 > 
-> In that case, we are lucky, since Ruby already implements [dump](https://ruby-doc.org/3.2.2/String.html#method-i-dump) and [undump](https://ruby-doc.org/3.2.2/String.html#method-i-undump), which happens to work exactly as the exercise require. But since we're here to learn, the methods will alternate at runtime between the Ruby methods and the manual implementation.
+> In that case, we are lucky, since Ruby already implements [dump](https://ruby-doc.org/3.2.2/String.html#method-i-dump) and [un-dump](https://ruby-doc.org/3.2.2/String.html#method-i-undump), which happens to work exactly as the exercise require. But since we're here to learn, the methods will alternate at runtime between the Ruby methods and the manual implementation.
 </details>
 
 This one was actually very funny. For a while, I thought it would be a pain to not be able to index strings, but extracting slices actually works better.
@@ -271,7 +271,7 @@ year_2015::day_09/year_2015::day_09_v2
 <details>
 <summary>Ruby version comments</summary>
 
-> Any programming school worth its salt will one day ask of you the shortest path between many points. Often, the idea is that you'll use graph theory and implement [Dijkstra's algorithm](https://en.wikipedia.org/wiki/Dijkstra%27s_algorithm). Sometimes, the school wants your brain for dinner and you'll be asked to further solve the [Travelling Salesman Problem](https://en.wikipedia.org/wiki/Travelling_salesman_problem). Both are very interested concepts in themselves, and a good first approach to [PathFinding](https://en.wikipedia.org/wiki/Pathfinding).
+> Any programming school worth its salt will one day ask of you the shortest path between many points. Often, the idea is that you'll use graph theory and implement [Dijkstra's algorithm](https://en.wikipedia.org/wiki/Dijkstra%27s_algorithm). Sometimes, the school wants your brain for dinner and you'll be asked to further solve the [Traveling Salesman Problem](https://en.wikipedia.org/wiki/Travelling_salesman_problem). Both are very interested concepts in themselves, and a good first approach to [PathFinding](https://en.wikipedia.org/wiki/Pathfinding).
 > 
 > If you're not fond of graph transversal, the best answer is often to start using the [A* (A-Star)](https://en.wikipedia.org/wiki/A*_search_algorithm) algorithm to iterate through all possible paths.
 > 
@@ -282,7 +282,7 @@ year_2015::day_09/year_2015::day_09_v2
 
 This one got me a bit closer to understand how lifetimes function.
 
-While my [more experienced counterpart](https://docs.rs/advent-of-code/2022.0.66/src/advent_of_code/year2015/day09.rs.html) used a cleaner perform-all-permutations approach, I wanted to keep the recursivity of my original algorithm, if only to force myself to make lifetimes work across recursion.
+While my [more experienced counterpart](https://docs.rs/advent-of-code/2022.0.66/src/advent_of_code/year2015/day09.rs.html) used a cleaner perform-all-permutations approach, I wanted to keep the recursion of my original algorithm, if only to force myself to make lifetimes work across recursion.
 
 ## Day 10: Elves Look, Elves Say
 
@@ -554,7 +554,7 @@ year_2015::day_19/year_2015::day_19_v2
 <details>
 <summary>Ruby version comments</summary>
 
-> Part one is nothing to write home about. However, part two... First idea was the good ol' bruteforce approach, but when searching if there was an algorithm I didn't know, I stumbled upon a [very interesting Reddit comment](https://www.reddit.com/r/adventofcode/comments/3xflz8/day_19_solutions/cy4h7ji/)...
+> Part one is nothing to write home about. However, part two... First idea was the good ol' brute-force approach, but when searching if there was an algorithm I didn't know, I stumbled upon a [very interesting Reddit comment](https://www.reddit.com/r/adventofcode/comments/3xflz8/day_19_solutions/cy4h7ji/)...
 </details>
 
 Okay, that was less painful than I remembered it, and my Rust code is actually clearer than my Ruby code.
@@ -684,7 +684,7 @@ year_2015::day_24/year_2015::day_24_v2
 <details>
 <summary>Ruby version comments</summary>
 
->While this looks like YABA (Yet Another Bruteforce Algorithm), Ruby's got a very useful [`#combination`](https://ruby-doc.org/3.2.2/Array.html#method-i-combination) method that will generate permutations around for you. And of course, knowing when to exit the loop at the best time is half the battle.
+>While this looks like YABA (Yet Another Brute-force Algorithm), Ruby's got a very useful [`#combination`](https://ruby-doc.org/3.2.2/Array.html#method-i-combination) method that will generate permutations around for you. And of course, knowing when to exit the loop at the best time is half the battle.
 </details>
 
 Would you believe it? The `combinations(n)` method also exists in Rust!

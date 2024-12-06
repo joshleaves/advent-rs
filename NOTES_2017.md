@@ -6,13 +6,13 @@ Welcome to another year. First day isn't too complicated, and the only play here
 
 Nothing too hard either, if you know how iterations work. In that case, it's FASTER to only iterate once and store the `min` and `max` as you go along, rather than iterating, collecting, and iterating again to gain the `min`, then iterating once more to gain the `max`.
 
-As for part 2, it's better to use `filter_map()` instead of chaining `filter` then `map` since our verification is based on doing a (costy) calculation.
+As for part 2, it's better to use `filter_map()` instead of chaining `filter` then `map` since our verification is based on doing a (costly) calculation.
 
 ## Day 03: Spiral Memory
 
 Now we are getting somewhere!
 
-Again, half the battle is knowing exactly what to really look for. While part 2 DOES force us to iterate through the field until we get to a result, part one can be solved by understaing you are faced with an [Ulam Spiral](https://en.wikipedia.org/wiki/Ulam_spiral). From there, a little Google can get you [prettY](https://oeis.org/A268038) [eXciting](https://oeis.org/A268038) [results](https://stackoverflow.com/a/61253346).
+Again, half the battle is knowing exactly what to really look for. While part 2 DOES force us to iterate through the field until we get to a result, part one can be solved by understating you are faced with an [Ulam Spiral](https://en.wikipedia.org/wiki/Ulam_spiral). From there, a little Google can get you [prettY](https://oeis.org/A268038) [eXciting](https://oeis.org/A268038) [results](https://stackoverflow.com/a/61253346).
 
 ## Day 04: High-Entropy Passphrases
 
@@ -38,7 +38,7 @@ Since we only iterate once with no jumps, no need to save instructions.
 
 ## Day 09: Stream Processing
 
-The usual: do your best to only iter every character once. Rust's pattern-matching is really good there.
+The usual: do your best to only iterate every character once. Rust's pattern-matching is really good there.
 
 ## Day 10: Knot Hash
 
@@ -46,7 +46,7 @@ Funny exercise, the second part was A BIT confusing at first, but it got okay.
 
 ## Day 11: Hex Ed
 
-Navigating hexagons is a pain. Naive approach is to start with "only change the Y value if we move up, not down", but this will fail you in the long run. What you can do, is treat each hexagone as "two squares": moving up means `Y minus 2` and moving down means `Y plus 2`, while all diagonals work the way they would with a regular grid.
+Navigating hexagons is a pain. Naive approach is to start with "only change the Y value if we move up, not down", but this will fail you in the long run. What you can do, is treat each hexagon as "two squares": moving up means `Y minus 2` and moving down means `Y plus 2`, while all diagonals work the way they would with a regular grid.
 
 ## Day 12: Digital Plumber
 
@@ -62,7 +62,7 @@ I kinda liked this one.
 
 ## Day 15: Dueling Generators
 
-The most interesting part of these exercises is often [all the obscure maths you can leanr about](https://www.reddit.com/r/adventofcode/comments/7jyz5x/2017_day_15_opportunities_for_optimization/drasfzr/?context=3), in that case [Mersenne prime](https://en.wikipedia.org/wiki/Mersenne_prime). But the peculiarities of the number used for the remainder [should have been obvious to people who wrote a lot of C](https://doc.rust-lang.org/std/i32/constant.MAX.html).
+The most interesting part of these exercises is often [all the obscure maths you can learn about](https://www.reddit.com/r/adventofcode/comments/7jyz5x/2017_day_15_opportunities_for_optimization/drasfzr/?context=3), in that case [Mersenne prime](https://en.wikipedia.org/wiki/Mersenne_prime). But the peculiarities of the number used for the remainder [should have been obvious to people who wrote a lot of C](https://doc.rust-lang.org/std/i32/constant.MAX.html).
 
 ## Day 16: Permutation Promenade
 

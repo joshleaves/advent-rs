@@ -31,7 +31,7 @@ Playing with specific types for closures can be a pain, but it's often very funn
 
 ## Day 07: Internet Protocol Version 7
 
-Some iterators are annoying, but sometimes, like when calculating whethere there is an interesection of two sets, it's great to not generate the whole intersection and just peek at the first element.
+Some iterators are annoying, but sometimes, like when calculating whether there is an intersection of two sets, it's great to not generate the whole intersection and just peek at the first element.
 
 ## Day 08: Two-Factor Authentication
 
@@ -49,7 +49,7 @@ Looking at it carefully proved very smart: both galenelias and me lost too much 
 
 ## Day 10: Balance Bots
 
-This exercise got me to face the worst part of Rust: iterating over a hashmap while mutating it.
+This exercise got me to face the worst part of Rust: iterating over a hash map while mutating it.
 
 ## Day 11: Radioisotope Thermoelectric Generators
 
