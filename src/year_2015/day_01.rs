@@ -90,7 +90,6 @@
 /// assert_eq!(day_01::day_01_v1(")))"), -3);
 /// assert_eq!(day_01::day_01_v1(")())())"), -3);
 /// ```
-
 pub fn day_01_v1(input: impl Into<String>) -> i16 {
   input
     .into()
@@ -136,7 +135,6 @@ pub fn day_01_v1(input: impl Into<String>) -> i16 {
 /// assert_eq!(day_01::day_01_v2(")"), 1);
 /// assert_eq!(day_01::day_01_v2("()())"), 5);
 /// ```
-
 pub fn day_01_v2(input: impl Into<String>) -> i16 {
   input
     .into()

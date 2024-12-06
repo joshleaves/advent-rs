@@ -4,14 +4,14 @@ use std::cmp;
 use std::collections::HashMap;
 
 fn id_for_city<'a>(cities: &mut HashMap<&'a str, u8>, city: &'a str) -> u8 {
-  return match cities.get(city) {
+  match cities.get(city) {
     Some(city_id) => *city_id,
     None => {
       let new_id = cities.len() as u8;
       cities.insert(city, new_id);
       new_id
     }
-  };
+  }
 }
 
 fn parse_input(input: &str) -> (Vec<u8>, HashMap<(u8, u8), u16>) {
