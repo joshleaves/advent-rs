@@ -26,3 +26,9 @@ At first, I felt like expanding each area one by one, until I realised that just
 # Day 07: The Sum of Its Parts
 
 I hate everything about time-advancing series calculations...
+
+# Day 08: Memory Maneuver
+
+Trees are one of those things I never know how to handle properly, traverse, balance, etc... I just love good old arrays.
+
+In that case however, despite my first five minutes being puzzled by the absence of a "length" value for each node of the tree, I quickly found out a solution and actually liked the exercise.

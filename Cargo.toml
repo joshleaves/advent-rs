@@ -2,7 +2,7 @@
 
 [package]
 name = "advent-rs"
-version = "2018.7.1"
+version = "2018.8.1"
 edition = "2021"
 authors = ["Arnaud 'red' Rouyer"]
 readme = "README.md"
