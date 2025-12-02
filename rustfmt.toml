@@ -8,7 +8,7 @@ hard_tabs = false
 reorder_imports = true
 reorder_modules = true
 
-# Arrays shouls always be on the next line
+# Arrays should always be on the next line
 array_width = 20
 # >The width threshold for an array element to be considered "short".
 # >https://rust-lang.github.io/rustfmt/?version=v1.6.0&search=#short_array_element_width_threshold
