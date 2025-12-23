@@ -78,7 +78,7 @@ impl Grid {
           .chars()
           .enumerate()
           .filter_map(|(x, chr)| {
-            size = std::cmp::max(size, (x + 1) / 2);
+            size = std::cmp::max(size, x.div_ceil(2));
             if chr == '#' {
               Some((x as i32, y as i32))
             } else {

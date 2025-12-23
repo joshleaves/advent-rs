@@ -11,7 +11,7 @@ pub fn day_19_v1(input: impl Into<String>) -> u32 {
 
 pub fn day_19_v2(input: impl Into<String>) -> u32 {
   let number = input.into().parse::<u32>().unwrap();
-  let mid = (number + 1) / 2;
+  let mid = number.div_ceil(2);
   let mut arr_v1: VecDeque<u32> = (1..mid).collect();
   let mut arr_v2: VecDeque<u32> = (mid..(number + 1)).collect();
   loop {

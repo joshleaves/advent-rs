@@ -56,9 +56,9 @@ impl Pattern {
   }
 
   pub fn split(self) -> (u16, Vec<Self>) {
-    if (self.size % 2) == 0 {
+    if self.size.is_multiple_of(2) {
       (2, self._split_2())
-    } else if (self.size % 3) == 0 {
+    } else if self.size.is_multiple_of(3) {
       (3, self._split_3())
     } else {
       panic!("Cannot split a pattern of size {}", self.size)

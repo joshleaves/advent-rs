@@ -29,7 +29,7 @@ pub fn day_13_v1(input: impl Into<String>) -> u32 {
 #[inline]
 fn traverse_firewall(firewalls: &[(i32, i32)], delay: u32) -> bool {
   for (depth, range) in firewalls.iter() {
-    if ((*depth as u32 + delay) % *range as u32) == 0 {
+    if (*depth as u32 + delay).is_multiple_of(*range as u32) {
       return false;
     }
   }

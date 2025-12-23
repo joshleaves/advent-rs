@@ -59,13 +59,13 @@ fn fold4(input: &[bool]) -> bool {
 
 #[inline]
 fn fold(mut input: Vec<bool>) -> bool {
-  while input.len() % 16 == 0 {
+  while input.len().is_multiple_of(16) {
     input = input.chunks(16).map(fold16).collect_vec();
   }
-  while input.len() % 8 == 0 {
+  while input.len().is_multiple_of(8) {
     input = input.chunks(8).map(fold8).collect_vec();
   }
-  while input.len() % 4 == 0 {
+  while input.len().is_multiple_of(4) {
     input = input.chunks(4).map(fold4).collect_vec();
   }
   if input.len() == 2 {
@@ -76,7 +76,7 @@ fn fold(mut input: Vec<bool>) -> bool {
 
 fn checksum(mut input: Vec<bool>) -> Vec<bool> {
   for divider in DIVIDERS {
-    while input.len() % divider == 0 {
+    while input.len().is_multiple_of(divider) {
       input = input
         .chunks(divider)
         .map(|chunk| fold(chunk.to_vec()))
@@ -84,7 +84,7 @@ fn checksum(mut input: Vec<bool>) -> Vec<bool> {
     }
   }
 
-  while input.len() % 2 == 0 {
+  while input.len().is_multiple_of(2) {
     input = input.chunks(2).map(|pair| pair[0] == pair[1]).collect_vec()
   }
 
