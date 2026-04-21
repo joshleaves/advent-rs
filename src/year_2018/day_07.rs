@@ -8,7 +8,7 @@ struct Instructions {
 }
 
 impl Instructions {
-  pub fn new(input: String) -> Self {
+  pub fn new(input: &str) -> Self {
     let mut newself = Self::default();
     for line in input.lines() {
       let tokens: Vec<&str> = line.split_whitespace().collect();
@@ -48,10 +48,10 @@ impl Instructions {
   }
 
   fn can_step_be_done(&self, c: char) -> bool {
-    if let Some(result) = self.steps.get(&c) {
-      if !result.is_empty() {
-        return result.iter().all(|todo| self.done.contains(todo));
-      }
+    if let Some(result) = self.steps.get(&c)
+      && !result.is_empty()
+    {
+      return result.iter().all(|todo| self.done.contains(todo));
     }
     true
   }
@@ -96,13 +96,13 @@ fn solve_v2(mut steps: Instructions, workers: u8, duration: u8) -> u32 {
   timer - 1
 }
 
-pub fn day_07_v1(input: impl Into<String>) -> String {
-  let steps = Instructions::new(input.into());
+pub fn day_07_v1(input: impl AsRef<str>) -> String {
+  let steps = Instructions::new(input.as_ref());
   solve_v1(steps)
 }
 
-pub fn day_07_v2(input: impl Into<String>) -> String {
-  let steps = Instructions::new(input.into());
+pub fn day_07_v2(input: impl AsRef<str>) -> String {
+  let steps = Instructions::new(input.as_ref());
   format!("{:?}", solve_v2(steps, 5, 60))
 }
 
@@ -127,7 +127,7 @@ mod tests {
 
   #[test]
   fn works_with_samples_v2() {
-    let steps = Instructions::new(SAMPLE.into());
+    let steps = Instructions::new(SAMPLE.as_ref());
     assert_eq!(solve_v2(steps, 2, 0), 15);
   }
 }

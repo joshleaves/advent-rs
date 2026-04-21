@@ -104,15 +104,15 @@ impl Program {
   }
 }
 
-pub fn day_23_v1(input: impl Into<String>) -> i32 {
-  let mut program = Program::new(&input.into());
+pub fn day_23_v1(input: impl AsRef<str>) -> i32 {
+  let mut program = Program::new(input.as_ref());
   program.run();
 
   program.registers[1]
 }
 
-pub fn day_23_v2(input: impl Into<String>) -> i32 {
-  let mut program = Program::new(&input.into());
+pub fn day_23_v2(input: impl AsRef<str>) -> i32 {
+  let mut program = Program::new(input.as_ref());
   program.registers[0] = 1;
   program.run();
 

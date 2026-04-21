@@ -74,9 +74,9 @@ fn race(reindeers: &mut [Reindeer], duration: u16) {
   }
 }
 
-pub fn day_14_v1(input: impl Into<String>) -> u16 {
+pub fn day_14_v1(input: impl AsRef<str>) -> u16 {
   let mut reindeers: Vec<Reindeer> = vec![];
-  for line in input.into().lines() {
+  for line in input.as_ref().lines() {
     reindeers.push(Reindeer::new(line));
   }
   race(&mut reindeers, RACE_DURATION);
@@ -84,9 +84,9 @@ pub fn day_14_v1(input: impl Into<String>) -> u16 {
   reindeers.iter().map(|deer| deer.curpos).max().unwrap()
 }
 
-pub fn day_14_v2(input: impl Into<String>) -> u16 {
+pub fn day_14_v2(input: impl AsRef<str>) -> u16 {
   let mut reindeers: Vec<Reindeer> = vec![];
-  for line in input.into().lines() {
+  for line in input.as_ref().lines() {
     reindeers.push(Reindeer::new(line));
   }
   race(&mut reindeers, RACE_DURATION);

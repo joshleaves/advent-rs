@@ -94,18 +94,18 @@ impl fmt::Display for DisplayScreen {
   }
 }
 
-pub fn day_08_v1(input: impl Into<String>) -> u16 {
+pub fn day_08_v1(input: impl AsRef<str>) -> u16 {
   let mut screen = DisplayScreen::new(50, 6);
-  for line in input.into().lines() {
+  for line in input.as_ref().lines() {
     screen.interpret(line);
   }
 
   screen.lights_on()
 }
 
-pub fn day_08_v2(input: impl Into<String>) -> String {
+pub fn day_08_v2(input: impl AsRef<str>) -> String {
   let mut screen = DisplayScreen::new(50, 6);
-  for line in input.into().lines() {
+  for line in input.as_ref().lines() {
     screen.interpret(line);
   }
 
@@ -113,7 +113,7 @@ pub fn day_08_v2(input: impl Into<String>) -> String {
 }
 
 /// Stub function only calling the _v1 variant (v2 cannot be tested)
-pub fn day_08(_part: u8, input: impl Into<String>) -> u16 {
+pub fn day_08(_part: u8, input: impl AsRef<str>) -> u16 {
   day_08_v1(input)
 }
 

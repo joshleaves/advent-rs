@@ -61,10 +61,10 @@ impl Bot {
 
 type BotHM = HashMap<usize, RefCell<Bot>>;
 
-fn parse_input(input: impl Into<String>) -> BotHM {
+fn parse_input(input: impl AsRef<str>) -> BotHM {
   let mut bots = BotHM::new();
 
-  for line in input.into().lines() {
+  for line in input.as_ref().lines() {
     let parts: Vec<_> = line.split_whitespace().collect();
     match parts[0] {
       "value" => {
@@ -100,7 +100,7 @@ fn parse_input(input: impl Into<String>) -> BotHM {
   bots
 }
 
-fn solve(input: impl Into<String>, chipstop: Option<Vec<usize>>) -> usize {
+fn solve(input: impl AsRef<str>, chipstop: Option<Vec<usize>>) -> usize {
   let mut outs: HashMap<usize, Vec<usize>> = HashMap::new();
   let bots = parse_input(input);
 
@@ -113,10 +113,10 @@ fn solve(input: impl Into<String>, chipstop: Option<Vec<usize>>) -> usize {
       if bot.borrow_mut().values.len() < 2 {
         continue;
       }
-      if let Some(chipstopper) = &chipstop {
-        if chipstopper == &bot.borrow_mut().values {
-          return **id;
-        }
+      if let Some(chipstopper) = &chipstop
+        && chipstopper == &bot.borrow_mut().values
+      {
+        return **id;
       }
       for (chip, direction) in bot.borrow_mut().extract_chips().iter() {
         match direction {
@@ -147,11 +147,11 @@ fn solve(input: impl Into<String>, chipstop: Option<Vec<usize>>) -> usize {
 const LOW_CHIP: usize = 17;
 const HIGH_CHIP: usize = 61;
 
-pub fn day_10_v1(input: impl Into<String>) -> usize {
+pub fn day_10_v1(input: impl AsRef<str>) -> usize {
   solve(input, Some(vec![LOW_CHIP, HIGH_CHIP]))
 }
 
-pub fn day_10_v2(input: impl Into<String>) -> usize {
+pub fn day_10_v2(input: impl AsRef<str>) -> usize {
   solve(input, None)
 }
 

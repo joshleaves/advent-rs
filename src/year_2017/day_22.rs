@@ -147,16 +147,16 @@ impl Grid {
   }
 }
 
-pub fn day_22_v1(input: impl Into<String>) -> u32 {
-  let mut grid = Grid::new(&input.into());
+pub fn day_22_v1(input: impl AsRef<str>) -> u32 {
+  let mut grid = Grid::new(input.as_ref());
   for _ in 0..10_000 {
     grid.next_v1();
   }
   grid.infections
 }
 
-pub fn day_22_v2(input: impl Into<String>) -> u32 {
-  let mut grid = Grid::new(&input.into());
+pub fn day_22_v2(input: impl AsRef<str>) -> u32 {
+  let mut grid = Grid::new(input.as_ref());
   for _ in 0..10_000_000 {
     grid.next_v2();
   }

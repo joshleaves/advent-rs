@@ -98,8 +98,8 @@ fn best_path_v1(
   best_path
 }
 
-pub fn day_24_v1(input: impl Into<String>) -> usize {
-  let labyrinth = Labyrinth::new(&input.into());
+pub fn day_24_v1(input: impl AsRef<str>) -> usize {
+  let labyrinth = Labyrinth::new(input.as_ref());
   let numbers: Vec<_> = (0..labyrinth.numbers.len()).collect();
   let mut distances = HashMap::new();
   let combos: Vec<_> = numbers.iter().combinations(2).collect();
@@ -150,8 +150,8 @@ fn best_path_v2(
   best_path
 }
 
-pub fn day_24_v2(input: impl Into<String>) -> usize {
-  let labyrinth = Labyrinth::new(&input.into());
+pub fn day_24_v2(input: impl AsRef<str>) -> usize {
+  let labyrinth = Labyrinth::new(input.as_ref());
   let numbers: Vec<_> = (0..labyrinth.numbers.len()).collect();
   let mut distances = HashMap::new();
   let combos: Vec<_> = numbers.iter().combinations(2).collect();

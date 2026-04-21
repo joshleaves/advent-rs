@@ -15,9 +15,9 @@ fn solve(numbers: &[u64], magic: u64) -> u64 {
     .unwrap()
 }
 
-pub fn day_24_v1(input: impl Into<String>) -> u64 {
+pub fn day_24_v1(input: impl AsRef<str>) -> u64 {
   let numbers: Vec<u64> = input
-    .into()
+    .as_ref()
     .lines()
     .map(|line| line.parse::<u64>().unwrap())
     .collect();
@@ -26,9 +26,9 @@ pub fn day_24_v1(input: impl Into<String>) -> u64 {
   solve(&numbers, magic)
 }
 
-pub fn day_24_v2(input: impl Into<String>) -> u64 {
+pub fn day_24_v2(input: impl AsRef<str>) -> u64 {
   let numbers: Vec<u64> = input
-    .into()
+    .as_ref()
     .lines()
     .map(|line| line.parse::<u64>().unwrap())
     .collect();

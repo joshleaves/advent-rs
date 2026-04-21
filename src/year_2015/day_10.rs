@@ -32,16 +32,16 @@ fn string_to_chr(input: &str) -> Vec<u8> {
     .collect_vec()
 }
 
-pub fn day_10_v1(input: impl Into<String>) -> u32 {
-  let mut next_input: Vec<u8> = string_to_chr(&input.into());
+pub fn day_10_v1(input: impl AsRef<str>) -> u32 {
+  let mut next_input: Vec<u8> = string_to_chr(input.as_ref());
   for _n in 1..=40 {
     next_input = look_and_say(&next_input);
   }
   next_input.len() as u32
 }
 
-pub fn day_10_v2(input: impl Into<String>) -> u32 {
-  let mut next_input: Vec<u8> = string_to_chr(&input.into());
+pub fn day_10_v2(input: impl AsRef<str>) -> u32 {
+  let mut next_input: Vec<u8> = string_to_chr(input.as_ref());
   for _n in 1..=50 {
     next_input = look_and_say(&next_input);
   }

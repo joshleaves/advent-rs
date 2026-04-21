@@ -82,14 +82,14 @@ fn calculate_happiness(
   best_happiness
 }
 
-pub fn day_13_v1(input: impl Into<String>) -> i16 {
-  let (users_ids, paths) = parse_input(&input.into());
+pub fn day_13_v1(input: impl AsRef<str>) -> i16 {
+  let (users_ids, paths) = parse_input(input.as_ref());
   let friends_left = remove_user_id_from_vec(&users_ids, &0);
   calculate_happiness(&paths, &0, friends_left, 0)
 }
 
-pub fn day_13_v2(input: impl Into<String>) -> i16 {
-  let (mut users_ids, mut paths) = parse_input(&input.into());
+pub fn day_13_v2(input: impl AsRef<str>) -> i16 {
+  let (mut users_ids, mut paths) = parse_input(input.as_ref());
   let my_user_id = users_ids.len() as u8;
   for lhp in 0..my_user_id {
     paths.insert((lhp, my_user_id), 0);

@@ -1,17 +1,17 @@
 use std::collections::HashSet;
 
-pub fn day_01_v1(input: impl Into<String>) -> i32 {
+pub fn day_01_v1(input: impl AsRef<str>) -> i32 {
   input
-    .into()
+    .as_ref()
     .lines()
     .map(|line| line.parse::<i32>().unwrap())
     .sum()
 }
 
-pub fn day_01_v2(input: impl Into<String>) -> i32 {
+pub fn day_01_v2(input: impl AsRef<str>) -> i32 {
   let mut numset: HashSet<i32> = HashSet::new();
   input
-    .into()
+    .as_ref()
     .lines()
     .map(|line| line.parse::<i32>().unwrap())
     .cycle()
@@ -24,7 +24,7 @@ pub fn day_01_v2(input: impl Into<String>) -> i32 {
   // let mut numset: HashSet<i32> = HashSet::from([0]);
   // let mut cursor: i32 = 0;
   // input
-  //   .into()
+  //   .as_ref()
   //   .lines()
   //   .map(|line| line.parse::<i32>().unwrap())
   //   .cycle()

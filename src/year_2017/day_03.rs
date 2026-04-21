@@ -24,8 +24,8 @@ fn spiral(input: u32) -> (i32, i32) {
   (k as i32, (k - (m - n - t)) as i32)
 }
 
-pub fn day_03_v1(input: impl Into<String>) -> u32 {
-  let number = input.into().trim_end().parse::<u32>().unwrap();
+pub fn day_03_v1(input: impl AsRef<str>) -> u32 {
+  let number = input.as_ref().trim_end().parse::<u32>().unwrap();
   let position = spiral(number);
 
   (position.0.unsigned_abs() + position.1.unsigned_abs()) as u32
@@ -44,8 +44,8 @@ fn get_neighbors(values: &HashMap<(i32, i32), u32>, position: (i32, i32)) -> u32
   result
 }
 
-pub fn day_03_v2(input: impl Into<String>) -> u32 {
-  let target = input.into().trim_end().parse::<u32>().unwrap();
+pub fn day_03_v2(input: impl AsRef<str>) -> u32 {
+  let target = input.as_ref().trim_end().parse::<u32>().unwrap();
   let mut values: HashMap<(i32, i32), u32> = HashMap::new();
   values.insert((0i32, 0i32), 1);
   let mut counter = 1;

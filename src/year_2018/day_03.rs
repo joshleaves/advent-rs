@@ -18,10 +18,10 @@ fn parse_line(input: &str) -> (u16, u16, u16, u16, u16) {
   (id, x, y, width, height)
 }
 
-pub fn day_03_v1(input: impl Into<String>) -> u32 {
+pub fn day_03_v1(input: impl AsRef<str>) -> u32 {
   let mut fabric = vec![0; 1_000_000];
   input
-    .into()
+    .as_ref()
     .lines()
     .map(parse_line)
     .for_each(|(_id, x, y, width, height)| {
@@ -35,9 +35,9 @@ pub fn day_03_v1(input: impl Into<String>) -> u32 {
   fabric.iter().filter(|number| number >= &&2).count() as u32
 }
 
-pub fn day_03_v2(input: impl Into<String>) -> u32 {
+pub fn day_03_v2(input: impl AsRef<str>) -> u32 {
   let mut fabric = vec![0; 1_000_000];
-  let lines: Vec<_> = input.into().lines().map(parse_line).collect();
+  let lines: Vec<_> = input.as_ref().lines().map(parse_line).collect();
   lines.iter().for_each(|(_id, x, y, width, height)| {
     for i in *x..*x + *width {
       for j in *y..*y + *height {

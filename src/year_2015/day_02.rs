@@ -75,17 +75,17 @@ impl PresentBox {
   }
 }
 
-pub fn day_02_v1(input: impl Into<String>) -> u32 {
+pub fn day_02_v1(input: impl AsRef<str>) -> u32 {
   input
-    .into()
+    .as_ref()
     .lines()
     .map(|line| PresentBox::new(line).wrapping_paper() as u32)
     .sum()
 }
 
-pub fn day_02_v2(input: impl Into<String>) -> u32 {
+pub fn day_02_v2(input: impl AsRef<str>) -> u32 {
   input
-    .into()
+    .as_ref()
     .lines()
     .map(|line| PresentBox::new(line).ribbon() as u32)
     .sum()

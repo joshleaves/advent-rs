@@ -27,13 +27,13 @@ fn count_gifts(
   0
 }
 
-pub fn day_20_v1(input: impl Into<String>) -> usize {
-  let target_gifts = input.into().trim_end().parse::<usize>().unwrap();
+pub fn day_20_v1(input: impl AsRef<str>) -> usize {
+  let target_gifts = input.as_ref().trim_end().parse::<usize>().unwrap();
   count_gifts(target_gifts, 1, MAX_HOUSES, 10, MAX_HOUSES)
 }
 
-pub fn day_20_v2(input: impl Into<String>) -> usize {
-  let target_gifts = input.into().trim_end().parse::<usize>().unwrap();
+pub fn day_20_v2(input: impl AsRef<str>) -> usize {
+  let target_gifts = input.as_ref().trim_end().parse::<usize>().unwrap();
   count_gifts(target_gifts, 19_000, MAX_HOUSES, 11, 50)
 }
 

@@ -1,12 +1,12 @@
 use advent_rs::year_2017::day_13;
-use criterion::{criterion_group, criterion_main, BenchmarkId, Criterion};
+use criterion::{BenchmarkId, Criterion, criterion_group, criterion_main};
 use itertools::Itertools;
 use std::time::Duration;
 
 // Found here: https://colab.research.google.com/github/hhoppe/advent_of_code/blob/main/2017/advent_of_code_2017.ipynb#scrollTo=84e08a8d-ca2e-4bc7-99ca-8a29a98d0bf9&line=15&uniqifier=1
-pub fn day_13_v2_sieve(input: impl Into<String>) -> u32 {
+pub fn day_13_v2_sieve(input: impl AsRef<str>) -> u32 {
   let firewalls: Vec<_> = input
-    .into()
+    .as_ref()
     .lines()
     .map(|line| {
       let mut tuple: (i32, i32) = line

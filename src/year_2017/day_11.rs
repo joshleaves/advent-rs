@@ -26,12 +26,12 @@ fn traverse(input: &str) -> (u32, u32) {
   (parse_position(position), distance_max)
 }
 
-pub fn day_11_v1(input: impl Into<String>) -> u32 {
-  traverse(&input.into()).0
+pub fn day_11_v1(input: impl AsRef<str>) -> u32 {
+  traverse(input.as_ref()).0
 }
 
-pub fn day_11_v2(input: impl Into<String>) -> u32 {
-  traverse(&input.into()).1
+pub fn day_11_v2(input: impl AsRef<str>) -> u32 {
+  traverse(input.as_ref()).1
 }
 
 solvable!(day_11, day_11_v1, day_11_v2, u32);

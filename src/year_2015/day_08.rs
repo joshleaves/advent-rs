@@ -34,17 +34,17 @@ fn dumped_line_len(line: &str) -> u16 {
   line_len
 }
 
-pub fn day_08_v1(input: impl Into<String>) -> u16 {
+pub fn day_08_v1(input: impl AsRef<str>) -> u16 {
   input
-    .into()
+    .as_ref()
     .lines()
     .map(|line| line.len() as u16 - memory_line_len(line))
     .sum()
 }
 
-pub fn day_08_v2(input: impl Into<String>) -> u16 {
+pub fn day_08_v2(input: impl AsRef<str>) -> u16 {
   input
-    .into()
+    .as_ref()
     .lines()
     .map(|line| dumped_line_len(line) - line.len() as u16)
     .sum()

@@ -36,12 +36,12 @@ fn follow_instructions(input: &str) -> (i16, i16) {
   (*registers.values().max().unwrap(), best_max)
 }
 
-pub fn day_08_v1(input: impl Into<String>) -> i16 {
-  follow_instructions(&input.into()).0
+pub fn day_08_v1(input: impl AsRef<str>) -> i16 {
+  follow_instructions(input.as_ref()).0
 }
 
-pub fn day_08_v2(input: impl Into<String>) -> i16 {
-  follow_instructions(&input.into()).1
+pub fn day_08_v2(input: impl AsRef<str>) -> i16 {
+  follow_instructions(input.as_ref()).1
 }
 
 solvable!(day_08, day_08_v1, day_08_v2, i16);

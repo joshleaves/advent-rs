@@ -26,12 +26,12 @@ fn decompressed_size(mut input: &str, deep_decompress: bool) -> u64 {
   result
 }
 
-pub fn day_09_v1(input: impl Into<String>) -> u64 {
-  decompressed_size(&input.into(), false)
+pub fn day_09_v1(input: impl AsRef<str>) -> u64 {
+  decompressed_size(input.as_ref(), false)
 }
 
-pub fn day_09_v2(input: impl Into<String>) -> u64 {
-  decompressed_size(&input.into(), true)
+pub fn day_09_v2(input: impl AsRef<str>) -> u64 {
+  decompressed_size(input.as_ref(), true)
 }
 
 solvable!(day_09, day_09_v1, day_09_v2, u64);

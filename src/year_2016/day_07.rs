@@ -44,17 +44,17 @@ fn address_supports_ssl(address: &str) -> bool {
   aba_list.intersection(&bab_list).next().is_some()
 }
 
-pub fn day_07_v1(input: impl Into<String>) -> u16 {
+pub fn day_07_v1(input: impl AsRef<str>) -> u16 {
   input
-    .into()
+    .as_ref()
     .lines()
     .filter(|line| address_supports_tls(line))
     .count() as u16
 }
 
-pub fn day_07_v2(input: impl Into<String>) -> u16 {
+pub fn day_07_v2(input: impl AsRef<str>) -> u16 {
   input
-    .into()
+    .as_ref()
     .lines()
     .filter(|line| address_supports_ssl(line))
     .count() as u16

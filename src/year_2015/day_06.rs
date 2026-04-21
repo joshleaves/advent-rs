@@ -97,9 +97,9 @@ where
   }
 }
 
-pub fn day_06_v1(input: impl Into<String>) -> u32 {
+pub fn day_06_v1(input: impl AsRef<str>) -> u32 {
   let mut light_grid: Vec<bool> = vec![false; 1_000_000];
-  for line in input.into().lines() {
+  for line in input.as_ref().lines() {
     let instruction = Instruction::new(line);
     instruction.execute_v1(&mut light_grid);
   }
@@ -107,9 +107,9 @@ pub fn day_06_v1(input: impl Into<String>) -> u32 {
   light_grid.iter().filter(|&light| *light).count() as u32
 }
 
-pub fn day_06_v2(input: impl Into<String>) -> u32 {
+pub fn day_06_v2(input: impl AsRef<str>) -> u32 {
   let mut light_grid: Vec<u8> = vec![0_u8; 1_000_000];
-  for line in input.into().lines() {
+  for line in input.as_ref().lines() {
     let instruction = Instruction::new(line);
     instruction.execute_v2(&mut light_grid)
   }

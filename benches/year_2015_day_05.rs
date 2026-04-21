@@ -1,5 +1,5 @@
 use advent_rs::year_2015::day_05;
-use criterion::{criterion_group, criterion_main, BenchmarkId, Criterion};
+use criterion::{BenchmarkId, Criterion, criterion_group, criterion_main};
 use std::time::Duration;
 
 fn string_is_nice_v1_contains(input: &str) -> bool {

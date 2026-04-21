@@ -1,5 +1,5 @@
 use crate::bfs::BreadthFirstSearch;
-use md5::{digest::core_api::CoreWrapper, Digest, Md5, Md5Core};
+use md5::{Digest, Md5, Md5Core, digest::core_api::CoreWrapper};
 use std::hash::{Hash, Hasher};
 
 #[derive(Eq, Clone, Debug)]
@@ -20,25 +20,25 @@ impl Day17Position {
     hasher.update(self.path.clone());
     let positions: &[u8] = &hasher.finalize()[0..=1];
     let mut next_moves = vec![];
-    if ((positions[0] & 0xF0) >> 4) >= 11 {
-      if let Some(move_up) = self.move_up() {
-        next_moves.push(move_up);
-      }
+    if ((positions[0] & 0xF0) >> 4) >= 11
+      && let Some(move_up) = self.move_up()
+    {
+      next_moves.push(move_up);
     }
-    if (positions[0] & 0x0F) >= 11 {
-      if let Some(move_down) = self.move_down() {
-        next_moves.push(move_down);
-      }
+    if (positions[0] & 0x0F) >= 11
+      && let Some(move_down) = self.move_down()
+    {
+      next_moves.push(move_down);
     }
-    if ((positions[1] & 0xF0) >> 4) >= 11 {
-      if let Some(move_left) = self.move_left() {
-        next_moves.push(move_left);
-      }
+    if ((positions[1] & 0xF0) >> 4) >= 11
+      && let Some(move_left) = self.move_left()
+    {
+      next_moves.push(move_left);
     }
-    if (positions[1] & 0x0F) >= 11 {
-      if let Some(move_right) = self.move_right() {
-        next_moves.push(move_right);
-      }
+    if (positions[1] & 0x0F) >= 11
+      && let Some(move_right) = self.move_right()
+    {
+      next_moves.push(move_right);
     }
     next_moves
   }
@@ -97,9 +97,9 @@ impl Hash for Day17Position {
   }
 }
 
-pub fn day_17_v1(input: impl Into<String>) -> String {
+pub fn day_17_v1(input: impl AsRef<str>) -> String {
   let mut hasher = Md5::new();
-  hasher.update(input.into().trim_end());
+  hasher.update(input.as_ref().trim_end());
   let starter = Day17Position::new((0, 0));
   let mut bfs = BreadthFirstSearch::new(starter, |curpos| curpos.next_moves(hasher.clone()));
   bfs.traverse_until(|position| position.position == (3, 3));
@@ -107,9 +107,9 @@ pub fn day_17_v1(input: impl Into<String>) -> String {
   bfs.ending.unwrap().path
 }
 
-pub fn day_17_v2(input: impl Into<String>) -> String {
+pub fn day_17_v2(input: impl AsRef<str>) -> String {
   let mut hasher = Md5::new();
-  hasher.update(input.into().trim_end());
+  hasher.update(input.as_ref().trim_end());
   let starter = Day17Position::new((0, 0));
   let mut bfs = BreadthFirstSearch::new(starter, |curpos| curpos.next_moves(hasher.clone()));
   bfs.longest_path_until(|position| position.position == (3, 3));

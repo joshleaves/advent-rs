@@ -90,9 +90,9 @@
 /// assert_eq!(day_01::day_01_v1(")))"), -3);
 /// assert_eq!(day_01::day_01_v1(")())())"), -3);
 /// ```
-pub fn day_01_v1(input: impl Into<String>) -> i16 {
+pub fn day_01_v1(input: impl AsRef<str>) -> i16 {
   input
-    .into()
+    .as_ref()
     .bytes()
     .map(|chr| match chr {
       b'(' => 1,
@@ -135,9 +135,9 @@ pub fn day_01_v1(input: impl Into<String>) -> i16 {
 /// assert_eq!(day_01::day_01_v2(")"), 1);
 /// assert_eq!(day_01::day_01_v2("()())"), 5);
 /// ```
-pub fn day_01_v2(input: impl Into<String>) -> i16 {
+pub fn day_01_v2(input: impl AsRef<str>) -> i16 {
   input
-    .into()
+    .as_ref()
     .bytes()
     .try_fold((0, 0), |mut acc, chr| {
       acc.1 += 1;

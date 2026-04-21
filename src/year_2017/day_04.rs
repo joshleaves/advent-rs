@@ -1,8 +1,8 @@
 use itertools::Itertools;
 
-pub fn day_04_v1(input: impl Into<String>) -> u16 {
+pub fn day_04_v1(input: impl AsRef<str>) -> u16 {
   input
-    .into()
+    .as_ref()
     .lines()
     .filter(|line| {
       line
@@ -15,9 +15,9 @@ pub fn day_04_v1(input: impl Into<String>) -> u16 {
     .count() as u16
 }
 
-pub fn day_04_v2(input: impl Into<String>) -> u16 {
+pub fn day_04_v2(input: impl AsRef<str>) -> u16 {
   input
-    .into()
+    .as_ref()
     .lines()
     .filter(|line| {
       line

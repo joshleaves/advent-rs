@@ -73,9 +73,9 @@ where
   best_score
 }
 
-pub fn day_15_v1(input: impl Into<String>) -> i32 {
+pub fn day_15_v1(input: impl AsRef<str>) -> i32 {
   let mut ingredients: Vec<Ingredient> = vec![];
-  for line in input.into().lines() {
+  for line in input.as_ref().lines() {
     ingredients.push(Ingredient::new(line));
   }
   let mut quantities = vec![1; ingredients.len()];
@@ -83,9 +83,9 @@ pub fn day_15_v1(input: impl Into<String>) -> i32 {
   try_best_ingredient(&ingredients, &mut quantities, 0, &|_c| false)
 }
 
-pub fn day_15_v2(input: impl Into<String>) -> i32 {
+pub fn day_15_v2(input: impl AsRef<str>) -> i32 {
   let mut ingredients: Vec<Ingredient> = vec![];
-  for line in input.into().lines() {
+  for line in input.as_ref().lines() {
     ingredients.push(Ingredient::new(line));
   }
   let mut quantities = vec![0; ingredients.len()];
@@ -101,16 +101,14 @@ mod tests {
 
   #[test]
   fn works_with_samples_v1() {
-    let sample: &str =
-      "Butterscotch: capacity -1, durability -2, flavor 6, texture 3, calories 8\n\
+    let sample: &str = "Butterscotch: capacity -1, durability -2, flavor 6, texture 3, calories 8\n\
       Cinnamon: capacity 2, durability 3, flavor -2, texture -1, calories 3";
     assert_eq!(day_15_v1(sample), 62_842_880);
   }
 
   #[test]
   fn works_with_samples_v2() {
-    let sample: &str =
-      "Butterscotch: capacity -1, durability -2, flavor 6, texture 3, calories 8\n\
+    let sample: &str = "Butterscotch: capacity -1, durability -2, flavor 6, texture 3, calories 8\n\
       Cinnamon: capacity 2, durability 3, flavor -2, texture -1, calories 3";
     assert_eq!(day_15_v2(sample), 57_600_000);
   }

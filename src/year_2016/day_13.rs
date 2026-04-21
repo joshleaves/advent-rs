@@ -24,8 +24,8 @@ fn next_moves(favorite: usize, position: (usize, usize)) -> Vec<(usize, usize)> 
   new_moves
 }
 
-pub fn day_13_v1(input: impl Into<String>) -> u8 {
-  let binding = input.into();
+pub fn day_13_v1(input: impl AsRef<str>) -> u8 {
+  let binding = input.as_ref();
   let input_parts: Vec<_> = binding.trim_end().split(',').collect();
   let favorite = input_parts[0].parse::<usize>().unwrap();
   let reach_x = input_parts[1].parse::<usize>().unwrap();
@@ -36,8 +36,8 @@ pub fn day_13_v1(input: impl Into<String>) -> u8 {
   bfs.depth as u8
 }
 
-pub fn day_13_v2(input: impl Into<String>) -> u8 {
-  let binding = input.into();
+pub fn day_13_v2(input: impl AsRef<str>) -> u8 {
+  let binding = input.as_ref();
   let input_parts: Vec<_> = binding.split(',').collect();
   let favorite = input_parts[0].parse::<usize>().unwrap();
   let mut bfs = BreadthFirstSearch::new((1, 1), |position| next_moves(favorite, position));

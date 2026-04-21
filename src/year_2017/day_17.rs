@@ -1,5 +1,5 @@
-pub fn day_17_v1(input: impl Into<String>) -> u32 {
-  let input = input.into().trim_end().parse::<u32>().unwrap();
+pub fn day_17_v1(input: impl AsRef<str>) -> u32 {
+  let input = input.as_ref().trim_end().parse::<u32>().unwrap();
   let mut spinlock: Vec<u32> = vec![0];
   let mut idx = 0;
   for i in 1..=2017 {
@@ -12,8 +12,8 @@ pub fn day_17_v1(input: impl Into<String>) -> u32 {
   spinlock[idx as usize]
 }
 
-pub fn day_17_v2(input: impl Into<String>) -> u32 {
-  let input = input.into().trim_end().parse::<u32>().unwrap();
+pub fn day_17_v2(input: impl AsRef<str>) -> u32 {
+  let input = input.as_ref().trim_end().parse::<u32>().unwrap();
   let mut answer = 0;
   let mut idx = 0;
   for i in 1..=5_000_000 {

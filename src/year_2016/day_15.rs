@@ -20,18 +20,18 @@ fn spin_the_discs(discs: Vec<(u32, u32, u32)>) -> u32 {
   time
 }
 
-pub fn day_15_v1(input: impl Into<String>) -> u32 {
+pub fn day_15_v1(input: impl AsRef<str>) -> u32 {
   let mut discs: Vec<(u32, u32, u32)> = vec![];
-  for line in input.into().lines() {
+  for line in input.as_ref().lines() {
     discs.push(parse_disc(line));
   }
 
   spin_the_discs(discs)
 }
 
-pub fn day_15_v2(input: impl Into<String>) -> u32 {
+pub fn day_15_v2(input: impl AsRef<str>) -> u32 {
   let mut discs: Vec<(u32, u32, u32)> = vec![];
-  for line in input.into().lines() {
+  for line in input.as_ref().lines() {
     discs.push(parse_disc(line));
   }
   discs.push(((discs.len() + 1) as u32, 11, 0));

@@ -1,5 +1,5 @@
 use advent_rs::year_2015::day_01;
-use criterion::{criterion_group, criterion_main, BenchmarkId, Criterion};
+use criterion::{BenchmarkId, Criterion, criterion_group, criterion_main};
 use std::mem;
 use std::time::Duration;
 
@@ -21,9 +21,9 @@ fn day_01_v1_normal(input: &str) -> i16 {
     .sum::<i16>()
 }
 
-fn day_01_v1_fast(input: impl Into<String>) -> i16 {
+fn day_01_v1_fast(input: impl AsRef<str>) -> i16 {
   let mut level: i16 = 0;
-  let nums: Vec<u16> = unsafe { mem::transmute::<String, Vec<u16>>(input.into()) };
+  let nums: Vec<u16> = unsafe { mem::transmute::<String, Vec<u16>>(input.as_ref()) };
   for num in nums {
     match num {
       // Case for "("
@@ -46,9 +46,9 @@ fn day_01_v1_fast(input: impl Into<String>) -> i16 {
   level
 }
 
-fn day_01_v2_fast(input: impl Into<String>) -> i16 {
+fn day_01_v2_fast(input: impl AsRef<str>) -> i16 {
   let mut level: i16 = 0;
-  let nums: Vec<u16> = unsafe { mem::transmute::<String, Vec<u16>>(input.into()) };
+  let nums: Vec<u16> = unsafe { mem::transmute::<String, Vec<u16>>(input.as_ref()) };
   for (index, num) in nums.iter().enumerate() {
     match (level, num) {
       // Case for "("
@@ -86,8 +86,8 @@ fn day_01_v2_fast(input: impl Into<String>) -> i16 {
   0
 }
 
-fn day_01_v2_flash(input: impl Into<String>) -> i16 {
-  unsafe { mem::transmute::<String, Vec<u16>>(input.into()) }
+fn day_01_v2_flash(input: impl AsRef<str>) -> i16 {
+  unsafe { mem::transmute::<String, Vec<u16>>(input.as_ref()) }
     .iter()
     .try_fold((0, 0), |mut acc, pair| {
       match (acc.0, pair) {

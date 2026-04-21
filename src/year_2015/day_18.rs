@@ -143,8 +143,8 @@ impl fmt::Display for GameOfLifeGrid {
   }
 }
 
-pub fn day_18_v1(input: impl Into<String>) -> u16 {
-  let mut grid = GameOfLifeGrid::new(&input.into(), false);
+pub fn day_18_v1(input: impl AsRef<str>) -> u16 {
+  let mut grid = GameOfLifeGrid::new(input.as_ref(), false);
   for _i in 0..100 {
     grid.mutate();
   }
@@ -152,8 +152,8 @@ pub fn day_18_v1(input: impl Into<String>) -> u16 {
   grid.alive_count()
 }
 
-pub fn day_18_v2(input: impl Into<String>) -> u16 {
-  let mut grid = GameOfLifeGrid::new(&input.into(), true);
+pub fn day_18_v2(input: impl AsRef<str>) -> u16 {
+  let mut grid = GameOfLifeGrid::new(input.as_ref(), true);
   for _i in 0..100 {
     grid.mutate();
   }

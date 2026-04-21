@@ -49,10 +49,10 @@ where
     })
 }
 
-pub fn day_16_v1(input: impl Into<String>) -> u16 {
+pub fn day_16_v1(input: impl AsRef<str>) -> u16 {
   let ticker_tape = build_ticker_tape();
   input
-    .into()
+    .as_ref()
     .lines()
     .position(|aunt| {
       compare_aunts(
@@ -66,10 +66,10 @@ pub fn day_16_v1(input: impl Into<String>) -> u16 {
     + 1
 }
 
-pub fn day_16_v2(input: impl Into<String>) -> u16 {
+pub fn day_16_v2(input: impl AsRef<str>) -> u16 {
   let ticker_tape = build_ticker_tape();
   input
-    .into()
+    .as_ref()
     .lines()
     .position(|aunt| {
       compare_aunts(

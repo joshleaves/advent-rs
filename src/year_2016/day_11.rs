@@ -144,14 +144,14 @@ fn search(states: Vec<Vec<u8>>, mut moves_tried: HashSet<Vec<u8>>, depth: u16) -
   search(next_states, moves_tried, depth + 1)
 }
 
-pub fn day_11_v1(input: impl Into<String>) -> u16 {
-  let floors: Vec<u8> = parse_world(&input.into());
+pub fn day_11_v1(input: impl AsRef<str>) -> u16 {
+  let floors: Vec<u8> = parse_world(input.as_ref());
   let moves_tried: HashSet<Vec<u8>> = HashSet::new();
   search(vec![floors], moves_tried, 0)
 }
 
-pub fn day_11_v2(input: impl Into<String>) -> u16 {
-  let mut floors: Vec<u8> = parse_world(&input.into());
+pub fn day_11_v2(input: impl AsRef<str>) -> u16 {
+  let mut floors: Vec<u8> = parse_world(input.as_ref());
   floors.append(&mut vec![0, 0, 0, 0]);
   let moves_tried: HashSet<Vec<u8>> = HashSet::new();
   search(vec![floors], moves_tried, 0)

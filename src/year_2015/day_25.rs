@@ -39,8 +39,8 @@ fn parse_input(input: &str) -> (u64, u64) {
     .expect("Wrong input")
 }
 
-pub fn day_25(input: impl Into<String>) -> u64 {
-  let (column, row) = parse_input(&input.into());
+pub fn day_25(input: impl AsRef<str>) -> u64 {
+  let (column, row) = parse_input(input.as_ref());
   let itr = find_iterations_count(column, row) - 1;
   let exp = mod_exp(MULT, itr, MODULO);
 

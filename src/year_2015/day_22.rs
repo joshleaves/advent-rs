@@ -137,13 +137,13 @@ fn parse_input(boss_input: &str) -> (i8, i8) {
   (hit_points, damage)
 }
 
-pub fn day_22_v1(input: impl Into<String>) -> usize {
-  let boss = parse_input(&input.into());
+pub fn day_22_v1(input: impl AsRef<str>) -> usize {
+  let boss = parse_input(input.as_ref());
   combat((50, 500), boss, vec![0, 0, 0], true, WORST_MANA, 1, 0)
 }
 
-pub fn day_22_v2(input: impl Into<String>) -> usize {
-  let boss = parse_input(&input.into());
+pub fn day_22_v2(input: impl AsRef<str>) -> usize {
+  let boss = parse_input(input.as_ref());
   combat((50, 500), boss, vec![0, 0, 0], true, WORST_MANA, 2, 0)
 }
 

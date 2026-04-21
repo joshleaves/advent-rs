@@ -101,14 +101,14 @@ fn calculate_checksum(input: &str, disk_size: usize) -> String {
 
 const DISK_SIZE_V1: usize = 272;
 
-pub fn day_16_v1(input: impl Into<String>) -> String {
-  calculate_checksum(&input.into(), DISK_SIZE_V1)
+pub fn day_16_v1(input: impl AsRef<str>) -> String {
+  calculate_checksum(input.as_ref(), DISK_SIZE_V1)
 }
 
 const DISK_SIZE_V2: usize = 35_651_584;
 
-pub fn day_16_v2(input: impl Into<String>) -> String {
-  calculate_checksum(&input.into(), DISK_SIZE_V2)
+pub fn day_16_v2(input: impl AsRef<str>) -> String {
+  calculate_checksum(input.as_ref(), DISK_SIZE_V2)
 }
 
 solvable!(day_16, day_16_v1, day_16_v2, String);

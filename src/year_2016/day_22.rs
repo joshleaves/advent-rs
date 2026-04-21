@@ -49,8 +49,8 @@ fn parse_nodes(input: &str) -> Vec<Node> {
     .collect_vec()
 }
 
-pub fn day_22_v1(input: impl Into<String>) -> usize {
-  let nodes = parse_nodes(&input.into());
+pub fn day_22_v1(input: impl AsRef<str>) -> usize {
+  let nodes = parse_nodes(input.as_ref());
   let mut result: usize = 0;
   for combo in nodes.iter().combinations(2) {
     let lhn = combo[0];
@@ -66,8 +66,8 @@ pub fn day_22_v1(input: impl Into<String>) -> usize {
   result
 }
 
-pub fn day_22_v2(input: impl Into<String>) -> usize {
-  let nodes = parse_nodes(&input.into());
+pub fn day_22_v2(input: impl AsRef<str>) -> usize {
+  let nodes = parse_nodes(input.as_ref());
   let max_x = nodes.iter().map(|node| node.position.0).max().unwrap();
   let max_y = nodes.iter().map(|node| node.position.1).max().unwrap();
   let open_node = nodes.iter().find(|node| node.used == 0).unwrap().position;

@@ -104,11 +104,11 @@ impl ChronalCoordinates {
   }
 }
 
-pub fn day_06_v1(input: impl Into<String>) -> u32 {
-  ChronalCoordinates::new(&input.into()).solve_part_one()
+pub fn day_06_v1(input: impl AsRef<str>) -> u32 {
+  ChronalCoordinates::new(input.as_ref()).solve_part_one()
 }
-pub fn day_06_v2(input: impl Into<String>) -> u32 {
-  ChronalCoordinates::new(&input.into()).solve_part_two(10_000)
+pub fn day_06_v2(input: impl AsRef<str>) -> u32 {
+  ChronalCoordinates::new(input.as_ref()).solve_part_two(10_000)
 }
 
 solvable!(day_06, day_06_v1, day_06_v2, u32);

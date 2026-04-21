@@ -310,7 +310,7 @@ Of note:
 
 ## [2015.12.2]
 ### Changed
-- All tests now take input from any `impl Into<String>` (so `String`, `&str`,...).
+- All tests now take input from any `impl AsRef<str>` (so `String`, `&str`,...).
 - Some optimizations there and there.
 ### Removed
 - File samples for 2015, days 6 and 7.

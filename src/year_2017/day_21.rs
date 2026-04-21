@@ -197,16 +197,16 @@ impl Image {
   }
 }
 
-pub fn day_21_v1(input: impl Into<String>) -> u32 {
-  let mut image = Image::new(&input.into());
+pub fn day_21_v1(input: impl AsRef<str>) -> u32 {
+  let mut image = Image::new(input.as_ref());
   for _ in 0..5 {
     image.mutate();
   }
   image.pixels_on()
 }
 
-pub fn day_21_v2(input: impl Into<String>) -> u32 {
-  let mut image = Image::new(&input.into());
+pub fn day_21_v2(input: impl AsRef<str>) -> u32 {
+  let mut image = Image::new(input.as_ref());
   for _ in 0..18 {
     image.mutate();
   }

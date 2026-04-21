@@ -2,9 +2,9 @@ use std::collections::HashMap;
 
 use itertools::Itertools;
 
-pub fn day_07_v1(input: impl Into<String>) -> String {
+pub fn day_07_v1(input: impl AsRef<str>) -> String {
   let mut nodes: HashMap<&str, bool> = HashMap::new();
-  let binding = input.into();
+  let binding = input.as_ref();
   for line in binding.lines() {
     let (left, rest) = line.split_once(' ').unwrap();
     nodes.entry(left).and_modify(|e| *e = !*e).or_default();
@@ -90,8 +90,8 @@ impl Tower {
   }
 }
 
-pub fn day_07_v2(input: impl Into<String>) -> String {
-  let tower = Tower::new(&input.into());
+pub fn day_07_v2(input: impl AsRef<str>) -> String {
+  let tower = Tower::new(input.as_ref());
   let bad_parent = tower
     .nodes
     .iter()

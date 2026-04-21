@@ -103,14 +103,14 @@ impl Coprocessor {
   }
 }
 
-pub fn day_23_v1(input: impl Into<String>) -> i32 {
-  let mut proco = Coprocessor::new(&input.into());
+pub fn day_23_v1(input: impl AsRef<str>) -> i32 {
+  let mut proco = Coprocessor::new(input.as_ref());
   while proco.execute_once() {}
   proco.count_mul
 }
 
-pub fn day_23_v2(input: impl Into<String>) -> i32 {
-  let mut proco = Coprocessor::new(&input.into());
+pub fn day_23_v2(input: impl AsRef<str>) -> i32 {
+  let mut proco = Coprocessor::new(input.as_ref());
   proco.registers[0] = 1;
   for _ in 0..10 {
     proco.execute_once();

@@ -23,7 +23,7 @@ use advent_rs::year_2016::day_22;
 use advent_rs::year_2016::day_23;
 use advent_rs::year_2016::day_24;
 use advent_rs::year_2016::day_25;
-use criterion::{black_box, criterion_group, criterion_main, Criterion};
+use criterion::{Criterion, black_box, criterion_group, criterion_main};
 
 fn year_2016_day_01(c: &mut Criterion) {
   let mut g2016_day_01 = c.benchmark_group("year_2016::day_01");

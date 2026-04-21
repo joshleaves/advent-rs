@@ -60,12 +60,12 @@ fn find_hash(input: &str, stop_value: u8) -> u32 {
     .unwrap()
 }
 
-pub fn day_04_v1(input: impl Into<String>) -> u32 {
-  find_hash(input.into().trim_end(), 16)
+pub fn day_04_v1(input: impl AsRef<str>) -> u32 {
+  find_hash(input.as_ref().trim_end(), 16)
 }
 
-pub fn day_04_v2(input: impl Into<String>) -> u32 {
-  find_hash(input.into().trim_end(), 1)
+pub fn day_04_v2(input: impl AsRef<str>) -> u32 {
+  find_hash(input.as_ref().trim_end(), 1)
 }
 
 solvable!(day_04, day_04_v1, day_04_v2, u32);

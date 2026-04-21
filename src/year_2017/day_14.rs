@@ -41,8 +41,8 @@ fn fill_map(map: &mut [Vec<i32>], starter: (usize, usize), value: i32) {
   }
 }
 
-pub fn day_14_v1(input: impl Into<String>) -> u32 {
-  let mut rows = generate_rows(input.into().trim_end(), 128);
+pub fn day_14_v1(input: impl AsRef<str>) -> u32 {
+  let mut rows = generate_rows(input.as_ref().trim_end(), 128);
   rows
     .iter_mut()
     .map(|row| {
@@ -54,8 +54,8 @@ pub fn day_14_v1(input: impl Into<String>) -> u32 {
     .sum()
 }
 
-pub fn day_14_v2(input: impl Into<String>) -> u32 {
-  let mut rows = generate_rows(input.into().trim_end(), 128);
+pub fn day_14_v2(input: impl AsRef<str>) -> u32 {
+  let mut rows = generate_rows(input.as_ref().trim_end(), 128);
   let mut map: Vec<_> = rows
     .iter_mut()
     .map(|row| {

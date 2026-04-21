@@ -51,8 +51,8 @@ fn sub_best_path_v2(need: u16, len: u16, current: u16, parts: &[(u16, u16)]) -> 
   best_path
 }
 
-pub fn day_24_v1(input: impl Into<String>) -> u16 {
-  let parts = parse_input(&input.into());
+pub fn day_24_v1(input: impl AsRef<str>) -> u16 {
+  let parts = parse_input(input.as_ref());
   let mut best_path = 0;
   for (pidx, part) in parts.iter().enumerate() {
     let next_needed = if part.0 == 0 {
@@ -70,8 +70,8 @@ pub fn day_24_v1(input: impl Into<String>) -> u16 {
   best_path
 }
 
-pub fn day_24_v2(input: impl Into<String>) -> u16 {
-  let parts = parse_input(&input.into());
+pub fn day_24_v2(input: impl AsRef<str>) -> u16 {
+  let parts = parse_input(input.as_ref());
   let mut best_path = (0, 0);
   for (pidx, part) in parts.iter().enumerate() {
     let next_needed = if part.0 == 0 {

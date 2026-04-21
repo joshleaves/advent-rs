@@ -28,8 +28,8 @@ fn calculate_available_addresses(ranges: Vec<(u32, u32)>, total: u32) -> u32 {
   total - highest_blocked + in_gaps
 }
 
-pub fn day_20_v1(input: impl Into<String>) -> u32 {
-  let ranges = parse_ranges(&input.into());
+pub fn day_20_v1(input: impl AsRef<str>) -> u32 {
+  let ranges = parse_ranges(input.as_ref());
   let mut low_ip = 0;
   let mut idx = 0;
   while idx < ranges.len() && ranges[idx].0 <= low_ip {
@@ -40,8 +40,8 @@ pub fn day_20_v1(input: impl Into<String>) -> u32 {
   low_ip
 }
 
-pub fn day_20_v2(input: impl Into<String>) -> u32 {
-  let ranges = parse_ranges(&input.into());
+pub fn day_20_v2(input: impl AsRef<str>) -> u32 {
+  let ranges = parse_ranges(input.as_ref());
   calculate_available_addresses(ranges, 4_294_967_295)
 }
 

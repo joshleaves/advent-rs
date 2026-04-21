@@ -14,8 +14,8 @@ fn parse_input(input: &str) -> Vec<(i32, i32, i32)> {
     .collect()
 }
 
-pub fn day_13_v1(input: impl Into<String>) -> u32 {
-  let firewalls = parse_input(&input.into());
+pub fn day_13_v1(input: impl AsRef<str>) -> u32 {
+  let firewalls = parse_input(input.as_ref());
   let mut severity: u32 = 0;
   for (depth, range, position) in firewalls.iter() {
     if *depth == 0 || (depth % position) == 0 {
@@ -36,9 +36,9 @@ fn traverse_firewall(firewalls: &[(i32, i32)], delay: u32) -> bool {
   true
 }
 
-pub fn day_13_v2(input: impl Into<String>) -> u32 {
+pub fn day_13_v2(input: impl AsRef<str>) -> u32 {
   let firewalls: Vec<_> = input
-    .into()
+    .as_ref()
     .lines()
     .map(|line| {
       let mut tuple: (i32, i32) = line

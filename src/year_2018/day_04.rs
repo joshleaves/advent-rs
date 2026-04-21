@@ -61,8 +61,8 @@ fn parse_input(input: &str) -> HashMap<u16, Vec<Sleep>> {
   guards
 }
 
-pub fn day_04_v1(input: impl Into<String>) -> u16 {
-  let guards = parse_input(&input.into());
+pub fn day_04_v1(input: impl AsRef<str>) -> u16 {
+  let guards = parse_input(input.as_ref());
   let worst_guard = guards
     .iter()
     .max_by_key(|(_k, v)| v.iter().map(|s| s.duration).sum::<u16>())
@@ -81,8 +81,8 @@ pub fn day_04_v1(input: impl Into<String>) -> u16 {
   worst_guard_id * worst_minute
 }
 
-pub fn day_04_v2(input: impl Into<String>) -> u16 {
-  let guards = parse_input(&input.into());
+pub fn day_04_v2(input: impl AsRef<str>) -> u16 {
+  let guards = parse_input(input.as_ref());
   let mut minutes_guards: HashMap<(u8, u16), u8> = HashMap::new();
   for (guard_id, sleeps) in guards {
     for sleep in sleeps {

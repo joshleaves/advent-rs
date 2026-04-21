@@ -83,7 +83,7 @@ pub mod day_25;
 /// let solution = solve(1, 1, "(())");
 /// assert_eq!(solution, Some("0".to_string()));
 /// ```
-pub fn solve(day: u8, part: u8, input: impl Into<String>) -> Option<String> {
+pub fn solve(day: u8, part: u8, input: impl AsRef<str>) -> Option<String> {
   if part > 2 {
     return None;
   }

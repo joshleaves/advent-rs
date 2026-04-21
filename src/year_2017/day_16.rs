@@ -66,8 +66,8 @@ impl std::fmt::Display for DanceFloor {
   }
 }
 
-pub fn day_16_v1(input: impl Into<String>) -> String {
-  let input = input.into();
+pub fn day_16_v1(input: impl AsRef<str>) -> String {
+  let input = input.as_ref();
   let input = input.lines().next().unwrap();
   let mut dancefloor = DanceFloor::new("abcdefghijklmnop", input);
   dancefloor.dance();
@@ -75,8 +75,8 @@ pub fn day_16_v1(input: impl Into<String>) -> String {
   dancefloor.to_string()
 }
 
-pub fn day_16_v2(input: impl Into<String>) -> String {
-  let input = input.into();
+pub fn day_16_v2(input: impl AsRef<str>) -> String {
+  let input = input.as_ref();
   let input = input.lines().next().unwrap();
   let mut dancefloor = DanceFloor::new("abcdefghijklmnop", input);
   let mut positions: HashMap<String, i64> = HashMap::new();

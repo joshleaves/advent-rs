@@ -23,8 +23,8 @@ fn max_idx(input: &[u8]) -> (usize, usize) {
   (idx, max)
 }
 
-pub fn day_06_v1(input: impl Into<String>) -> u32 {
-  let mut towers = parse_input(&input.into());
+pub fn day_06_v1(input: impl AsRef<str>) -> u32 {
+  let mut towers = parse_input(input.as_ref());
   let towers_len = towers.len();
   let mut positions: HashSet<Vec<u8>> = HashSet::new();
   let mut moves = 0;
@@ -41,8 +41,8 @@ pub fn day_06_v1(input: impl Into<String>) -> u32 {
   moves
 }
 
-pub fn day_06_v2(input: impl Into<String>) -> u32 {
-  let mut towers = parse_input(&input.into());
+pub fn day_06_v2(input: impl AsRef<str>) -> u32 {
+  let mut towers = parse_input(input.as_ref());
   let towers_len = towers.len();
   let mut positions: HashMap<Vec<u8>, u32> = HashMap::new();
   let mut moves = 0;

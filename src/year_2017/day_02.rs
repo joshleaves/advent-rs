@@ -1,8 +1,8 @@
 use itertools::Itertools;
 
-pub fn day_02_v1(input: impl Into<String>) -> u16 {
+pub fn day_02_v1(input: impl AsRef<str>) -> u16 {
   input
-    .into()
+    .as_ref()
     .lines()
     .map(|line| {
       let mut max = 0;
@@ -17,9 +17,9 @@ pub fn day_02_v1(input: impl Into<String>) -> u16 {
     .sum()
 }
 
-pub fn day_02_v2(input: impl Into<String>) -> u16 {
+pub fn day_02_v2(input: impl AsRef<str>) -> u16 {
   input
-    .into()
+    .as_ref()
     .lines()
     .map(|line| {
       line

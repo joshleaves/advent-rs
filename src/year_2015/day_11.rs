@@ -44,8 +44,8 @@ fn update_password(mut password: Vec<u8>) -> Vec<u8> {
   password
 }
 
-pub fn day_11_v1(input: impl Into<String>) -> String {
-  let mut password = input.into().trim_end().as_bytes().to_vec();
+pub fn day_11_v1(input: impl AsRef<str>) -> String {
+  let mut password = input.as_ref().trim_end().as_bytes().to_vec();
   while !password_is_valid(&password) {
     password = update_password(password);
   }
@@ -53,8 +53,8 @@ pub fn day_11_v1(input: impl Into<String>) -> String {
   String::from_utf8(password).unwrap().to_string()
 }
 
-pub fn day_11_v2(input: impl Into<String>) -> String {
-  let mut password = input.into().trim_end().as_bytes().to_vec();
+pub fn day_11_v2(input: impl AsRef<str>) -> String {
+  let mut password = input.as_ref().trim_end().as_bytes().to_vec();
   let mut pass_valid = false;
   loop {
     password = update_password(password);

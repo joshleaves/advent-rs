@@ -75,14 +75,14 @@ impl Node {
   }
 }
 
-pub fn day_08_v1(input: impl Into<String>) -> u32 {
-  let mut parser = ParseCounter::new(&input.into());
+pub fn day_08_v1(input: impl AsRef<str>) -> u32 {
+  let mut parser = ParseCounter::new(input.as_ref());
   let root_node = Node::new(&mut parser);
   root_node.metadatas_v1()
 }
 
-pub fn day_08_v2(input: impl Into<String>) -> u32 {
-  let mut parser = ParseCounter::new(&input.into());
+pub fn day_08_v2(input: impl AsRef<str>) -> u32 {
+  let mut parser = ParseCounter::new(input.as_ref());
   let root_node = Node::new(&mut parser);
   root_node.metadatas_v2()
 }

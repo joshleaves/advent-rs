@@ -4,7 +4,7 @@ use advent_rs::year_2018::day_03;
 use advent_rs::year_2018::day_04;
 use advent_rs::year_2018::day_05;
 use advent_rs::year_2018::day_06;
-use criterion::{black_box, criterion_group, criterion_main, Criterion};
+use criterion::{Criterion, black_box, criterion_group, criterion_main};
 
 fn year_2018_day_01(c: &mut Criterion) {
   let input = include_str!("../inputs/year_2018/day_01_input");

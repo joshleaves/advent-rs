@@ -51,12 +51,12 @@ fn traverse_map(input: &str) -> (String, u32) {
   (path, step_count)
 }
 
-pub fn day_19_v1(input: impl Into<String>) -> String {
-  traverse_map(&input.into()).0
+pub fn day_19_v1(input: impl AsRef<str>) -> String {
+  traverse_map(input.as_ref()).0
 }
 
-pub fn day_19_v2(input: impl Into<String>) -> String {
-  traverse_map(&input.into()).1.to_string()
+pub fn day_19_v2(input: impl AsRef<str>) -> String {
+  traverse_map(input.as_ref()).1.to_string()
 }
 solvable!(day_19, day_19_v1, day_19_v2, String);
 

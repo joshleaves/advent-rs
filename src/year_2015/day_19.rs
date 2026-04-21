@@ -52,14 +52,14 @@ fn calculate_permutations(molecules: &HashMap<String, Vec<String>>, starter: &st
   permutations.len()
 }
 
-pub fn day_19_v1(input: impl Into<String>) -> usize {
-  let (molecules, starter) = parse_input(&input.into());
+pub fn day_19_v1(input: impl AsRef<str>) -> usize {
+  let (molecules, starter) = parse_input(input.as_ref());
 
   calculate_permutations(&molecules, &starter)
 }
 
-pub fn day_19_v2(input: impl Into<String>) -> usize {
-  let (_molecules, starter) = parse_input(&input.into());
+pub fn day_19_v2(input: impl AsRef<str>) -> usize {
+  let (_molecules, starter) = parse_input(input.as_ref());
 
   let mut count_az = 0;
   let mut count_rn = 0;

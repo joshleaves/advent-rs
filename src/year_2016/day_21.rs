@@ -117,9 +117,9 @@ impl Instruction {
   }
 }
 
-pub fn day_21_v1(input: impl Into<String>) -> String {
+pub fn day_21_v1(input: impl AsRef<str>) -> String {
   let mut password = "abcdefgh".chars().collect::<Vec<_>>();
-  let instructions = input.into().lines().map(Instruction::new).collect_vec();
+  let instructions = input.as_ref().lines().map(Instruction::new).collect_vec();
   for instruction in instructions {
     password = instruction.execute(password);
   }
@@ -127,9 +127,9 @@ pub fn day_21_v1(input: impl Into<String>) -> String {
   password.iter().collect::<String>()
 }
 
-pub fn day_21_v2(input: impl Into<String>) -> String {
+pub fn day_21_v2(input: impl AsRef<str>) -> String {
   let mut password = "fbgdceah".chars().collect::<Vec<_>>();
-  let mut instructions = input.into().lines().map(Instruction::new).collect_vec();
+  let mut instructions = input.as_ref().lines().map(Instruction::new).collect_vec();
   instructions.reverse();
   for instruction in instructions {
     password = instruction.execute_rev(password);

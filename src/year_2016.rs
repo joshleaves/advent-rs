@@ -30,7 +30,7 @@ pub mod day_23;
 pub mod day_24;
 pub mod day_25;
 
-pub fn solve(day: u8, part: u8, input: impl Into<String>) -> Option<String> {
+pub fn solve(day: u8, part: u8, input: impl AsRef<str>) -> Option<String> {
   if part > 2 {
     return None;
   }

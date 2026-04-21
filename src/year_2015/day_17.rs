@@ -23,19 +23,15 @@ fn build_solutions_v2(liters: u16, containers: &[u16]) -> u16 {
         .combinations(sol_len)
         .filter(|combo| combo.iter().map(|c| **c).sum::<u16>() == liters)
         .count() as u16;
-      if answers == 0 {
-        None
-      } else {
-        Some(answers)
-      }
+      if answers == 0 { None } else { Some(answers) }
     })
     .unwrap()
 }
 
 /// Solve exercise for year 2015, day 17 (part 1).
-pub fn day_17_v1(input: impl Into<String>) -> u16 {
+pub fn day_17_v1(input: impl AsRef<str>) -> u16 {
   let containers: Vec<u16> = input
-    .into()
+    .as_ref()
     .lines()
     .map(|line| line.parse::<u16>().unwrap())
     .collect();
@@ -43,9 +39,9 @@ pub fn day_17_v1(input: impl Into<String>) -> u16 {
 }
 
 /// Solve exercise for year 2015, day 17 (part 2).
-pub fn day_17_v2(input: impl Into<String>) -> u16 {
+pub fn day_17_v2(input: impl AsRef<str>) -> u16 {
   let containers: Vec<u16> = input
-    .into()
+    .as_ref()
     .lines()
     .map(|line| line.parse::<u16>().unwrap())
     .collect();

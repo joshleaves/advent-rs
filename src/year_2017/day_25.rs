@@ -134,8 +134,8 @@ impl fmt::Display for StateMachine {
   }
 }
 
-pub fn day_25(input: impl Into<String>) -> u64 {
-  let mut state_machine = StateMachine::new(&input.into());
+pub fn day_25(input: impl AsRef<str>) -> u64 {
+  let mut state_machine = StateMachine::new(input.as_ref());
   state_machine.run();
   state_machine.tape.values().filter(|v| **v).count() as u64
 }

@@ -1,6 +1,6 @@
-pub fn day_01_v1(input: impl Into<String>) -> u16 {
+pub fn day_01_v1(input: impl AsRef<str>) -> u16 {
   let mut characters = input
-    .into()
+    .as_ref()
     .trim_end()
     .chars()
     .map(|c| c as u8)
@@ -18,9 +18,9 @@ pub fn day_01_v1(input: impl Into<String>) -> u16 {
     .sum()
 }
 
-pub fn day_01_v2(input: impl Into<String>) -> u16 {
+pub fn day_01_v2(input: impl AsRef<str>) -> u16 {
   let characters = input
-    .into()
+    .as_ref()
     .trim_end()
     .chars()
     .map(|c| c as u8)

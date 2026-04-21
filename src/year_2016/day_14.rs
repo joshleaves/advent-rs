@@ -1,7 +1,7 @@
 use std::collections::VecDeque;
 
 use itertools::Itertools;
-use md5::{digest::core_api::CoreWrapper, Digest, Md5, Md5Core};
+use md5::{Digest, Md5, Md5Core, digest::core_api::CoreWrapper};
 
 #[inline]
 fn multi_hash(hasher_base: &CoreWrapper<Md5Core>, input: &str) -> String {
@@ -93,8 +93,8 @@ fn fill_hashes(md5: &CoreWrapper<Md5Core>, counter: usize, hashes: usize) -> Vec
   hashes
 }
 
-pub fn day_14_v1(input: impl Into<String>) -> usize {
-  let hasher = build_hasher(input.into().trim_end());
+pub fn day_14_v1(input: impl AsRef<str>) -> usize {
+  let hasher = build_hasher(input.as_ref().trim_end());
   let mut counter: usize = 0;
   let mut hash_queue: VecDeque<Vec<u8>> = fill_hashes(&hasher, 0, 0);
   let mut keys_count = 0;
@@ -117,8 +117,8 @@ pub fn day_14_v1(input: impl Into<String>) -> usize {
   counter
 }
 
-pub fn day_14_v2(input: impl Into<String>) -> usize {
-  let hasher = build_hasher(input.into().trim_end());
+pub fn day_14_v2(input: impl AsRef<str>) -> usize {
+  let hasher = build_hasher(input.as_ref().trim_end());
   let mut counter: usize = 0;
   let mut hash_queue: VecDeque<String> = fill_hashes_v2(&hasher, 0, 1000);
   let mut keys_count = 0;

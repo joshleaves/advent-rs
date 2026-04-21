@@ -1,6 +1,6 @@
-pub fn day_05_v1(input: impl Into<String>) -> u32 {
+pub fn day_05_v1(input: impl AsRef<str>) -> u32 {
   let mut instructions: Vec<i16> = input
-    .into()
+    .as_ref()
     .lines()
     .map(|line| line.parse::<i16>().unwrap())
     .collect();
@@ -15,9 +15,9 @@ pub fn day_05_v1(input: impl Into<String>) -> u32 {
   moves
 }
 
-pub fn day_05_v2(input: impl Into<String>) -> u32 {
+pub fn day_05_v2(input: impl AsRef<str>) -> u32 {
   let mut instructions: Vec<i16> = input
-    .into()
+    .as_ref()
     .lines()
     .map(|line| line.parse::<i16>().unwrap())
     .collect();

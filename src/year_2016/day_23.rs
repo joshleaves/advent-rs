@@ -1,15 +1,15 @@
 use super::assembunny::Assembunny;
 
-pub fn day_23_v1(input: impl Into<String>) -> i64 {
-  let mut bunny: Assembunny = Assembunny::from_input(&input.into());
+pub fn day_23_v1(input: impl AsRef<str>) -> i64 {
+  let mut bunny: Assembunny = Assembunny::from_input(input.as_ref());
   bunny.set_register("a", 7);
   bunny.run();
 
   bunny.registers[0]
 }
 
-pub fn day_23_v2(input: impl Into<String>) -> i64 {
-  let mut bunny: Assembunny = Assembunny::from_input(&input.into());
+pub fn day_23_v2(input: impl AsRef<str>) -> i64 {
+  let mut bunny: Assembunny = Assembunny::from_input(input.as_ref());
   bunny.set_register("a", 12);
   bunny.run();
 

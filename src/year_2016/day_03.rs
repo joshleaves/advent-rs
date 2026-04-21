@@ -7,9 +7,9 @@ fn is_triangle_possible(triangle: [u16; 3]) -> bool {
   (*sides[0] + *sides[1]) > *sides[2]
 }
 
-pub fn day_03_v1(input: impl Into<String>) -> u16 {
+pub fn day_03_v1(input: impl AsRef<str>) -> u16 {
   let mut result: u16 = 0;
-  for line in input.into().lines() {
+  for line in input.as_ref().lines() {
     let parts: Vec<_> = line.split_whitespace().collect();
     let numbers: [u16; 3] = [
       parts[0].parse::<u16>().unwrap(),
@@ -24,9 +24,9 @@ pub fn day_03_v1(input: impl Into<String>) -> u16 {
   result
 }
 
-pub fn day_03_v2(input: impl Into<String>) -> u16 {
+pub fn day_03_v2(input: impl AsRef<str>) -> u16 {
   let mut result: u16 = 0;
-  for mut lines in &input.into().lines().chunks(3) {
+  for mut lines in &input.as_ref().lines().chunks(3) {
     let parts_one: Vec<_> = lines.next().unwrap().split_whitespace().collect();
     let parts_two: Vec<_> = lines.next().unwrap().split_whitespace().collect();
     let parts_tre: Vec<_> = lines.next().unwrap().split_whitespace().collect();

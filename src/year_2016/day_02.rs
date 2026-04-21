@@ -74,10 +74,10 @@ fn matcher_v2(mut current_button: char, line: &str) -> char {
   current_button
 }
 
-pub fn day_02_v1(input: impl Into<String>) -> String {
+pub fn day_02_v1(input: impl AsRef<str>) -> String {
   let mut result: Vec<char> = vec![];
   let mut current_button = '5';
-  for line in input.into().lines() {
+  for line in input.as_ref().lines() {
     current_button = matcher_v1(current_button, line);
     result.push(current_button);
   }
@@ -85,10 +85,10 @@ pub fn day_02_v1(input: impl Into<String>) -> String {
   result.iter().collect::<String>()
 }
 
-pub fn day_02_v2(input: impl Into<String>) -> String {
+pub fn day_02_v2(input: impl AsRef<str>) -> String {
   let mut result: Vec<char> = vec![];
   let mut current_button = '5';
-  for line in input.into().lines() {
+  for line in input.as_ref().lines() {
     current_button = matcher_v2(current_button, line);
     result.push(current_button);
   }

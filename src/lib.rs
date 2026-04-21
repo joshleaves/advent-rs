@@ -3,7 +3,7 @@
 macro_rules! solvable {
   ($day_xx:tt, $day_v1:tt, $day_v2:tt, $retype:ty) => {
     /// Stub function calling the _v1 or _v2 variant
-    pub fn $day_xx(part: u8, input: impl Into<String>) -> $retype {
+    pub fn $day_xx(part: u8, input: impl AsRef<str>) -> $retype {
       match part {
         1 => $day_v1(input),
         2 => $day_v2(input),
@@ -42,7 +42,7 @@ pub mod year_2018;
 /// let solution = solve(2015, 1, 1, "(())");
 /// assert_eq!(solution, Some("0".to_string()));
 /// ```
-pub fn solve(year: u16, day: u8, part: u8, input: impl Into<String>) -> Option<String> {
+pub fn solve(year: u16, day: u8, part: u8, input: impl AsRef<str>) -> Option<String> {
   match year {
     2015 => year_2015::solve(day, part, input),
     2016 => year_2016::solve(day, part, input),

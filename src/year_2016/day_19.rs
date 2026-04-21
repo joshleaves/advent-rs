@@ -1,16 +1,16 @@
 use itertools::Itertools;
 use std::collections::VecDeque;
 
-pub fn day_19_v1(input: impl Into<String>) -> u32 {
-  let number = input.into().parse::<u32>().unwrap();
+pub fn day_19_v1(input: impl AsRef<str>) -> u32 {
+  let number = input.as_ref().parse::<u32>().unwrap();
   let mut binary = format!("{number:b}").chars().collect_vec();
   binary.rotate_left(1);
 
   u32::from_str_radix(&binary.iter().collect::<String>(), 2).unwrap()
 }
 
-pub fn day_19_v2(input: impl Into<String>) -> u32 {
-  let number = input.into().parse::<u32>().unwrap();
+pub fn day_19_v2(input: impl AsRef<str>) -> u32 {
+  let number = input.as_ref().parse::<u32>().unwrap();
   let mid = number.div_ceil(2);
   let mut arr_v1: VecDeque<u32> = (1..mid).collect();
   let mut arr_v2: VecDeque<u32> = (mid..(number + 1)).collect();

@@ -42,8 +42,8 @@ fn parse_input(input: &str) -> (u64, u64) {
   )
 }
 
-pub fn day_15_v1(input: impl Into<String>) -> u64 {
-  let inputs = parse_input(&input.into());
+pub fn day_15_v1(input: impl AsRef<str>) -> u64 {
+  let inputs = parse_input(input.as_ref());
   let gen_a = Generator::new(inputs.0, FACTOR_A, 1);
   let gen_b = Generator::new(inputs.1, FACTOR_B, 1);
   gen_a
@@ -53,8 +53,8 @@ pub fn day_15_v1(input: impl Into<String>) -> u64 {
     .count() as u64
 }
 
-pub fn day_15_v2(input: impl Into<String>) -> u64 {
-  let inputs = parse_input(&input.into());
+pub fn day_15_v2(input: impl AsRef<str>) -> u64 {
+  let inputs = parse_input(input.as_ref());
   let gen_a = Generator::new(inputs.0, FACTOR_A, 4);
   let gen_b = Generator::new(inputs.1, FACTOR_B, 8);
   gen_a

@@ -46,11 +46,11 @@ fn move_character(pos: &mut (i8, i8), direction: u8) {
   }
 }
 
-pub fn day_03_v1(input: impl Into<String>) -> u16 {
+pub fn day_03_v1(input: impl AsRef<str>) -> u16 {
   let mut santa: (i8, i8) = (0, 0);
   let mut houses = HashSet::from([santa]);
 
-  for direction in input.into().bytes() {
+  for direction in input.as_ref().bytes() {
     move_character(&mut santa, direction);
     houses.insert(santa);
   }
@@ -58,12 +58,12 @@ pub fn day_03_v1(input: impl Into<String>) -> u16 {
   houses.len() as u16
 }
 
-pub fn day_03_v2(input: impl Into<String>) -> u16 {
+pub fn day_03_v2(input: impl AsRef<str>) -> u16 {
   let mut santa: (i8, i8) = (0, 0);
   let mut robot: (i8, i8) = (0, 0);
   let mut houses = HashSet::from([santa]);
 
-  for mut chars in &input.into().bytes().chunks(2) {
+  for mut chars in &input.as_ref().bytes().chunks(2) {
     move_character(&mut santa, chars.next().unwrap());
     move_character(&mut robot, chars.next().unwrap());
     houses.insert(santa);

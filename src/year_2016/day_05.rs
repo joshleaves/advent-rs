@@ -4,9 +4,9 @@ const HEX_TABLE: [char; 16] = [
   '0', '1', '2', '3', '4', '5', '6', '7', '8', '9', 'a', 'b', 'c', 'd', 'e', 'f',
 ];
 
-pub fn day_05_v1(input: impl Into<String>) -> String {
+pub fn day_05_v1(input: impl AsRef<str>) -> String {
   let mut hasher = Md5::new();
-  hasher.update(input.into().trim_end());
+  hasher.update(input.as_ref().trim_end());
   let mut starter: u32 = 0;
   let mut result: String = String::new();
   loop {
@@ -23,9 +23,9 @@ pub fn day_05_v1(input: impl Into<String>) -> String {
   }
 }
 
-pub fn day_05_v2(input: impl Into<String>) -> String {
+pub fn day_05_v2(input: impl AsRef<str>) -> String {
   let mut hasher = Md5::new();
-  hasher.update(input.into().trim_end());
+  hasher.update(input.as_ref().trim_end());
   let mut starter: u32 = 0;
   let mut result: [char; 8] = [
     '_', '_', '_', '_', '_', '_', '_', '_',

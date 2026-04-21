@@ -76,8 +76,8 @@ where
   best_path
 }
 
-pub fn day_09_v1(input: impl Into<String>) -> u16 {
-  let (cities_ids, paths) = parse_input(&input.into());
+pub fn day_09_v1(input: impl AsRef<str>) -> u16 {
+  let (cities_ids, paths) = parse_input(input.as_ref());
   let mut best_path = u16::MAX;
   for city_id in cities_ids.iter() {
     let new_best = try_best_path(
@@ -94,8 +94,8 @@ pub fn day_09_v1(input: impl Into<String>) -> u16 {
   best_path
 }
 
-pub fn day_09_v2(input: impl Into<String>) -> u16 {
-  let (cities_ids, paths) = parse_input(&input.into());
+pub fn day_09_v2(input: impl AsRef<str>) -> u16 {
+  let (cities_ids, paths) = parse_input(input.as_ref());
   let mut best_path = 0;
   for city_id in cities_ids.iter() {
     let new_best = try_best_path(

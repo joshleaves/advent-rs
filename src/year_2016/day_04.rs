@@ -45,9 +45,9 @@ fn verify_translation(input: &str, value: u32, reference: &[u8]) -> bool {
   true
 }
 
-pub fn day_04_v1(input: impl Into<String>) -> u32 {
+pub fn day_04_v1(input: impl AsRef<str>) -> u32 {
   input
-    .into()
+    .as_ref()
     .lines()
     .filter_map(|line| {
       let (letters, value, checksum) = parse_line(line);
@@ -60,8 +60,8 @@ pub fn day_04_v1(input: impl Into<String>) -> u32 {
     .sum()
 }
 
-pub fn day_04_v2(input: impl Into<String>) -> u32 {
-  for line in input.into().lines() {
+pub fn day_04_v2(input: impl AsRef<str>) -> u32 {
+  for line in input.as_ref().lines() {
     let (letters, value, checksum) = parse_line(line);
     if !verify_checksum(checksum, letters) {
       continue;

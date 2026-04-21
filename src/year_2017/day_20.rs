@@ -64,9 +64,9 @@ impl Particle {
   }
 }
 
-pub fn day_20_v1(input: impl Into<String>) -> u16 {
+pub fn day_20_v1(input: impl AsRef<str>) -> u16 {
   let mut particles: Vec<Particle> = input
-    .into()
+    .as_ref()
     .lines()
     .enumerate()
     .map(|(idx, line)| Particle::new(idx as u16, line))
@@ -80,9 +80,9 @@ pub fn day_20_v1(input: impl Into<String>) -> u16 {
     .id
 }
 
-pub fn day_20_v2(input: impl Into<String>) -> u16 {
+pub fn day_20_v2(input: impl AsRef<str>) -> u16 {
   let mut particles: Vec<Particle> = input
-    .into()
+    .as_ref()
     .lines()
     .enumerate()
     .map(|(idx, line)| Particle::new(idx as u16, line))

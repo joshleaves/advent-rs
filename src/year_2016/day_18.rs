@@ -34,12 +34,12 @@ fn string2bools(input: &str) -> Vec<bool> {
   input.trim_end().chars().map(|c| c == '.').collect_vec()
 }
 
-pub fn day_18_v1(input: impl Into<String>) -> usize {
-  count_safe_tiles(string2bools(&input.into()), 40)
+pub fn day_18_v1(input: impl AsRef<str>) -> usize {
+  count_safe_tiles(string2bools(input.as_ref()), 40)
 }
 
-pub fn day_18_v2(input: impl Into<String>) -> usize {
-  count_safe_tiles(string2bools(&input.into()), 400_000)
+pub fn day_18_v2(input: impl AsRef<str>) -> usize {
+  count_safe_tiles(string2bools(input.as_ref()), 400_000)
 }
 
 solvable!(day_18, day_18_v1, day_18_v2, usize);

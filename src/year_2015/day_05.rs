@@ -94,17 +94,17 @@ fn string_is_nice_v2(input: &str) -> bool {
   twice_pair && repeated
 }
 
-pub fn day_05_v1(input: impl Into<String>) -> u16 {
+pub fn day_05_v1(input: impl AsRef<str>) -> u16 {
   input
-    .into()
+    .as_ref()
     .lines()
     .filter(|line| string_is_nice_v1(line))
     .count() as u16
 }
 
-pub fn day_05_v2(input: impl Into<String>) -> u16 {
+pub fn day_05_v2(input: impl AsRef<str>) -> u16 {
   input
-    .into()
+    .as_ref()
     .lines()
     .filter(|line| string_is_nice_v2(line))
     .count() as u16

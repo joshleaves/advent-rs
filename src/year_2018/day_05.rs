@@ -12,12 +12,12 @@ fn react_polymer(input: &str) -> u16 {
     .len() as u16
 }
 
-pub fn day_05_v1(input: impl Into<String>) -> u16 {
-  react_polymer(&input.into())
+pub fn day_05_v1(input: impl AsRef<str>) -> u16 {
+  react_polymer(input.as_ref())
 }
 
-pub fn day_05_v2(input: impl Into<String>) -> u16 {
-  let input = input.into();
+pub fn day_05_v2(input: impl AsRef<str>) -> u16 {
+  let input = input.as_ref();
   let maj = 'A'..='Z';
   ('a'..='z')
     .zip(maj)

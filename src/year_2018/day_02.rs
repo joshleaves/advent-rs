@@ -1,8 +1,8 @@
 use itertools::Itertools;
 
-pub fn day_02_v1(input: impl Into<String>) -> String {
+pub fn day_02_v1(input: impl AsRef<str>) -> String {
   let chk = input
-    .into()
+    .as_ref()
     .lines()
     .map(|input| {
       let mut two = false;
@@ -46,8 +46,8 @@ fn common_characters(lhs: &str, rhs: &str) -> Option<String> {
     })
 }
 
-pub fn day_02_v2(input: impl Into<String>) -> String {
-  let input = input.into();
+pub fn day_02_v2(input: impl AsRef<str>) -> String {
+  let input = input.as_ref();
   let input: Vec<_> = input.lines().collect();
   for i in 0..input.len() {
     for j in i + 1..input.len() {

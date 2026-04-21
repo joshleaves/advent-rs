@@ -45,17 +45,17 @@ impl Village {
   }
 }
 
-pub fn day_12_v1(input: impl Into<String>) -> u16 {
+pub fn day_12_v1(input: impl AsRef<str>) -> u16 {
   let mut village = Village::default();
-  for line in input.into().lines() {
+  for line in input.as_ref().lines() {
     village.add_node(line);
   }
   village.group_zero().len() as u16
 }
 
-pub fn day_12_v2(input: impl Into<String>) -> u16 {
+pub fn day_12_v2(input: impl AsRef<str>) -> u16 {
   let mut village = Village::default();
-  for line in input.into().lines() {
+  for line in input.as_ref().lines() {
     village.add_node(line);
   }
   village.groups.len() as u16

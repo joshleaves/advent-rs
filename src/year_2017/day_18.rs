@@ -142,15 +142,15 @@ impl SoundCard {
   }
 }
 
-pub fn day_18_v1(input: impl Into<String>) -> i64 {
-  let mut sound_card = SoundCard::new(&input.into(), 0);
+pub fn day_18_v1(input: impl AsRef<str>) -> i64 {
+  let mut sound_card = SoundCard::new(input.as_ref(), 0);
   sound_card.get_first_sound()
 }
 
-pub fn day_18_v2(input: impl Into<String>) -> i64 {
-  let input = input.into();
-  let mut sc0 = SoundCard::new(&input, 0);
-  let mut sc1 = SoundCard::new(&input, 1);
+pub fn day_18_v2(input: impl AsRef<str>) -> i64 {
+  let input = input.as_ref();
+  let mut sc0 = SoundCard::new(input, 0);
+  let mut sc1 = SoundCard::new(input, 1);
   sc1.registers[(b'p' - b'a') as usize] = 1;
   let mut sound_count = 0;
   while sc0.execute_once() || sc1.execute_once() {

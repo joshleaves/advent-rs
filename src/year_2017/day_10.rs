@@ -16,13 +16,13 @@ fn parse_input(input: &str) -> Vec<u32> {
     .collect()
 }
 
-pub fn day_10_v1(input: impl Into<String>) -> String {
-  let numbers = knot_hash::_knot_hash(256, &parse_jumps(&input.into()), 1);
+pub fn day_10_v1(input: impl AsRef<str>) -> String {
+  let numbers = knot_hash::_knot_hash(256, &parse_jumps(input.as_ref()), 1);
   (numbers[0] * numbers[1]).to_string()
 }
 
-pub fn day_10_v2(input: impl Into<String>) -> String {
-  let mut input = parse_input(&input.into());
+pub fn day_10_v2(input: impl AsRef<str>) -> String {
+  let mut input = parse_input(input.as_ref());
   knot_hash::knot_hash(&mut input)
     .iter()
     .map(|xor| format!("{:02x}", xor))

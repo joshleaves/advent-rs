@@ -1,11 +1,11 @@
 use advent_rs::year_2017::day_04;
-use criterion::{criterion_group, criterion_main, BenchmarkId, Criterion};
+use criterion::{BenchmarkId, Criterion, criterion_group, criterion_main};
 use itertools::Itertools;
 use std::{collections::HashSet, time::Duration};
 
-pub fn day_04_v1_naive(input: impl Into<String>) -> u16 {
+pub fn day_04_v1_naive(input: impl AsRef<str>) -> u16 {
   input
-    .into()
+    .as_ref()
     .lines()
     .filter(|line| {
       line
@@ -18,9 +18,9 @@ pub fn day_04_v1_naive(input: impl Into<String>) -> u16 {
     .count() as u16
 }
 
-pub fn day_04_v1_sorted(input: impl Into<String>) -> u16 {
+pub fn day_04_v1_sorted(input: impl AsRef<str>) -> u16 {
   input
-    .into()
+    .as_ref()
     .lines()
     .filter(|line| {
       !line
@@ -33,9 +33,9 @@ pub fn day_04_v1_sorted(input: impl Into<String>) -> u16 {
     .count() as u16
 }
 
-pub fn day_04_v1_with_set(input: impl Into<String>) -> u16 {
+pub fn day_04_v1_with_set(input: impl AsRef<str>) -> u16 {
   input
-    .into()
+    .as_ref()
     .lines()
     .filter(|line| {
       let mut set = HashSet::new();

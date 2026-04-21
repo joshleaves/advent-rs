@@ -192,8 +192,8 @@ where
   best_price
 }
 
-pub fn day_21_v1(input: impl Into<String>) -> usize {
-  let boss = Character::new(&input.into());
+pub fn day_21_v1(input: impl AsRef<str>) -> usize {
+  let boss = Character::new(input.as_ref());
   let price_updater = |result: bool, best_price, next_price| {
     if result {
       std::cmp::min(best_price, next_price)
@@ -205,8 +205,8 @@ pub fn day_21_v1(input: impl Into<String>) -> usize {
   try_on_equipment(&boss, 256, price_updater)
 }
 
-pub fn day_21_v2(input: impl Into<String>) -> usize {
-  let boss = Character::new(&input.into());
+pub fn day_21_v2(input: impl AsRef<str>) -> usize {
+  let boss = Character::new(input.as_ref());
   let price_updater = |result: bool, best_price, next_price| {
     if !result {
       std::cmp::max(best_price, next_price)

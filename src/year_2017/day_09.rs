@@ -27,12 +27,12 @@ fn traverse_input(input: &str) -> (u32, u32) {
   (result, garbage)
 }
 
-pub fn day_09_v1(input: impl Into<String>) -> u32 {
-  traverse_input(&input.into()).0
+pub fn day_09_v1(input: impl AsRef<str>) -> u32 {
+  traverse_input(input.as_ref()).0
 }
 
-pub fn day_09_v2(input: impl Into<String>) -> u32 {
-  traverse_input(&input.into()).1
+pub fn day_09_v2(input: impl AsRef<str>) -> u32 {
+  traverse_input(input.as_ref()).1
 }
 
 solvable!(day_09, day_09_v1, day_09_v2, u32);

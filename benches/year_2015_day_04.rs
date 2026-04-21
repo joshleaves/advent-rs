@@ -1,6 +1,6 @@
 use advent_rs::year_2015::day_04;
 use core::hash;
-use criterion::{criterion_group, criterion_main, BenchmarkId, Criterion};
+use criterion::{BenchmarkId, Criterion, criterion_group, criterion_main};
 use std::time::Duration;
 
 use md5::Digest;
@@ -127,12 +127,12 @@ pub fn find_hash_fast(input: &str, stop_value: u8) -> u32 {
   }
 }
 
-pub fn day_04_v1_fast(input: impl Into<String>) -> u32 {
-  find_hash_fast(input.into().trim_end(), 16)
+pub fn day_04_v1_fast(input: impl AsRef<str>) -> u32 {
+  find_hash_fast(input.as_ref().trim_end(), 16)
 }
 
-pub fn day_04_v2_fast(input: impl Into<String>) -> u32 {
-  find_hash_fast(input.into().trim_end(), 1)
+pub fn day_04_v2_fast(input: impl AsRef<str>) -> u32 {
+  find_hash_fast(input.as_ref().trim_end(), 1)
 }
 
 fn bench_year_2015_day_04_v1(c: &mut Criterion) {

@@ -1,5 +1,5 @@
 use advent_rs::year_2015::day_03;
-use criterion::{criterion_group, criterion_main, BenchmarkId, Criterion};
+use criterion::{BenchmarkId, Criterion, criterion_group, criterion_main};
 use std::collections::BTreeSet;
 use std::time::Duration;
 

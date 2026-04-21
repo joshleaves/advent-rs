@@ -1,13 +1,13 @@
 use itertools::Itertools;
 use std::cmp::Ordering;
 
-fn build_result<F>(input: impl Into<String>, sort_closure: F) -> String
+fn build_result<F>(input: impl AsRef<str>, sort_closure: F) -> String
 where
   F: Fn(&(&char, usize), &(&char, usize)) -> Ordering,
 {
   let mut chars: Vec<Vec<char>> = vec![];
 
-  for line in input.into().lines() {
+  for line in input.as_ref().lines() {
     for (idx, chr) in line.chars().enumerate() {
       if chars.len() == idx {
         chars.push(vec![]);
@@ -31,11 +31,11 @@ where
     .join("")
 }
 
-pub fn day_06_v1(input: impl Into<String>) -> String {
+pub fn day_06_v1(input: impl AsRef<str>) -> String {
   build_result(input, |&lhs, &rhs| lhs.1.cmp(&rhs.1))
 }
 
-pub fn day_06_v2(input: impl Into<String>) -> String {
+pub fn day_06_v2(input: impl AsRef<str>) -> String {
   build_result(input, |&lhs, &rhs| rhs.1.cmp(&lhs.1))
 }
 

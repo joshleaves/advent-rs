@@ -1,9 +1,9 @@
 use std::collections::HashSet;
 
-pub fn day_01_v1(input: impl Into<String>) -> i16 {
+pub fn day_01_v1(input: impl AsRef<str>) -> i16 {
   let mut direction: i16 = 0;
   let mut position: [i16; 2] = [0, 0];
-  for line in input.into().split(", ") {
+  for line in input.as_ref().split(", ") {
     let mut line_chars = line.chars();
     let dir_mod = if line_chars.next().unwrap() == 'L' {
       3
@@ -23,11 +23,11 @@ pub fn day_01_v1(input: impl Into<String>) -> i16 {
   position[0].abs() + position[1].abs()
 }
 
-pub fn day_01_v2(input: impl Into<String>) -> i16 {
+pub fn day_01_v2(input: impl AsRef<str>) -> i16 {
   let mut direction: i16 = 0;
   let mut position: [i16; 2] = [0, 0];
   let mut streets: HashSet<[i16; 2]> = HashSet::from([position]);
-  for line in input.into().split(", ") {
+  for line in input.as_ref().split(", ") {
     let mut line_chars = line.chars();
     let dir_mod = if line_chars.next().unwrap() == 'L' {
       3

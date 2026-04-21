@@ -69,8 +69,8 @@ fn create_gate<'a>(gates: &mut HashMap<&'a str, LogicalGate<'a>>, line: &'a str)
   gates.insert(wire, gate);
 }
 
-pub fn day_07_v1(input: impl Into<String>) -> u32 {
-  let input_str = input.into();
+pub fn day_07_v1(input: impl AsRef<str>) -> u32 {
+  let input_str = input.as_ref();
   let mut gates: HashMap<&str, LogicalGate> = HashMap::new();
   for line in input_str.lines() {
     create_gate(&mut gates, line);
@@ -81,13 +81,13 @@ pub fn day_07_v1(input: impl Into<String>) -> u32 {
   result
 }
 
-pub fn day_07_v2(input: impl Into<String>) -> u32 {
-  let input_str = input.into();
+pub fn day_07_v2(input: impl AsRef<str>) -> u32 {
+  let input_str = input.as_ref();
   let mut gates: HashMap<&str, LogicalGate> = HashMap::new();
   for line in input_str.lines() {
     create_gate(&mut gates, line);
   }
-  let value_of_a = day_07_v1(&input_str);
+  let value_of_a = day_07_v1(input_str);
   let value_a = format!("{}", value_of_a);
   let gate = LogicalGate {
     operation: Operation::Assign(value_a.as_str()),

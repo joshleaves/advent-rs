@@ -1,11 +1,11 @@
 use advent_rs::year_2017::day_02;
-use criterion::{criterion_group, criterion_main, BenchmarkId, Criterion};
+use criterion::{BenchmarkId, Criterion, criterion_group, criterion_main};
 use itertools::Itertools;
 use std::time::Duration;
 
-pub fn day_02_v1_naive(input: impl Into<String>) -> u16 {
+pub fn day_02_v1_naive(input: impl AsRef<str>) -> u16 {
   input
-    .into()
+    .as_ref()
     .lines()
     .map(|line| {
       let numbers: Vec<_> = line

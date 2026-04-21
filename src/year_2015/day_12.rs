@@ -93,11 +93,11 @@ fn traverse_node_hash(input: &[u8], idx: usize) -> (i32, usize) {
   }
 }
 
-pub fn day_12_v1(input: impl Into<String>) -> i32 {
+pub fn day_12_v1(input: impl AsRef<str>) -> i32 {
   let mut total: i32 = 0;
   let mut idx = 0;
 
-  let letters: Vec<u8> = input.into().into_bytes();
+  let letters: Vec<u8> = input.as_ref().bytes().collect();
   while idx < letters.len() - 1 {
     if let b'-'..=b'9' = letters[idx] {
       let (add_total, add_length) = traverse_node_value(&letters, idx);
@@ -110,8 +110,8 @@ pub fn day_12_v1(input: impl Into<String>) -> i32 {
   total
 }
 
-pub fn day_12_v2(input: impl Into<String>) -> i32 {
-  let bytes = input.into().into_bytes();
+pub fn day_12_v2(input: impl AsRef<str>) -> i32 {
+  let bytes: Vec<_> = input.as_ref().bytes().collect();
   match bytes[0] {
     b'{' => traverse_node_hash(&bytes, 0).0,
     b'[' => traverse_node_array(&bytes, 0).0,
